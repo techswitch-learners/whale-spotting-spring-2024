@@ -60,13 +60,37 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterUserRequest registerUserRequest)
     {
-        var newUser = new User { UserName = registerUserRequest.UserName, };
+        var newUser = new User { UserName = registerUserRequest.UserName };
         var result = await _userManager.CreateAsync(newUser, registerUserRequest.Password);
         if (!result.Succeeded)
         {
-            return BadRequest(
-                new ErrorResponse { Errors = result.Errors.Select(error => error.Description).ToList(), }
-            );
+            var errorResponse = new ErrorResponse();
+            var userNameErrors = new List<string>();
+            var passwordErrors = new List<string>();
+            var generalErrors = new List<string>();
+            foreach (var error in result.Errors)
+            {
+                var errorCategory = error.Description switch
+                {
+                    var userNameError when userNameError.Contains("Username") => userNameErrors,
+                    var passwordError when passwordError.Contains("Password") => passwordErrors,
+                    _ => generalErrors,
+                };
+                errorCategory.Add(error.Description);
+            }
+            if (userNameErrors.Count > 0)
+            {
+                errorResponse.Errors["UserName"] = userNameErrors;
+            }
+            if (passwordErrors.Count > 0)
+            {
+                errorResponse.Errors["Password"] = passwordErrors;
+            }
+            if (generalErrors.Count > 0)
+            {
+                errorResponse.Errors["General"] = generalErrors;
+            }
+            return BadRequest(errorResponse);
         }
         await _userManager.AddToRoleAsync(newUser, RoleType.User.ToString());
         return CreatedAtAction(

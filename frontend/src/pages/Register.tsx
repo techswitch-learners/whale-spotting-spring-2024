@@ -11,13 +11,13 @@ const Register = () => {
   const [password, setPassword] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
-  const [errors, setErrors] = useState<string[]>([])
+  const [errors, setErrors] = useState<{ [subject: string]: string[] }>({})
 
   const tryRegister: FormEventHandler = (event) => {
     event.preventDefault()
     setLoading(true)
     setSuccess(false)
-    setErrors([])
+    setErrors({})
     registerUser(username, password)
       .then((response) => {
         if (response.ok) {
@@ -25,10 +25,10 @@ const Register = () => {
           setPassword("")
           setSuccess(true)
         } else {
-          response.json().then((content: { errors: string[] }) => setErrors(content.errors))
+          response.json().then((content) => setErrors(content.errors))
         }
       })
-      .catch(() => setErrors(["Unable to complete registration at this time. Please try again later."]))
+      .catch(() => setErrors({ General: ["Unable to complete registration at this time. Please try again later."] }))
       .finally(() => setLoading(false))
   }
 
@@ -51,9 +51,20 @@ const Register = () => {
                 onChange={(event) => {
                   setUsername(event.target.value)
                   setSuccess(false)
-                  setErrors([])
+                  setErrors({})
                 }}
               />
+              {errors["UserName"]?.length > 0 && (
+                <Form.Text>
+                  <ul className="list-unstyled mb-0 small">
+                    {errors["UserName"].map((error) => (
+                      <li key={error} className="text-danger">
+                        {error}
+                      </li>
+                    ))}
+                  </ul>
+                </Form.Text>
+              )}
             </Form.Group>
             <Form.Group className="mb-3 text-start" controlId="password">
               <Form.Label className="mb-1">Password</Form.Label>
@@ -63,9 +74,20 @@ const Register = () => {
                 onChange={(event) => {
                   setPassword(event.target.value)
                   setSuccess(false)
-                  setErrors([])
+                  setErrors({})
                 }}
               />
+              {errors["Password"]?.length > 0 && (
+                <Form.Text>
+                  <ul className="list-unstyled mb-0 small">
+                    {errors["Password"].map((error) => (
+                      <li key={error} className="text-danger">
+                        {error}
+                      </li>
+                    ))}
+                  </ul>
+                </Form.Text>
+              )}
             </Form.Group>
             <Button variant="primary" type="submit" disabled={loading}>
               {loading ? <Spinner variant="light" size="sm" /> : <>Submit</>}
@@ -81,13 +103,13 @@ const Register = () => {
                 .
               </CardText>
             )}
-            {errors.length > 0 && (
+            {errors["General"]?.length > 0 && (
               <>
                 <CardText className="text-danger mt-2 mb-0">
-                  Error{errors.length > 1 ? "s" : ""} encountered during registration:
+                  Error{errors["General"].length > 1 ? "s" : ""} encountered during registration:
                 </CardText>
                 <ul className="list-unstyled mb-0 small">
-                  {errors.map((error) => (
+                  {errors["General"].map((error) => (
                     <Fragment key={error}>
                       <li className="d-inline text-danger">{error}</li>{" "}
                     </Fragment>
