@@ -1,0 +1,17 @@
+$min-contrast-ratio: 2;
+
+$primary: #55acee;
+$secondary: #3b88c3;
+
+@import "bootstrap/scss/bootstrap";
+
+html,
+body,
+#root,
+main {
+  height: 100%;
+}
+
+main {
+  padding: 5rem 0;
+}

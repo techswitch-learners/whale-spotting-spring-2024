@@ -1,0 +1,6 @@
+{
+  "*.{js,cjs,mjs,jsx,ts,tsx}": ["eslint --fix --max-warnings=0", "prettier --write"],
+  "*.{md,html,css,scss,json}": "prettier --write",
+  "*.{xml,svg,csproj}": "prettier --plugin=@prettier/plugin-xml --write",
+  "*.{cs,csx}": "dotnet csharpier"
+}
