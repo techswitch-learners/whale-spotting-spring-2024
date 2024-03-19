@@ -8,6 +8,13 @@ namespace WhaleSpotting;
 public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options)
     : IdentityDbContext<User, Role, int>(options)
 {
+    public DbSet<Achievement> Achievements { get; set; } = null!;
+    public DbSet<BodyOfWater> BodiesOfWater { get; set; } = null!;
+    public DbSet<Reaction> Reactions { get; set; } = null!;
+    public DbSet<Sighting> Sightings { get; set; } = null!;
+    public DbSet<Species> Species { get; set; } = null!;
+    public DbSet<VerificationEvent> VerificationEvents { get; set; } = null!;
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
