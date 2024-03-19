@@ -5,7 +5,7 @@ namespace WhaleSpotting.Models.Data;
 
 public class Sighting
 {
-    public required int Id { get; set; }
+    public int Id { get; set; }
 
     public required decimal Latitude { get; set; }
 

@@ -50,7 +50,7 @@ public class SightingController : Controller
                     Description = sightingRequest.Description,
                     ImageUrl = sightingRequest.ImageUrl,
                     BodyOfWaterId = sightingRequest.BodyOfWaterId,
-                    SightingTimestamp = sightingRequest.SightingTimeStamp,
+                    SightingTimestamp = sightingRequest.SightingTimestamp,
                     CreationTimestamp = DateTime.Now,
                 }
             )
