@@ -42,6 +42,13 @@ main {
   min-height: 100%;
 }
 
+@media (max-width: 680px) {
+  #eyeId {
+    height: 0.8em;
+    width: auto;
+  }
+}
+
 .Home-button-container {
   @include media-breakpoint-down(lg) {
     width: 20rem;

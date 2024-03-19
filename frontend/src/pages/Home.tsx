@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react"
 import { BackgroundContext } from "../App"
 import whaleAnimation from "../assets/whale-animation.gif"
+import eye from "../assets/eye.svg"
 import { Button } from "react-bootstrap"
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
           <br />
           Whale
           <br />
-          Spotters!
+          Sp<img src={eye} id="eyeId"></img>tters!
         </h1>
       </div>
       <div className="col-lg d-flex flex-column justify-content-center">
