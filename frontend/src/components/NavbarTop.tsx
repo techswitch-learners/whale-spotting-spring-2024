@@ -37,8 +37,8 @@ const NavbarTop = () => {
   const authContext = useContext(AuthContext)
 
   return (
-    <Navbar fixed="top" expand="lg" collapseOnSelect bg="secondary" data-bs-theme="dark">
-      <Container className="text-center">
+    <Navbar fixed="top" expand="lg" collapseOnSelect bg="tertiary" data-bs-theme="dark">
+      <Container fluid className="text-center">
         <Navbar.Brand>Whale Spotting</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

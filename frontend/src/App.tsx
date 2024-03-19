@@ -1,4 +1,4 @@
-import { createContext } from "react"
+import { createContext, useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { CookieSetOptions } from "universal-cookie"
@@ -22,26 +22,42 @@ export const AuthContext = createContext<{
   removeCookie: () => {},
 })
 
+export const BackgroundContext = createContext<{
+  background: string
+  setBackground: (background: string) => void
+}>({
+  background: "white",
+  setBackground: () => {},
+})
+
 const App = () => {
   const [cookie, setCookie, removeCookie] = useCookies(["token"])
 
+  const [background, setBackground] = useState("white")
+
+  useEffect(() => {
+    document.body.style.background = background
+  }, [background])
+
   return (
     <AuthContext.Provider value={{ cookie, setCookie, removeCookie }}>
-      <Router>
-        <NavbarTop />
-        <main className="container">
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/faqs" element={<Faqs />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/logout" element={<Logout />} />
-          </Routes>
-        </main>
-        <NavbarBottom />
-      </Router>
+      <BackgroundContext.Provider value={{ background, setBackground }}>
+        <Router>
+          <NavbarTop />
+          <main className="container-fluid">
+            <Routes>
+              <Route index element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/faqs" element={<Faqs />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/logout" element={<Logout />} />
+            </Routes>
+          </main>
+          <NavbarBottom />
+        </Router>
+      </BackgroundContext.Provider>
     </AuthContext.Provider>
   )
 }

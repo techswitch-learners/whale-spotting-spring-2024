@@ -3,6 +3,20 @@ $min-contrast-ratio: 2;
 $primary: #55acee;
 $secondary: #3b88c3;
 
+$custom-colors: (
+  "tertiary": #8aa3be,
+  "translucent": #fff5,
+);
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+$btn-border-radius: 1000px;
+$btn-border-radius-lg: 1000px;
+$btn-border-radius-sm: 1000px;
+
 @import "bootstrap/scss/bootstrap";
 
 html,
@@ -12,6 +26,40 @@ main {
   height: 100%;
 }
 
+body {
+  background-position: center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  transition: background 1s;
+}
+
 main {
   padding: 5rem 0;
+}
+
+.min-h-100 {
+  min-height: 100%;
+}
+
+.Home-button-container {
+  @include media-breakpoint-down(lg) {
+    width: 20rem;
+    max-width: 100%;
+    margin: auto;
+  }
+  @include media-breakpoint-up(lg) {
+    padding-left: 30%;
+    padding-right: 10%;
+  }
+  @include media-breakpoint-down(md) {
+    &:first-of-type {
+      display: none !important;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    &:last-of-type {
+      display: none !important;
+    }
+  }
 }
