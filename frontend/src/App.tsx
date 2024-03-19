@@ -11,6 +11,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
+import Map from "./pages/Map"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/faqs" element={<Faqs />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/map" element={<Map />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/logout" element={<Logout />} />
           </Routes>
