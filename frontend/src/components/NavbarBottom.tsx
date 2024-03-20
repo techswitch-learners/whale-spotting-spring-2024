@@ -5,7 +5,7 @@ import { faCopyright } from "@fortawesome/free-regular-svg-icons"
 
 const NavbarBottom = () => {
   return (
-    <Navbar fixed="bottom" bg="primary" data-bs-theme="dark">
+    <Navbar fixed="bottom" bg="transparent" data-bs-theme="dark">
       <Container className="justify-content-center">
         <Navbar.Brand className="d-flex flex-column flex-sm-row align-items-center mx-0 fs-6">
           <span>
