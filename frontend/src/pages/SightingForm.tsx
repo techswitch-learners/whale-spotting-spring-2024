@@ -7,9 +7,6 @@ import { AuthContext } from "../App"
 import Sighting from "../models/sighting"
 import { addSighting } from "../api/backendClient"
 
-//    description: string
-// imageUrl: string
-// bodyOfWaterId?: number
 const SightingForm = () => {
   const authContext = useContext(AuthContext)
   const [loading, setLoading] = useState<boolean>(false)
@@ -22,11 +19,7 @@ const SightingForm = () => {
   const [imageUrl, setImageUrl] = useState<string>()
   const [bodyOfWaterId, setBodyOfWaterId] = useState<number>()
   const [success, setSuccess] = useState<boolean>(false)
-  //   const [backendErrors, setBackendErrors] = useState<{ [subject: string]: string[] }>({})
 
-  //const [sightingRequest, setSightingRequest] = useState<Sighting>()
-
-  // var formData = new FormData(event.target as HTMLFormElement);
   const submitSighting: FormEventHandler = (event) => {
     event.preventDefault()
     setLoading(true)
