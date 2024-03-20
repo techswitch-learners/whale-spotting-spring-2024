@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using WhaleSpotting.Attributes;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Request;
 using WhaleSpotting.Models.Response;
