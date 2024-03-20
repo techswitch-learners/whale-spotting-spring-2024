@@ -1,9 +1,11 @@
 import { useContext, useState, FormEventHandler } from "react"
-import { Navigate } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import { Button, CardText, Form, Spinner } from "react-bootstrap"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import { AuthContext } from "../App"
+import Sighting from "../models/sighting"
+import { addSighting } from "../api/backendClient"
 
 //    description: string
 // imageUrl: string
@@ -17,28 +19,45 @@ const SightingForm = () => {
   const [speciesId, setSpeciesId] = useState<number>()
   const [sightingDate, setSightingDate] = useState<Date>(new Date())
   const [description, setDescription] = useState<string>()
-  const [imgUrl, setImageUrl] = useState<string>()
+  const [imageUrl, setImageUrl] = useState<string>()
   const [bodyOfWaterId, setBodyOfWaterId] = useState<number>()
+  const [success, setSuccess] = useState<boolean>(false)
+  //   const [backendErrors, setBackendErrors] = useState<{ [subject: string]: string[] }>({})
 
-  //const [addSightingRequest, setAddSightingRequest] = useState<AddSightingRequest>()
+  //const [sightingRequest, setSightingRequest] = useState<Sighting>()
 
   // var formData = new FormData(event.target as HTMLFormElement);
-  const addSighting: FormEventHandler = (event) => {
+  const submitSighting: FormEventHandler = (event) => {
     event.preventDefault()
     setLoading(true)
     setError(undefined)
-    const addSighting = {
+    const sighting: Sighting = {
       latitude: latitude,
       longitude: longitude,
       token: authContext.cookie.token,
       speciesId: speciesId,
       description: description,
-      imageUrl: imgUrl,
+      imageUrl: imageUrl,
       bodyOfWaterId: bodyOfWaterId,
       sightingTimeStamp: sightingDate,
     }
-    console.log(addSighting)
-    // setAddSightingRequest(addSighting)
+
+    console.log(sighting)
+    event.preventDefault()
+    setLoading(true)
+    setSuccess(false)
+    setError("")
+    addSighting(sighting)
+      .then((response) => {
+        if (response.ok) {
+          setSuccess(true)
+          setLoading(false)
+        } else {
+          response.json().then((content) => setError(content.errors))
+        }
+      })
+      .catch(() => setError("Unable to submit sighting at this time. Please try again later."))
+      .finally(() => setLoading(false))
   }
 
   if (!authContext.cookie.token) {
@@ -47,14 +66,16 @@ const SightingForm = () => {
 
   return (
     <>
-      <Form onSubmit={addSighting}>
+      <Form onSubmit={submitSighting}>
         <Form.Group as={Row} className="mb-3 text-start" controlId="formSightingLatitude">
           <Form.Label column sm={2} className="mb-1">
             Latitude
           </Form.Label>
           <Col sm={5}>
             <Form.Control
-              type="text"
+              type="number"
+              max="90"
+              min="-90"
               value={latitude}
               onChange={(event) => {
                 setLatitude(Number(event.target.value))
@@ -70,7 +91,9 @@ const SightingForm = () => {
           </Form.Label>
           <Col sm={5}>
             <Form.Control
-              type="text"
+              type="number"
+              max="180"
+              min="-180"
               value={longitude}
               onChange={(event) => {
                 setLongitude(Number(event.target.value))
@@ -109,7 +132,7 @@ const SightingForm = () => {
           <Col sm={5}>
             <Form.Control
               type="date"
-              max-value={new Date().getDate()}
+              max={new Date().toISOString().split("T")[0]}
               onChange={(event) => {
                 setSightingDate(new Date(event.target.value))
                 setError(undefined)
@@ -161,6 +184,7 @@ const SightingForm = () => {
             <Form.Control
               as="textarea"
               value={description}
+              max-length="140"
               onChange={(event) => {
                 setDescription(event.target.value)
                 setError(undefined)
@@ -172,6 +196,18 @@ const SightingForm = () => {
         <Button variant="primary" type="submit" disabled={loading}>
           {loading ? <Spinner variant="light" size="sm" /> : <>Submit</>}
         </Button>
+
+        {success && (
+          <CardText className="text-success mt-2 mb-0">
+            Add sighting successful!
+            <br />
+            You can now go to{" "}
+            <Link to="/sighting/all" className="link-success">
+              All sightings
+            </Link>
+            .
+          </CardText>
+        )}
         {error && <CardText className="text-danger mt-2">{error}</CardText>}
       </Form>
     </>
