@@ -1,7 +1,7 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using WhaleSpotting.Models.Data;
 
 namespace WhaleSpotting.Models.Response;
+
 public class SightingResponse
 {
     public int Id { get; set; }
@@ -10,25 +10,17 @@ public class SightingResponse
 
     public required decimal Longitude { get; set; }
 
-    public string UserName { get; set; }
+    public required string UserName { get; set; }
 
-    // public User User { get; set; } = null!;
-
-    //public int SpeciesId { get; set; }
-
-    public string SpeciesName { get; set; } = null!;
+    public Species Species { get; set; } = null!;
 
     public required string Description { get; set; }
 
     public required string ImageUrl { get; set; }
 
-    //public int BodyOfWaterId { get; set; }
     public string BodyOfWaterName { get; set; } = null!;
 
-    //public int VerificationEventId { get; set; }
-
-    //[ForeignKey(nameof(VerificationEventId))]
-    public List<VerificationEvent> Verifications { get; set; } = [];
+    public VerificationEvent? VerificationEvent { get; set; }
 
     public required DateTime SightingTimestamp { get; set; }
 
