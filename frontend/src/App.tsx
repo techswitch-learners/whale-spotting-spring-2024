@@ -11,7 +11,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
-import Map from "./pages/Map"
+import Map from "./pages/map/Map"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
