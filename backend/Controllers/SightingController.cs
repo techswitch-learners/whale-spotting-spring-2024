@@ -32,19 +32,12 @@ public class SightingController : Controller
             claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
         );
         var userName = nameClaim?.Value;
-        // Console.WriteLine($"***********{userName}");
-
-        //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidmlja3k5NCIsImp0aSI6Ijk5MGRmZDYyLTYzZjAtNDY2ZS1hOGQyLWNjNDA2NDVhYjNkZiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJleHAiOjE3MTA4NjI0MTIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTI4MCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE3MyJ9.QAp-nI3VyrREwfMp6IIG9MtzYUXNCF2kQmIC9fLQaU0
-        //Nandini -
-        //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibmFuZGluaXAiLCJqdGkiOiI2YjY0N2JkNi1lMmUxLTQyZDMtOTc0Mi0xNTNhZmNkMjVlZjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzEwOTMzMDg1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUxNzMifQ.zZ_e5Mr_-Jx-96uW0iJEMHOHURNFr8_qRC-1wP9qQhY
-        //var userId = _whaleSpotting.Users.Single(user => user.UserName==userName).Id;
         if (userName == null)
         {
             return NotFound();
         }
         var matchingUser = await _userManager.FindByNameAsync(userName);
         var userId = matchingUser.Id;
-        // Console.WriteLine($"*****{userId}");
 
         var newSighting = _whaleSpotting
             .Sightings.Add(
