@@ -1,10 +1,16 @@
 import "./Map.scss"
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import { Icon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
 import Form from "react-bootstrap/Form"
+import { BackgroundContext } from "../../App"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faList, faMapMarker } from "@fortawesome/free-solid-svg-icons"
+import Card from "react-bootstrap/Card"
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
 
 interface SightingsCardProps {
   imgUrl: string
@@ -13,19 +19,26 @@ interface SightingsCardProps {
   description: string
 }
 
-const SightingsCard = ({ imgUrl, species, bodyOfWater, description }: SightingsCardProps) => {
+function SightingsCard({ imgUrl, species, bodyOfWater, description }: SightingsCardProps) {
   return (
-    <div className="sightingsCard">
-      <img src={imgUrl} />
-      <p>Species: {species}</p>
-      <p>Body of Water: {bodyOfWater}</p>
-      <p>{description}</p>
-    </div>
+    <Card>
+      <Card.Img variant="top" src={imgUrl} />
+      <Card.Body>
+        <Card.Title>{species}</Card.Title>
+        <Card.Subtitle>{bodyOfWater}</Card.Subtitle>
+        <Card.Text>{description}</Card.Text>
+      </Card.Body>
+    </Card>
   )
 }
 
 const Map = () => {
+  const backgroundContext = useContext(BackgroundContext)
   const [mapView, setMapView] = useState<boolean>(false)
+
+  useEffect(() => {
+    backgroundContext.setBackground("white")
+  }, [backgroundContext])
 
   //     interface SightingsData{
   //     id: number,
@@ -56,7 +69,7 @@ const Map = () => {
       longitude: 156.445313,
       species: "blue whale",
       bodyOfWater: "Tasman Sea",
-      imageUrl: "https://picsum.photos/200/300?grayscale",
+      imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 1",
     },
     {
@@ -65,7 +78,7 @@ const Map = () => {
       longitude: -79.453125,
       species: "orca",
       bodyOfWater: "South Pacific Ocean",
-      imageUrl: "https://picsum.photos/200/300?grayscale",
+      imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 2",
     },
     {
@@ -74,7 +87,7 @@ const Map = () => {
       longitude: -0.878906,
       species: "grey whale",
       bodyOfWater: "North Sea",
-      imageUrl: "https://picsum.photos/200/300?grayscale",
+      imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 3",
     },
     {
@@ -83,7 +96,7 @@ const Map = () => {
       longitude: -0.878906,
       species: "toothed whale",
       bodyOfWater: "North Sea",
-      imageUrl: "https://picsum.photos/200/300?grayscale",
+      imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 4",
     },
     {
@@ -92,7 +105,7 @@ const Map = () => {
       longitude: -0.877906,
       species: "toothed whale",
       bodyOfWater: "North Sea",
-      imageUrl: "https://picsum.photos/200/300?grayscale",
+      imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 5",
     },
   ]
@@ -103,15 +116,27 @@ const Map = () => {
   })
 
   const toggleView = () => {
-    mapView ? setMapView(false) : setMapView(true)
+    setMapView(!mapView)
   }
 
   return (
     <div className="mainContainer">
       <h1>Whale Sightings</h1>
-      <Form>
-        <Form.Check type="switch" id="custom-switch" label={mapView ? "Map View" : "List View"} onClick={toggleView} />
+      <Form className="layoutToggleForm">
+        <Form.Check
+          type="switch"
+          id="layout-switch"
+          label={
+            <>
+              <FontAwesomeIcon icon={faList} />
+              <FontAwesomeIcon icon={faMapMarker} />
+            </>
+          }
+          onClick={toggleView}
+        />
+        <Form.Label htmlFor="layout-switch">{mapView ? "Map View" : "List View"}</Form.Label>
       </Form>
+
       {mapView && (
         <div>
           <p>
@@ -140,15 +165,18 @@ const Map = () => {
       )}
       {!mapView && (
         <div className="sightingsContainer">
-          {sightings.map((sighting) => (
-            <SightingsCard
-              key={sighting.id}
-              imgUrl={sighting.imageUrl}
-              species={sighting.species}
-              bodyOfWater={sighting.bodyOfWater}
-              description={sighting.description}
-            />
-          ))}
+          <Row xs={1} md={3} lg={4} className="g-4">
+            {sightings.map((sighting) => (
+              <Col key={sighting.id}>
+                <SightingsCard
+                  imgUrl={sighting.imageUrl}
+                  species={sighting.species}
+                  bodyOfWater={sighting.bodyOfWater}
+                  description={sighting.description}
+                />
+              </Col>
+            ))}
+          </Row>
         </div>
       )}
     </div>

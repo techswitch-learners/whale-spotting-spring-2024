@@ -1,4 +1,4 @@
-@import "//frontend/src/main.scss";
+@import "../../main.scss";
 
 h1 {
   text-align: center;
@@ -15,49 +15,65 @@ p {
 
 .leaflet-container {
   height: 60vh;
-  margin-bottom: 20px;
+  margin-bottom: 20p;
 }
 
 .sightingsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 10px;
-  column-gap: 10px;
-  justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.sightingsCard {
-  display: flex;
-  flex-direction: column;
-  width: 21%;
-
-  img {
-    max-width: 100%;
-    aspect-ratio: 1/1;
-  }
+.g-4 {
+  justify-content: center;
 }
 
-#custom-switch {
+.card-text {
+  text-align: left;
+}
+
+.card {
+  max-width: fit-content;
+}
+
+card-img-top {
+  max-width: 100%;
+}
+
+#layout-switch {
   width: 4rem;
   height: 2rem;
-  background-image: url("hamburger_list_icon.svg");
-  background-size: 35%;
 }
 
-.form-check-label {
-  margin-left: 10px;
-}
-.form-check {
-  display: flex !important;
+.layoutToggleForm {
+  position: relative;
+  display: flex;
   align-items: center;
 }
 
-.form-switch .form-check-input:focus {
-  background-image: url("hamburger_list_icon.svg");
+.fa-list {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.5rem;
+  color: white;
 }
 
-.form-switch .form-check-input:checked {
-  background-image: url("location_map_icon.svg") !important;
+.fa-location-pin {
+  position: absolute;
+  top: 0.75rem;
+  left: 2.625rem;
+  color: #bfbfbf;
+  transition: color 0.3s;
+}
+
+#layout-switch:focus + label .fa-location-pin {
+  color: lighten($color: $primary, $amount: 18);
+}
+
+#layout-switch:checked + label .fa-location-pin {
+  color: $primary;
+}
+
+.form-label {
+  margin-bottom: 0 !important;
+  margin-left: 10px;
 }
