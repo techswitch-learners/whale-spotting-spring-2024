@@ -22,7 +22,7 @@ public class SightingController : Controller
         _userManager = userManager;
     }
 
-    [HttpPost]
+    [HttpPost("add")]
     public async Task<IActionResult> Add([FromBody] SightingRequest sightingRequest)
     {
         var handler = new JwtSecurityTokenHandler();
@@ -65,7 +65,7 @@ public class SightingController : Controller
         return Ok(newSighting);
     }
 
-    [HttpGet("/all")]
+    [HttpGet("all")]
     public IActionResult ListAll()
     {
         var sightingsResponse = new SightingsResponse();
