@@ -14,12 +14,14 @@ const Home = () => {
   return (
     <div className="Home row min-h-100">
       <div className="col-lg d-flex flex-column justify-content-center pe-lg-5">
-        <h1 className="display-3 text-center text-white">
+        <h1 className="display-3 text-center text-white" aria-label="Welcome Whale Spotters!">
           Welcome
           <br />
           Whale
           <br />
-          Sp<img src={eye} id="eyeId"></img>tters!
+          Sp
+          <img src={eye} id="eyeId" alt="Eye taking the place of letter O" />
+          tters!
         </h1>
       </div>
       <div className="col-lg d-flex flex-column justify-content-center">
