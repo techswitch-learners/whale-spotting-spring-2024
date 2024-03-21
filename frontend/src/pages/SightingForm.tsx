@@ -1,16 +1,20 @@
-import { useContext, useState, FormEventHandler } from "react"
+import { useContext, useState, FormEventHandler, useEffect } from "react"
 import { Link, Navigate } from "react-router-dom"
 import { Button, CardText, Form, Spinner } from "react-bootstrap"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-import { AuthContext } from "../App"
-import Sighting from "../models/sighting"
+import { AuthContext, BackgroundContext } from "../App"
 import { addSighting } from "../api/backendClient"
+import ErrorList from "../components/ErrorList"
 
 const SightingForm = () => {
+  const backgroundContext = useContext(BackgroundContext)
+
+  useEffect(() => {
+    backgroundContext.setBackground("white")
+  }, [backgroundContext])
+
   const authContext = useContext(AuthContext)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string>()
   const [latitude, setLatitude] = useState<number>()
   const [longitude, setLongitude] = useState<number>()
   const [speciesId, setSpeciesId] = useState<number>()
@@ -18,13 +22,18 @@ const SightingForm = () => {
   const [description, setDescription] = useState<string>()
   const [imageUrl, setImageUrl] = useState<string>()
   const [bodyOfWaterId, setBodyOfWaterId] = useState<number>()
+
+  const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
+  const [errors, setErrors] = useState<{ [subject: string]: string[] }>({})
 
   const submitSighting: FormEventHandler = (event) => {
     event.preventDefault()
     setLoading(true)
-    setError(undefined)
-    const sighting: Sighting = {
+    setSuccess(false)
+    setErrors({})
+
+    addSighting({
       latitude: latitude,
       longitude: longitude,
       token: authContext.cookie.token,
@@ -33,23 +42,24 @@ const SightingForm = () => {
       imageUrl: imageUrl,
       bodyOfWaterId: bodyOfWaterId,
       sightingTimeStamp: sightingDate,
-    }
-
-    console.log(sighting)
-    event.preventDefault()
-    setLoading(true)
-    setSuccess(false)
-    setError("")
-    addSighting(sighting)
+    })
       .then((response) => {
         if (response.ok) {
+          setLatitude(undefined)
+          setLongitude(undefined)
+          setSpeciesId(undefined)
+          setSightingDate(new Date())
+          setDescription(undefined)
+          setImageUrl(undefined)
+          setBodyOfWaterId(undefined)
           setSuccess(true)
-          setLoading(false)
         } else {
-          response.json().then((content) => setError(content.errors))
+          response.json().then((content) => {
+            setErrors(content.errors)
+          })
         }
       })
-      .catch(() => setError("Unable to submit sighting at this time. Please try again later."))
+      .catch(() => setErrors({ General: ["Unable to submit your sighting. Please try again later."] }))
       .finally(() => setLoading(false))
   }
 
@@ -67,14 +77,14 @@ const SightingForm = () => {
           <Col sm={5}>
             <Form.Control
               type="number"
-              max="90"
-              min="-90"
               value={latitude}
               onChange={(event) => {
                 setLatitude(Number(event.target.value))
-                setError(undefined)
+                setSuccess(false)
+                setErrors({})
               }}
             />
+            <ErrorList errors={errors["Latitude"]} />
           </Col>
         </Form.Group>
 
@@ -85,14 +95,14 @@ const SightingForm = () => {
           <Col sm={5}>
             <Form.Control
               type="number"
-              max="180"
-              min="-180"
               value={longitude}
               onChange={(event) => {
                 setLongitude(Number(event.target.value))
-                setError(undefined)
+                setSuccess(false)
+                setErrors({})
               }}
             />
+            <ErrorList errors={errors["Longitude"]} />
           </Col>
         </Form.Group>
 
@@ -105,7 +115,8 @@ const SightingForm = () => {
               aria-label="formSightingBodyOfWaterId"
               onChange={(event) => {
                 setBodyOfWaterId(Number(event.target.value))
-                setError(undefined)
+                setSuccess(false)
+                setErrors({})
               }}
             >
               <option>Select the body of water</option>
@@ -115,6 +126,7 @@ const SightingForm = () => {
               <option value={4}>North Pacific</option>
               <option value={5}>South Pacific</option>
             </Form.Select>
+            <ErrorList errors={errors["BodyOfWaterId"]} />
           </Col>
         </Form.Group>
 
@@ -128,9 +140,11 @@ const SightingForm = () => {
               max={new Date().toISOString().split("T")[0]}
               onChange={(event) => {
                 setSightingDate(new Date(event.target.value))
-                setError(undefined)
+                setSuccess(false)
+                setErrors({})
               }}
             />
+            <ErrorList errors={errors["Date"]} />
           </Col>
         </Form.Group>
 
@@ -143,7 +157,8 @@ const SightingForm = () => {
               aria-label="SpeciesId"
               onChange={(event) => {
                 setSpeciesId(Number(event.target.value))
-                setError(undefined)
+                setSuccess(false)
+                setErrors({})
               }}
             >
               <option>Select the Species of the whale</option>
@@ -151,6 +166,7 @@ const SightingForm = () => {
               <option value={2}>Right Whale</option>
               <option value={3}>Fin Whale</option>
             </Form.Select>
+            <ErrorList errors={errors["SpeciesId"]} />
           </Col>
         </Form.Group>
 
@@ -163,7 +179,8 @@ const SightingForm = () => {
               type="url"
               onChange={(event) => {
                 setImageUrl(event.target.value)
-                setError(undefined)
+                setSuccess(false)
+                setErrors({})
               }}
             />
           </Col>
@@ -180,7 +197,8 @@ const SightingForm = () => {
               max-length="140"
               onChange={(event) => {
                 setDescription(event.target.value)
-                setError(undefined)
+                setSuccess(false)
+                setErrors({})
               }}
             />
           </Col>
@@ -201,7 +219,7 @@ const SightingForm = () => {
             .
           </CardText>
         )}
-        {error && <CardText className="text-danger mt-2">{error}</CardText>}
+        <ErrorList errors={errors["General"]} />
       </Form>
     </>
   )

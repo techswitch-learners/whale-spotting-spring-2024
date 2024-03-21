@@ -1,14 +1,16 @@
-import { useContext, useState, FormEventHandler, Fragment } from "react"
+import { useContext, useState, FormEventHandler } from "react"
 import { Link, Navigate } from "react-router-dom"
 import { Button, Card, CardText, Form, Spinner } from "react-bootstrap"
 import { registerUser } from "../api/backendClient"
 import { AuthContext } from "../App"
+import ErrorList from "../components/ErrorList"
 
 const Register = () => {
   const authContext = useContext(AuthContext)
 
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+
   const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
   const [errors, setErrors] = useState<{ [subject: string]: string[] }>({})
@@ -18,6 +20,7 @@ const Register = () => {
     setLoading(true)
     setSuccess(false)
     setErrors({})
+
     registerUser(username, password)
       .then((response) => {
         if (response.ok) {
@@ -54,17 +57,7 @@ const Register = () => {
                   setErrors({})
                 }}
               />
-              {errors["UserName"]?.length > 0 && (
-                <Form.Text>
-                  <ul className="list-unstyled mb-0 small">
-                    {errors["UserName"].map((error) => (
-                      <li key={error} className="text-danger">
-                        {error}
-                      </li>
-                    ))}
-                  </ul>
-                </Form.Text>
-              )}
+              <ErrorList errors={errors["UserName"]} />
             </Form.Group>
             <Form.Group className="mb-3 text-start" controlId="password">
               <Form.Label className="mb-1">Password</Form.Label>
@@ -77,17 +70,7 @@ const Register = () => {
                   setErrors({})
                 }}
               />
-              {errors["Password"]?.length > 0 && (
-                <Form.Text>
-                  <ul className="list-unstyled mb-0 small">
-                    {errors["Password"].map((error) => (
-                      <li key={error} className="text-danger">
-                        {error}
-                      </li>
-                    ))}
-                  </ul>
-                </Form.Text>
-              )}
+              <ErrorList errors={errors["Password"]} />
             </Form.Group>
             <Button variant="primary" type="submit" disabled={loading}>
               {loading ? <Spinner variant="light" size="sm" /> : <>Submit</>}
@@ -103,20 +86,7 @@ const Register = () => {
                 .
               </CardText>
             )}
-            {errors["General"]?.length > 0 && (
-              <>
-                <CardText className="text-danger mt-2 mb-0">
-                  Error{errors["General"].length > 1 ? "s" : ""} encountered during registration:
-                </CardText>
-                <ul className="list-unstyled mb-0 small">
-                  {errors["General"].map((error) => (
-                    <Fragment key={error}>
-                      <li className="d-inline text-danger">{error}</li>{" "}
-                    </Fragment>
-                  ))}
-                </ul>
-              </>
-            )}
+            <ErrorList errors={errors["General"]} />
           </Form>
         </Card.Body>
         <Card.Footer className="text-muted">

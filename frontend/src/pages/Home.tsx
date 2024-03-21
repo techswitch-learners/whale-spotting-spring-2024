@@ -3,6 +3,7 @@ import { BackgroundContext } from "../App"
 import whaleAnimation from "../assets/whale-animation.gif"
 import eye from "../assets/eye.svg"
 import { Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 const Home = () => {
   const backgroundContext = useContext(BackgroundContext)
@@ -26,9 +27,11 @@ const Home = () => {
       </div>
       <div className="col-lg d-flex flex-column justify-content-center">
         <div className="Home-button-container d-flex flex-column justify-content-center align-items-stretch gap-3">
-          <Button variant="translucent" size="lg">
-            Add a whale sighting
-          </Button>
+          <Link to="/sighting/add">
+            <Button variant="translucent" size="lg">
+              Add a whale sighting
+            </Button>
+          </Link>
           <Button variant="translucent" size="lg">
             See whale sightings
           </Button>
@@ -37,7 +40,9 @@ const Home = () => {
           </Button>
         </div>
         <div className="Home-button-container d-flex flex-column justify-content-center align-items-stretch gap-3">
-          <Button variant="translucent">Add a whale sighting</Button>
+          <Link to="/sighting/add">
+            <Button variant="translucent">Add a whale sighting</Button>
+          </Link>
           <Button variant="translucent">See whale sightings</Button>
           <Button variant="translucent">Check the weather</Button>
         </div>

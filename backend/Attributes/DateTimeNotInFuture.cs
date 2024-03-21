@@ -7,7 +7,7 @@ public class DateTimeNotInFuture : ValidationAttribute
     public override bool IsValid(object? value)
     {
         DateTime d = Convert.ToDateTime(value);
-        if (d > DateTime.UtcNow.Date)
+        if (d > DateTime.UtcNow)
             return false;
 
         return true;

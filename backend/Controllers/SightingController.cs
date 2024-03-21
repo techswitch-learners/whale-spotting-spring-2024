@@ -1,7 +1,10 @@
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.IdentityModel.Tokens;
 using WhaleSpotting.Attributes;
 using WhaleSpotting.Models.Data;
@@ -24,10 +27,10 @@ public class SightingController : Controller
     }
 
     [HttpPost("add")]
-    public async Task<IActionResult> Add([FromBody] SightingRequest sightingRequest)
+    public async Task<IActionResult> Add([FromBody] AddSightingRequest addSightingRequest)
     {
         var handler = new JwtSecurityTokenHandler();
-        var jsonToken = handler.ReadToken(sightingRequest.Token) as JwtSecurityToken;
+        var jsonToken = handler.ReadToken(addSightingRequest.Token) as JwtSecurityToken;
         var nameClaim = jsonToken?.Claims.FirstOrDefault(claim =>
             claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
         );
@@ -43,14 +46,14 @@ public class SightingController : Controller
             .Sightings.Add(
                 new Sighting
                 {
-                    Latitude = sightingRequest.Latitude,
-                    Longitude = sightingRequest.Longitude,
+                    Latitude = addSightingRequest.Latitude,
+                    Longitude = addSightingRequest.Longitude,
                     UserId = userId,
-                    SpeciesId = sightingRequest.SpeciesId,
-                    Description = sightingRequest.Description,
-                    ImageUrl = sightingRequest.ImageUrl,
-                    BodyOfWaterId = sightingRequest.BodyOfWaterId,
-                    SightingTimestamp = sightingRequest.SightingTimestamp,
+                    SpeciesId = addSightingRequest.SpeciesId,
+                    Description = addSightingRequest.Description,
+                    ImageUrl = addSightingRequest.ImageUrl,
+                    BodyOfWaterId = addSightingRequest.BodyOfWaterId,
+                    SightingTimestamp = addSightingRequest.SightingTimestamp,
                     CreationTimestamp = DateTime.UtcNow,
                 }
             )
