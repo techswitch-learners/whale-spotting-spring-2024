@@ -40,7 +40,7 @@ public class SightingController : Controller
             return NotFound();
         }
         var matchingUser = await _userManager.FindByNameAsync(userName);
-        var userId = matchingUser.Id;
+        var userId = matchingUser!.Id;
 
         var newSighting = _whaleSpotting
             .Sightings.Add(
