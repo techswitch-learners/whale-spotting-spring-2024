@@ -1,12 +1,7 @@
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.IdentityModel.Tokens;
-using WhaleSpotting.Attributes;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Request;
 using WhaleSpotting.Models.Response;
@@ -14,19 +9,13 @@ using WhaleSpotting.Models.Response;
 namespace WhaleSpotting.Controllers;
 
 [ApiController]
-[Route("/sighting")]
-public class SightingController : Controller
+[Route("/sightings")]
+public class SightingController(WhaleSpottingContext context, UserManager<User> userManager) : Controller
 {
-    private readonly WhaleSpottingContext _whaleSpotting;
-    private readonly UserManager<User> _userManager;
+    private readonly WhaleSpottingContext _context = context;
+    private readonly UserManager<User> _userManager = userManager;
 
-    public SightingController(WhaleSpottingContext whaleSpottingContext, UserManager<User> userManager)
-    {
-        _whaleSpotting = whaleSpottingContext;
-        _userManager = userManager;
-    }
-
-    [HttpPost("add")]
+    [HttpPost("")]
     public async Task<IActionResult> Add([FromBody] AddSightingRequest addSightingRequest)
     {
         var handler = new JwtSecurityTokenHandler();
@@ -42,90 +31,90 @@ public class SightingController : Controller
         var matchingUser = await _userManager.FindByNameAsync(userName);
         var userId = matchingUser!.Id;
 
-        var newSighting = _whaleSpotting
+        var newSighting = _context
             .Sightings.Add(
                 new Sighting
                 {
-                    Latitude = addSightingRequest.Latitude,
-                    Longitude = addSightingRequest.Longitude,
+                    Latitude = addSightingRequest.Latitude!.Value,
+                    Longitude = addSightingRequest.Longitude!.Value,
                     UserId = userId,
-                    SpeciesId = addSightingRequest.SpeciesId,
+                    SpeciesId = addSightingRequest.SpeciesId!.Value,
                     Description = addSightingRequest.Description,
                     ImageUrl = addSightingRequest.ImageUrl,
-                    BodyOfWaterId = addSightingRequest.BodyOfWaterId,
-                    SightingTimestamp = addSightingRequest.SightingTimestamp,
+                    BodyOfWaterId = addSightingRequest.BodyOfWaterId!.Value,
+                    SightingTimestamp = addSightingRequest.SightingTimestamp!.Value,
                     CreationTimestamp = DateTime.UtcNow,
                 }
             )
             .Entity;
-        _whaleSpotting.SaveChanges();
+        _context.SaveChanges();
         return Ok(newSighting);
     }
 
     [HttpGet("{id}")]
     public IActionResult GetById([FromRoute] int id)
     {
-        var matchSighting = _whaleSpotting
+        var matchingSighting = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
             .Include(sighting => sighting.BodyOfWater)
             .Include(sighting => sighting.VerificationEvent)
+            .Include(sighting => sighting.Reactions)
             .SingleOrDefault(sighting => sighting.Id == id);
-        if (matchSighting == null)
+        if (matchingSighting == null)
         {
             return NotFound();
         }
         var sighting = new SightingResponse
         {
-            Id = matchSighting.Id,
-            Latitude = matchSighting.Latitude,
-            Longitude = matchSighting.Longitude,
-            UserName = string.IsNullOrEmpty(matchSighting.User.UserName) ? "" : matchSighting.User.UserName,
-            Species = matchSighting.Species,
-            Description = matchSighting.Description,
-            ImageUrl = matchSighting.ImageUrl,
-            BodyOfWaterName = matchSighting.BodyOfWater.Name,
-            VerificationEvent = matchSighting.VerificationEvent,
-            SightingTimestamp = matchSighting.SightingTimestamp,
-            CreationTimestamp = matchSighting.CreationTimestamp,
-            Reactions = matchSighting.Reactions
+            Id = matchingSighting.Id,
+            Latitude = matchingSighting.Latitude,
+            Longitude = matchingSighting.Longitude,
+            UserName = matchingSighting.User.UserName!,
+            Species = matchingSighting.Species,
+            Description = matchingSighting.Description,
+            ImageUrl = matchingSighting.ImageUrl,
+            BodyOfWaterName = matchingSighting.BodyOfWater.Name,
+            VerificationEvent = matchingSighting.VerificationEvent,
+            SightingTimestamp = matchingSighting.SightingTimestamp,
+            CreationTimestamp = matchingSighting.CreationTimestamp,
+            Reactions = matchingSighting.Reactions
         };
 
         return Ok(sighting);
     }
 
-    [HttpGet("all")]
-    public IActionResult ListAll()
+    [HttpGet("")]
+    public IActionResult Search()
     {
-        var sightingsResponse = new SightingsResponse();
-        var sightingsList = _whaleSpotting
-            .Sightings.Include(s => s.User)
-            .Include(s => s.Species)
-            .Include(s => s.BodyOfWater)
-            .Include(s => s.VerificationEvent)
-            .Include(s => s.Reactions)
+        var sightings = _context
+            .Sightings.Include(sighting => sighting.User)
+            .Include(sighting => sighting.Species)
+            .Include(sighting => sighting.BodyOfWater)
+            .Include(sighting => sighting.VerificationEvent)
+            .Include(sighting => sighting.Reactions)
             .ToList();
 
-        foreach (var sighting in sightingsList)
+        var sightingsResponse = new SightingsResponse
         {
-            var sightingResponse = new SightingResponse
-            {
-                Id = sighting.Id,
-                Latitude = sighting.Latitude,
-                Longitude = sighting.Longitude,
-                UserName = string.IsNullOrEmpty(sighting.User.UserName) ? "" : sighting.User.UserName,
-                Species = sighting.Species,
-                Description = sighting.Description,
-                ImageUrl = sighting.ImageUrl,
-                BodyOfWaterName = sighting.BodyOfWater.Name,
-                VerificationEvent = sighting.VerificationEvent,
-                SightingTimestamp = sighting.SightingTimestamp,
-                CreationTimestamp = sighting.CreationTimestamp,
-                Reactions = sighting.Reactions
-            };
-            sightingsResponse.Sightings.Add(sightingResponse);
-        }
-
+            Sightings = sightings
+                .Select(sighting => new SightingResponse
+                {
+                    Id = sighting.Id,
+                    Latitude = sighting.Latitude,
+                    Longitude = sighting.Longitude,
+                    UserName = sighting.User.UserName!,
+                    Species = sighting.Species,
+                    Description = sighting.Description,
+                    ImageUrl = sighting.ImageUrl,
+                    BodyOfWaterName = sighting.BodyOfWater.Name,
+                    VerificationEvent = sighting.VerificationEvent,
+                    SightingTimestamp = sighting.SightingTimestamp,
+                    CreationTimestamp = sighting.CreationTimestamp,
+                    Reactions = sighting.Reactions
+                })
+                .ToList()
+        };
         return Ok(sightingsResponse);
     }
 }

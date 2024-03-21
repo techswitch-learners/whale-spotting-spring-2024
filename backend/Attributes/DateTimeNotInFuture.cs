@@ -6,10 +6,13 @@ public class DateTimeNotInFuture : ValidationAttribute
 {
     public override bool IsValid(object? value)
     {
-        DateTime d = Convert.ToDateTime(value);
-        if (d > DateTime.UtcNow)
-            return false;
+        var dateTime = (DateTime?)value;
 
-        return true;
+        if (dateTime == null)
+        {
+            return true;
+        }
+
+        return dateTime <= DateTime.UtcNow;
     }
 }

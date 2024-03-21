@@ -54,7 +54,7 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/logout" element={<Logout />} />
-              <Route path="/sighting/add" element={<SightingForm />} />
+              <Route path="/sightings/add" element={<SightingForm />} />
             </Routes>
           </main>
           <NavbarBottom />

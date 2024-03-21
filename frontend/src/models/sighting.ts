@@ -1,12 +1,12 @@
 interface Sighting {
-  latitude?: number
-  longitude?: number
-  token?: string
-  speciesId?: number
-  description?: string
-  imageUrl?: string
-  bodyOfWaterId?: number
-  sightingTimeStamp?: Date
+  latitude: number | null
+  longitude: number | null
+  token: string | null | undefined
+  speciesId: number | null
+  description: string | null
+  imageUrl: string | null
+  bodyOfWaterId: number | null
+  sightingTimeStamp: Date | null
 }
 
 export default Sighting

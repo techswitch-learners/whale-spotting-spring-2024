@@ -15,13 +15,14 @@ const SightingForm = () => {
   }, [backgroundContext])
 
   const authContext = useContext(AuthContext)
-  const [latitude, setLatitude] = useState<number>()
-  const [longitude, setLongitude] = useState<number>()
+
+  const [latitude, setLatitude] = useState<string>("")
+  const [longitude, setLongitude] = useState<string>("")
   const [speciesId, setSpeciesId] = useState<number>()
-  const [sightingDate, setSightingDate] = useState<Date>(new Date())
-  const [description, setDescription] = useState<string>()
-  const [imageUrl, setImageUrl] = useState<string>()
-  const [bodyOfWaterId, setBodyOfWaterId] = useState<number>()
+  const [sightingDate, setSightingDate] = useState<Date | null>(null)
+  const [description, setDescription] = useState<string>("")
+  const [imageUrl, setImageUrl] = useState<string>("")
+  const [bodyOfWaterId, setBodyOfWaterId] = useState<number | null>(null)
 
   const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
@@ -34,10 +35,10 @@ const SightingForm = () => {
     setErrors({})
 
     addSighting({
-      latitude: latitude,
-      longitude: longitude,
+      latitude: parseFloat(latitude ?? ""),
+      longitude: parseFloat(longitude ?? ""),
       token: authContext.cookie.token,
-      speciesId: speciesId,
+      speciesId: speciesId ?? null,
       description: description,
       imageUrl: imageUrl,
       bodyOfWaterId: bodyOfWaterId,
@@ -45,13 +46,12 @@ const SightingForm = () => {
     })
       .then((response) => {
         if (response.ok) {
-          setLatitude(undefined)
-          setLongitude(undefined)
-          setSpeciesId(undefined)
-          setSightingDate(new Date())
-          setDescription(undefined)
-          setImageUrl(undefined)
-          setBodyOfWaterId(undefined)
+          setLatitude("")
+          setLongitude("")
+          setDescription("")
+          setImageUrl("")
+          const form = event.target as HTMLFormElement
+          form.reset()
           setSuccess(true)
         } else {
           response.json().then((content) => {
@@ -77,9 +77,9 @@ const SightingForm = () => {
           <Col sm={5}>
             <Form.Control
               type="number"
-              value={latitude}
+              value={latitude ?? undefined}
               onChange={(event) => {
-                setLatitude(Number(event.target.value))
+                setLatitude(event.target.value)
                 setSuccess(false)
                 setErrors({})
               }}
@@ -95,9 +95,9 @@ const SightingForm = () => {
           <Col sm={5}>
             <Form.Control
               type="number"
-              value={longitude}
+              value={longitude ?? undefined}
               onChange={(event) => {
-                setLongitude(Number(event.target.value))
+                setLongitude(event.target.value)
                 setSuccess(false)
                 setErrors({})
               }}
@@ -108,7 +108,7 @@ const SightingForm = () => {
 
         <Form.Group as={Row} className="mb-3" controlId="formSightingBodyOfWaterId">
           <Form.Label column sm={2} className="mb-1">
-            Body of Water{" "}
+            Body of water{" "}
           </Form.Label>
           <Col sm={5}>
             <Form.Select
@@ -144,13 +144,13 @@ const SightingForm = () => {
                 setErrors({})
               }}
             />
-            <ErrorList errors={errors["Date"]} />
+            <ErrorList errors={errors["SightingTimestamp"]} />
           </Col>
         </Form.Group>
 
         <Form.Group as={Row} className="mb-3" controlId="formSightingSpeciesId">
           <Form.Label column sm={2} className="mb-1">
-            SpeciesId
+            Species
           </Form.Label>
           <Col sm={5}>
             <Form.Select
@@ -161,7 +161,7 @@ const SightingForm = () => {
                 setErrors({})
               }}
             >
-              <option>Select the Species of the whale</option>
+              <option>Select the species of the whale</option>
               <option value={1}>Beluga Whale</option>
               <option value={2}>Right Whale</option>
               <option value={3}>Fin Whale</option>
@@ -172,7 +172,7 @@ const SightingForm = () => {
 
         <Form.Group as={Row} controlId="formSightingImageUrl" className="mb-3">
           <Form.Label column sm={2}>
-            Upload Image
+            Upload image
           </Form.Label>
           <Col sm={5}>
             <Form.Control
@@ -183,6 +183,7 @@ const SightingForm = () => {
                 setErrors({})
               }}
             />
+            <ErrorList errors={errors["ImageUrl"]} />
           </Col>
         </Form.Group>
 
@@ -193,7 +194,7 @@ const SightingForm = () => {
           <Col sm={5}>
             <Form.Control
               as="textarea"
-              value={description}
+              value={description ?? ""}
               max-length="140"
               onChange={(event) => {
                 setDescription(event.target.value)
@@ -201,6 +202,7 @@ const SightingForm = () => {
                 setErrors({})
               }}
             />
+            <ErrorList errors={errors["Description"]} />
           </Col>
         </Form.Group>
 

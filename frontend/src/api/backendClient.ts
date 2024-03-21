@@ -1,4 +1,4 @@
-import Sighting from "../models/sighting"
+import Sighting from "../models/Sighting"
 
 export const loginUser = async (username: string, password: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
@@ -27,7 +27,7 @@ export const registerUser = async (username: string, password: string) => {
 }
 
 export const addSighting = async (sighting: Sighting) => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sighting/add`, {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",

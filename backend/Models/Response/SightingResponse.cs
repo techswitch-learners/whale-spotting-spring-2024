@@ -4,7 +4,7 @@ namespace WhaleSpotting.Models.Response;
 
 public class SightingResponse
 {
-    public int Id { get; set; }
+    public required int Id { get; set; }
 
     public required decimal Latitude { get; set; }
 
@@ -12,19 +12,19 @@ public class SightingResponse
 
     public required string UserName { get; set; }
 
-    public Species Species { get; set; } = null!;
+    public required Species Species { get; set; }
 
     public required string Description { get; set; }
 
     public required string ImageUrl { get; set; }
 
-    public string BodyOfWaterName { get; set; } = null!;
+    public required string BodyOfWaterName { get; set; }
 
     public VerificationEvent? VerificationEvent { get; set; }
 
     public required DateTime SightingTimestamp { get; set; }
 
-    public DateTime CreationTimestamp { get; init; } = DateTime.Now;
+    public required DateTime CreationTimestamp { get; init; }
 
-    public List<Reaction> Reactions { get; set; } = [];
+    public required List<Reaction> Reactions { get; set; }
 }
