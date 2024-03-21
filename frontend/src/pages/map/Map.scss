@@ -23,20 +23,13 @@ p {
   margin-bottom: 20px;
 }
 
-.g-4 {
+.col {
+  display: flex;
   justify-content: center;
 }
 
 .card-text {
   text-align: left;
-}
-
-.card {
-  max-width: fit-content;
-}
-
-card-img-top {
-  max-width: 100%;
 }
 
 #layout-switch {
