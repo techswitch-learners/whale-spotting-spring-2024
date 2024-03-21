@@ -17,9 +17,10 @@ interface SightingsCardProps {
   species: string
   bodyOfWater: string
   description: string
+  sightingTimestamp: string
 }
 
-function SightingsCard({ imgUrl, species, bodyOfWater, description }: SightingsCardProps) {
+function SightingsCard({ imgUrl, species, bodyOfWater, description, sightingTimestamp }: SightingsCardProps) {
   return (
     <Card>
       <Card.Img variant="top" src={imgUrl} />
@@ -28,6 +29,9 @@ function SightingsCard({ imgUrl, species, bodyOfWater, description }: SightingsC
         <Card.Subtitle>{bodyOfWater}</Card.Subtitle>
         <Card.Text>{description}</Card.Text>
       </Card.Body>
+      <Card.Footer>
+        <small className="text-muted">{sightingTimestamp}</small>
+      </Card.Footer>
     </Card>
   )
 }
@@ -71,6 +75,7 @@ const Map = () => {
       bodyOfWater: "Tasman Sea",
       imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 1",
+      sightingTimestamp: "21 December 2021",
     },
     {
       id: 2,
@@ -80,6 +85,7 @@ const Map = () => {
       bodyOfWater: "South Pacific Ocean",
       imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 2",
+      sightingTimestamp: "15 August 2015",
     },
     {
       id: 3,
@@ -89,6 +95,7 @@ const Map = () => {
       bodyOfWater: "North Sea",
       imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 3",
+      sightingTimestamp: "8 March 2024",
     },
     {
       id: 4,
@@ -98,6 +105,7 @@ const Map = () => {
       bodyOfWater: "North Sea",
       imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 4",
+      sightingTimestamp: "2 October 2019",
     },
     {
       id: 5,
@@ -107,6 +115,7 @@ const Map = () => {
       bodyOfWater: "North Sea",
       imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 5",
+      sightingTimestamp: "17 July 2015",
     },
   ]
 
@@ -173,6 +182,7 @@ const Map = () => {
                   species={sighting.species}
                   bodyOfWater={sighting.bodyOfWater}
                   description={sighting.description}
+                  sightingTimestamp={sighting.sightingTimestamp}
                 />
               </Col>
             ))}
