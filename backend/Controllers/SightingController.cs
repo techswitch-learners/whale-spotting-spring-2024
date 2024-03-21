@@ -62,6 +62,38 @@ public class SightingController : Controller
         return Ok(newSighting);
     }
 
+    [HttpGet("{id}")]
+    public IActionResult GetById([FromRoute] int id)
+    {
+        var matchSighting = _whaleSpotting
+            .Sightings.Include(sighting => sighting.User)
+            .Include(sighting => sighting.Species)
+            .Include(sighting => sighting.BodyOfWater)
+            .Include(sighting => sighting.VerificationEvent)
+            .SingleOrDefault(sighting => sighting.Id == id);
+        if (matchSighting == null)
+        {
+            return NotFound();
+        }
+        var sighting = new SightingResponse
+        {
+            Id = matchSighting.Id,
+            Latitude = matchSighting.Latitude,
+            Longitude = matchSighting.Longitude,
+            UserName = string.IsNullOrEmpty(matchSighting.User.UserName) ? "" : matchSighting.User.UserName,
+            Species = matchSighting.Species,
+            Description = matchSighting.Description,
+            ImageUrl = matchSighting.ImageUrl,
+            BodyOfWaterName = matchSighting.BodyOfWater.Name,
+            VerificationEvent = matchSighting.VerificationEvent,
+            SightingTimestamp = matchSighting.SightingTimestamp,
+            CreationTimestamp = matchSighting.CreationTimestamp,
+            Reactions = matchSighting.Reactions
+        };
+
+        return Ok(sighting);
+    }
+
     [HttpGet("all")]
     public IActionResult ListAll()
     {
