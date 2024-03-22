@@ -21,13 +21,21 @@ interface SightingsCardProps {
 }
 
 function SightingsCard({ imgUrl, species, bodyOfWater, description, sightingTimestamp }: SightingsCardProps) {
+  const [clicked, setClicked] = useState(false)
+
+  const handleClick = () => {
+    setClicked(!clicked)
+  }
+
   return (
     <Card>
       <Card.Img variant="top" src={imgUrl} />
       <Card.Body>
         <Card.Title>{species}</Card.Title>
         <Card.Subtitle>{bodyOfWater}</Card.Subtitle>
-        <Card.Text>{description}</Card.Text>
+        <Card.Text onClick={handleClick} className={clicked ? "show" : " "}>
+          {description}
+        </Card.Text>
       </Card.Body>
       <Card.Footer>
         <small className="text-muted">{sightingTimestamp}</small>
@@ -39,7 +47,14 @@ function SightingsCard({ imgUrl, species, bodyOfWater, description, sightingTime
 const Map = () => {
   const backgroundContext = useContext(BackgroundContext)
   const [mapView, setMapView] = useState<boolean>(false)
+  // const TextDisplay = ({ text }) => {
+  //   const [displayText, setDisplayText] = useState(text.substring(0, 100));
+  //   const [isFullTextDisplayed, setIsFullTextDisplayed] = useState(false);
 
+  //   const handleLoadMoreClick = () => {
+  //     setDisplayText(text);
+  //     setIsFullTextDisplayed(true);
+  //   };
   useEffect(() => {
     backgroundContext.setBackground("white")
   }, [backgroundContext])
@@ -65,6 +80,8 @@ const Map = () => {
   //   .then(data=>setAllSightings(data))
   //   .catch(() => setErrror(true))
   // },[])
+  const timestamp = Date.now()
+  const date = new Date(timestamp)
 
   const sightings = [
     {
@@ -73,9 +90,9 @@ const Map = () => {
       longitude: 156.445313,
       species: "blue whale",
       bodyOfWater: "Tasman Sea",
-      imageUrl: "https://picsum.photos/200/?grayscale",
+      imageUrl: "https://picsum.photos/300/200?grayscale",
       description: "whale spotting 1",
-      sightingTimestamp: "21 December 2021",
+      sightingTimestamp: date,
     },
     {
       id: 2,
@@ -85,7 +102,7 @@ const Map = () => {
       bodyOfWater: "South Pacific Ocean",
       imageUrl: "https://picsum.photos/200/?grayscale",
       description: "whale spotting 2",
-      sightingTimestamp: "15 August 2015",
+      sightingTimestamp: date,
     },
     {
       id: 3,
@@ -93,9 +110,9 @@ const Map = () => {
       longitude: -0.878906,
       species: "grey whale",
       bodyOfWater: "North Sea",
-      imageUrl: "https://picsum.photos/200/?grayscale",
+      imageUrl: "https://picsum.photos/500/1000?grayscale",
       description: "whale spotting 3",
-      sightingTimestamp: "8 March 2024",
+      sightingTimestamp: date,
     },
     {
       id: 4,
@@ -104,8 +121,9 @@ const Map = () => {
       species: "toothed whale",
       bodyOfWater: "North Sea",
       imageUrl: "https://picsum.photos/200/?grayscale",
-      description: "whale spotting 4",
-      sightingTimestamp: "2 October 2019",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam semper odio eu varius. In lorem odio, malesuada et auctor eu, cursus vitae arcu. Sed vel blandit sapien, non fermentum ligula.",
+      sightingTimestamp: date,
     },
     {
       id: 5,
@@ -114,8 +132,9 @@ const Map = () => {
       species: "toothed whale",
       bodyOfWater: "North Sea",
       imageUrl: "https://picsum.photos/200/?grayscale",
-      description: "whale spotting 5",
-      sightingTimestamp: "17 July 2015",
+      description:
+        "Sed consectetur hendrerit risus vel viverra. Proin eu est id mi vulputate iaculis nec sed est. Praesent congue id erat ac gravida. Nam in nisl et eros vestibulum cursus at consectetur dui.",
+      sightingTimestamp: date,
     },
   ]
 
@@ -131,64 +150,65 @@ const Map = () => {
   return (
     <div className="mainContainer">
       <h1>Whale Sightings</h1>
-      <Form className="layoutToggleForm">
-        <Form.Check
-          type="switch"
-          id="layout-switch"
-          label={
-            <>
-              <FontAwesomeIcon icon={faList} />
-              <FontAwesomeIcon icon={faMapMarker} />
-            </>
-          }
-          onClick={toggleView}
-        />
-        <Form.Label htmlFor="layout-switch">{mapView ? "Map View" : "List View"}</Form.Label>
-      </Form>
+      <div className="contentContainer">
+        <Form className="layoutToggleForm">
+          <Form.Check
+            type="switch"
+            id="layout-switch"
+            label={
+              <>
+                <FontAwesomeIcon icon={faList} />
+                <FontAwesomeIcon icon={faMapMarker} />
+              </>
+            }
+            onClick={toggleView}
+          />
+          <Form.Label htmlFor="layout-switch">{mapView ? "Map View" : "List View"}</Form.Label>
+        </Form>
 
-      {mapView && (
-        <div>
-          <p>
-            Use the zoom button to see the exact location of the whale sighting <br /> Click on the icon to see more
-            details about the whale sighting
-          </p>
-          <p></p>
-          <MapContainer center={[26.115, -16.523]} zoom={1} scrollWheelZoom={false}>
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <MarkerClusterGroup>
+        {mapView && (
+          <div>
+            <p>
+              Use the zoom button to see the exact location of the whale sighting <br /> Click on the icon to see more
+              details about the whale sighting
+            </p>
+            <MapContainer center={[26.115, -16.523]} zoom={1} scrollWheelZoom={false}>
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <MarkerClusterGroup>
+                {sightings.map((sighting) => (
+                  <Marker
+                    key={sighting.id}
+                    position={[Number(sighting.latitude), Number(sighting.longitude)]}
+                    icon={customIcon}
+                  >
+                    <Popup>{sighting.description}</Popup>
+                  </Marker>
+                ))}
+              </MarkerClusterGroup>
+            </MapContainer>
+          </div>
+        )}
+        {!mapView && (
+          <div className="sightingsContainer">
+            <Row xs={1} md={3} lg={4} className="g-4">
               {sightings.map((sighting) => (
-                <Marker
-                  key={sighting.id}
-                  position={[Number(sighting.latitude), Number(sighting.longitude)]}
-                  icon={customIcon}
-                >
-                  <Popup>{sighting.description}</Popup>
-                </Marker>
+                <Col key={sighting.id}>
+                  <SightingsCard
+                    imgUrl={sighting.imageUrl}
+                    species={sighting.species}
+                    bodyOfWater={sighting.bodyOfWater}
+                    description={sighting.description}
+                    sightingTimestamp={"Observed on " + sighting.sightingTimestamp.toISOString().split("T")[0]}
+                  />
+                </Col>
               ))}
-            </MarkerClusterGroup>
-          </MapContainer>
-        </div>
-      )}
-      {!mapView && (
-        <div className="sightingsContainer">
-          <Row xs={1} md={3} lg={4} className="g-4">
-            {sightings.map((sighting) => (
-              <Col key={sighting.id}>
-                <SightingsCard
-                  imgUrl={sighting.imageUrl}
-                  species={sighting.species}
-                  bodyOfWater={sighting.bodyOfWater}
-                  description={sighting.description}
-                  sightingTimestamp={sighting.sightingTimestamp}
-                />
-              </Col>
-            ))}
-          </Row>
-        </div>
-      )}
+            </Row>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
