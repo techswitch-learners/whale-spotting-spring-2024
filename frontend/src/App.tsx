@@ -11,6 +11,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
+import SightingForm from "./pages/FormMap"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -53,6 +54,7 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/SightingForm" element={<SightingForm />} />
             </Routes>
           </main>
           <NavbarBottom />
