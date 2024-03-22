@@ -5,7 +5,7 @@ namespace WhaleSpotting.Models.Data;
 
 public class Sighting
 {
-    public required int Id { get; set; }
+    public int Id { get; set; }
 
     public required decimal Latitude { get; set; }
 
@@ -30,7 +30,7 @@ public class Sighting
     [ForeignKey(nameof(BodyOfWaterId))]
     public BodyOfWater BodyOfWater { get; set; } = null!;
 
-    public int VerificationEventId { get; set; }
+    public int? VerificationEventId { get; set; }
 
     [ForeignKey(nameof(VerificationEventId))]
     public VerificationEvent? VerificationEvent { get; set; }
