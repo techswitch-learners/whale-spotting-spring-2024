@@ -32,16 +32,18 @@ const SightingForm = () => {
     setSuccess(false)
     setErrors({})
 
-    addSighting({
-      latitude: parseFloat(latitude ?? ""),
-      longitude: parseFloat(longitude ?? ""),
-      token: authContext.cookie.token,
-      speciesId: speciesId ?? null,
-      description: description,
-      imageUrl: imageUrl,
-      bodyOfWaterId: bodyOfWaterId,
-      sightingTimeStamp: sightingDate,
-    })
+    addSighting(
+      {
+        latitude: parseFloat(latitude ?? ""),
+        longitude: parseFloat(longitude ?? ""),
+        speciesId: speciesId ?? null,
+        description: description,
+        imageUrl: imageUrl,
+        bodyOfWaterId: bodyOfWaterId,
+        sightingTimeStamp: sightingDate,
+      },
+      authContext.cookie.token,
+    )
       .then((response) => {
         if (response.ok) {
           setLatitude("")

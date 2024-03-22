@@ -1,5 +1,5 @@
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WhaleSpotting.Models.Data;
@@ -10,27 +10,15 @@ namespace WhaleSpotting.Controllers;
 
 [ApiController]
 [Route("/sightings")]
-public class SightingController(WhaleSpottingContext context, UserManager<User> userManager) : Controller
+public class SightingController(WhaleSpottingContext context) : Controller
 {
     private readonly WhaleSpottingContext _context = context;
-    private readonly UserManager<User> _userManager = userManager;
 
+    [Authorize]
     [HttpPost("")]
-    public async Task<IActionResult> Add([FromBody] AddSightingRequest addSightingRequest)
+    public IActionResult Add([FromBody] AddSightingRequest addSightingRequest)
     {
-        var handler = new JwtSecurityTokenHandler();
-        var jsonToken = handler.ReadToken(addSightingRequest.Token) as JwtSecurityToken;
-        var nameClaim = jsonToken?.Claims.FirstOrDefault(claim =>
-            claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-        );
-        var userName = nameClaim?.Value;
-        if (userName == null)
-        {
-            return NotFound();
-        }
-        var matchingUser = await _userManager.FindByNameAsync(userName);
-        var userId = matchingUser!.Id;
-
+        var userId = AuthHelper.GetUserId(User);
         var newSighting = _context
             .Sightings.Add(
                 new Sighting

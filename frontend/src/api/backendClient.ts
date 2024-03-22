@@ -26,11 +26,12 @@ export const registerUser = async (username: string, password: string) => {
   })
 }
 
-export const addSighting = async (sighting: Sighting) => {
+export const addSighting = async (sighting: Sighting, token?: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(sighting),
   })

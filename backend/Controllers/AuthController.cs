@@ -29,6 +29,7 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
             var matchingUserRoles = await _userManager.GetRolesAsync(matchingUser);
             var authClaims = new List<Claim>
             {
+                new(ClaimTypes.NameIdentifier, matchingUser.Id.ToString()),
                 new(ClaimTypes.Name, matchingUser.UserName!),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
@@ -60,6 +61,18 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterUserRequest registerUserRequest)
     {
+        if (registerUserRequest.UserName == "current")
+        {
+            return BadRequest(
+                new ErrorResponse
+                {
+                    Errors = new Dictionary<string, List<string>>
+                    {
+                        { "UserName", ["Username 'current' is already taken."] }
+                    },
+                }
+            );
+        }
         var newUser = new User { UserName = registerUserRequest.UserName, ProfileImageUrl = "", };
         var result = await _userManager.CreateAsync(newUser, registerUserRequest.Password);
         if (!result.Succeeded)

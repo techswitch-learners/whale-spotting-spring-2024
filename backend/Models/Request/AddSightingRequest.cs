@@ -13,9 +13,6 @@ public class AddSightingRequest
     [Range(-180, 180)]
     public required decimal? Longitude { get; set; }
 
-    [Required(ErrorMessage = "Token is required.")]
-    public required string Token { get; set; }
-
     [Required(ErrorMessage = "Species is required.")]
     [SpeciesExists]
     public required int? SpeciesId { get; set; }
