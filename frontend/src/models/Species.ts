@@ -1,8 +1,8 @@
 interface Species {
   id: number
   name: string
-  description: string
   exampleImageUrl: string
+  wikiLink: string
 }
 
 export default Species

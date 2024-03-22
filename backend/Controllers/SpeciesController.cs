@@ -21,8 +21,8 @@ public class SpeciesController(WhaleSpottingContext context) : Controller
                 {
                     Id = species.Id,
                     Name = species.Name,
-                    Description = species.Description,
-                    ExampleImageUrl = species.ExampleImageUrl
+                    ExampleImageUrl = species.ExampleImageUrl,
+                    WikiLink = species.WikiLink,
                 })
                 .ToList()
         };

@@ -1,3 +1,5 @@
+using System.Globalization;
+using CsvHelper;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WhaleSpotting.Enums;
@@ -31,5 +33,10 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
             NormalizedName = RoleType.Admin.ToString().ToUpper(),
         };
         builder.Entity<Role>().HasData(userRole, adminRole);
+
+        using var speciesStreamReader = new StreamReader("Data/species.csv");
+        using var speciesCsvReader = new CsvReader(speciesStreamReader, CultureInfo.InvariantCulture);
+        var speciesList = speciesCsvReader.GetRecords<Species>().ToList();
+        builder.Entity<Species>().HasData(speciesList);
     }
 }
