@@ -1,22 +1,19 @@
 import { useContext, useState, FormEventHandler, useEffect } from "react"
-import { Link, Navigate } from "react-router-dom"
+import { useNavigate, Link, Navigate } from "react-router-dom"
 import { Button, CardText, Form, Spinner, Row, Col } from "react-bootstrap"
 import { AuthContext, BackgroundContext } from "../App"
 import { addSighting } from "../api/backendClient"
 import ErrorList from "../components/ErrorList"
 
 const SightingForm = () => {
+  const navigate = useNavigate()
+
   const backgroundContext = useContext(BackgroundContext)
-
-  useEffect(() => {
-    backgroundContext.setBackground("white")
-  }, [backgroundContext])
-
   const authContext = useContext(AuthContext)
 
   const [latitude, setLatitude] = useState<string>("")
   const [longitude, setLongitude] = useState<string>("")
-  const [speciesId, setSpeciesId] = useState<number>()
+  const [speciesId, setSpeciesId] = useState<number | null>(null)
   const [sightingDate, setSightingDate] = useState<Date | null>(null)
   const [description, setDescription] = useState<string>("")
   const [imageUrl, setImageUrl] = useState<string>("")
@@ -25,6 +22,10 @@ const SightingForm = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
   const [errors, setErrors] = useState<{ [subject: string]: string[] }>({})
+
+  useEffect(() => {
+    backgroundContext.setBackground("white")
+  }, [backgroundContext])
 
   const submitSighting: FormEventHandler = (event) => {
     event.preventDefault()
@@ -36,7 +37,7 @@ const SightingForm = () => {
       {
         latitude: parseFloat(latitude ?? ""),
         longitude: parseFloat(longitude ?? ""),
-        speciesId: speciesId ?? null,
+        speciesId: speciesId,
         description: description,
         imageUrl: imageUrl,
         bodyOfWaterId: bodyOfWaterId,
@@ -53,6 +54,8 @@ const SightingForm = () => {
           const form = event.target as HTMLFormElement
           form.reset()
           setSuccess(true)
+        } else if (response.status === 401) {
+          navigate("/login")
         } else {
           response.json().then((content) => {
             setErrors(content.errors)
@@ -214,11 +217,11 @@ const SightingForm = () => {
           <CardText className="text-success mt-2 mb-0">
             Add sighting successful!
             <br />
-            You can now go to{" "}
+            You can view other sightings on the{" "}
             <Link to="/sighting/all" className="link-success">
-              All sightings
-            </Link>
-            .
+              sightings page
+            </Link>{" "}
+            while you are waiting for your sighting to be approved.
           </CardText>
         )}
         <ErrorList errors={errors["General"]} />
