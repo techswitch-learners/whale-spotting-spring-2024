@@ -73,10 +73,7 @@ const AllSightings = () => {
   function getData() {
     fetch("http://localhost:5280/sightings")
       .then((response) => response.json())
-      .then((data) => {
-        setAllSightings(data)
-        console.log(data)
-      })
+      .then((data) => setAllSightings(data))
       .catch(() => setErrror(true))
   }
 
@@ -108,12 +105,12 @@ const AllSightings = () => {
           <Form.Label htmlFor="layout-switch">{mapView ? "Map View" : "List View"}</Form.Label>
         </Form>
         {mapView && (
-          <div>
+          <div className="mapContainer">
             <p>
               Use the zoom button to see the exact location of the whale sighting <br /> Click on the icon to see more
               details about the whale sighting
             </p>
-            <MapContainer center={[26.115, -16.523]} zoom={1} scrollWheelZoom={false}>
+            <MapContainer center={[26.115, -16.523]} zoom={1} scrollWheelZoom={true}>
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -10,12 +10,15 @@ p {
 .mainContainer {
   display: flex;
   flex-direction: column;
-  padding-bottom: 40px;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .leaflet-container {
   height: 60vh;
-  margin-bottom: 20p;
 }
 
 .sightingsContainer {
@@ -30,6 +33,13 @@ p {
 }
 .card {
   width: 13rem;
+  min-width: 13rem !important;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 18rem;
+  }
 }
 
 .card-img-top {
@@ -39,7 +49,7 @@ p {
 }
 
 .card-img-top:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -60,34 +70,11 @@ p {
   width: 4rem;
   height: 2rem;
 }
-
-.contentContainer {
-  display: flex;
-  flex-direction: column;
-}
-
 .layoutToggleForm {
   position: relative;
   display: flex;
   align-items: center;
-  margin-left: 3%;
-}
-
-@media (max-width: 992px) {
-  .layoutToggleForm {
-    margin-left: 5%;
-  }
-}
-@media (max-width: 768px) {
-  .contentContainer {
-    align-items: center;
-  }
-  .layoutToggleForm {
-    margin-left: 0;
-  }
-  .card {
-    width: 18rem;
-  }
+  align-self: center;
 }
 
 .fa-list {
