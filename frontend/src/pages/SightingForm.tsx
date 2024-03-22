@@ -2,14 +2,19 @@ import { useContext, useState, FormEventHandler, useEffect } from "react"
 import { useNavigate, Link, Navigate } from "react-router-dom"
 import { Button, CardText, Form, Spinner, Row, Col } from "react-bootstrap"
 import { AuthContext, BackgroundContext } from "../App"
-import { addSighting } from "../api/backendClient"
+import { addSighting, getBodiesOfWater, getSpeciesList } from "../api/backendClient"
 import ErrorList from "../components/ErrorList"
+import BodyOfWater from "../models/BodyOfWater"
+import Species from "../models/Species"
 
 const SightingForm = () => {
   const navigate = useNavigate()
 
   const backgroundContext = useContext(BackgroundContext)
   const authContext = useContext(AuthContext)
+
+  const [bodiesOfWater, setBodiesOfWater] = useState<BodyOfWater[]>()
+  const [speciesList, setSpeciesList] = useState<Species[]>()
 
   const [latitude, setLatitude] = useState<string>("")
   const [longitude, setLongitude] = useState<string>("")
@@ -22,6 +27,18 @@ const SightingForm = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
   const [errors, setErrors] = useState<{ [subject: string]: string[] }>({})
+
+  useEffect(() => {
+    getBodiesOfWater()
+      .then((response) => response.json())
+      .then((content) => setBodiesOfWater(content.bodiesOfWater))
+      .catch(() => {})
+
+    getSpeciesList()
+      .then((response) => response.json())
+      .then((content) => setSpeciesList(content.speciesList))
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     backgroundContext.setBackground("white")
@@ -55,6 +72,7 @@ const SightingForm = () => {
           form.reset()
           setSuccess(true)
         } else if (response.status === 401) {
+          authContext.removeCookie("token")
           navigate("/login")
         } else {
           response.json().then((content) => {
@@ -123,11 +141,11 @@ const SightingForm = () => {
               }}
             >
               <option>Select the body of water</option>
-              <option value={1}>Arctic</option>
-              <option value={2}>North Atlantic</option>
-              <option value={3}>South Atlantic</option>
-              <option value={4}>North Pacific</option>
-              <option value={5}>South Pacific</option>
+              {bodiesOfWater?.map((bodyOfWater) => (
+                <option key={bodyOfWater.id} value={bodyOfWater.id}>
+                  {bodyOfWater.name}
+                </option>
+              ))}
             </Form.Select>
             <ErrorList errors={errors["BodyOfWaterId"]} />
           </Col>
@@ -164,10 +182,12 @@ const SightingForm = () => {
                 setErrors({})
               }}
             >
-              <option>Select the species of the whale</option>
-              <option value={1}>Beluga Whale</option>
-              <option value={2}>Right Whale</option>
-              <option value={3}>Fin Whale</option>
+              <option>Select the species</option>
+              {speciesList?.map((species) => (
+                <option key={species.id} value={species.id}>
+                  {species.name}
+                </option>
+              ))}
             </Form.Select>
             <ErrorList errors={errors["SpeciesId"]} />
           </Col>
