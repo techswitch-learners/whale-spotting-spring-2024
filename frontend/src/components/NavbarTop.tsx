@@ -44,7 +44,7 @@ const NavbarTop = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="gap-2 w-100 mt-2 mb-1 my-lg-0">
             <NavbarLink to="/" text="Home" icon={faHouse} />
-            <NavbarLink to="/map" text="Map" icon={faCircleQuestion} />
+            <NavbarLink to="/sightings" text="Sightings" icon={faCircleQuestion} />
             <NavbarLink to="/about" text="About" icon={faCircleInfo} />
             <NavbarLink to="/faqs" text="FAQs" icon={faCircleQuestion} />
 

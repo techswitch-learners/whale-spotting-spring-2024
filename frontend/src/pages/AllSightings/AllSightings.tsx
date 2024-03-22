@@ -1,4 +1,4 @@
-import "./Map.scss"
+import "./AllSightings.scss"
 import { useState, useContext, useEffect } from "react"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
@@ -38,105 +38,47 @@ function SightingsCard({ imgUrl, species, bodyOfWater, description, sightingTime
         </Card.Text>
       </Card.Body>
       <Card.Footer>
-        <small className="text-muted">{sightingTimestamp}</small>
+        <small className="-mtextuted">{sightingTimestamp}</small>
       </Card.Footer>
     </Card>
   )
 }
 
-const Map = () => {
+const AllSightings = () => {
   const backgroundContext = useContext(BackgroundContext)
   const [mapView, setMapView] = useState<boolean>(false)
-  // const TextDisplay = ({ text }) => {
-  //   const [displayText, setDisplayText] = useState(text.substring(0, 100));
-  //   const [isFullTextDisplayed, setIsFullTextDisplayed] = useState(false);
+  const [allSightings, setAllSightings] = useState<SightingsData>()
+  const [error, setErrror] = useState(false)
 
-  //   const handleLoadMoreClick = () => {
-  //     setDisplayText(text);
-  //     setIsFullTextDisplayed(true);
-  //   };
   useEffect(() => {
     backgroundContext.setBackground("white")
+    getData()
   }, [backgroundContext])
 
-  //     interface SightingsData{
-  //     id: number,
-  //     latitude: number,
-  //     longitude: number,
-  //     species: {
-  //       name: string
-  //     },
-  //     description: string,
-  //     bodyOfWater: string,
-  //     imageUrl: string,
-  //   }
+  interface SightingsData {
+    sightings: {
+      id: number
+      latitude: number
+      longitude: number
+      species: {
+        name: string
+      }
+      description: string
+      bodyOfWaterName: string
+      imageUrl: string
+      sightingTimestamp: string
+    }[]
+  }
 
-  //   const [allSightings, setAllSightings]= useState<SightingsData>();
-  //   const [error, setErrror] = useState(false);
-
-  // useEffect(()=>{
-  //   fetch("htpps://localhost:5280/all")
-  //   .then(response=>response.json())
-  //   .then(data=>setAllSightings(data))
-  //   .catch(() => setErrror(true))
-  // },[])
-  const timestamp = Date.now()
-  const date = new Date(timestamp)
-
-  const sightings = [
-    {
-      id: 1,
-      latitude: -37.439974,
-      longitude: 156.445313,
-      species: "blue whale",
-      bodyOfWater: "Tasman Sea",
-      imageUrl: "https://picsum.photos/300/200?grayscale",
-      description: "whale spotting 1",
-      sightingTimestamp: date,
-    },
-    {
-      id: 2,
-      latitude: -49.382372,
-      longitude: -79.453125,
-      species: "orca",
-      bodyOfWater: "South Pacific Ocean",
-      imageUrl: "https://picsum.photos/200/?grayscale",
-      description: "whale spotting 2",
-      sightingTimestamp: date,
-    },
-    {
-      id: 3,
-      latitude: 58.859224,
-      longitude: -0.878906,
-      species: "grey whale",
-      bodyOfWater: "North Sea",
-      imageUrl: "https://picsum.photos/500/1000?grayscale",
-      description: "whale spotting 3",
-      sightingTimestamp: date,
-    },
-    {
-      id: 4,
-      latitude: 59.859224,
-      longitude: -0.878906,
-      species: "toothed whale",
-      bodyOfWater: "North Sea",
-      imageUrl: "https://picsum.photos/200/?grayscale",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam semper odio eu varius. In lorem odio, malesuada et auctor eu, cursus vitae arcu. Sed vel blandit sapien, non fermentum ligula.",
-      sightingTimestamp: date,
-    },
-    {
-      id: 5,
-      latitude: 59.859224,
-      longitude: -0.877906,
-      species: "toothed whale",
-      bodyOfWater: "North Sea",
-      imageUrl: "https://picsum.photos/200/?grayscale",
-      description:
-        "Sed consectetur hendrerit risus vel viverra. Proin eu est id mi vulputate iaculis nec sed est. Praesent congue id erat ac gravida. Nam in nisl et eros vestibulum cursus at consectetur dui.",
-      sightingTimestamp: date,
-    },
-  ]
+  function getData() {
+    fetch("http://localhost:5280/sightings")
+      .then((response) => response.json())
+      .then((data) => {
+        setAllSightings(data)
+        console.log(data)
+      })
+      .catch(() => setErrror(true))
+  }
 
   const customIcon = new Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/8153/8153004.png",
@@ -165,7 +107,6 @@ const Map = () => {
           />
           <Form.Label htmlFor="layout-switch">{mapView ? "Map View" : "List View"}</Form.Label>
         </Form>
-
         {mapView && (
           <div>
             <p>
@@ -178,7 +119,7 @@ const Map = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <MarkerClusterGroup>
-                {sightings.map((sighting) => (
+                {allSightings?.sightings.map((sighting) => (
                   <Marker
                     key={sighting.id}
                     position={[Number(sighting.latitude), Number(sighting.longitude)]}
@@ -194,23 +135,24 @@ const Map = () => {
         {!mapView && (
           <div className="sightingsContainer">
             <Row xs={1} md={3} lg={4} className="g-4">
-              {sightings.map((sighting) => (
+              {allSightings?.sightings.map((sighting) => (
                 <Col key={sighting.id}>
                   <SightingsCard
                     imgUrl={sighting.imageUrl}
-                    species={sighting.species}
-                    bodyOfWater={sighting.bodyOfWater}
+                    species={sighting.species.name}
+                    bodyOfWater={sighting.bodyOfWaterName}
                     description={sighting.description}
-                    sightingTimestamp={"Observed on " + sighting.sightingTimestamp.toISOString().split("T")[0]}
+                    sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
                   />
                 </Col>
               ))}
             </Row>
           </div>
         )}
+        {error && <p>There was an error</p>}
       </div>
     </div>
   )
 }
 
-export default Map
+export default AllSightings
