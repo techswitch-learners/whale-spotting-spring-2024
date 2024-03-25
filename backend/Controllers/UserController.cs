@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WhaleSpotting.Models.Data;
@@ -10,6 +11,14 @@ namespace WhaleSpotting.Controllers;
 public class UserController(UserManager<User> userManager) : Controller
 {
     private readonly UserManager<User> _userManager = userManager;
+
+    [Authorize]
+    [HttpGet("current")]
+    public async Task<IActionResult> GetCurrent()
+    {
+        var matchingUser = (await _userManager.FindByNameAsync(AuthHelper.GetUserName(User)))!;
+        return Ok(new UserResponse { Id = matchingUser.Id, UserName = matchingUser.UserName!, });
+    }
 
     [HttpGet("{userName}")]
     public async Task<IActionResult> GetByUserName([FromRoute] string userName)

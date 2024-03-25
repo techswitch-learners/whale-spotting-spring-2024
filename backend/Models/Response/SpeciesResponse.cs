@@ -1,6 +1,6 @@
-namespace WhaleSpotting.Models.Data;
+namespace WhaleSpotting.Models.Response;
 
-public class Species
+public class SpeciesResponse
 {
     public required int Id { get; set; }
     public required string Name { get; set; }

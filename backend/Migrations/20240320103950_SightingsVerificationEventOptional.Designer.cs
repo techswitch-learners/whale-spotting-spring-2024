@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WhaleSpotting;
@@ -11,9 +12,11 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingContext))]
-    partial class WhaleSpottingContextModelSnapshot : ModelSnapshot
+    [Migration("20240320103950_SightingsVerificationEventOptional")]
+    partial class SightingsVerificationEventOptional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,6 +308,10 @@ namespace WhaleSpotting.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("ExampleImageUrl")
                         .IsRequired()
                         .HasColumnType("text");
@@ -313,127 +320,9 @@ namespace WhaleSpotting.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("WikiLink")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.ToTable("Species");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Berardius_bairdii.jpg/1599px-Berardius_bairdii.jpg?20151221184110",
-                            Name = "Beaked whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Beaked_whale"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e8/Oceanogr%C3%A0fic_29102004.jpg",
-                            Name = "Beluga whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Beluga_whale"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Anim1754_-_Flickr_-_NOAA_Photo_Library.jpg/2560px-Anim1754_-_Flickr_-_NOAA_Photo_Library.jpg",
-                            Name = "Blue whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Blue_whale"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bowhead_Whale_NOAA.jpg/2560px-Bowhead_Whale_NOAA.jpg",
-                            Name = "Bowhead whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Bowhead_whale"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/3/35/Balaenoptera_brydei.jpg",
-                            Name = "Bryde's whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Bryde%27s_whale"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Finhval_%281%29.jpg/2560px-Finhval_%281%29.jpg",
-                            Name = "Fin whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Fin_whale"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Ballena_gris_adulta_con_su_ballenato.jpg/2560px-Ballena_gris_adulta_con_su_ballenato.jpg",
-                            Name = "Gray whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Gray_whale"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/6/61/Humpback_Whale_underwater_shot.jpg",
-                            Name = "Humpback whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Humpback_whale"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/3/37/Killerwhales_jumping.jpg",
-                            Name = "Killer whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Orca"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/d/d9/Minke_Whale_%28NOAA%29.jpg",
-                            Name = "Minke whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Minke_whale"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/%D0%9D%D0%B0%D1%80%D0%B2%D0%B0%D0%BB_%D0%B2_%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%BE%D0%B9_%D0%90%D1%80%D0%BA%D1%82%D0%B8%D0%BA%D0%B5.jpg/1280px-%D0%9D%D0%B0%D1%80%D0%B2%D0%B0%D0%BB_%D0%B2_%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%BE%D0%B9_%D0%90%D1%80%D0%BA%D1%82%D0%B8%D0%BA%D0%B5.jpg",
-                            Name = "Narwhal",
-                            WikiLink = "https://en.wikipedia.org/wiki/Narwhal"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Pilot_whale.jpg/1920px-Pilot_whale.jpg",
-                            Name = "Pilot whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Pilot_whale"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e2/Southern_right_whale.jpg",
-                            Name = "Right whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Right_whale"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sei_whale_mother_and_calf_Christin_Khan_NOAA.jpg/1280px-Sei_whale_mother_and_calf_Christin_Khan_NOAA.jpg",
-                            Name = "Sei whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Sei_whale"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            ExampleImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Mother_and_baby_sperm_whale.jpg/1920px-Mother_and_baby_sperm_whale.jpg",
-                            Name = "Sperm whale",
-                            WikiLink = "https://en.wikipedia.org/wiki/Sperm_whale"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            ExampleImageUrl = "https://cdn1.vectorstock.com/i/thumb-large/32/75/cartoon-curious-whale-and-speech-bubble-sticker-vector-26423275.jpg",
-                            Name = "Other/unknown",
-                            WikiLink = "https://en.wikipedia.org/wiki/Whale"
-                        });
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Data.User", b =>
