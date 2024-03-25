@@ -1,16 +1,16 @@
-import "./AllSightings.scss"
+import "./SightingsSearch.scss"
 import { useState, useContext, useEffect } from "react"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import { Icon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
 import Form from "react-bootstrap/Form"
-import { BackgroundContext } from "../../App"
+import { BackgroundContext } from "../App"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faList, faMapMarker } from "@fortawesome/free-solid-svg-icons"
 import Card from "react-bootstrap/Card"
 import { Link } from "react-router-dom"
-import Sighting from "../../models/view/Sighting"
+import Sighting from "../models/view/Sighting"
 
 interface SightingCardProps {
   imgUrl: string
@@ -36,7 +36,7 @@ function SightingCard({ imgUrl, species, bodyOfWater, description, sightingTimes
   )
 }
 
-const AllSightings = () => {
+const SightingsSearch = () => {
   const backgroundContext = useContext(BackgroundContext)
   const [mapView, setMapView] = useState<boolean>(false)
   const [allSightings, setAllSightings] = useState<Sighting[]>()
@@ -130,4 +130,4 @@ const AllSightings = () => {
   )
 }
 
-export default AllSightings
+export default SightingsSearch
