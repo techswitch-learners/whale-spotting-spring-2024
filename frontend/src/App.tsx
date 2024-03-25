@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { CookieSetOptions } from "universal-cookie"
 import NavbarTop from "./components/NavbarTop"
-import NavbarBottom from "./components/NavbarBottom"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Faqs from "./pages/Faqs"
@@ -11,6 +10,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
+import SightingsSearch from "./pages/SightingsSearch"
 import SightingForm from "./pages/SightingForm"
 
 export const AuthContext = createContext<{
@@ -54,10 +54,10 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/sightings" element={<SightingsSearch />} />
               <Route path="/sightings/add" element={<SightingForm />} />
             </Routes>
           </main>
-          <NavbarBottom />
         </Router>
       </BackgroundContext.Provider>
     </AuthContext.Provider>

@@ -1,4 +1,4 @@
-import Sighting from "../models/Sighting"
+import Sighting from "../models/request/AddSightingRequest"
 
 export const loginUser = async (username: string, password: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
@@ -43,4 +43,8 @@ export const getBodiesOfWater = async () => {
 
 export const getSpeciesList = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/species`)
+}
+
+export const getSightings = async () => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`)
 }
