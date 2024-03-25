@@ -6,18 +6,39 @@ import { addSighting, getBodiesOfWater, getSpeciesList } from "../api/backendCli
 import ErrorList from "../components/ErrorList"
 import BodyOfWater from "../models/view/BodyOfWater"
 import Species from "../models/view/Species"
+import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
+import "leaflet/dist/leaflet.css"
+import "./FormMap.scss"
+
+interface GetLocationProps {
+  setLatitude: (latitude: number) => void
+  setLongitude: (longitude: number) => void
+}
+
+function GetLocation({ setLatitude, setLongitude }: GetLocationProps) {
+  useMapEvents({
+    click: (event) => {
+      setLatitude(event.latlng.lat)
+      setLongitude(event.latlng.lng)
+    },
+  })
+  return null
+}
 
 const SightingForm = () => {
   const navigate = useNavigate()
 
   const backgroundContext = useContext(BackgroundContext)
   const authContext = useContext(AuthContext)
+  const defaultLat = 51.505
+  const defaultLong = -0.09
 
   const [bodiesOfWater, setBodiesOfWater] = useState<BodyOfWater[]>()
   const [speciesList, setSpeciesList] = useState<Species[]>()
 
-  const [latitude, setLatitude] = useState<string>("")
-  const [longitude, setLongitude] = useState<string>("")
+  const [latitude, setLatitude] = useState<number>(defaultLat)
+  const [longitude, setLongitude] = useState<number>(defaultLong)
+
   const [speciesId, setSpeciesId] = useState<number | null>(null)
   const [sightingDate, setSightingDate] = useState<Date | null>(null)
   const [description, setDescription] = useState<string>("")
@@ -52,8 +73,8 @@ const SightingForm = () => {
 
     addSighting(
       {
-        latitude: parseFloat(latitude ?? ""),
-        longitude: parseFloat(longitude ?? ""),
+        latitude: latitude,
+        longitude: longitude,
         speciesId: speciesId,
         description: description,
         imageUrl: imageUrl,
@@ -64,8 +85,8 @@ const SightingForm = () => {
     )
       .then((response) => {
         if (response.ok) {
-          setLatitude("")
-          setLongitude("")
+          setLatitude(defaultLat)
+          setLongitude(defaultLong)
           setDescription("")
           setImageUrl("")
           const form = event.target as HTMLFormElement
@@ -100,7 +121,7 @@ const SightingForm = () => {
               type="number"
               value={latitude ?? undefined}
               onChange={(event) => {
-                setLatitude(event.target.value)
+                setLatitude(Number(event.target.value))
                 setSuccess(false)
                 setErrors({})
               }}
@@ -118,7 +139,7 @@ const SightingForm = () => {
               type="number"
               value={longitude ?? undefined}
               onChange={(event) => {
-                setLongitude(event.target.value)
+                setLongitude(Number(event.target.value))
                 setSuccess(false)
                 setErrors({})
               }}
@@ -126,7 +147,16 @@ const SightingForm = () => {
             <ErrorList errors={errors["Longitude"]} />
           </Col>
         </Form.Group>
-
+        <div>
+          <MapContainer center={[defaultLat, defaultLong]} zoom={5}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <GetLocation setLatitude={setLatitude} setLongitude={setLongitude} />
+            <Marker position={[latitude, longitude]}></Marker>
+          </MapContainer>
+        </div>
         <Form.Group as={Row} className="mb-3" controlId="formSightingBodyOfWaterId">
           <Form.Label column sm={2} className="mb-1">
             Body of water{" "}
