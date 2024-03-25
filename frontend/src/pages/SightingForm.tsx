@@ -238,7 +238,7 @@ const SightingForm = () => {
             Add sighting successful!
             <br />
             You can view other sightings on the{" "}
-            <Link to="/sighting/all" className="link-success">
+            <Link to="/sightings" className="link-success">
               sightings page
             </Link>{" "}
             while you are waiting for your sighting to be approved.
