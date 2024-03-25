@@ -1,15 +1,15 @@
+import BodyOfWater from "./BodyOfWater"
+import Species from "./Species"
+
 interface Sighting {
   id: number
   latitude: number
   longitude: number
-  species: {
-    name: string
-  }
+  userName: string
+  species: Species
   description: string
   imageUrl: string
-  bodyOfWater: {
-    name: string
-  }
+  bodyOfWater: BodyOfWater
   sightingTimestamp: string
 }
 
