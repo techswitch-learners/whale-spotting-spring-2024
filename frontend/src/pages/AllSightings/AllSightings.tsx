@@ -78,7 +78,7 @@ const AllSightings = () => {
   }
 
   const customIcon = new Icon({
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/8153/8153004.png",
+    iconUrl: "favicon.ico",
     iconSize: [25, 25],
   })
 
