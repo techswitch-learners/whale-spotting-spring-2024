@@ -10,7 +10,7 @@ interface Sighting {
   bodyOfWater: {
     name: string
   }
-  sightingTimeStamp: string
+  sightingTimestamp: string
 }
 
 export default Sighting
