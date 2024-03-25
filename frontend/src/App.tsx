@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { CookieSetOptions } from "universal-cookie"
 import NavbarTop from "./components/NavbarTop"
-import NavbarBottom from "./components/NavbarBottom"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Faqs from "./pages/Faqs"
@@ -59,7 +58,6 @@ const App = () => {
               <Route path="/sightings/add" element={<SightingForm />} />
             </Routes>
           </main>
-          <NavbarBottom />
         </Router>
       </BackgroundContext.Provider>
     </AuthContext.Provider>

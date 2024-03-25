@@ -9,10 +9,10 @@ import { BackgroundContext } from "../../App"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faList, faMapMarker } from "@fortawesome/free-solid-svg-icons"
 import Card from "react-bootstrap/Card"
-import Col from "react-bootstrap/Col"
-import Row from "react-bootstrap/Row"
+import { Link } from "react-router-dom"
+import Sighting from "../../models/view/Sighting"
 
-interface SightingsCardProps {
+interface SightingCardProps {
   imgUrl: string
   species: string
   bodyOfWater: string
@@ -20,25 +20,17 @@ interface SightingsCardProps {
   sightingTimestamp: string
 }
 
-function SightingsCard({ imgUrl, species, bodyOfWater, description, sightingTimestamp }: SightingsCardProps) {
-  const [clicked, setClicked] = useState(false)
-
-  const handleClick = () => {
-    setClicked(!clicked)
-  }
-
+function SightingCard({ imgUrl, species, bodyOfWater, description, sightingTimestamp }: SightingCardProps) {
   return (
     <Card>
       <Card.Img variant="top" src={imgUrl} />
       <Card.Body>
         <Card.Title>{species}</Card.Title>
         <Card.Subtitle>{bodyOfWater}</Card.Subtitle>
-        <Card.Text onClick={handleClick} className={clicked ? "show" : " "}>
-          {description}
-        </Card.Text>
+        <Card.Text>{description}</Card.Text>
       </Card.Body>
       <Card.Footer>
-        <small className="-mtextuted">{sightingTimestamp}</small>
+        <small>{sightingTimestamp}</small>
       </Card.Footer>
     </Card>
   )
@@ -47,7 +39,7 @@ function SightingsCard({ imgUrl, species, bodyOfWater, description, sightingTime
 const AllSightings = () => {
   const backgroundContext = useContext(BackgroundContext)
   const [mapView, setMapView] = useState<boolean>(false)
-  const [allSightings, setAllSightings] = useState<SightingsData>()
+  const [allSightings, setAllSightings] = useState<Sighting[]>()
   const [error, setErrror] = useState(false)
 
   useEffect(() => {
@@ -55,25 +47,10 @@ const AllSightings = () => {
     getData()
   }, [backgroundContext])
 
-  interface SightingsData {
-    sightings: {
-      id: number
-      latitude: number
-      longitude: number
-      species: {
-        name: string
-      }
-      description: string
-      bodyOfWaterName: string
-      imageUrl: string
-      sightingTimestamp: string
-    }[]
-  }
-
   function getData() {
     fetch("http://localhost:5280/sightings")
       .then((response) => response.json())
-      .then((data) => setAllSightings(data))
+      .then((data) => setAllSightings(data.sightings))
       .catch(() => setErrror(true))
   }
 
@@ -93,11 +70,12 @@ const AllSightings = () => {
         <Form className="layoutToggleForm">
           <Form.Check
             type="switch"
+            role="button"
             id="layout-switch"
             label={
               <>
-                <FontAwesomeIcon icon={faList} />
-                <FontAwesomeIcon icon={faMapMarker} />
+                <FontAwesomeIcon icon={faList} className="pe-none" />
+                <FontAwesomeIcon icon={faMapMarker} className="pe-none" />
               </>
             }
             onClick={toggleView}
@@ -106,17 +84,14 @@ const AllSightings = () => {
         </Form>
         {mapView && (
           <div className="mapContainer">
-            <p>
-              Use the zoom button to see the exact location of the whale sighting <br /> Click on the icon to see more
-              details about the whale sighting
-            </p>
+            <p>Click on the icon to see more details about the whale sighting</p>
             <MapContainer center={[26.115, -16.523]} zoom={1} scrollWheelZoom={true}>
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <MarkerClusterGroup>
-                {allSightings?.sightings.map((sighting) => (
+                {allSightings?.map((sighting) => (
                   <Marker
                     key={sighting.id}
                     position={[Number(sighting.latitude), Number(sighting.longitude)]}
@@ -130,23 +105,26 @@ const AllSightings = () => {
           </div>
         )}
         {!mapView && (
-          <div className="sightingsContainer">
-            <Row xs={1} md={3} lg={4} className="g-4">
-              {allSightings?.sightings.map((sighting) => (
-                <Col key={sighting.id}>
-                  <SightingsCard
-                    imgUrl={sighting.imageUrl}
-                    species={sighting.species.name}
-                    bodyOfWater={sighting.bodyOfWaterName}
-                    description={sighting.description}
-                    sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
-                  />
-                </Col>
-              ))}
-            </Row>
+          <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
+            {allSightings?.map((sighting) => (
+              <Link
+                to={`/sightings/${sighting.id}`}
+                key={sighting.id}
+                className="text-decoration-none"
+                style={{ width: "13rem" }}
+              >
+                <SightingCard
+                  imgUrl={sighting.imageUrl}
+                  species={sighting.species.name}
+                  bodyOfWater={sighting.bodyOfWater.name}
+                  description={sighting.description}
+                  sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
+                />
+              </Link>
+            ))}
           </div>
         )}
-        {error && <p>There was an error</p>}
+        {error && <p>Sorry, unable to load sightings at this time</p>}
       </div>
     </div>
   )

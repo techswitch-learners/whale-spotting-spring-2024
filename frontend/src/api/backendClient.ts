@@ -1,4 +1,4 @@
-import Sighting from "../models/Sighting"
+import Sighting from "../models/request/AddSightingRequest"
 
 export const loginUser = async (username: string, password: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
