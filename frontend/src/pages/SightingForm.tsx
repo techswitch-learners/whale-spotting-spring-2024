@@ -4,8 +4,8 @@ import { Button, CardText, Form, Spinner, Row, Col } from "react-bootstrap"
 import { AuthContext, BackgroundContext } from "../App"
 import { addSighting, getBodiesOfWater, getSpeciesList } from "../api/backendClient"
 import ErrorList from "../components/ErrorList"
-import BodyOfWater from "../models/BodyOfWater"
-import Species from "../models/Species"
+import BodyOfWater from "../models/view/BodyOfWater"
+import Species from "../models/view/Species"
 
 const SightingForm = () => {
   const navigate = useNavigate()

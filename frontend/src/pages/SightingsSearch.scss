@@ -1,0 +1,57 @@
+@import "../main.scss";
+
+.SightingsSearch {
+  .leaflet-container {
+    height: 60vh;
+  }
+
+  .card {
+    transition:
+      transform 0.5s,
+      box-shadow 0.5s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
+  }
+
+  .card-img-top {
+    height: 13rem;
+    object-fit: cover;
+  }
+
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #layout-switch {
+    width: 4rem;
+    height: 2rem;
+  }
+
+  .fa-list {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.5rem;
+    color: white;
+  }
+
+  .fa-location-pin {
+    position: absolute;
+    top: 0.75rem;
+    left: 2.625rem;
+    color: #bfbfbf;
+    transition: color 0.3s;
+  }
+
+  #layout-switch:focus + label .fa-location-pin {
+    color: lighten($color: $primary, $amount: 18);
+  }
+
+  #layout-switch:checked + label .fa-location-pin {
+    color: $primary;
+  }
+}
