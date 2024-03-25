@@ -1,85 +1,57 @@
 @import "../main.scss";
 
-h1 {
-  text-align: center;
-}
-p {
-  text-align: center;
-}
+.SightingsSearch {
+  .leaflet-container {
+    height: 60vh;
+  }
 
-.mainContainer {
-  display: flex;
-  flex-direction: column;
-}
+  .card {
+    transition:
+      transform 0.5s,
+      box-shadow 0.5s;
+  }
 
-.contentContainer {
-  display: flex;
-  flex-direction: column;
-}
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
+  }
 
-.leaflet-container {
-  height: 60vh;
-}
+  .card-img-top {
+    height: 13rem;
+    object-fit: cover;
+  }
 
-.card {
-  transition:
-    transform 0.5s,
-    box-shadow 0.5s;
-}
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
+  #layout-switch {
+    width: 4rem;
+    height: 2rem;
+  }
 
-.card-img-top {
-  height: 13rem;
-  object-fit: cover;
-}
+  .fa-list {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.5rem;
+    color: white;
+  }
 
-.card-text {
-  white-space: nowrap;
-  text-align: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  .fa-location-pin {
+    position: absolute;
+    top: 0.75rem;
+    left: 2.625rem;
+    color: #bfbfbf;
+    transition: color 0.3s;
+  }
 
-#layout-switch {
-  width: 4rem;
-  height: 2rem;
-}
+  #layout-switch:focus + label .fa-location-pin {
+    color: lighten($color: $primary, $amount: 18);
+  }
 
-.layoutToggleForm {
-  position: relative;
-  display: flex;
-  align-items: center;
-  align-self: center;
-}
-
-.fa-list {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.5rem;
-  color: white;
-}
-
-.fa-location-pin {
-  position: absolute;
-  top: 0.75rem;
-  left: 2.625rem;
-  color: #bfbfbf;
-  transition: color 0.3s;
-}
-
-#layout-switch:focus + label .fa-location-pin {
-  color: lighten($color: $primary, $amount: 18);
-}
-
-#layout-switch:checked + label .fa-location-pin {
-  color: $primary;
-}
-
-.form-label {
-  margin-bottom: 0 !important;
-  margin-left: 10px;
+  #layout-switch:checked + label .fa-location-pin {
+    color: $primary;
+  }
 }

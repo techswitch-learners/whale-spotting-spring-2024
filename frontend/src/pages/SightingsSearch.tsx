@@ -22,7 +22,7 @@ interface SightingCardProps {
 
 function SightingCard({ imgUrl, species, bodyOfWater, description, sightingTimestamp }: SightingCardProps) {
   return (
-    <Card>
+    <Card className="text-start">
       <Card.Img variant="top" src={imgUrl} />
       <Card.Body>
         <Card.Title>{species}</Card.Title>
@@ -64,10 +64,10 @@ const SightingsSearch = () => {
   }
 
   return (
-    <div className="mainContainer">
+    <div className="SightingsSearch d-flex flex-column text-center">
       <h1>Whale Sightings</h1>
-      <div className="contentContainer">
-        <Form className="layoutToggleForm">
+      <div className="d-flex flex-column">
+        <Form className="d-flex align-items-center align-self-center position-relative">
           <Form.Check
             type="switch"
             role="button"
@@ -80,7 +80,9 @@ const SightingsSearch = () => {
             }
             onClick={toggleView}
           />
-          <Form.Label htmlFor="layout-switch">{mapView ? "Map View" : "List View"}</Form.Label>
+          <Form.Label htmlFor="layout-switch" className="ms-3 mb-0">
+            {mapView ? "Map View" : "List View"}
+          </Form.Label>
         </Form>
         {mapView && (
           <div className="mapContainer">
