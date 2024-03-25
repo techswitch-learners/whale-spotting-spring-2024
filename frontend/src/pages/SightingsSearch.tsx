@@ -11,19 +11,21 @@ import { faList, faMapMarker } from "@fortawesome/free-solid-svg-icons"
 import Card from "react-bootstrap/Card"
 import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
+import icon from "/favicon.ico"
+import { getSightings } from "../api/backendClient"
 
 interface SightingCardProps {
-  imgUrl: string
+  imageUrl: string
   species: string
   bodyOfWater: string
   description: string
   sightingTimestamp: string
 }
 
-function SightingCard({ imgUrl, species, bodyOfWater, description, sightingTimestamp }: SightingCardProps) {
+function SightingCard({ imageUrl, species, bodyOfWater, description, sightingTimestamp }: SightingCardProps) {
   return (
     <Card className="text-start">
-      <Card.Img variant="top" src={imgUrl} />
+      <Card.Img variant="top" src={imageUrl} />
       <Card.Body>
         <Card.Title>{species}</Card.Title>
         <Card.Subtitle>{bodyOfWater}</Card.Subtitle>
@@ -40,28 +42,33 @@ const SightingsSearch = () => {
   const backgroundContext = useContext(BackgroundContext)
   const [mapView, setMapView] = useState<boolean>(false)
   const [allSightings, setAllSightings] = useState<Sighting[]>()
-  const [error, setErrror] = useState(false)
-
-  useEffect(() => {
-    backgroundContext.setBackground("white")
-    getData()
-  }, [backgroundContext])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   function getData() {
-    fetch("http://localhost:5280/sightings")
+    setLoading(true)
+    setError(false)
+    getSightings()
       .then((response) => response.json())
       .then((data) => setAllSightings(data.sightings))
-      .catch(() => setErrror(true))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false))
   }
 
   const customIcon = new Icon({
-    iconUrl: "favicon.ico",
-    iconSize: [25, 25],
+    iconUrl: icon,
+    iconSize: [24, 24],
   })
 
   const toggleView = () => {
     setMapView(!mapView)
   }
+
+  useEffect(getData, [])
+
+  useEffect(() => {
+    backgroundContext.setBackground("white")
+  }, [backgroundContext])
 
   return (
     <div className="SightingsSearch d-flex flex-column text-center">
@@ -116,7 +123,7 @@ const SightingsSearch = () => {
                 style={{ width: "13rem" }}
               >
                 <SightingCard
-                  imgUrl={sighting.imageUrl}
+                  imageUrl={sighting.imageUrl}
                   species={sighting.species.name}
                   bodyOfWater={sighting.bodyOfWater.name}
                   description={sighting.description}
@@ -126,6 +133,7 @@ const SightingsSearch = () => {
             ))}
           </div>
         )}
+        {loading && <p>Loading...</p>}
         {error && <p>Sorry, unable to load sightings at this time</p>}
       </div>
     </div>

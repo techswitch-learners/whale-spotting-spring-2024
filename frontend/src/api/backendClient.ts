@@ -44,3 +44,7 @@ export const getBodiesOfWater = async () => {
 export const getSpeciesList = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/species`)
 }
+
+export const getSightings = async () => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`)
+}
