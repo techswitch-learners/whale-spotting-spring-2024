@@ -8,7 +8,6 @@ import BodyOfWater from "../models/view/BodyOfWater"
 import Species from "../models/view/Species"
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
-import "./SightingForm.scss"
 
 interface GetLocationProps {
   setLatitude: (latitude: number) => void
@@ -116,17 +115,17 @@ const SightingForm = () => {
   }
 
   return (
-    <div className="SightingForm text-center">
-      <h1> Add a Sighting </h1>
-      <p>Use the map to find the coordinates of your location or enter them manually</p>
-      <Card className="d-flex align-items-center" style={{ border: "none" }}>
-        <CardBody text-center style={{ width: "70vw" }}>
+    <div className="text-center">
+      <h1>Add a Sighting</h1>
+      <p>Use the map to find the coordinates of the sighting location or enter them manually</p>
+      <Card className="d-flex align-items-center border-0">
+        <CardBody className="w-100">
           <Form onSubmit={submitSighting}>
             <Form.Group as={Row} className="mb-3 text-start" controlId="formSightingLatitude">
-              <Form.Label column sm={5} className="mb-1">
+              <Form.Label column md={4} className="text-md-end">
                 Latitude
               </Form.Label>
-              <Col sm={5}>
+              <Col md={5}>
                 <Form.Control
                   type="number"
                   value={latitude ?? undefined}
@@ -141,10 +140,10 @@ const SightingForm = () => {
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3 text-start" controlId="formSightingLongitude">
-              <Form.Label column sm={5} className="mb-1">
+              <Form.Label column md={4} className="text-md-end">
                 Longitude
               </Form.Label>
-              <Col sm={5}>
+              <Col md={5}>
                 <Form.Control
                   type="number"
                   value={longitude ?? undefined}
@@ -162,7 +161,12 @@ const SightingForm = () => {
                 {showMap ? "Hide Map" : "Show Map"}
               </Button>
               {showMap && (
-                <MapContainer center={[defaultLat, defaultLong]} zoom={5}>
+                <MapContainer
+                  center={[defaultLat, defaultLong]}
+                  zoom={5}
+                  className="mw-100 mx-auto"
+                  style={{ width: "37.5rem", height: "44vh" }}
+                >
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -172,11 +176,11 @@ const SightingForm = () => {
                 </MapContainer>
               )}
             </Form.Group>
-            <Form.Group as={Row} className="mb-3" controlId="formSightingBodyOfWaterId">
-              <Form.Label column sm={5} className="mb-1">
-                Body of water{" "}
+            <Form.Group as={Row} className="mb-3 text-start" controlId="formSightingBodyOfWaterId">
+              <Form.Label column md={4} className="text-md-end">
+                Body of water
               </Form.Label>
-              <Col sm={5}>
+              <Col md={5}>
                 <Form.Select
                   aria-label="formSightingBodyOfWaterId"
                   onChange={(event) => {
@@ -197,10 +201,10 @@ const SightingForm = () => {
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3 text-start" controlId="formSightingSightingDate">
-              <Form.Label column sm={5} className="mb-1">
+              <Form.Label column md={4} className="text-md-end">
                 Date
               </Form.Label>
-              <Col sm={5}>
+              <Col md={5}>
                 <Form.Control
                   type="date"
                   max={new Date().toISOString().split("T")[0]}
@@ -214,11 +218,11 @@ const SightingForm = () => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} className="mb-3" controlId="formSightingSpeciesId">
-              <Form.Label column sm={5} className="mb-1">
+            <Form.Group as={Row} className="mb-3 text-start" controlId="formSightingSpeciesId">
+              <Form.Label column md={4} className="text-md-end">
                 Species
               </Form.Label>
-              <Col sm={5}>
+              <Col md={5}>
                 <Form.Select
                   aria-label="SpeciesId"
                   onChange={(event) => {
@@ -238,11 +242,11 @@ const SightingForm = () => {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} controlId="formSightingImageUrl" className="mb-3">
-              <Form.Label column sm={5}>
+            <Form.Group as={Row} controlId="formSightingImageUrl" className="mb-3 text-start">
+              <Form.Label column md={4} className="text-md-end">
                 Upload image
               </Form.Label>
-              <Col sm={5}>
+              <Col md={5}>
                 <Form.Control
                   type="url"
                   onChange={(event) => {
@@ -256,10 +260,10 @@ const SightingForm = () => {
             </Form.Group>
 
             <Form.Group as={Row} className="mb-3 text-start" controlId="formSightingDescription">
-              <Form.Label column sm={5} className="mb-1">
+              <Form.Label column md={4} className="text-md-end">
                 Description
               </Form.Label>
-              <Col sm={5}>
+              <Col md={5}>
                 <Form.Control
                   as="textarea"
                   value={description ?? ""}
