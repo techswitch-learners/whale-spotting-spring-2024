@@ -7,20 +7,13 @@ namespace WhaleSpotting.Controllers;
 
 [ApiController]
 [Route("/hotspots")]
-public class HotSpotsController : Controller
+public class HotSpotController : Controller
 {
     private readonly WhaleSpottingContext _context;
 
-    public HotSpotsController(WhaleSpottingContext context)
+    public HotSpotController(WhaleSpottingContext context)
     {
         _context = context;
-    }
-
-    /* create an endpoint to list all the hotspots */
-    [HttpGet("")]
-    public IActionResult GetAllHotSpots()
-    {
-        return Ok(_context.HotSpots.ToList());
     }
 
     /* create an endpoint to list all the viewing suggestions */
@@ -36,6 +29,8 @@ public class HotSpotsController : Controller
     {
         var query = _context
             .ViewingSuggestions.Include(suggestion => suggestion.HotSpot)
+            .ThenInclude(hotSpot => hotSpot.ViewingSuggestions)
+            .ThenInclude(suggestion => suggestion.Species)
             .Include(suggestion => suggestion.Species)
             .AsQueryable();
 
@@ -62,6 +57,12 @@ public class HotSpotsController : Controller
             query = query.Where(suggestion => searchRequest.Months.Any(month => suggestion.Months.Contains(month)));
         }
 
-        return Ok(query.ToList());
+        return Ok(
+            query
+                .Include(suggestion => suggestion.HotSpot.ViewingSuggestions)
+                .GroupBy(suggestion => suggestion.HotSpot)
+                .Select(group => group.Key)
+                .ToList()
+        );
     }
 }

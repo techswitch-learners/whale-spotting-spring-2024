@@ -44,38 +44,43 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
 
         // Inject HotSpotRowTest from csv file
 
-        using var streamReader = new StreamReader("Data/hotSpotRowTest.csv");
+        using var streamReader = new StreamReader("Data/hotSpots.csv");
         using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
         var hotSpotRows = csvReader.GetRecords<HotSpotRow>().ToList();
 
         // Select columns for HotSpot model
-        var hotSpots = hotSpotRows
-            .Select(hotSpotRow => new
-            {
-                hotSpotRow.TownOrHarbour,
-                hotSpotRow.Latitude,
-                hotSpotRow.Longitude,
-                hotSpotRow.Country,
-            })
-            .Distinct()
+        var distinctHotSpots = hotSpotRows
+            // .Select(hotSpotRow => new
+            // {
+            //     hotSpotRow.Country,
+            //     hotSpotRow.Region,
+            //     hotSpotRow.TownOrHarbour,
+            //     hotSpotRow.Latitude,
+            //     hotSpotRow.Longitude,
+            // })
+            .DistinctBy(hotSpot =>
+                (hotSpot.Country, hotSpot.Region, hotSpot.TownOrHarbour, hotSpot.Latitude, hotSpot.Longitude)
+            )
             .ToList();
 
-        for (var i = 0; i < hotSpots.Count; i++)
+        for (var i = 0; i < distinctHotSpots.Count; i++)
         {
             var hotSpot = new HotSpot
             {
-                Id = -1 - i,
-                Name = hotSpots[i].TownOrHarbour,
-                Latitude = hotSpots[i].Latitude,
-                Longitude = hotSpots[i].Longitude,
-                Country = hotSpots[i].Country,
+                Id = i + 1,
+                Name = GetHotSpotName(distinctHotSpots[i]),
+                Latitude = distinctHotSpots[i].Latitude,
+                Longitude = distinctHotSpots[i].Longitude,
+                Country = distinctHotSpots[i].Country,
                 ViewingSuggestions = [],
             };
             builder.Entity<HotSpot>().HasData(hotSpot);
 
             // Viewing suggestions at this spot
-            var ViewingSuggestions = hotSpotRows.Where(hotSpotRow => hotSpot.Name == hotSpotRow.TownOrHarbour).ToList();
-            foreach (var suggestion in ViewingSuggestions)
+            var viewingSuggestions = hotSpotRows
+                .Where(hotSpotRow => hotSpot.Name == GetHotSpotName(hotSpotRow))
+                .ToList();
+            foreach (var suggestion in viewingSuggestions)
             {
                 var viewingSuggestion = new ViewingSuggestion
                 {
@@ -84,19 +89,31 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
                     SpeciesId = speciesList.First(spec => spec.Name == suggestion.Species).Id,
                     Platforms = suggestion.Platform,
                     PlatformBoxes = suggestion
-                        .PlatformBoxes.Split(',')
+                        .PlatformBoxes.Split(
+                            ',',
+                            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+                        )
                         .Where(platform => Enum.TryParse<Platform>(platform, out _))
-                        .Select(platform => Enum.Parse<Platform>(platform))
+                        .Select(Enum.Parse<Platform>)
                         .ToList(),
                     TimeOfYear = suggestion.TimeOfYear,
                     Months = suggestion
-                        .Months.Split(',')
+                        .Months.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
                         .Where(month => Enum.TryParse<Month>(month, out _))
-                        .Select(month => Enum.Parse<Month>(month))
+                        .Select(Enum.Parse<Month>)
                         .ToList(),
                 };
                 builder.Entity<ViewingSuggestion>().HasData(viewingSuggestion);
             }
         }
+    }
+
+    private string GetHotSpotName(HotSpotRow hotSpotRow)
+    {
+        return !string.IsNullOrEmpty(hotSpotRow.Region) && !string.IsNullOrEmpty(hotSpotRow.TownOrHarbour)
+            ? $"{hotSpotRow.TownOrHarbour}, {hotSpotRow.Region}"
+            : !string.IsNullOrEmpty(hotSpotRow.Region)
+                ? hotSpotRow.Region
+                : hotSpotRow.TownOrHarbour;
     }
 }
