@@ -10,6 +10,7 @@ $custom-colors: (
 
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
+@import "leaflet/dist/leaflet.css";
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
