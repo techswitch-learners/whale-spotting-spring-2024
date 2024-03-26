@@ -1,11 +1,9 @@
 .SightingForm {
   .leaflet-container {
     height: 44vh;
-    width: 44vh;
+    width: 70vw;
   }
-}
-
-.form-label {
-  display: inline-block;
-  text-align: left;
+  .form-label {
+    text-align: left;
+  }
 }

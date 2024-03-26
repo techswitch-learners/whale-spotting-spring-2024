@@ -120,7 +120,7 @@ const SightingForm = () => {
       <h1> Add a Sighting </h1>
       <p>Use the map to find the coordinates of your location or enter them manually</p>
       <Card className="d-flex align-items-center" style={{ border: "none" }}>
-        <CardBody text-center>
+        <CardBody text-center style={{ width: "70vw" }}>
           <Form onSubmit={submitSighting}>
             <Form.Group as={Row} className="mb-3 text-start" controlId="formSightingLatitude">
               <Form.Label column sm={5} className="mb-1">
