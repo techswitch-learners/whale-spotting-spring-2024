@@ -47,7 +47,9 @@ const Home = () => {
             <LinkContainer to="/sightings/add">
               <Button variant="translucent">Add a whale sighting</Button>
             </LinkContainer>
-            <Button variant="translucent">See whale sightings</Button>
+            <LinkContainer to="/sightings">
+              <Button variant="translucent">See whale sightings</Button>
+            </LinkContainer>
             <Button variant="translucent">Check the weather</Button>
           </div>
         </div>
