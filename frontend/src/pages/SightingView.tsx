@@ -41,38 +41,46 @@ const SightingView = () => {
   return (
     <>
       {sighting && (
-        <Container className="pb-4">
-          <Card className="text-start">
+        <Container className="pb-4" style={{ width: "20rem" }}>
+          <Card className="text-start" id="main-sighting-image">
             <Card.Img variant="top" src={sighting?.imageUrl} />
-            <Card.Body>
-              <Card.Title>{sighting?.species.name}</Card.Title>
-              <Card.Subtitle>{sighting?.bodyOfWater.name}</Card.Subtitle>
-              <Card.Text>{sighting?.description}</Card.Text>
-              <div style={{ height: "20rem", width: "50%" }}>
-                <MapContainer
-                  style={{ height: "100%" }}
-                  center={[sighting?.latitude, sighting?.longitude]}
-                  zoom={3}
-                  scrollWheelZoom={true}
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-
-                  <Marker
-                    key={sighting?.id}
-                    position={[Number(sighting?.latitude), Number(sighting?.longitude)]}
-                    icon={customIcon}
-                  >
-                    <Popup>{sighting?.description}</Popup>
-                  </Marker>
-                </MapContainer>
+          </Card>
+          <Card className="text-start" id="species-card">
+            <Card.Body style={{ display: "flex", gap: "1rem" }}>
+              <div style={{ backgroundColor: "green", height: "10rem", width: "0.5rem" }}></div>
+              <div>
+                <Card.Img variant="right" style={{ height: "10rem" }} src={sighting?.species.exampleImageUrl} />
+                <Card.Title>
+                  <Card.Title>Species</Card.Title>
+                  <Card.Link href={sighting?.species.wikiLink} target="_blank">
+                    {sighting?.species.name}
+                  </Card.Link>
+                </Card.Title>
               </div>
             </Card.Body>
-            <Card.Footer>
-              <small>{sighting?.sightingTimestamp}</small>
-            </Card.Footer>
+          </Card>
+          <Card className="text-start" id="map-card">
+            <div style={{ height: "20rem", width: "100%" }}>
+              <MapContainer
+                style={{ height: "100%" }}
+                center={[sighting?.latitude, sighting?.longitude]}
+                zoom={3}
+                scrollWheelZoom={true}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+
+                <Marker
+                  key={sighting?.id}
+                  position={[Number(sighting?.latitude), Number(sighting?.longitude)]}
+                  icon={customIcon}
+                >
+                  <Popup>{sighting?.description}</Popup>
+                </Marker>
+              </MapContainer>
+            </div>
           </Card>
         </Container>
       )}
