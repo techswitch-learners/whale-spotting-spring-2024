@@ -7,7 +7,6 @@ import ErrorList from "../components/ErrorList"
 import BodyOfWater from "../models/view/BodyOfWater"
 import Species from "../models/view/Species"
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
-import "leaflet/dist/leaflet.css"
 
 interface GetLocationProps {
   setLatitude: (latitude: number) => void
