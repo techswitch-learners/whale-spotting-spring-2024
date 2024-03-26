@@ -1,7 +1,6 @@
 import "./SightingsSearch.scss"
 import { useState, useContext, useEffect } from "react"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
-import "leaflet/dist/leaflet.css"
 import { Icon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
 import Form from "react-bootstrap/Form"
