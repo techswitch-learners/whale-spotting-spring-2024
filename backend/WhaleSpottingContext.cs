@@ -42,22 +42,11 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
         var speciesList = speciesCsvReader.GetRecords<Species>().ToList();
         builder.Entity<Species>().HasData(speciesList);
 
-        // Inject HotSpotRowTest from csv file
-
         using var streamReader = new StreamReader("Data/hotSpots.csv");
         using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
         var hotSpotRows = csvReader.GetRecords<HotSpotRow>().ToList();
 
-        // Select columns for HotSpot model
         var distinctHotSpots = hotSpotRows
-            // .Select(hotSpotRow => new
-            // {
-            //     hotSpotRow.Country,
-            //     hotSpotRow.Region,
-            //     hotSpotRow.TownOrHarbour,
-            //     hotSpotRow.Latitude,
-            //     hotSpotRow.Longitude,
-            // })
             .DistinctBy(hotSpot =>
                 (hotSpot.Country, hotSpot.Region, hotSpot.TownOrHarbour, hotSpot.Latitude, hotSpot.Longitude)
             )
@@ -76,7 +65,6 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
             };
             builder.Entity<HotSpot>().HasData(hotSpot);
 
-            // Viewing suggestions at this spot
             var viewingSuggestions = hotSpotRows
                 .Where(hotSpotRow => hotSpot.Name == GetHotSpotName(hotSpotRow))
                 .ToList();
@@ -108,7 +96,7 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
         }
     }
 
-    private string GetHotSpotName(HotSpotRow hotSpotRow)
+    private static string GetHotSpotName(HotSpotRow hotSpotRow)
     {
         return !string.IsNullOrEmpty(hotSpotRow.Region) && !string.IsNullOrEmpty(hotSpotRow.TownOrHarbour)
             ? $"{hotSpotRow.TownOrHarbour}, {hotSpotRow.Region}"
