@@ -1,4 +1,4 @@
-import { useContext, useState, FormEventHandler, useEffect } from "react"
+import { useContext, useState, FormEventHandler, useEffect, useMemo } from "react"
 import { useNavigate, Link, Navigate } from "react-router-dom"
 import { Button, CardText, Form, Spinner, Row, Col, Card, CardBody } from "react-bootstrap"
 import { AuthContext, BackgroundContext } from "../App"
@@ -7,6 +7,7 @@ import ErrorList from "../components/ErrorList"
 import BodyOfWater from "../models/view/BodyOfWater"
 import Species from "../models/view/Species"
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
+import { LeafletEventHandlerFnMap, LeafletMouseEvent } from "leaflet"
 
 interface GetLocationProps {
   setLatitude: (latitude: number) => void
@@ -28,16 +29,16 @@ const SightingForm = () => {
 
   const backgroundContext = useContext(BackgroundContext)
   const authContext = useContext(AuthContext)
-  const defaultLat = 51.505
-  const defaultLong = -0.09
 
   const [showMap, setShowMap] = useState(false)
 
   const [bodiesOfWater, setBodiesOfWater] = useState<BodyOfWater[]>()
   const [speciesList, setSpeciesList] = useState<Species[]>()
 
-  const [latitude, setLatitude] = useState<number>(defaultLat)
-  const [longitude, setLongitude] = useState<number>(defaultLong)
+  const defaultLat = 51.505
+  const defaultLong = -0.09
+  const [latitude, setLatitude] = useState<string>(defaultLat.toFixed(3))
+  const [longitude, setLongitude] = useState<string>(defaultLong.toFixed(3))
 
   const [speciesId, setSpeciesId] = useState<number | null>(null)
   const [sightingDate, setSightingDate] = useState<Date | null>(null)
@@ -52,6 +53,18 @@ const SightingForm = () => {
   const toggleMap = () => {
     setShowMap(!showMap)
   }
+
+  const changePositionOnDrag = useMemo(
+    () => ({
+      move(event: LeafletMouseEvent) {
+        if (event.originalEvent) {
+          setLatitude(event.latlng.lat.toFixed(3))
+          setLongitude(event.latlng.lng.toFixed(3))
+        }
+      },
+    }),
+    [],
+  )
 
   useEffect(() => {
     getBodiesOfWater()
@@ -77,8 +90,8 @@ const SightingForm = () => {
 
     addSighting(
       {
-        latitude: latitude,
-        longitude: longitude,
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
         speciesId: speciesId,
         description: description,
         imageUrl: imageUrl,
@@ -89,8 +102,8 @@ const SightingForm = () => {
     )
       .then((response) => {
         if (response.ok) {
-          setLatitude(defaultLat)
-          setLongitude(defaultLong)
+          setLatitude(latitude)
+          setLongitude(longitude)
           setDescription("")
           setImageUrl("")
           const form = event.target as HTMLFormElement
@@ -127,9 +140,9 @@ const SightingForm = () => {
               <Col md={5}>
                 <Form.Control
                   type="number"
-                  value={latitude ?? undefined}
+                  value={latitude}
                   onChange={(event) => {
-                    setLatitude(Number(event.target.value))
+                    setLatitude(event.target.value)
                     setSuccess(false)
                     setErrors({})
                   }}
@@ -145,9 +158,9 @@ const SightingForm = () => {
               <Col md={5}>
                 <Form.Control
                   type="number"
-                  value={longitude ?? undefined}
+                  value={longitude}
                   onChange={(event) => {
-                    setLongitude(Number(event.target.value))
+                    setLongitude(event.target.value)
                     setSuccess(false)
                     setErrors({})
                   }}
@@ -170,8 +183,17 @@ const SightingForm = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
-                  <GetLocation setLatitude={setLatitude} setLongitude={setLongitude} />
-                  <Marker position={[latitude, longitude]}></Marker>
+                  <GetLocation
+                    setLatitude={(latitude) => setLatitude(latitude.toFixed(3))}
+                    setLongitude={(longitude) => setLongitude(longitude.toFixed(3))}
+                  />
+                  {!isNaN(parseFloat(latitude)) && !isNaN(parseFloat(longitude)) && (
+                    <Marker
+                      draggable
+                      position={[parseFloat(latitude), parseFloat(longitude)]}
+                      eventHandlers={changePositionOnDrag as LeafletEventHandlerFnMap}
+                    />
+                  )}
                 </MapContainer>
               )}
             </Form.Group>
@@ -183,7 +205,7 @@ const SightingForm = () => {
                 <Form.Select
                   aria-label="formSightingBodyOfWaterId"
                   onChange={(event) => {
-                    setBodyOfWaterId(Number(event.target.value))
+                    setBodyOfWaterId(parseInt(event.target.value))
                     setSuccess(false)
                     setErrors({})
                   }}
@@ -225,7 +247,7 @@ const SightingForm = () => {
                 <Form.Select
                   aria-label="SpeciesId"
                   onChange={(event) => {
-                    setSpeciesId(Number(event.target.value))
+                    setSpeciesId(parseInt(event.target.value))
                     setSuccess(false)
                     setErrors({})
                   }}
