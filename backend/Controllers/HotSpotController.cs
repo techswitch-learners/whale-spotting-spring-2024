@@ -1,30 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Request;
 
 namespace WhaleSpotting.Controllers;
 
 [ApiController]
 [Route("/hotspots")]
-public class HotSpotController : Controller
+public class HotSpotController(WhaleSpottingContext context) : Controller
 {
-    private readonly WhaleSpottingContext _context;
+    private readonly WhaleSpottingContext _context = context;
 
-    public HotSpotController(WhaleSpottingContext context)
-    {
-        _context = context;
-    }
-
-    /* create an endpoint to list all the viewing suggestions */
-    [HttpGet("viewing-suggestion")]
-    public IActionResult GetAllSuggestions()
-    {
-        return Ok(_context.ViewingSuggestions.ToList());
-    }
-
-    /* create an endpoint to allow user to search in our database */
-    [HttpGet("search")]
+    [HttpGet("")]
     public IActionResult Search([FromQuery] SearchHotSpotRequest searchRequest)
     {
         var query = _context
@@ -36,11 +22,15 @@ public class HotSpotController : Controller
 
         if (!string.IsNullOrEmpty(searchRequest.Country))
         {
-            query = query.Where(suggestion => suggestion.HotSpot.Country.Contains(searchRequest.Country));
+            query = query.Where(suggestion =>
+                EF.Functions.ILike(suggestion.HotSpot.Country, $"%{searchRequest.Country}%")
+            );
         }
         if (!string.IsNullOrEmpty(searchRequest.HotSpotName))
         {
-            query = query.Where(suggestion => suggestion.HotSpot.Name.Contains(searchRequest.HotSpotName));
+            query = query.Where(suggestion =>
+                EF.Functions.ILike(suggestion.HotSpot.Name, $"%{searchRequest.HotSpotName}%")
+            );
         }
         if (searchRequest.Species != null && searchRequest.Species.Count > 0)
         {
@@ -57,12 +47,6 @@ public class HotSpotController : Controller
             query = query.Where(suggestion => searchRequest.Months.Any(month => suggestion.Months.Contains(month)));
         }
 
-        return Ok(
-            query
-                .Include(suggestion => suggestion.HotSpot.ViewingSuggestions)
-                .GroupBy(suggestion => suggestion.HotSpot)
-                .Select(group => group.Key)
-                .ToList()
-        );
+        return Ok(query.ToList().GroupBy(suggestion => suggestion.HotSpot).Select(group => group.Key).ToList());
     }
 }
