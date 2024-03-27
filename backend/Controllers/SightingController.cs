@@ -68,13 +68,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             CreationTimestamp = matchingSighting.CreationTimestamp,
             Reactions = matchingSighting
                 .Reactions.GroupBy(reaction => reaction.Type)
-                .Select(reaction => new ReactionResponse
-                {
-                    Type = reaction.Key,
-                    Name = reaction.Key.ToString(),
-                    Count = reaction.Count()
-                })
-                .ToList()
+                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count())
         };
 
         return Ok(sighting);
@@ -109,13 +103,10 @@ public class SightingController(WhaleSpottingContext context) : Controller
                     CreationTimestamp = sighting.CreationTimestamp,
                     Reactions = sighting
                         .Reactions.GroupBy(reaction => reaction.Type)
-                        .Select(reaction => new ReactionResponse
-                        {
-                            Type = reaction.Key,
-                            Name = reaction.Key.ToString(),
-                            Count = reaction.Count()
-                        })
-                        .ToList()
+                        .ToDictionary(
+                            reactionGroup => reactionGroup.Key.ToString(),
+                            reactionGroup => reactionGroup.Count()
+                        )
                 })
                 .ToList()
         };

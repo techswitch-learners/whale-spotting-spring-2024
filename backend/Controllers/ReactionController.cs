@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using WhaleSpotting.Enums;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Request;
-using WhaleSpotting.Models.Response;
 
 namespace WhaleSpotting.Controllers;
 
@@ -42,16 +41,31 @@ public class ReactionController(WhaleSpottingContext context) : Controller
         return BadRequest("You can not give reaction to the same sighting more than once");
     }
 
-    // [Authorize]
-    // [HttpPatch("")]
-    // public IActionResult Update([FromBody] AddReactionRequest reactionRequest)
-    // {
-    //     var userId = AuthHelper.GetUserId(User);
-    //     var matchingReaction = _context
-    //         .Reactions.Where(reaction=> reaction.UserId == userId && reaction.SightingId==reactionRequest.SightingId);
+    [Authorize]
+    [HttpPatch("")]
+    public IActionResult UpdateReaction([FromBody] AddReactionRequest addReactionRequest)
+    {
+        var userId = AuthHelper.GetUserId(User);
+        var matchingSighting = _context.Reactions.SingleOrDefault(reaction =>
+            reaction.SightingId == addReactionRequest.SightingId && reaction.UserId == userId
+        );
+        if (matchingSighting != null)
+        {
+            ReactionType newReactionType = addReactionRequest.Type;
+            if (matchingSighting.Type != newReactionType)
+            {
+                matchingSighting.Type = newReactionType;
+                matchingSighting.Timestamp = DateTime.UtcNow;
+                _context.SaveChanges();
 
-    //     matchingReaction
-    //     _context.Reactions.Update()
-    //     return Ok(newReaction);
-    // }
+                return Ok(matchingSighting);
+            }
+        }
+        else
+        {
+            return BadRequest("Reaction type is the same as before. No update made.");
+        }
+
+        return NotFound("No existing reaction found for the given sighting by this user.");
+    }
 }
