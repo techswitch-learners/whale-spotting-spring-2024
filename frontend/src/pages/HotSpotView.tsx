@@ -69,7 +69,7 @@ const hotSpots = [
   },
 ]
 
-function Weather() {
+function HotSpotView() {
   const { id } = useParams()
   const [weather, setWeather] = useState<Weather>()
   const [loading, setLoading] = useState<boolean>(false)
@@ -142,4 +142,4 @@ function Weather() {
   )
 }
 
-export default Weather
+export default HotSpotView

@@ -12,7 +12,7 @@ import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
 import SightingsSearch from "./pages/SightingsSearch"
 import SightingForm from "./pages/SightingForm"
-import Weather from "./pages/Weather"
+import HotSpotView from "./pages/HotSpotView"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -57,7 +57,7 @@ const App = () => {
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
               <Route path="/sightings/add" element={<SightingForm />} />
-              <Route path="/hotspots/:id" element={<Weather />} />
+              <Route path="/hotspots/:id" element={<HotSpotView />} />
             </Routes>
           </main>
         </Router>
