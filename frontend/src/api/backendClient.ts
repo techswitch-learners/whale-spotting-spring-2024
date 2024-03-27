@@ -48,3 +48,7 @@ export const getSpeciesList = async () => {
 export const getSightings = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`)
 }
+
+export const getSightingById = async (id?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${id}`)
+}
