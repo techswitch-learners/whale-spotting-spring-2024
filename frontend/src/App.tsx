@@ -12,6 +12,7 @@ import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
 import SightingsSearch from "./pages/SightingsSearch"
 import SightingForm from "./pages/SightingForm"
+import SightingView from "./pages/SightingView"
 import Reactions from "./components/Reactions"
 
 export const AuthContext = createContext<{
@@ -57,6 +58,7 @@ const App = () => {
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
               <Route path="/sightings/add" element={<SightingForm />} />
+              <Route path="/sightings/:id" element={<SightingView />} />
               <Route path="/reactions" element={<Reactions />} />
             </Routes>
           </main>
