@@ -117,7 +117,7 @@ function Weather() {
         <div>
           <br />
           <h5>Current weather:</h5>
-          <img src={`${import.meta.env.BASE_URL}weatherIcons/icon${weather.current.weather_code}.png`} width="35px" />
+          <img src={`${import.meta.env.BASE_URL}weather-icons/icon${weather.current.weather_code}.png`} width="35" />
           <p>Temp: {weather.current.temperature_2m} °C</p>
           <br></br>
           <h5>Weather forecast for the next 7 days:</h5>
@@ -126,7 +126,7 @@ function Weather() {
               {arr.map((x, i) => (
                 <Col key={i}>
                   <p>{new Date(x.date).toDateString()}</p>
-                  <img src={`${import.meta.env.BASE_URL}weatherIcons/icon${x.icon}.png`} width="35px" />
+                  <img src={`${import.meta.env.BASE_URL}weather-icons/icon${x.icon}.png`} width="35" />
                   <p>MinTemp: {Math.round(x.minTemp)}°C</p>
                   <p>MaxTemp: {Math.round(x.maxTemp)}°C</p>
                   <p>Rain probability: {x.rain}%</p>
