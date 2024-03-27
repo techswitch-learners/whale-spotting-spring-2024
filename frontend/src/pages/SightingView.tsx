@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import { Container, Card, Row, Col, Stack, Button } from "react-bootstrap"
+import { Link, useParams } from "react-router-dom"
+import { Card, Row, Col, Stack, Button, Container, Image } from "react-bootstrap"
 import { BackgroundContext } from "../App"
 import { getSightingById } from "../api/backendClient"
 import Sighting from "../models/view/Sighting"
@@ -18,7 +18,6 @@ const SightingView = () => {
   const backgroundContext = useContext(BackgroundContext)
   const [sighting, setSighting] = useState<Sighting>()
   const [loading, setLoading] = useState<boolean>(false)
-  // const [success, setSuccess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
@@ -29,10 +28,14 @@ const SightingView = () => {
     setLoading(true)
     setError(false)
     getSightingById(id)
-      .then((response) => response.json())
-      .then((data) => {
-        setSighting(data)
-        console.log(data)
+      .then((response) => {
+        if (response.ok) {
+          response.json().then((data) => setSighting(data))
+        } else if (response.status === 404) {
+          console.log("Sighting not found")
+        } else {
+          setError(true)
+        }
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
@@ -41,58 +44,58 @@ const SightingView = () => {
   return (
     <>
       {sighting && (
-        <Container className="pb-4" fluid>
+        <Container className="pb-4">
           <Stack gap={5}>
             <Stack direction="horizontal">
-              <Card.Title>{sighting?.userName}</Card.Title>
+              <h1 className="me-3">
+                Sighting by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
+              </h1>
               <Button variant="primary" className="share-button ms-auto">
                 Share
-              </Button>{" "}
+              </Button>
             </Stack>
 
-            <Stack direction="horizontal" gap={3}>
-              <div className="species-card" style={{ width: "30rem" }}>
-                <Stack direction="horizontal" gap={1}>
-                  <div style={{ backgroundColor: "green", height: "10rem", width: "2rem" }} />
-                  <div>
-                    <Row>
-                      <Col>
-                        <Card.Img src={sighting?.species.exampleImageUrl} />
-                      </Col>
-                      <Col>
-                        <Card.Title>Species</Card.Title>
-                        <Card.Link href={sighting?.species.wikiLink} target="_blank">
-                          {sighting?.species.name}
-                        </Card.Link>
-                      </Col>
-                    </Row>
-                  </div>
+            <Row>
+              <Col className="species-card d-flex flex-column justify-content-center" sm={5}>
+                <Stack direction="horizontal" gap={1} className="align-items-stretch">
+                  <div className="border border-2 border-success mb-3" />
+                  <Row>
+                    <Col xs={6} sm={12} md={6} className="mb-3">
+                      <Image src={sighting.species.exampleImageUrl} thumbnail />
+                    </Col>
+                    <Col xs={6} sm={12} md={6} className="d-flex flex-column justify-content-center mb-3">
+                      <h2 className="h5 mb-0 ms-1">Species</h2>
+                      <a href={sighting.species.wikiLink} target="_blank" className="ms-1">
+                        {sighting.species.name}
+                      </a>
+                    </Col>
+                  </Row>
                 </Stack>
-              </div>
-              <div className="sighting-card" style={{ width: "60rem" }}>
+              </Col>
+              <Col className="sighting-card" sm={7}>
                 <Card>
-                  <Card.Img variant="top" src={sighting?.imageUrl} />
+                  <Card.Img variant="top" src={sighting.imageUrl} />
                   <Card.Body>
-                    <Card.Text>{sighting?.description}</Card.Text>
+                    <Card.Text>{sighting.description}</Card.Text>
                   </Card.Body>
                 </Card>
-              </div>
-            </Stack>
-            <Stack direction="horizontal" gap={3}>
-              <div className="location-card" style={{ width: "30rem" }}>
-                <Stack direction="horizontal" gap={1}>
-                  <div style={{ backgroundColor: "green", height: "10rem", width: "0.5rem" }} />
+              </Col>
+            </Row>
+            <Row>
+              <Col className="location-card d-flex flex-column justify-content-center" sm={5}>
+                <Stack direction="horizontal" gap={1} className="align-items-stretch">
+                  <div className="border border-2 border-success mb-3" />
                   <div>
-                    <Card.Title>Sight Location</Card.Title>
-                    <Card.Subtitle>{sighting?.bodyOfWater.name}</Card.Subtitle>
+                    <h2 className="h5 mb-0 mt-4 ms-1">Sight Location</h2>
+                    <h3 className="h6 mb-5 ms-1">{sighting.bodyOfWater.name}</h3>
                   </div>
                 </Stack>
-              </div>
-              <div className="map-card" style={{ width: "60rem" }}>
+              </Col>
+              <Col className="map-card" sm={7}>
                 <div style={{ height: "30rem", width: "100%" }}>
                   <MapContainer
                     style={{ height: "100%" }}
-                    center={[sighting?.latitude, sighting?.longitude]}
+                    center={[sighting.latitude, sighting.longitude]}
                     zoom={3}
                     scrollWheelZoom={true}
                   >
@@ -102,56 +105,20 @@ const SightingView = () => {
                     />
 
                     <Marker
-                      key={sighting?.id}
-                      position={[Number(sighting?.latitude), Number(sighting?.longitude)]}
+                      key={sighting.id}
+                      position={[Number(sighting.latitude), Number(sighting.longitude)]}
                       icon={customIcon}
                     >
-                      <Popup>{sighting?.description}</Popup>
+                      <Popup>{sighting.description}</Popup>
                     </Marker>
                   </MapContainer>
                 </div>
-              </div>
-            </Stack>
+              </Col>
+            </Row>
           </Stack>
         </Container>
       )}
 
-      {/* {sighting && (
-        <Container className="pb-4">
-          <Card className="text-start">
-            <Card.Img variant="top" src={sighting?.imageUrl} />
-            <Card.Body>
-              <Card.Title>{sighting?.species.name}</Card.Title>
-              <Card.Subtitle>{sighting?.bodyOfWater.name}</Card.Subtitle>
-              <Card.Text>{sighting?.description}</Card.Text>
-              <div style={{ height: "20rem", width: "50%" }}>
-                <MapContainer
-                  style={{ height: "100%" }}
-                  center={[sighting?.latitude, sighting?.longitude]}
-                  zoom={3}
-                  scrollWheelZoom={true}
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-
-                  <Marker
-                    key={sighting?.id}
-                    position={[Number(sighting?.latitude), Number(sighting?.longitude)]}
-                    icon={customIcon}
-                  >
-                    <Popup>{sighting?.description}</Popup>
-                  </Marker>
-                </MapContainer>
-              </div>
-            </Card.Body>
-            <Card.Footer>
-              <small>{sighting?.sightingTimestamp}</small>
-            </Card.Footer>
-          </Card>
-        </Container>
-      )} */}
       {loading && <p>Loading...</p>}
       {error && <p>Error fetching sighting from the backend</p>}
     </>
