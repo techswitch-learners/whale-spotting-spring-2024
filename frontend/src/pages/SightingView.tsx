@@ -92,9 +92,9 @@ const SightingView = () => {
                 </Stack>
               </Col>
               <Col className="map-card" sm={7}>
-                <div style={{ height: "30rem", width: "100%" }}>
+                <div className="w-100" style={{ height: "25rem" }}>
                   <MapContainer
-                    style={{ height: "100%" }}
+                    className="h-100"
                     center={[sighting.latitude, sighting.longitude]}
                     zoom={3}
                     scrollWheelZoom={true}
