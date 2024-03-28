@@ -2,9 +2,8 @@ import { useContext, useState, FormEventHandler, useEffect, useMemo } from "reac
 import { useNavigate, Link, Navigate } from "react-router-dom"
 import { Button, CardText, Form, Spinner, Row, Col, Card, CardBody } from "react-bootstrap"
 import { AuthContext, BackgroundContext } from "../App"
-import { addSighting, getBodiesOfWater, getSpeciesList } from "../api/backendClient"
+import { addSighting, getSpeciesList } from "../api/backendClient"
 import ErrorList from "../components/ErrorList"
-import BodyOfWater from "../models/view/BodyOfWater"
 import Species from "../models/view/Species"
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
 import { LeafletEventHandlerFnMap, LeafletMouseEvent } from "leaflet"
@@ -17,6 +16,7 @@ interface GetLocationProps {
 function GetLocation({ setLatitude, setLongitude }: GetLocationProps) {
   useMapEvents({
     click: (event) => {
+      // console.log(event);
       setLatitude(event.latlng.lat)
       setLongitude(event.latlng.lng)
     },
@@ -32,7 +32,7 @@ const SightingForm = () => {
 
   const [showMap, setShowMap] = useState(false)
 
-  const [bodiesOfWater, setBodiesOfWater] = useState<BodyOfWater[]>()
+  const [bodyOfWater, setBodyOfWater] = useState<string>("")
   const [speciesList, setSpeciesList] = useState<Species[]>()
 
   const defaultLat = 51.505
@@ -44,12 +44,12 @@ const SightingForm = () => {
   const [sightingDate, setSightingDate] = useState<Date | null>(null)
   const [description, setDescription] = useState<string>("")
   const [imageUrl, setImageUrl] = useState<string>("")
-  const [bodyOfWaterId, setBodyOfWaterId] = useState<number | null>(null)
+
+  const [bodyOfWaterEditable, setBodyOfWaterEditable] = useState<boolean>(false)
 
   const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
   const [errors, setErrors] = useState<{ [subject: string]: string[] }>({})
-
   const toggleMap = () => {
     setShowMap(!showMap)
   }
@@ -66,17 +66,31 @@ const SightingForm = () => {
     [],
   )
 
-  useEffect(() => {
-    getBodiesOfWater()
-      .then((response) => response.json())
-      .then((content) => setBodiesOfWater(content.bodiesOfWater))
-      .catch(() => {})
+  const fetchBodyOfWater = async (latitude: string, longitude: string) => {
+    const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
+    try {
+      const response = await fetch(url)
+      const data = await response.json()
+      const waterBody =
+        data?.localityInfo?.informative?.find(
+          (info: { name: string; description: string }) =>
+            ["passage", "basin", "strait", "bight", "sound", "channel", "gulf", "bay", "sea", "ocean"].some(
+              (bodyOfWaterType) => info.name.toLowerCase().includes(bodyOfWaterType),
+            ) && !["time zone", "continent"].some((otherType) => info.description.toLowerCase().includes(otherType)),
+        )?.name ?? ""
+      setBodyOfWater(waterBody)
+    } catch (error) {
+      console.error("Error fetching data: ", error)
+    }
+  }
 
+  useEffect(() => {
+    fetchBodyOfWater(latitude, longitude)
     getSpeciesList()
       .then((response) => response.json())
       .then((content) => setSpeciesList(content.speciesList))
       .catch(() => {})
-  }, [])
+  }, [latitude, longitude])
 
   useEffect(() => {
     backgroundContext.setBackground("white")
@@ -95,7 +109,7 @@ const SightingForm = () => {
         speciesId: speciesId,
         description: description,
         imageUrl: imageUrl,
-        bodyOfWaterId: bodyOfWaterId,
+        bodyOfWater: bodyOfWater,
         sightingTimeStamp: sightingDate,
       },
       authContext.cookie.token,
@@ -202,22 +216,23 @@ const SightingForm = () => {
                 Body of water
               </Form.Label>
               <Col md={5}>
-                <Form.Select
-                  aria-label="formSightingBodyOfWaterId"
-                  onChange={(event) => {
-                    setBodyOfWaterId(parseInt(event.target.value))
-                    setSuccess(false)
-                    setErrors({})
-                  }}
-                >
-                  <option>Select the body of water</option>
-                  {bodiesOfWater?.map((bodyOfWater) => (
-                    <option key={bodyOfWater.id} value={bodyOfWater.id}>
-                      {bodyOfWater.name}
-                    </option>
-                  ))}
-                </Form.Select>
-                <ErrorList errors={errors["BodyOfWaterId"]} />
+                <Form.Control
+                  type="text"
+                  value={bodyOfWater}
+                  readOnly={!bodyOfWaterEditable}
+                  onChange={(event) => setBodyOfWater(event.target.value)}
+                />
+                <Form.Text className="d-flex flex-wrap">
+                  <span className="me-1">Can't find the right body of water?</span>
+                  <Button
+                    variant="link"
+                    size="sm"
+                    className="p-0 border-0"
+                    onClick={() => setBodyOfWaterEditable(true)}
+                  >
+                    Enter manually
+                  </Button>
+                </Form.Text>
               </Col>
             </Form.Group>
 

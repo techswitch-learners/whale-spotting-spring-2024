@@ -4,7 +4,7 @@ interface Sighting {
   speciesId: number | null
   description: string | null
   imageUrl: string | null
-  bodyOfWaterId: number | null
+  bodyOfWater: string | null
   sightingTimeStamp: Date | null
 }
 

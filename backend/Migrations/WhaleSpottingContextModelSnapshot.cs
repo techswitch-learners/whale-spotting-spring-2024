@@ -155,23 +155,6 @@ namespace WhaleSpotting.Migrations
                     b.ToTable("Achievements");
                 });
 
-            modelBuilder.Entity("WhaleSpotting.Models.Data.BodyOfWater", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BodiesOfWater");
-                });
-
             modelBuilder.Entity("WhaleSpotting.Models.Data.HotSpot", b =>
                 {
                     b.Property<int>("Id")
@@ -2577,8 +2560,9 @@ namespace WhaleSpotting.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BodyOfWaterId")
-                        .HasColumnType("integer");
+                    b.Property<string>("BodyOfWater")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreationTimestamp")
                         .HasColumnType("timestamp with time zone");
@@ -2610,8 +2594,6 @@ namespace WhaleSpotting.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BodyOfWaterId");
 
                     b.HasIndex("SpeciesId");
 
@@ -8000,12 +7982,6 @@ namespace WhaleSpotting.Migrations
 
             modelBuilder.Entity("WhaleSpotting.Models.Data.Sighting", b =>
                 {
-                    b.HasOne("WhaleSpotting.Models.Data.BodyOfWater", "BodyOfWater")
-                        .WithMany()
-                        .HasForeignKey("BodyOfWaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WhaleSpotting.Models.Data.Species", "Species")
                         .WithMany()
                         .HasForeignKey("SpeciesId")
@@ -8021,8 +7997,6 @@ namespace WhaleSpotting.Migrations
                     b.HasOne("WhaleSpotting.Models.Data.VerificationEvent", "VerificationEvent")
                         .WithMany()
                         .HasForeignKey("VerificationEventId");
-
-                    b.Navigation("BodyOfWater");
 
                     b.Navigation("Species");
 

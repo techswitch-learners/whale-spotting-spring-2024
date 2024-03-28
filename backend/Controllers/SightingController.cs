@@ -28,7 +28,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
                     SpeciesId = addSightingRequest.SpeciesId!.Value,
                     Description = addSightingRequest.Description,
                     ImageUrl = addSightingRequest.ImageUrl,
-                    BodyOfWaterId = addSightingRequest.BodyOfWaterId!.Value,
+                    BodyOfWater = addSightingRequest.BodyOfWater,
                     SightingTimestamp = addSightingRequest.SightingTimestamp!.Value,
                     CreationTimestamp = DateTime.UtcNow,
                 }
@@ -44,7 +44,6 @@ public class SightingController(WhaleSpottingContext context) : Controller
         var matchingSighting = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
-            .Include(sighting => sighting.BodyOfWater)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
             .SingleOrDefault(sighting => sighting.Id == id);
@@ -77,7 +76,6 @@ public class SightingController(WhaleSpottingContext context) : Controller
         var sightings = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
-            .Include(sighting => sighting.BodyOfWater)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
             .ToList();
