@@ -13,12 +13,17 @@ public class HotSpotController(WhaleSpottingContext context) : Controller
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-        var query = _context
-            .HotSpots.Where(hotspot => hotspot.Id == id)
-            .Include(hotspot => hotspot.ViewingSuggestions)
-            .ThenInclude(suggestion => suggestion.Species);
+        var hotSpot = _context
+            .HotSpots.Include(hotspot => hotspot.ViewingSuggestions)
+            .ThenInclude(suggestion => suggestion.Species)
+            .SingleOrDefault(hotspot => hotspot.Id == id);
 
-        return Ok(query.ToList());
+        if (hotSpot == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(hotSpot);
     }
 
     [HttpGet("")]

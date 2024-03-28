@@ -19,7 +19,7 @@ function HotSpotView() {
   useEffect(() => {
     fetch(`http://localhost:5280/hotspots/${id}`)
       .then((response) => response.json())
-      .then((data) => setHotSpot(data[0]))
+      .then((data) => setHotSpot(data))
       .catch(() => setError(true))
       .finally(() => setLoading(false))
   }, [id])
