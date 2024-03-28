@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Response;
 

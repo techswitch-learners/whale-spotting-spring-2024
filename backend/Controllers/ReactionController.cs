@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WhaleSpotting.Enums;
+using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Request;
+using WhaleSpotting.Models.Response;
 
 namespace WhaleSpotting.Controllers;
 
@@ -20,14 +22,14 @@ public class ReactionController(WhaleSpottingContext context) : Controller
         if (
             !_context.Reactions.Any(reaction =>
                 reaction.SightingId == addReactionRequest.SightingId && reaction.UserId == userId
-            )
+            ) && Enum.TryParse<ReactionType>(addReactionRequest.Type, true, out var reactionType)
         )
         {
             var newReaction = _context
                 .Reactions.Add(
                     new Reaction
                     {
-                        Type = addReactionRequest.Type,
+                        Type = reactionType,
                         UserId = userId,
                         SightingId = addReactionRequest.SightingId,
                         Timestamp = DateTime.UtcNow
@@ -35,7 +37,15 @@ public class ReactionController(WhaleSpottingContext context) : Controller
                 )
                 .Entity;
             _context.SaveChanges();
-            return Ok(newReaction);
+            return Ok(
+                new ReactionResponse
+                {
+                    Type = newReaction.Type.ToString(),
+                    UserId = newReaction.UserId,
+                    SightingId = newReaction.SightingId,
+                    Timestamp = newReaction.Timestamp
+                }
+            );
         }
 
         return BadRequest("You can not give reaction to the same sighting more than once");
@@ -43,29 +53,49 @@ public class ReactionController(WhaleSpottingContext context) : Controller
 
     [Authorize]
     [HttpPatch("")]
-    public IActionResult UpdateReaction([FromBody] AddReactionRequest addReactionRequest)
+    public IActionResult UpdateReaction([FromBody] UpdateReactionRequest updateReactionRequest)
     {
         var userId = AuthHelper.GetUserId(User);
-        var matchingSighting = _context.Reactions.SingleOrDefault(reaction =>
-            reaction.SightingId == addReactionRequest.SightingId && reaction.UserId == userId
+        var matchingReaction = _context.Reactions.SingleOrDefault(reaction =>
+            reaction.SightingId == updateReactionRequest.SightingId && reaction.UserId == userId
         );
-        if (matchingSighting != null)
-        {
-            ReactionType newReactionType = addReactionRequest.Type;
-            if (matchingSighting.Type != newReactionType)
-            {
-                matchingSighting.Type = newReactionType;
-                matchingSighting.Timestamp = DateTime.UtcNow;
-                _context.SaveChanges();
 
-                return Ok(matchingSighting);
-            }
-        }
-        else
+        if (
+            matchingReaction != null
+            && Enum.TryParse<ReactionType>(updateReactionRequest.Type, true, out var reactionType)
+        )
         {
-            return BadRequest("Reaction type is the same as before. No update made.");
+            matchingReaction.Type = reactionType;
+            matchingReaction.Timestamp = DateTime.UtcNow;
+            _context.SaveChanges();
+            return Ok(
+                new ReactionResponse
+                {
+                    Type = matchingReaction.Type.ToString(),
+                    UserId = matchingReaction.UserId,
+                    SightingId = matchingReaction.SightingId,
+                    Timestamp = matchingReaction.Timestamp
+                }
+            );
         }
+        return BadRequest("Cannot find the matching reaction to update.");
+    }
 
-        return NotFound("No existing reaction found for the given sighting by this user.");
+    [Authorize]
+    [HttpDelete("")]
+    public IActionResult DeleteReaction([FromBody] DeleteReactionRequest deleteReactionRequest)
+    {
+        var userId = AuthHelper.GetUserId(User);
+        var matchingReaction = _context.Reactions.SingleOrDefault(reaction =>
+            reaction.SightingId == deleteReactionRequest.SightingId && reaction.UserId == userId
+        );
+
+        if (matchingReaction != null)
+        {
+            _context.Reactions.Remove(matchingReaction);
+            _context.SaveChanges();
+            return Ok("Deleted Reaction Successfully.");
+        }
+        return BadRequest("Cannot find the matching reaction to delete.");
     }
 }

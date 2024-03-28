@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Request;
 using WhaleSpotting.Models.Response;
@@ -41,6 +42,8 @@ public class SightingController(WhaleSpottingContext context) : Controller
     [HttpGet("{id}")]
     public IActionResult GetById([FromRoute] int id)
     {
+        var userId = AuthHelper.GetUserIdIfLoggedIn(User);
+
         var matchingSighting = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
@@ -68,7 +71,11 @@ public class SightingController(WhaleSpottingContext context) : Controller
             CreationTimestamp = matchingSighting.CreationTimestamp,
             Reactions = matchingSighting
                 .Reactions.GroupBy(reaction => reaction.Type)
-                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count())
+                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count()),
+            CurrentUserReaction =
+                userId != null
+                    ? matchingSighting.Reactions.SingleOrDefault(reaction => reaction.UserId == userId)?.Type.ToString()
+                    : string.Empty
         };
 
         return Ok(sighting);
@@ -77,6 +84,8 @@ public class SightingController(WhaleSpottingContext context) : Controller
     [HttpGet("")]
     public IActionResult Search()
     {
+        var userId = AuthHelper.GetUserIdIfLoggedIn(User);
+
         var sightings = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
@@ -106,7 +115,11 @@ public class SightingController(WhaleSpottingContext context) : Controller
                         .ToDictionary(
                             reactionGroup => reactionGroup.Key.ToString(),
                             reactionGroup => reactionGroup.Count()
-                        )
+                        ),
+                    CurrentUserReaction =
+                        userId != null
+                            ? sighting.Reactions.SingleOrDefault(reaction => reaction.UserId == userId)?.Type.ToString()
+                            : string.Empty
                 })
                 .ToList()
         };

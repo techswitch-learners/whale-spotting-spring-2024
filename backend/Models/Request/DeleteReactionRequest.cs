@@ -4,10 +4,8 @@ using WhaleSpotting.Enums;
 
 namespace WhaleSpotting.Models.Request;
 
-public class AddReactionRequest
+public class DeleteReactionRequest
 {
-    public required string Type { get; set; }
-
     [Required(ErrorMessage = "Sighting is required.")]
     [SightingExists]
     public required int SightingId { get; set; }

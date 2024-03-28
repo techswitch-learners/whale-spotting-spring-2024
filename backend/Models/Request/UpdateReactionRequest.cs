@@ -4,7 +4,7 @@ using WhaleSpotting.Enums;
 
 namespace WhaleSpotting.Models.Request;
 
-public class AddReactionRequest
+public class UpdateReactionRequest
 {
     public required string Type { get; set; }
 
