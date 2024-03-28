@@ -12,8 +12,8 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingContext))]
-    [Migration("20240327185140_HotspotsData")]
-    partial class HotspotsData
+    [Migration("20240328114944_HotSpotsData")]
+    partial class HotSpotsData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
