@@ -1,4 +1,4 @@
-import ReactionType from "../../types/types"
+import ReactionType from "../../types/ReactionType"
 
 interface ReactionRequest {
   reactionType: ReactionType

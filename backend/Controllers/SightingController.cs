@@ -75,7 +75,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             CurrentUserReaction =
                 userId != null
                     ? matchingSighting.Reactions.SingleOrDefault(reaction => reaction.UserId == userId)?.Type.ToString()
-                    : string.Empty
+                    : null
         };
 
         return Ok(sighting);
@@ -85,6 +85,8 @@ public class SightingController(WhaleSpottingContext context) : Controller
     public IActionResult Search()
     {
         var userId = AuthHelper.GetUserIdIfLoggedIn(User);
+
+        Console.WriteLine($"=================={userId}");
 
         var sightings = _context
             .Sightings.Include(sighting => sighting.User)
@@ -119,7 +121,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
                     CurrentUserReaction =
                         userId != null
                             ? sighting.Reactions.SingleOrDefault(reaction => reaction.UserId == userId)?.Type.ToString()
-                            : string.Empty
+                            : null
                 })
                 .ToList()
         };

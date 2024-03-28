@@ -1,8 +1,8 @@
 interface Reaction {
-  letsParty: number
-  niceCatch: number
-  soSo: number
-  suspicious: number
+  LetsParty?: number
+  NiceCatch?: number
+  SoSo?: number
+  Suspicious?: number
 }
 
 export default Reaction

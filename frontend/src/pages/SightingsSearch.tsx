@@ -12,6 +12,8 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings } from "../api/backendClient"
+import Reactions from "../components/Reactions"
+import { Stack } from "react-bootstrap"
 
 interface SightingCardProps {
   imageUrl: string
@@ -19,13 +21,11 @@ interface SightingCardProps {
   bodyOfWater: string
   description: string
   sightingTimestamp: string
-  // reactions:Array<Reaction>
 }
 
 function SightingCard({ imageUrl, species, bodyOfWater, description, sightingTimestamp }: SightingCardProps) {
   return (
     <Card className="text-start">
-      <Card.Header>{/* <Reactions reactions={reaction}/> */}</Card.Header>
       <Card.Img variant="top" src={imageUrl} />
       <Card.Body>
         <Card.Title>{species}</Card.Title>
@@ -51,7 +51,10 @@ const SightingsSearch = () => {
     setError(false)
     getSightings()
       .then((response) => response.json())
-      .then((data) => setAllSightings(data.sightings))
+      .then((data) => {
+        setAllSightings(data.sightings)
+        console.log(data.sightings)
+      })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
   }
@@ -117,21 +120,28 @@ const SightingsSearch = () => {
         {!mapView && (
           <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
             {allSightings?.map((sighting) => (
-              <Link
-                to={`/sightings/${sighting.id}`}
-                key={sighting.id}
-                className="text-decoration-none"
-                style={{ width: "13rem" }}
-              >
-                <SightingCard
-                  imageUrl={sighting.imageUrl}
-                  species={sighting.species.name}
-                  bodyOfWater={sighting.bodyOfWater.name}
-                  description={sighting.description}
-                  // reactions={sighting.reactions}
-                  sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
+              <Stack>
+                <Reactions
+                  reactions={sighting.reactions}
+                  currentUserReaction={sighting.currentUserReaction}
+                  sightingId={sighting.id}
                 />
-              </Link>
+                {sighting.currentUserReaction}
+                <Link
+                  to={`/sightings/${sighting.id}`}
+                  key={sighting.id}
+                  className="text-decoration-none"
+                  style={{ width: "13rem" }}
+                >
+                  <SightingCard
+                    imageUrl={sighting.imageUrl}
+                    species={sighting.species.name}
+                    bodyOfWater={sighting.bodyOfWater.name}
+                    description={sighting.description}
+                    sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
+                  />
+                </Link>
+              </Stack>
             ))}
           </div>
         )}
