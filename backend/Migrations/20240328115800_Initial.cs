@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -8,11 +9,78 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace WhaleSpotting.Migrations
 {
     /// <inheritdoc />
-    public partial class HotSpotsData : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AspNetRoles",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(
+                        type: "character varying(256)",
+                        maxLength: 256,
+                        nullable: true
+                    ),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    ProfileImageUrl = table.Column<string>(type: "text", nullable: false),
+                    Experience = table.Column<int>(type: "integer", nullable: false),
+                    FavoriteLocationLatitude = table.Column<decimal>(type: "numeric", nullable: true),
+                    FavoriteLocationLongitude = table.Column<decimal>(type: "numeric", nullable: true),
+                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(
+                        type: "character varying(256)",
+                        maxLength: 256,
+                        nullable: true
+                    ),
+                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(
+                        type: "character varying(256)",
+                        maxLength: 256,
+                        nullable: true
+                    ),
+                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                }
+            );
+
             migrationBuilder.CreateTable(
                 name: "HotSpots",
                 columns: table => new
@@ -31,6 +99,186 @@ namespace WhaleSpotting.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HotSpots", x => x.Id);
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "Species",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    ExampleImageUrl = table.Column<string>(type: "text", nullable: false),
+                    WikiLink = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Species", x => x.Id);
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    RoleId = table.Column<int>(type: "integer", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "Achievements",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    BadgeImageUrl = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Achievements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Achievements_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id"
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "text", nullable: false),
+                    ProviderKey = table.Column<string>(type: "text", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    RoleId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    LoginProvider = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey(
+                        "PK_AspNetUserTokens",
+                        x => new
+                        {
+                            x.UserId,
+                            x.LoginProvider,
+                            x.Name
+                        }
+                    );
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
                 }
             );
 
@@ -68,6 +316,120 @@ namespace WhaleSpotting.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "Reactions",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    SightingId = table.Column<int>(type: "integer", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reactions_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "Sightings",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    Latitude = table.Column<decimal>(type: "numeric", nullable: false),
+                    Longitude = table.Column<decimal>(type: "numeric", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    SpeciesId = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    ImageUrl = table.Column<string>(type: "text", nullable: false),
+                    BodyOfWater = table.Column<string>(type: "text", nullable: false),
+                    VerificationEventId = table.Column<int>(type: "integer", nullable: true),
+                    SightingTimestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreationTimestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sightings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sightings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                    table.ForeignKey(
+                        name: "FK_Sightings_Species_SpeciesId",
+                        column: x => x.SpeciesId,
+                        principalTable: "Species",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "VerificationEvents",
+                columns: table => new
+                {
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    SightingId = table.Column<int>(type: "integer", nullable: false),
+                    AdminId = table.Column<int>(type: "integer", nullable: false),
+                    Comment = table.Column<string>(type: "text", nullable: true),
+                    Timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VerificationEvents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VerificationEvents_AspNetUsers_AdminId",
+                        column: x => x.AdminId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                    table.ForeignKey(
+                        name: "FK_VerificationEvents_Sightings_SightingId",
+                        column: x => x.SightingId,
+                        principalTable: "Sightings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, null, "User", "USER" },
+                    { 2, null, "Admin", "ADMIN" }
                 }
             );
 
@@ -609,6 +971,110 @@ namespace WhaleSpotting.Migrations
                     { 285, "United States of America", 63.588753m, -154.4930619m, "Alaska(Gulf of Mexico)" },
                     { 286, "United States of America", 52.0767026m, -123.8302432m, "Northwest(Pacific)" },
                     { 287, "United States of America", 21.3072314m, -157.8619256m, "Hawaii(Pacific)" }
+                }
+            );
+
+            migrationBuilder.InsertData(
+                table: "Species",
+                columns: new[] { "Id", "ExampleImageUrl", "Name", "WikiLink" },
+                values: new object[,]
+                {
+                    {
+                        1,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Berardius_bairdii.jpg/1599px-Berardius_bairdii.jpg?20151221184110",
+                        "Beaked whale",
+                        "https://en.wikipedia.org/wiki/Beaked_whale"
+                    },
+                    {
+                        2,
+                        "https://upload.wikimedia.org/wikipedia/commons/e/e8/Oceanogr%C3%A0fic_29102004.jpg",
+                        "Beluga whale",
+                        "https://en.wikipedia.org/wiki/Beluga_whale"
+                    },
+                    {
+                        3,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Anim1754_-_Flickr_-_NOAA_Photo_Library.jpg/2560px-Anim1754_-_Flickr_-_NOAA_Photo_Library.jpg",
+                        "Blue whale",
+                        "https://en.wikipedia.org/wiki/Blue_whale"
+                    },
+                    {
+                        4,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bowhead_Whale_NOAA.jpg/2560px-Bowhead_Whale_NOAA.jpg",
+                        "Bowhead whale",
+                        "https://en.wikipedia.org/wiki/Bowhead_whale"
+                    },
+                    {
+                        5,
+                        "https://upload.wikimedia.org/wikipedia/commons/3/35/Balaenoptera_brydei.jpg",
+                        "Bryde's whale",
+                        "https://en.wikipedia.org/wiki/Bryde%27s_whale"
+                    },
+                    {
+                        6,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Finhval_%281%29.jpg/2560px-Finhval_%281%29.jpg",
+                        "Fin whale",
+                        "https://en.wikipedia.org/wiki/Fin_whale"
+                    },
+                    {
+                        7,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Ballena_gris_adulta_con_su_ballenato.jpg/2560px-Ballena_gris_adulta_con_su_ballenato.jpg",
+                        "Gray whale",
+                        "https://en.wikipedia.org/wiki/Gray_whale"
+                    },
+                    {
+                        8,
+                        "https://upload.wikimedia.org/wikipedia/commons/6/61/Humpback_Whale_underwater_shot.jpg",
+                        "Humpback whale",
+                        "https://en.wikipedia.org/wiki/Humpback_whale"
+                    },
+                    {
+                        9,
+                        "https://upload.wikimedia.org/wikipedia/commons/3/37/Killerwhales_jumping.jpg",
+                        "Killer whale",
+                        "https://en.wikipedia.org/wiki/Orca"
+                    },
+                    {
+                        10,
+                        "https://upload.wikimedia.org/wikipedia/commons/d/d9/Minke_Whale_%28NOAA%29.jpg",
+                        "Minke whale",
+                        "https://en.wikipedia.org/wiki/Minke_whale"
+                    },
+                    {
+                        11,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/%D0%9D%D0%B0%D1%80%D0%B2%D0%B0%D0%BB_%D0%B2_%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%BE%D0%B9_%D0%90%D1%80%D0%BA%D1%82%D0%B8%D0%BA%D0%B5.jpg/1280px-%D0%9D%D0%B0%D1%80%D0%B2%D0%B0%D0%BB_%D0%B2_%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%BE%D0%B9_%D0%90%D1%80%D0%BA%D1%82%D0%B8%D0%BA%D0%B5.jpg",
+                        "Narwhal",
+                        "https://en.wikipedia.org/wiki/Narwhal"
+                    },
+                    {
+                        12,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Pilot_whale.jpg/1920px-Pilot_whale.jpg",
+                        "Pilot whale",
+                        "https://en.wikipedia.org/wiki/Pilot_whale"
+                    },
+                    {
+                        13,
+                        "https://upload.wikimedia.org/wikipedia/commons/e/e2/Southern_right_whale.jpg",
+                        "Right whale",
+                        "https://en.wikipedia.org/wiki/Right_whale"
+                    },
+                    {
+                        14,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sei_whale_mother_and_calf_Christin_Khan_NOAA.jpg/1280px-Sei_whale_mother_and_calf_Christin_Khan_NOAA.jpg",
+                        "Sei whale",
+                        "https://en.wikipedia.org/wiki/Sei_whale"
+                    },
+                    {
+                        15,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Mother_and_baby_sperm_whale.jpg/1920px-Mother_and_baby_sperm_whale.jpg",
+                        "Sperm whale",
+                        "https://en.wikipedia.org/wiki/Sperm_whale"
+                    },
+                    {
+                        16,
+                        "https://cdn1.vectorstock.com/i/thumb-large/32/75/cartoon-curious-whale-and-speech-bubble-sticker-vector-26423275.jpg",
+                        "Other/unknown",
+                        "https://en.wikipedia.org/wiki/Whale"
+                    }
                 }
             );
 
@@ -3473,6 +3939,70 @@ namespace WhaleSpotting.Migrations
                 }
             );
 
+            migrationBuilder.CreateIndex(name: "IX_Achievements_UserId", table: "Achievements", column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
+                column: "RoleId"
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserClaims_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId"
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserLogins_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId"
+            );
+
+            migrationBuilder.CreateIndex(name: "IX_AspNetUserRoles_RoleId", table: "AspNetUserRoles", column: "RoleId");
+
+            migrationBuilder.CreateIndex(name: "EmailIndex", table: "AspNetUsers", column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true
+            );
+
+            migrationBuilder.CreateIndex(name: "IX_Reactions_SightingId", table: "Reactions", column: "SightingId");
+
+            migrationBuilder.CreateIndex(name: "IX_Reactions_UserId", table: "Reactions", column: "UserId");
+
+            migrationBuilder.CreateIndex(name: "IX_Sightings_SpeciesId", table: "Sightings", column: "SpeciesId");
+
+            migrationBuilder.CreateIndex(name: "IX_Sightings_UserId", table: "Sightings", column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sightings_VerificationEventId",
+                table: "Sightings",
+                column: "VerificationEventId"
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VerificationEvents_AdminId",
+                table: "VerificationEvents",
+                column: "AdminId"
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VerificationEvents_SightingId",
+                table: "VerificationEvents",
+                column: "SightingId"
+            );
+
             migrationBuilder.CreateIndex(
                 name: "IX_ViewingSuggestions_HotSpotId",
                 table: "ViewingSuggestions",
@@ -3484,14 +4014,67 @@ namespace WhaleSpotting.Migrations
                 table: "ViewingSuggestions",
                 column: "SpeciesId"
             );
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Reactions_Sightings_SightingId",
+                table: "Reactions",
+                column: "SightingId",
+                principalTable: "Sightings",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade
+            );
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Sightings_VerificationEvents_VerificationEventId",
+                table: "Sightings",
+                column: "VerificationEventId",
+                principalTable: "VerificationEvents",
+                principalColumn: "Id"
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(name: "FK_Sightings_AspNetUsers_UserId", table: "Sightings");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_VerificationEvents_AspNetUsers_AdminId",
+                table: "VerificationEvents"
+            );
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_VerificationEvents_Sightings_SightingId",
+                table: "VerificationEvents"
+            );
+
+            migrationBuilder.DropTable(name: "Achievements");
+
+            migrationBuilder.DropTable(name: "AspNetRoleClaims");
+
+            migrationBuilder.DropTable(name: "AspNetUserClaims");
+
+            migrationBuilder.DropTable(name: "AspNetUserLogins");
+
+            migrationBuilder.DropTable(name: "AspNetUserRoles");
+
+            migrationBuilder.DropTable(name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(name: "Reactions");
+
             migrationBuilder.DropTable(name: "ViewingSuggestions");
 
+            migrationBuilder.DropTable(name: "AspNetRoles");
+
             migrationBuilder.DropTable(name: "HotSpots");
+
+            migrationBuilder.DropTable(name: "AspNetUsers");
+
+            migrationBuilder.DropTable(name: "Sightings");
+
+            migrationBuilder.DropTable(name: "Species");
+
+            migrationBuilder.DropTable(name: "VerificationEvents");
         }
     }
 }

@@ -25,10 +25,10 @@ public class Sighting
 
     public required string ImageUrl { get; set; }
 
-    public int BodyOfWaterId { get; set; }
+    // public int BodyOfWaterId { get; set; }
 
-    [ForeignKey(nameof(BodyOfWaterId))]
-    public BodyOfWater BodyOfWater { get; set; } = null!;
+    // [ForeignKey(nameof(BodyOfWaterId))]
+    public string BodyOfWater { get; set; } = null!;
 
     public int? VerificationEventId { get; set; }
 
