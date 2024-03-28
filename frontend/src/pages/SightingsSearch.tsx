@@ -12,8 +12,6 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings } from "../api/backendClient"
-//import { CardHeader } from "react-bootstrap"
-//import Reaction from "../models/view/Reaction"
 
 interface SightingCardProps {
   imageUrl: string
