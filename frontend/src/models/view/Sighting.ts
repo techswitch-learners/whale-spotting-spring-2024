@@ -1,6 +1,7 @@
 import BodyOfWater from "./BodyOfWater"
 import Species from "./Species"
 import Reaction from "./Reaction"
+import ReactionType from "../../types/ReactionType"
 interface Sighting {
   id: number
   latitude: number
@@ -12,7 +13,7 @@ interface Sighting {
   bodyOfWater: BodyOfWater
   sightingTimestamp: string
   reactions: Reaction
-  currentUserReaction: string | null
+  currentUserReaction: ReactionType | null
 }
 
 export default Sighting

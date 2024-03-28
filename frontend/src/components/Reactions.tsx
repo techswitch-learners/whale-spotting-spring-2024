@@ -14,7 +14,7 @@ const emojis = {
 }
 interface ReactionProps {
   reactions: Reaction
-  currentUserReaction: string | null
+  currentUserReaction: ReactionType | null
   sightingId: number
 }
 
