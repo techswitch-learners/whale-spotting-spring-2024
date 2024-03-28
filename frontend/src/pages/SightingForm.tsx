@@ -74,8 +74,10 @@ const SightingForm = () => {
       const response = await fetch(url)
       const data = await response.json()
       const waterBody = data.localityInfo.informative.find(
-        (info: { name: string | string[] }) =>
-          info.name.includes("Sea") || info.name.includes("Ocean") || info.name.includes("Glacier"),
+        (info: { description: string }) =>
+          info.description.toLowerCase().includes("sea") ||
+          info.description.toLowerCase().includes("ocean") ||
+          info.description.toLowerCase().includes("glacier"),
       )?.name
       setBodyOfWater(waterBody)
     } catch (error) {

@@ -30,6 +30,8 @@ public class Sighting
     [ForeignKey(nameof(BodyOfWaterId))]
     public BodyOfWater BodyOfWater { get; set; } = null!;
 
+    // public string BodyOfWater { get; set; } = null!;
+
     public int? VerificationEventId { get; set; }
 
     [ForeignKey(nameof(VerificationEventId))]

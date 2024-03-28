@@ -23,9 +23,11 @@ public class AddSightingRequest
     [Required(ErrorMessage = "Image is required.")]
     public required string ImageUrl { get; set; }
 
-    [Required(ErrorMessage = "Body of water is required.")]
+    [Required(ErrorMessage = "Body of water is required.")] // Change here as well!
     [BodyOfWaterExists]
     public required int? BodyOfWaterId { get; set; }
+
+    // public required string BodyOfWaterName { get; set; }
 
     [Required(ErrorMessage = "Timestamp is required.")]
     [DateTimeNotInFuture(ErrorMessage = "The timestamp must not be in the future.")]
