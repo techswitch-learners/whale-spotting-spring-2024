@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhaleSpotting.Models.Data;
+using WhaleSpotting.Models.Data.Request;
 using WhaleSpotting.Models.Request;
 using WhaleSpotting.Models.Response;
 
@@ -47,8 +49,12 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.BodyOfWater)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
+            .Where(sighting => sighting.VerificationEvent != null)
             .SingleOrDefault(sighting => sighting.Id == id);
-        if (matchingSighting == null)
+        if (
+            matchingSighting == null
+            || matchingSighting.VerificationEvent.ApprovalStatus == Enums.ApprovalStatus.Rejected
+        )
         {
             return NotFound();
         }
@@ -80,6 +86,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.BodyOfWater)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
+            .Where(sighting => sighting.VerificationEvent != null)
             .ToList();
 
         var sightingsResponse = new SightingsResponse
@@ -103,5 +110,73 @@ public class SightingController(WhaleSpottingContext context) : Controller
                 .ToList()
         };
         return Ok(sightingsResponse);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("pending")]
+    public IActionResult ViewPendingSightings()
+    {
+        var pendingSightings = _context
+            .Sightings.Include(sighting => sighting.User)
+            .Include(sighting => sighting.Species)
+            .Include(sighting => sighting.BodyOfWater)
+            .Include(sighting => sighting.VerificationEvent)
+            .Include(sighting => sighting.Reactions)
+            .Where(sighting => sighting.VerificationEvent == null)
+            .ToList();
+
+        var sightingsResponse = new SightingsResponse
+        {
+            Sightings = pendingSightings
+                .Select(sighting => new SightingResponse
+                {
+                    Id = sighting.Id,
+                    Latitude = sighting.Latitude,
+                    Longitude = sighting.Longitude,
+                    UserName = sighting.User.UserName!,
+                    Species = sighting.Species,
+                    Description = sighting.Description,
+                    ImageUrl = sighting.ImageUrl,
+                    BodyOfWater = sighting.BodyOfWater,
+                    VerificationEvent = sighting.VerificationEvent,
+                    SightingTimestamp = sighting.SightingTimestamp,
+                    CreationTimestamp = sighting.CreationTimestamp,
+                    Reactions = sighting.Reactions
+                })
+                .ToList()
+        };
+        return Ok(sightingsResponse);
+    }
+
+    [HttpPost("{sightingId}/verify")]
+    public IActionResult VerifySighting(
+        [FromRoute] int sightingId,
+        [FromBody] VerificationEventRequest verificationEventRequest
+    )
+    {
+        var sighting = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
+        var userId = AuthHelper.GetUserId(User);
+
+        if (sighting == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            var newVerificationEvent = new VerificationEvent
+            {
+                SightingId = sightingId,
+                AdminId = userId,
+                ApprovalStatus = verificationEventRequest.ApprovalStatus,
+                Comment = verificationEventRequest.Comment,
+                Timestamp = DateTime.UtcNow,
+            };
+
+            var savedVerificationEvent = _context.VerificationEvents.Add(newVerificationEvent).Entity;
+            _context.SaveChanges();
+            sighting.VerificationEventId = savedVerificationEvent.Id;
+            _context.SaveChanges();
+            return Ok();
+        }
     }
 }

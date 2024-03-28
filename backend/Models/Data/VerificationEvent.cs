@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using WhaleSpotting.Enums;
 
 namespace WhaleSpotting.Models.Data;
 
 public class VerificationEvent
 {
-    public required int Id { get; set; }
+    public int Id { get; set; }
 
     public int SightingId { get; set; }
 
@@ -15,6 +16,8 @@ public class VerificationEvent
 
     [ForeignKey(nameof(AdminId))]
     public User Admin { get; set; } = null!;
+
+    public required ApprovalStatus ApprovalStatus { get; set; }
 
     public string? Comment { get; set; }
 
