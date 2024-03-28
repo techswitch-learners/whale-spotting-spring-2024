@@ -10,6 +10,17 @@ public class HotSpotController(WhaleSpottingContext context) : Controller
 {
     private readonly WhaleSpottingContext _context = context;
 
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var query = _context
+            .HotSpots.Where(hotspot => hotspot.Id == id)
+            .Include(hotspot => hotspot.ViewingSuggestions)
+            .ThenInclude(suggestion => suggestion.Species);
+
+        return Ok(query.ToList());
+    }
+
     [HttpGet("")]
     public IActionResult Search([FromQuery] SearchHotSpotRequest searchRequest)
     {

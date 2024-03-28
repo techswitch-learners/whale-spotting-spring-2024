@@ -69,12 +69,12 @@
 68,Canada,Minke whale,British Columbia,Telegraph Cove,"Motorized boat, non-motorized boats, land-based","Boat, LandBased,",May - September,"May,June,July,August,September,",50.5492459,-126.832251
 69,Canada,Minke whale,British Columbia,Campbell River,"Motorized boat, non-motorized boats, land-based","Boat, LandBased,",May - September,"May,June,July,August,September,",50.0331226,-125.2733354
 70,Canada,Minke whale,British Columbia,Tofino,"Motorized boat, non-motorized boats, land-based","Boat, LandBased,",May - September,"May,June,July,August,September,",49.1529842,-125.9066184
-71,Canada,Beluga whale,Québec,"St. Lawrence River Estuary,Saguenay Fjord (near Tadoussac), Mingan region","Motorized boat, land-based","Boat, LandBased,",Year-round,"January,February,March,April,May,June,July,August,September,October,November,December,",48.1459776,-69.7128395
-72,Canada,Blue whale,Québec,"St. Lawrence River Estuary,Saguenay Fjord (near Tadoussac), Mingan region","Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
-73,Canada,Fin whale,Québec,"St. Lawrence River Estuary,Saguenay Fjord (near Tadoussac), Mingan region","Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
-74,Canada,Humpback whale,Québec,"St. Lawrence River Estuary,Saguenay Fjord (near Tadoussac), Mingan region","Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
-75,Canada,Minke whale,Québec,"St. Lawrence River Estuary,Saguenay Fjord (near Tadoussac), Mingan region","Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
-76,Canada,Right whale,Québec,"St. Lawrence River Estuary,Saguenay Fjord (near Tadoussac), Mingan region","Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
+71,Canada,Beluga whale,Québec,St. Lawrence River Estuary,"Motorized boat, land-based","Boat, LandBased,",Year-round,"January,February,March,April,May,June,July,August,September,October,November,December,",48.1459776,-69.7128395
+72,Canada,Blue whale,Québec,St. Lawrence River Estuary,"Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
+73,Canada,Fin whale,Québec,St. Lawrence River Estuary,"Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
+74,Canada,Humpback whale,Québec,St. Lawrence River Estuary,"Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
+75,Canada,Minke whale,Québec,St. Lawrence River Estuary,"Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
+76,Canada,Right whale,Québec,St. Lawrence River Estuary,"Motorized boat, land-based","Boat, LandBased,",May – October,"May,June,July,August,September,October,",48.1459776,-69.7128395
 77,Canada,Pilot whale,Nova Scotia and New Brunswick,Bay of Fundy,"Motorized vessel, non-motorized craft, land-based","Boat, LandBased,",Unknown,"January,February,March,April,May,June,July,August,September,October,November,December,",56.130366,-106.346771
 78,Canada,Pilot whale,Nova Scotia and New Brunswick,Halifax,"Motorized vessel, non-motorized craft, land-based","Boat, LandBased,",Unknown,"January,February,March,April,May,June,July,August,September,October,November,December,",44.6475811,-63.5727683
 79,Canada,Pilot whale,Nova Scotia and New Brunswick,Cape Breton,"Motorized vessel, non-motorized craft, land-based","Boat, LandBased,",Unknown,"January,February,March,April,May,June,July,August,September,October,November,December,",46.2486851,-60.851817
@@ -173,15 +173,15 @@
 172,Ecuador,Humpback whale,Manabí Province,Manta,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-0.9676533,-80.7089101
 173,Ecuador,Humpback whale,Manabí Province,Pedernales,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",0.0731181,-80.0513928
 174,Ecuador,Humpback whale,Manabí Province,Puerto López,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-1.5539322,-80.8045568
-175,Ecuador,Humpback whale,Manabí Province,Isla de la Plata (Parque Nacional Machalilla),Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-1.4886678,-80.7738641
+175,Ecuador,Humpback whale,Manabí Province,Isla de la Plata,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-1.4886678,-80.7738641
 176,Ecuador,Humpback whale,Manabí Province,Isla Salango,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-1.5961038,-80.8668369
 177,Ecuador,Humpback whale,Esmeraldas Province,Muisne,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",0.6105615,-80.0190796
 178,Ecuador,Humpback whale,Esmeraldas Province,Atacames,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",0.8680071,-79.8464804
-179,Ecuador,Humpback whale,Esmeraldas Province,Súa (Reserva Marino Galeras),Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-1.831239,-78.183406
-180,Ecuador,Humpback whale,Santa Elena Province,Santa Elena (Reserva Marina Puntilla de Santa Elena),Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-2.1887133,-81.0110023
+179,Ecuador,Humpback whale,Esmeraldas Province,Súa,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-1.831239,-78.183406
+180,Ecuador,Humpback whale,Santa Elena Province,Santa Elena,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-2.1887133,-81.0110023
 181,Ecuador,Humpback whale,Santa Elena Province,Ayangue,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-1.9804241,-80.7477708
 182,Ecuador,Humpback whale,El Oro Province,Jambelí,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-3.2334344,-79.9696277
-183,Ecuador,Humpback whale,Guayas Province,Isla Santa Clara (Refugio de Vida Silvestre Isla Santa Clara).,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-3.1716525,-80.4361291
+183,Ecuador,Humpback whale,Guayas Province,Isla Santa Clara,Motorized boat,"Boat, ",June – October,"June,July,August,September,October,",-3.1716525,-80.4361291
 184,Ecuador,Bryde's whale,Galapagos,Isla Santa Cruz,Motorized boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",-0.6393592,-90.3371889
 185,Ecuador,Bryde's whale,Galapagos,Isla San Cristobal,"Motorized boats, Cruceros","Boat, SwimWith,LandBased,Aerial,",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",-0.8674715,-89.436391
 186,Ecuador,Bryde's whale,Galapagos,Isla Floreana,"Motorized boats, Cruceros","Boat, SwimWith,LandBased,Aerial,",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",-1.3083314,-90.4313729
@@ -199,108 +199,108 @@
 198,France,Fin whale,Mediterranean Coast,Provence coast,Unknown,"Boat, SwimWith,LandBased,Aerial,",April-September,"April,May,June,July,August,September,",44.0144936,6.2116438
 199,France,Sperm whale,Mediterranean Coast,Provence coast,Unknown,"Boat, SwimWith,LandBased,Aerial,",April-September,"April,May,June,July,August,September,",44.0144936,6.2116438
 200,France,Pilot whale,Mediterranean Coast,Provence coast,Unknown,"Boat, SwimWith,LandBased,Aerial,",June- September,"June,July,August,September,",44.0144936,6.2116438
-201,France,Humpback whale,"South Pacific (French Polynesia, New-Caledonia)",South lagoon of New Caledonia and Tahiti,Unknown,"Boat, SwimWith,LandBased,Aerial,",July - November,"July,August,September,October,November,",-20.904305,165.618042
-202,France,Humpback whale,"South Pacific (French Polynesia, New-Caledonia)",Moorea,Unknown,"Boat, SwimWith,LandBased,Aerial,",July - November,"July,August,September,October,November,",-17.5388435,-149.8295234
-203,France,Humpback whale,"South Pacific (French Polynesia, New-Caledonia)",Bora Bora,Unknown,"Boat, SwimWith,LandBased,Aerial,",July - November,"July,August,September,October,November,",-16.5004126,-151.7414904
-204,France,Humpback whale,"South Pacific (French Polynesia, New-Caledonia)",Rurutu French Polynesia,Unknown,"Boat, SwimWith,LandBased,Aerial,",July - November,"July,August,September,October,November,",-22.480133,-151.3385191
+201,France,Humpback whale,French Polynesia and New-Caledonia,South lagoon of New Caledonia and Tahiti,Unknown,"Boat, SwimWith,LandBased,Aerial,",July - November,"July,August,September,October,November,",-20.904305,165.618042
+202,France,Humpback whale,French Polynesia and New-Caledonia,Moorea,Unknown,"Boat, SwimWith,LandBased,Aerial,",July - November,"July,August,September,October,November,",-17.5388435,-149.8295234
+203,France,Humpback whale,French Polynesia and New-Caledonia,Bora Bora,Unknown,"Boat, SwimWith,LandBased,Aerial,",July - November,"July,August,September,October,November,",-16.5004126,-151.7414904
+204,France,Humpback whale,French Polynesia and New-Caledonia,Rurutu French Polynesia,Unknown,"Boat, SwimWith,LandBased,Aerial,",July - November,"July,August,September,October,November,",-22.480133,-151.3385191
 205,France,Humpback whale,Carribean (Agoa Sanctuary),,Unknown,"Boat, SwimWith,LandBased,Aerial,",December – June,"January,February,March,April,May,June,December,",46.227638,2.213749
-206,France,Humpback whale,Indian Ocean - Réunion,"Saint Gilles (west coast),",Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",43.677079,4.433703
-207,France,Humpback whale,Indian Ocean - Réunion,Le Port,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",42.867945,1.372902
-208,France,Humpback whale,Indian Ocean - Réunion,Saint-Leu,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",49.019157,2.247531
-209,France,Humpback whale,Indian Ocean - Réunion,Saint-Pierre,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",48.383707,7.47253
-210,France,Humpback whale,Indian Ocean - Mayotte,Mamoudzou,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",-12.78064,45.2326964
-211,France,Humpback whale,Indian Ocean - Mayotte,Dzaoudzi,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",-12.7819879,45.2564226
-212,France,Humpback whale,Indian Ocean - Mayotte,plage N’Gouja,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",46.227638,2.213749
-213,France,Humpback whale,Indian Ocean - Mayotte,plage Gouela,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",46.227638,2.213749
-214,Gabon,Humpback whale,The entire coastline,Librevillle,Boat-based,"Boat, ",July – September,"July,August,September,",0.4077972,9.4402833
-215,Gabon,Humpback whale,The entire coastline,"Port Gentil,",Boat-based,"Boat, ",July – September,"July,August,September,",-0.7149503,8.7843278
-216,Gabon,Humpback whale,The entire coastline,Loango National Park,Boat-based,"Boat, ",July – September,"July,August,September,",-2.1538342,9.5896043
-217,Gabon,Humpback whale,The entire coastline,Mayumba National Park,Boat-based,"Boat, ",July – September,"July,August,September,",-3.8194511,11.0202729
-218,Ireland,Fin whale,South and Southeast,Baltimore,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",51.4843274,-9.3661093
-219,Ireland,Fin whale,South and Southeast,Dunmore East,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",52.1527666,-6.994804
-220,Ireland,Fin whale,South and Southeast,Kinsale,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",51.7058853,-8.5222327
-221,Ireland,Fin whale,South and Southeast,Kilmore Quay,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",52.1757194,-6.5863919
-222,Ireland,Fin whale,South and Southeast,Unionhall,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",51.558803,-9.1434791
-223,Ireland,Minke whale,South and Southeast,Baltimore,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",51.4843274,-9.3661093
-224,Ireland,Minke whale,South and Southeast,Castletownbere,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",51.6514954,-9.9103302
-225,Ireland,Minke whale,South and Southeast,Dingle,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",52.1408534,-10.2671142
-226,Ireland,Minke whale,South and Southeast,Kinsale,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",51.7058853,-8.5222327
-227,Ireland,Minke whale,South and Southeast,Unionhall,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",51.558803,-9.1434791
-228,Ireland,Minke whale,South and Southeast,Ventry,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",52.1333113,-10.3617104
-229,Ireland,Humpback whale,"Southwest, South, Southeast",Baltimore,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",51.4843274,-9.3661093
-230,Ireland,Humpback whale,"Southwest, South, Southeast",Castletownbere,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",51.6514954,-9.9103302
-231,Ireland,Humpback whale,"Southwest, South, Southeast",Dingle,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",52.1408534,-10.2671142
-232,Ireland,Humpback whale,"Southwest, South, Southeast",Dunmore East,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",52.1527666,-6.994804
-233,Ireland,Humpback whale,"Southwest, South, Southeast",Kilmore Quay,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",52.1757194,-6.5863919
-234,Ireland,Humpback whale,"Southwest, South, Southeast",Kinsale,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",51.7058853,-8.5222327
-235,Ireland,Humpback whale,"Southwest, South, Southeast",Unionhall,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",51.558803,-9.1434791
-236,Ireland,Humpback whale,"Southwest, South, Southeast",Ventry,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",52.1333113,-10.3617104
-237,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Bordighera,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.7806979,7.6722799
-238,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Sanremo,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.8159671,7.7760567
-239,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Imperia,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.8897316,8.0393482
-240,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Andora,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.9848226,8.1305992
-241,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Laigueglia,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.9783918,8.1579376
-242,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Loano,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.1261565,8.2558714
-243,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Alassio,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.014336,8.1811741
-244,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Savona,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.2975603,8.4645
-245,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Varazze,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.3890436,8.5611142
-246,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Arenzano,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.4058612,8.6860167
-247,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Genova,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.4071448,8.9347381
-248,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Nervi,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.3837051,9.0391431
-249,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Recco,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.3614219,9.1437445
-250,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Camogli,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.3542792,9.1498178
-251,Italy,Fin whale,"Pelagos Sanctuary, Sardinia",Poltu Quatu,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",41.1357338,9.4967926
-252,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Bordighera,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.7806979,7.6722799
-253,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Sanremo,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8159671,7.7760567
-254,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Imperia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8897316,8.0393482
-255,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Andora,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9848226,8.1305992
-256,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Laigueglia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9783918,8.1579376
-257,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Loano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.1261565,8.2558714
-258,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Alassio,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.014336,8.1811741
-259,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Savona,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.2975603,8.4645
-260,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Varazze,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3890436,8.5611142
-261,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Arenzano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4058612,8.6860167
-262,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Genova,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4071448,8.9347381
-263,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Nervi,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3837051,9.0391431
-264,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Recco,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3614219,9.1437445
-265,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Camogli,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3542792,9.1498178
-266,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Poltu Quatu,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",41.1357338,9.4967926
-267,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Ischia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",40.7271553,13.9434035
-268,Italy,Sperm whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Naples,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",40.8517983,14.26812
-269,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Bordighera,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.7806979,7.6722799
-270,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Sanremo,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8159671,7.7760567
-271,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Imperia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8897316,8.0393482
-272,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Andora,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9848226,8.1305992
-273,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Laigueglia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9783918,8.1579376
-274,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Loano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.1261565,8.2558714
-275,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Alassio,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.014336,8.1811741
-276,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Savona,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.2975603,8.4645
-277,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Varazze,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3890436,8.5611142
-278,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Arenzano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4058612,8.6860167
-279,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Genova,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4071448,8.9347381
-280,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Nervi,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3837051,9.0391431
-281,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Recco,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3614219,9.1437445
-282,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Camogli,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3542792,9.1498178
-283,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Poltu Quatu,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",41.1357338,9.4967926
-284,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Ischia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",40.7271553,13.9434035
-285,Italy,Pilot whale,"Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago",Naples,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",40.8517983,14.26812
-286,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Bordighera,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.7806979,7.6722799
-287,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Sanremo,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8159671,7.7760567
-288,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Imperia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8897316,8.0393482
-289,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Andora,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9848226,8.1305992
-290,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Laigueglia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9783918,8.1579376
-291,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Loano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.1261565,8.2558714
-292,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Alassio,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.014336,8.1811741
-293,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Savona,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.2975603,8.4645
-294,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Varazze,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3890436,8.5611142
-295,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Arenzano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4058612,8.6860167
-296,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Genova,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4071448,8.9347381
-297,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Nervi,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3837051,9.0391431
-298,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Recco,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3614219,9.1437445
-299,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Camogli,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3542792,9.1498178
-300,Italy,Beaked whale,"Pelagos Sanctuary, Sardinia",Poltu Quatu,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",41.1357338,9.4967926
+206,France,Humpback whale,Réunion,Saint Gilles (west coast),Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",43.677079,4.433703
+207,France,Humpback whale,Réunion,Le Port,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",42.867945,1.372902
+208,France,Humpback whale,Réunion,Saint-Leu,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",49.019157,2.247531
+209,France,Humpback whale,Réunion,Saint-Pierre,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",48.383707,7.47253
+210,France,Humpback whale,Mayotte,Mamoudzou,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",-12.78064,45.2326964
+211,France,Humpback whale,Mayotte,Dzaoudzi,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",-12.7819879,45.2564226
+212,France,Humpback whale,Mayotte,plage N’Gouja,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",46.227638,2.213749
+213,France,Humpback whale,Mayotte,plage Gouela,Unknown,"Boat, SwimWith,LandBased,Aerial,",June-September,"June,July,August,September,",46.227638,2.213749
+214,Gabon,Humpback whale,,Librevillle,Boat-based,"Boat, ",July – September,"July,August,September,",0.4077972,9.4402833
+215,Gabon,Humpback whale,,Port Gentil,Boat-based,"Boat, ",July – September,"July,August,September,",-0.7149503,8.7843278
+216,Gabon,Humpback whale,,Loango National Park,Boat-based,"Boat, ",July – September,"July,August,September,",-2.1538342,9.5896043
+217,Gabon,Humpback whale,,Mayumba National Park,Boat-based,"Boat, ",July – September,"July,August,September,",-3.8194511,11.0202729
+218,Ireland,Fin whale,South,Baltimore,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",51.4843274,-9.3661093
+219,Ireland,Fin whale,South,Dunmore East,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",52.1527666,-6.994804
+220,Ireland,Fin whale,South,Kinsale,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",51.7058853,-8.5222327
+221,Ireland,Fin whale,South,Kilmore Quay,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",52.1757194,-6.5863919
+222,Ireland,Fin whale,South,Unionhall,Unknown,"Boat, SwimWith,LandBased,Aerial,",Autumn-Winter,"January,February,September,October,November,December,",51.558803,-9.1434791
+223,Ireland,Minke whale,South,Baltimore,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",51.4843274,-9.3661093
+224,Ireland,Minke whale,South,Castletownbere,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",51.6514954,-9.9103302
+225,Ireland,Minke whale,South,Dingle,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",52.1408534,-10.2671142
+226,Ireland,Minke whale,South,Kinsale,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",51.7058853,-8.5222327
+227,Ireland,Minke whale,South,Unionhall,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",51.558803,-9.1434791
+228,Ireland,Minke whale,South,Ventry,Unknown,"Boat, SwimWith,LandBased,Aerial,",Spring-Summer-Autumn,"March,April,May,June,July,August,September,October,November,",52.1333113,-10.3617104
+229,Ireland,Humpback whale,South,Baltimore,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",51.4843274,-9.3661093
+230,Ireland,Humpback whale,South,Castletownbere,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",51.6514954,-9.9103302
+231,Ireland,Humpback whale,South,Dingle,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",52.1408534,-10.2671142
+232,Ireland,Humpback whale,South,Dunmore East,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",52.1527666,-6.994804
+233,Ireland,Humpback whale,South,Kilmore Quay,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",52.1757194,-6.5863919
+234,Ireland,Humpback whale,South,Kinsale,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",51.7058853,-8.5222327
+235,Ireland,Humpback whale,South,Unionhall,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",51.558803,-9.1434791
+236,Ireland,Humpback whale,South,Ventry,Unknown,"Boat, SwimWith,LandBased,Aerial,",Summer-Autumn-Winter,"January,February,June,July,August,September,October,November,December,",52.1333113,-10.3617104
+237,Italy,Fin whale,Pelagos Sanctuary,Bordighera,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.7806979,7.6722799
+238,Italy,Fin whale,Pelagos Sanctuary,Sanremo,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.8159671,7.7760567
+239,Italy,Fin whale,Pelagos Sanctuary,Imperia,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.8897316,8.0393482
+240,Italy,Fin whale,Pelagos Sanctuary,Andora,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.9848226,8.1305992
+241,Italy,Fin whale,Pelagos Sanctuary,Laigueglia,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",43.9783918,8.1579376
+242,Italy,Fin whale,Pelagos Sanctuary,Loano,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.1261565,8.2558714
+243,Italy,Fin whale,Pelagos Sanctuary,Alassio,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.014336,8.1811741
+244,Italy,Fin whale,Pelagos Sanctuary,Savona,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.2975603,8.4645
+245,Italy,Fin whale,Pelagos Sanctuary,Varazze,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.3890436,8.5611142
+246,Italy,Fin whale,Pelagos Sanctuary,Arenzano,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.4058612,8.6860167
+247,Italy,Fin whale,Pelagos Sanctuary,Genova,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.4071448,8.9347381
+248,Italy,Fin whale,Pelagos Sanctuary,Nervi,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.3837051,9.0391431
+249,Italy,Fin whale,Pelagos Sanctuary,Recco,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.3614219,9.1437445
+250,Italy,Fin whale,Pelagos Sanctuary,Camogli,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",44.3542792,9.1498178
+251,Italy,Fin whale,Pelagos Sanctuary,Poltu Quatu,"Big motorized boat, sailing boat","Boat, ",May - August,"May,June,July,August,",41.1357338,9.4967926
+252,Italy,Sperm whale,Pelagos Sanctuary,Bordighera,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.7806979,7.6722799
+253,Italy,Sperm whale,Pelagos Sanctuary,Sanremo,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8159671,7.7760567
+254,Italy,Sperm whale,Pelagos Sanctuary,Imperia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8897316,8.0393482
+255,Italy,Sperm whale,Pelagos Sanctuary,Andora,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9848226,8.1305992
+256,Italy,Sperm whale,Pelagos Sanctuary,Laigueglia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9783918,8.1579376
+257,Italy,Sperm whale,Pelagos Sanctuary,Loano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.1261565,8.2558714
+258,Italy,Sperm whale,Pelagos Sanctuary,Alassio,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.014336,8.1811741
+259,Italy,Sperm whale,Pelagos Sanctuary,Savona,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.2975603,8.4645
+260,Italy,Sperm whale,Pelagos Sanctuary,Varazze,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3890436,8.5611142
+261,Italy,Sperm whale,Pelagos Sanctuary,Arenzano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4058612,8.6860167
+262,Italy,Sperm whale,Pelagos Sanctuary,Genova,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4071448,8.9347381
+263,Italy,Sperm whale,Pelagos Sanctuary,Nervi,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3837051,9.0391431
+264,Italy,Sperm whale,Pelagos Sanctuary,Recco,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3614219,9.1437445
+265,Italy,Sperm whale,Pelagos Sanctuary,Camogli,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3542792,9.1498178
+266,Italy,Sperm whale,Pelagos Sanctuary,Poltu Quatu,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",41.1357338,9.4967926
+267,Italy,Sperm whale,Pelagos Sanctuary,Ischia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",40.7271553,13.9434035
+268,Italy,Sperm whale,Pelagos Sanctuary,Naples,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",40.8517983,14.26812
+269,Italy,Pilot whale,Pelagos Sanctuary,Bordighera,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.7806979,7.6722799
+270,Italy,Pilot whale,Pelagos Sanctuary,Sanremo,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8159671,7.7760567
+271,Italy,Pilot whale,Pelagos Sanctuary,Imperia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8897316,8.0393482
+272,Italy,Pilot whale,Pelagos Sanctuary,Andora,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9848226,8.1305992
+273,Italy,Pilot whale,Pelagos Sanctuary,Laigueglia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9783918,8.1579376
+274,Italy,Pilot whale,Pelagos Sanctuary,Loano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.1261565,8.2558714
+275,Italy,Pilot whale,Pelagos Sanctuary,Alassio,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.014336,8.1811741
+276,Italy,Pilot whale,Pelagos Sanctuary,Savona,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.2975603,8.4645
+277,Italy,Pilot whale,Pelagos Sanctuary,Varazze,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3890436,8.5611142
+278,Italy,Pilot whale,Pelagos Sanctuary,Arenzano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4058612,8.6860167
+279,Italy,Pilot whale,Pelagos Sanctuary,Genova,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4071448,8.9347381
+280,Italy,Pilot whale,Pelagos Sanctuary,Nervi,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3837051,9.0391431
+281,Italy,Pilot whale,Pelagos Sanctuary,Recco,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3614219,9.1437445
+282,Italy,Pilot whale,Pelagos Sanctuary,Camogli,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3542792,9.1498178
+283,Italy,Pilot whale,Pelagos Sanctuary,Poltu Quatu,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",41.1357338,9.4967926
+284,Italy,Pilot whale,Pelagos Sanctuary,Ischia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",40.7271553,13.9434035
+285,Italy,Pilot whale,Pelagos Sanctuary,Naples,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",40.8517983,14.26812
+286,Italy,Beaked whale,Pelagos Sanctuary,Bordighera,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.7806979,7.6722799
+287,Italy,Beaked whale,Pelagos Sanctuary,Sanremo,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8159671,7.7760567
+288,Italy,Beaked whale,Pelagos Sanctuary,Imperia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.8897316,8.0393482
+289,Italy,Beaked whale,Pelagos Sanctuary,Andora,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9848226,8.1305992
+290,Italy,Beaked whale,Pelagos Sanctuary,Laigueglia,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",43.9783918,8.1579376
+291,Italy,Beaked whale,Pelagos Sanctuary,Loano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.1261565,8.2558714
+292,Italy,Beaked whale,Pelagos Sanctuary,Alassio,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.014336,8.1811741
+293,Italy,Beaked whale,Pelagos Sanctuary,Savona,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.2975603,8.4645
+294,Italy,Beaked whale,Pelagos Sanctuary,Varazze,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3890436,8.5611142
+295,Italy,Beaked whale,Pelagos Sanctuary,Arenzano,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4058612,8.6860167
+296,Italy,Beaked whale,Pelagos Sanctuary,Genova,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.4071448,8.9347381
+297,Italy,Beaked whale,Pelagos Sanctuary,Nervi,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3837051,9.0391431
+298,Italy,Beaked whale,Pelagos Sanctuary,Recco,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3614219,9.1437445
+299,Italy,Beaked whale,Pelagos Sanctuary,Camogli,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",44.3542792,9.1498178
+300,Italy,Beaked whale,Pelagos Sanctuary,Poltu Quatu,"Big motorized boat, sailing boat","Boat, ",May - October,"May,June,July,August,September,October,",41.1357338,9.4967926
 301,Kenya,Humpback whale,Malindi Watamu National Marine Park and Reserve (MWMPA),Watamu,Small boats,"Boat, ",August - October,"August,September,October,",-3.3425465,40.0274159
-302,Kenya,Humpback whale,Malindi Watamu National Marine Park and Reserve (MWMPA),Ngomeni (just north of park,Small boats,"Boat, ",August - October,"August,September,October,",-0.6462266,38.4060986
+302,Kenya,Humpback whale,Malindi Watamu National Marine Park and Reserve (MWMPA),Ngomeni,Small boats,"Boat, ",August - October,"August,September,October,",-0.6462266,38.4060986
 303,Maldives,Blue whale,Maldives,,Boat,"Boat, ",November - May,"January,February,March,April,May,November,December,",3.202778,73.22068
 304,Maldives,Bryde's whale,Maldives,,Boat,"Boat, ",During El Nino years,"January,February,March,April,May,June,July,August,September,October,November,December,",3.202778,73.22068
 305,Maldives,Humpback whale,Maldives,,Boat,"Boat, ",June - October,"June,July,August,September,October,",3.202778,73.22068
@@ -313,7 +313,7 @@
 312,Maldives,Beaked whale,Maldives,,Boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",3.202778,73.22068
 313,Maldives,Beaked whale,Maldives,,Boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",3.202778,73.22068
 314,Mexico,Gray whale,Baja California,Ensenada,Medium and senior vessels,"Boat, ",December - May,"January,February,March,April,May,December,",31.8667427,-116.5963713
-315,Mexico,Gray whale,Baja California Sur,Guerrero Negro/ Laguna Ojo de Liebre,Motorized small boats,"Boat, ",February-March,"February,March,",27.9672737,-114.0210061
+315,Mexico,Gray whale,Baja California Sur,Guerrero Negro/Laguna Ojo de Liebre,Motorized small boats,"Boat, ",February-March,"February,March,",27.9672737,-114.0210061
 316,Mexico,Gray whale,Baja California Sur,San Ignacio/Laguna San Ignacio,Motorized small boats,"Boat, ",February-March,"February,March,",26.753045,-113.2473278
 317,Mexico,Gray whale,Baja California Sur,Puerto Adolfo Mateo,Motorized small boats,"Boat, ",February-March,"February,March,",25.0189888,-111.6532253
 318,Mexico,Gray whale,Baja California Sur,San Carlos/Bahía Magdalena Puerto Chale/Bahía Almejas,Motorized small boats,"Boat, ",February-March,"February,March,",27.9617875,-111.0370989
@@ -344,18 +344,18 @@
 343,New Zealand,Killer whale,North Island and northern South Island,Bay of Islands,Boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",-35.2167252,174.1540659
 344,Norway,Sperm whale,Nordland/Vesterålen,Andenes,Motorised boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",69.3160799,16.1202284
 345,Norway,Sperm whale,Nordland/Vesterålen,Stø,Motorised boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",69.01893,15.1234474
-346,Norway,Killer whale,"Nordland, Troms, Finnmark",Andenes,Motorised boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",69.3160799,16.1202284
-347,Norway,Killer whale,"Nordland, Troms, Finnmark",Stø,Motorised boat,"Boat, ",Nov-Jan,"January,November,December,",69.01893,15.1234474
-348,Norway,Killer whale,"Nordland, Troms, Finnmark",Skjervøy,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",70.0339919,20.9737453
-349,Norway,Killer whale,"Nordland, Troms, Finnmark",Tromsø,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",69.6492047,18.9553238
+346,Norway,Killer whale,Nordland/Vesterålen,Andenes,Motorised boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",69.3160799,16.1202284
+347,Norway,Killer whale,Nordland/Vesterålen,Stø,Motorised boat,"Boat, ",Nov-Jan,"January,November,December,",69.01893,15.1234474
+348,Norway,Killer whale,Troms,Skjervøy,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",70.0339919,20.9737453
+349,Norway,Killer whale,Troms,Tromsø,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",69.6492047,18.9553238
 350,Norway,Pilot whale,Nordland/Vesterålen,Andenes,Motorised boat,"Boat, ",Andenes: Year around (infrequent),"January,February,March,April,May,June,July,August,September,October,November,December,",69.3160799,16.1202284
 351,Norway,Pilot whale,Nordland/Vesterålen,Stø,Motorised boat,"Boat, ",Unknown,"January,February,March,April,May,June,July,August,September,October,November,December,",69.01893,15.1234474
-352,Norway,Killer whale,"Nordland, Troms, Finnmark",,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",60.472024,8.468946
-353,Norway,Humpback whale,"Nordland/Vesterålen,Troms, Finnmark, Svalbard",Andenes,Motorised boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",69.3160799,16.1202284
-354,Norway,Humpback whale,"Nordland/Vesterålen,Troms, Finnmark, Svalbard",Stø,Motorised boat,"Boat, ",Summer,"June,July,August,",69.01893,15.1234474
-355,Norway,Humpback whale,"Nordland/Vesterålen,Troms, Finnmark, Svalbard",Skjervøy,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",70.0339919,20.9737453
-356,Norway,Humpback whale,"Nordland/Vesterålen,Troms, Finnmark, Svalbard",Tromsø,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",69.6492047,18.9553238
-357,Norway,Humpback whale,"Nordland/Vesterålen,Troms, Finnmark, Svalbard",,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",60.472024,8.468946
+352,Norway,Killer whale,Northern regions,,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",60.472024,8.468946
+353,Norway,Humpback whale,Nordland/Vesterålen,Andenes,Motorised boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",69.3160799,16.1202284
+354,Norway,Humpback whale,Nordland/Vesterålen,Stø,Motorised boat,"Boat, ",Summer,"June,July,August,",69.01893,15.1234474
+355,Norway,Humpback whale,Troms,Skjervøy,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",70.0339919,20.9737453
+356,Norway,Humpback whale,Troms,Tromsø,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",69.6492047,18.9553238
+357,Norway,Humpback whale,Northern regions,,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",60.472024,8.468946
 358,Norway,Humpback whale,Svalbard,Longyearbyen,Motorised boat,"Boat, ","Nov-Jan, depending on if/where the herring will be overwintering in fjords","January,November,December,",78.2231722,15.626723
 359,Norway,Minke whale,Nordland/Vesterålen,Andenes,Motorised boat,"Boat, ",All year round,"January,February,March,April,May,June,July,August,September,October,November,December,",69.3160799,16.1202284
 360,Norway,Minke whale,Nordland/Vesterålen,Stø,Motorised boat,"Boat, ",Summer,"June,July,August,",69.01893,15.1234474
@@ -368,7 +368,7 @@
 367,Panama,Humpback whale,Pacific Coast,Panama City,Boat-based and live-aboard,"Boat, ",July-October or December –April (Golfo de Chriqui only),"January,February,March,April,July,August,September,October,December,",8.9823792,-79.5198696
 368,Panama,Humpback whale,Pacific Coast,Isla Iguana (Tono and Pedasi),Boat-based and live-aboard,"Boat, ",July-October or December –April (Golfo de Chriqui only),"January,February,March,April,July,August,September,October,December,",7.6321187,-79.9989895
 369,Panama,Humpback whale,Pacific Coast,Las Perlas Archipelago,Boat-based and live-aboard,"Boat, ",July-October or December –April (Golfo de Chriqui only),"January,February,March,April,July,August,September,October,December,",8.431881238,-78.95123703
-370,Panama,Humpback whale,Pacific Coast, Bahia Piña,Boat-based and live-aboard,"Boat, ",July-October or December –April (Golfo de Chriqui only),"January,February,March,April,July,August,September,October,December,",8.537981,-80.782127
+370,Panama,Humpback whale,Pacific Coast,Bahia Piña,Boat-based and live-aboard,"Boat, ",July-October or December –April (Golfo de Chriqui only),"January,February,March,April,July,August,September,October,December,",8.537981,-80.782127
 371,Panama,Humpback whale,Pacific Coast,Taboga,Boat-based and live-aboard,"Boat, ",July-October or December –April (Golfo de Chriqui only),"January,February,March,April,July,August,September,October,December,",8.7946029,-79.5554268
 372,Panama,Humpback whale,Pacific Coast,Coiba,Boat-based and live-aboard,"Boat, ",July-October or December –April (Golfo de Chriqui only),"January,February,March,April,July,August,September,October,December,",7.4693076,-81.7568253
 373,Peru,Humpback whale,"Piura, Tumbes",Los Organos,"Motorized boat (yachts, artisanal fishing boats)","Boat, ",July - October,"July,August,September,October,",-4.1764859,-81.1237446
@@ -403,7 +403,7 @@
 402,South Africa,Bryde's whale,Western Cape Province,Gansbaai,Motorized boat,"Boat, ",Jul-Nov,"July,August,September,October,November,",-34.5805396,19.3517529
 403,South Africa,Bryde's whale,Western Cape Province,Kleinbaai,Motorized boat,"Boat, ",Jul-Nov,"July,August,September,October,November,",-34.6163984,19.3501046
 404,South Africa,Bryde's whale,Western Cape Province,Knysna,Vessel based,"Boat, ",Jul-Apr,"January,February,March,April,July,August,September,October,November,December,",-34.0350789,23.0464579
-405,South Africa,Bryde's whale,Eastern Cape,Port Elizabeth,Vessel based,"Boat, ",Sept-Nov,"September,October,November,",-33.9608369,25.6022423
+405,South Africa,Bryde's whale,Eastern Cape Province,Port Elizabeth,Vessel based,"Boat, ",Sept-Nov,"September,October,November,",-33.9608369,25.6022423
 406,South Africa,Humpback whale,Western Cape Province,Simonstown,Vessel based,"Boat, ",Jun-Aug,"June,July,August,",-34.1934595,18.435835
 407,South Africa,Humpback whale,Western Cape Province,Hermanus,Vessel based,"Boat, ",Jun-Aug,"June,July,August,",-34.4063429,19.2686949
 408,South Africa,Humpback whale,Western Cape Province,Gansbaai,Vessel based,"Boat, ",Jun-Aug,"June,July,August,",-34.5805396,19.3517529
@@ -412,14 +412,14 @@
 411,South Africa,Humpback whale,Western Cape Province,Plettenberg Bay,Vessel Based; Land based,"Boat, LandBased,",Jun-Apr,"January,February,March,April,June,July,August,September,October,November,December,",-34.0620481,23.3713855
 412,South Africa,Humpback whale,Eastern Cape Province,Algoa Bay,Vessel Based,"Boat, ",Jun-Nov,"June,July,August,September,October,November,",-30.559482,22.937506
 413,South Africa,Humpback whale,Kwa-Zulu Natal Province,St Lucia,Vessel based,"Boat, ",Jun-Sept,"June,July,August,September,October,November,December,",-28.377531,32.4107259
-414,South Africa,Right whale,Western Cape,Simonstown,Vessel based; land based,"Boat, LandBased,",Jun-Nov,"June,July,August,September,October,November,",-34.1934595,18.435835
-415,South Africa,Right whale,Western Cape,Hermanus,Vessel based; land based,"Boat, LandBased,",Jun-Nov,"June,July,August,September,October,November,",-34.4063429,19.2686949
-416,South Africa,Right whale,Western Cape,Gansbaai,Vessel based; land based,"Boat, LandBased,",Jun-Nov,"June,July,August,September,October,November,",-34.5805396,19.3517529
-417,South Africa,Right whale,Western Cape,Kleinbaai,Vessel based; land based,"Boat, LandBased,",Jun-Nov,"June,July,August,September,October,November,",-34.6163984,19.3501046
-418,South Africa,Right whale,Western Cape,Knysna,Vessel based,"Boat, ",Jul-Oct,"July,August,September,October,",-34.0350789,23.0464579
-419,South Africa,Right whale,Western Cape,Mosselbay,Vessel Based; Land based,"Boat, LandBased,",Jun-Oct,"June,July,August,September,October,",-34.1836263,22.1243871
-420,South Africa,Right whale,Western Cape,Plettenberg Bay,Vessel based; Land based,"Boat, LandBased,",Jun-Oct,"June,July,August,September,October,",-34.0620481,23.3713855
-421,South Africa,Right whale,Eastern Cape,Port Elizabeth,Vessel based,"Boat, ",Jun-Sept,"June,July,August,September,October,November,December,",-33.9608369,25.6022423
+414,South Africa,Right whale,Western Cape Province,Simonstown,Vessel based; land based,"Boat, LandBased,",Jun-Nov,"June,July,August,September,October,November,",-34.1934595,18.435835
+415,South Africa,Right whale,Western Cape Province,Hermanus,Vessel based; land based,"Boat, LandBased,",Jun-Nov,"June,July,August,September,October,November,",-34.4063429,19.2686949
+416,South Africa,Right whale,Western Cape Province,Gansbaai,Vessel based; land based,"Boat, LandBased,",Jun-Nov,"June,July,August,September,October,November,",-34.5805396,19.3517529
+417,South Africa,Right whale,Western Cape Province,Kleinbaai,Vessel based; land based,"Boat, LandBased,",Jun-Nov,"June,July,August,September,October,November,",-34.6163984,19.3501046
+418,South Africa,Right whale,Western Cape Province,Knysna,Vessel based,"Boat, ",Jul-Oct,"July,August,September,October,",-34.0350789,23.0464579
+419,South Africa,Right whale,Western Cape Province,Mosselbay,Vessel Based; Land based,"Boat, LandBased,",Jun-Oct,"June,July,August,September,October,",-34.1836263,22.1243871
+420,South Africa,Right whale,Western Cape Province,Plettenberg Bay,Vessel based; Land based,"Boat, LandBased,",Jun-Oct,"June,July,August,September,October,",-34.0620481,23.3713855
+421,South Africa,Right whale,Eastern Cape Province,Port Elizabeth,Vessel based,"Boat, ",Jun-Sept,"June,July,August,September,October,November,December,",-33.9608369,25.6022423
 422,South Africa,Killer whale,Western Cape Province,Hermanus,Vessel based,"Boat, ",October,"October,",-34.4063429,19.2686949
 423,Spain,Sei whale,Canary Isands,,motorized boat,"Boat, ",May and June,"May,June,",28.2915637,-16.6291304
 424,Spain,Blue whale,Canary Isands,,motorized boat,"Boat, ",May and June,"May,June,",28.2915637,-16.6291304
@@ -460,43 +460,39 @@
 459,United Kingdom,Humpback whale,UK wide,,Unknown,"Boat, SwimWith,LandBased,Aerial,",Sporadic sightings throughout the year,"January,February,March,April,May,June,July,August,September,October,November,December,",55.378051,-3.435973
 460,United Kingdom,Killer whale,North and West Scotland,,Unknown,"Boat, SwimWith,LandBased,Aerial,",All year,"January,February,March,April,May,June,July,August,September,October,November,December,",56.4906712,-4.2026458
 461,United Kingdom,Killer whale,Shetland,,Unknown,"Boat, SwimWith,LandBased,Aerial,",All year,"January,February,March,April,May,June,July,August,September,October,November,December,",60.1529871,-1.1492932
-462,United States of America,Blue whale,Southwest(Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.09024,-95.712891
-463,United States of America,Bryde's whale,Northeast(Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
-464,United States of America,Bryde's whale,Southwest(Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.09024,-95.712891
-465,United States of America,Bryde's whale,(Gulf of Mexico),,motorized boat,"Boat, ",Summer,"June,July,August,",25.304304,-90.065918
-466,United States of America,Fin whale,Northeast(Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
-467,United States of America,Fin whale,Alaska(Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",61.1892616,-149.8065058
-468,United States of America,Fin whale,Northwest,,motorized boat,"Boat, ",Summer,"June,July,August,",34.30856,-78.1469792
-469,United States of America,Fin whale,Southwest,,motorized boat,"Boat, ",Summer,"June,July,August,",37.09024,-95.712891
-470,United States of America,Gray whale,Alaska(Pacific),,motorized boat,"Boat, ",Summer (Alaska),"June,July,August,",61.1892616,-149.8065058
-471,United States of America,Gray whale,Northwest,,shore-based,"LandBased,","Spring (Northwest, Southwest)","March,April,May,",34.30856,-78.1469792
-472,United States of America,Gray whale,Southwest,,shore-based,"LandBased,","Spring (Northwest, Southwest)","March,April,May,",37.09024,-95.712891
-473,United States of America,Humpback whale,Northeast(Atlantic),,motorized boat,"Boat, ","Summer (Northeast, Alaska, Northwest, Southwest)","June,July,August,",39.5333379,-74.6868815
-474,United States of America,Humpback whale,Southeast(Pacific),,shore-based,"LandBased,","Winter & Spring (Southeast, Hawaii)","January,February,September,October,November,December,",37.09024,-95.712891
-475,United States of America,Humpback whale,Alaska,,shore-based,"LandBased,","Summer (Northeast, Alaska, Northwest, Southwest)","June,July,August,",63.588753,-154.4930619
-476,United States of America,Humpback whale,Northwest,,shore-based,"LandBased,","Summer (Northeast, Alaska, Northwest, Southwest)","June,July,August,",34.30856,-78.1469792
-477,United States of America,Humpback whale,Southwest,,shore-based,"LandBased,","Summer (Northeast, Alaska, Northwest, Southwest)","June,July,August,",37.09024,-95.712891
-478,United States of America,Humpback whale,Hawaii,,shore-based,"LandBased,","Winter & Spring (Southeast, Hawaii)","January,February,March,April,May,December,",19.8986819,-155.6658568
-479,United States of America,Minke whale,Northeast(Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
-480,United States of America,Minke whale,Southwest(Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.09024,-95.712891
-481,United States of America,Minke whale,Northwest,,motorized boat,"Boat, ",Summer,"June,July,August,",34.30856,-78.1469792
-482,United States of America,Right whale,Northeast(Atlantic),,motorized boat,"Boat, ",Summer (Northeast),"June,July,August,",39.5333379,-74.6868815
-483,United States of America,Right whale,Southeast,,shore-based,"LandBased,",Winter (Southeast),"January,February,December,",37.09024,-95.712891
-484,United States of America,Sei whale,Northeast(Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
-485,United States of America,Sei whale,Southeast(Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.09024,-95.712891
-486,United States of America,Sperm whale,Northeast(Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
-487,United States of America,Sperm whale,Alaska(Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",61.1892616,-149.8065058
-488,United States of America,Sperm whale,Northwest(Gulf of Mexico),,motorized boat,"Boat, ",Summer,"June,July,August,",25.304304,-90.065918
-489,United States of America,Sperm whale,Southwest,,motorized boat,"Boat, ",Summer,"June,July,August,",37.09024,-95.712891
-490,United States of America,Killer whale,Northeast(Atlantic),,motorized boat,"Boat, SwimWith,LandBased,Aerial,","Summer (Northeast, Southwest)","June,July,August,",39.5333379,-74.6868815
-491,United States of America,Killer whale,Southeast(Gulf of Mexico),,motorized boat,"Boat, ","Year round (Southeast, Hawaii)","January,February,March,April,May,June,July,August,September,October,November,December,",37.09024,-95.712891
-492,United States of America,Killer whale,Southwest(Pacific),,motorized boat,"Boat, ","Year round (Southeast, Hawaii)","January,February,March,April,May,June,July,August,September,October,November,December,",37.09024,-95.712891
-493,United States of America,Killer whale,Hawaii,,motorized boat,"Boat, ","Year round (Southeast, Hawaii)","January,February,March,April,May,June,July,August,September,October,November,December,",19.8986819,-155.6658568
-494,United States of America,Killer whale,Northeast(Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
-495,United States of America,Killer whale,Alaska(Gulf of Mexico),,shore-based,"LandBased,",Rare (Hawaii),"January,February,March,April,May,June,July,August,September,October,November,December,",63.588753,-154.4930619
-496,United States of America,Killer whale,Northwest(Pacific),,shore-based,"LandBased,",Year-Round (Northwest),"January,February,March,April,May,June,July,August,September,October,November,December,",52.0767026,-123.8302432
-497,United States of America,Killer whale,Southwest,,shore-based,"LandBased,",Year-Round (Northwest),"January,February,March,April,May,June,July,August,September,October,November,December,",37.09024,-95.712891
-498,United States of America,Killer whale,Hawaii,,shore-based,"LandBased,",Year-Round (Northwest),"January,February,March,April,May,June,July,August,September,October,November,December,",19.8986819,-155.6658568
-499,United States of America,Pilot whale,Northeast(Atlantic),,motorized boat,"Boat, ",Year-round,"January,February,March,April,May,June,July,August,September,October,November,December,",39.5333379,-74.6868815
-500,United States of America,Pilot whale,Southeast(Gulf of Mexico),,motorized boat,"Boat, ",Year-round,"January,February,March,April,May,June,July,August,September,October,November,December,",37.09024,-95.712891
-501,United States of America,Pilot whale,Hawaii(Pacific),,motorized boat,"Boat, ",Year-round,"January,February,March,April,May,June,July,August,September,October,November,December,",21.3072314,-157.8619256
+462,United States of America,Blue whale,Southwest (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.740862,-122.642870
+463,United States of America,Bryde's whale,Northeast (Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
+464,United States of America,Bryde's whale,Southwest (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.740862,-122.642870
+465,United States of America,Bryde's whale,Gulf of Mexico,,motorized boat,"Boat, ",Summer,"June,July,August,",25.304304,-90.065918
+466,United States of America,Fin whale,Northeast (Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
+467,United States of America,Fin whale,Alaska (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",61.1892616,-149.8065058
+468,United States of America,Fin whale,Northwest (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",45.656575,-124.341473
+469,United States of America,Fin whale,Southwest (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.740862,-122.642870
+470,United States of America,Gray whale,Alaska (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",61.1892616,-149.8065058
+471,United States of America,Gray whale,Northwest (Pacific),,shore-based,"LandBased,",Spring,"March,April,May,",45.656575,-124.341473
+472,United States of America,Gray whale,Southwest (Pacific),,shore-based,"LandBased,",Spring,"March,April,May,",37.740862,-122.642870
+473,United States of America,Humpback whale,Northeast (Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
+474,United States of America,Humpback whale,Southeast (Gulf of Mexico),,shore-based,"LandBased,",Winter & Spring,"January,February,September,October,November,December,",37.09024,-95.712891
+475,United States of America,Humpback whale,Alaska (Pacific),,shore-based,"LandBased,",Summer,"June,July,August,",61.1892616,-149.8065058
+476,United States of America,Humpback whale,Northwest (Pacific),,shore-based,"LandBased,",Summer,"June,July,August,",45.656575,-124.341473
+477,United States of America,Humpback whale,Southwest (Pacific),,shore-based,"LandBased,",Summer,"June,July,August,",37.740862,-122.642870
+478,United States of America,Humpback whale,Hawaii (Pacific),,shore-based,"LandBased,",Winter & Spring,"January,February,March,April,May,December,",19.8986819,-155.6658568
+479,United States of America,Minke whale,Northeast (Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
+480,United States of America,Minke whale,Southwest (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.740862,-122.642870
+481,United States of America,Minke whale,Northwest (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",45.656575,-124.341473
+482,United States of America,Right whale,Northeast (Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
+483,United States of America,Right whale,Southeast (Gulf of Mexico),,shore-based,"LandBased,",Winter,"January,February,December,",37.09024,-95.712891
+484,United States of America,Sei whale,Northeast (Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
+485,United States of America,Sei whale,Southeast (Gulf of Mexico),,motorized boat,"Boat, ",Summer,"June,July,August,",37.09024,-95.712891
+486,United States of America,Sperm whale,Northeast (Atlantic),,motorized boat,"Boat, ",Summer,"June,July,August,",39.5333379,-74.6868815
+487,United States of America,Sperm whale,Alaska (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",61.1892616,-149.8065058
+488,United States of America,Sperm whale,Northwest (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",45.656575,-124.341473
+489,United States of America,Sperm whale,Southwest (Pacific),,motorized boat,"Boat, ",Summer,"June,July,August,",37.740862,-122.642870
+490,United States of America,Killer whale,Northeast (Atlantic),,motorized boat and shore-based,"Boat, LandBased,",Summer,"June,July,August,",39.5333379,-74.6868815
+491,United States of America,Killer whale,Southwest (Pacific),,motorized boat and shore-based,"Boat, LandBased",Summer,"June,July,August,",37.740862,-122.642870
+492,United States of America,Killer whale,Hawaii (Pacific),,motorized boat and shore-based,"Boat, LandBased",Rare,"January,February,March,April,May,June,July,August,September,October,November,December,",19.8986819,-155.6658568
+493,United States of America,Killer whale,Alaska (Pacific),,motorized boat and shore-based,"Boat, LandBased",Year-Round,"January,February,March,April,May,June,July,August,September,October,November,December,",61.1892616,-149.8065058
+494,United States of America,Killer whale,Northwest (Pacific),,motorized boat and shore-based,"Boat, LandBased",Year-Round,"January,February,March,April,May,June,July,August,September,October,November,December,",45.656575,-124.341473
+495,United States of America,Pilot whale,Northeast (Atlantic),,motorized boat,"Boat, ",Year-round,"January,February,March,April,May,June,July,August,September,October,November,December,",39.5333379,-74.6868815
+496,United States of America,Pilot whale,Southeast (Gulf of Mexico),,motorized boat,"Boat, ",Year-round,"January,February,March,April,May,June,July,August,September,October,November,December,",37.09024,-95.712891
+497,United States of America,Pilot whale,Hawaii (Pacific),,motorized boat,"Boat, ",Year-round,"January,February,March,April,May,June,July,August,September,October,November,December,",19.8986819,-155.6658568
