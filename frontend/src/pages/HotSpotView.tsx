@@ -47,10 +47,10 @@ function HotSpotView() {
   }
   useEffect(loadWeather, [hotSpot])
 
-  const arr = []
+  const weatherData = []
   if (weather) {
     for (let i = 0; i < 7; i++) {
-      arr.push({
+      weatherData.push({
         date: weather.daily.time[i],
         minTemp: weather.daily.temperature_2m_min[i],
         maxTemp: weather.daily.temperature_2m_max[i],
@@ -59,9 +59,6 @@ function HotSpotView() {
       })
     }
   }
-  arr.map((x) => {
-    return x.date, x.minTemp, x.maxTemp, x.rain, x.icon
-  })
 
   return (
     <>
@@ -95,28 +92,31 @@ function HotSpotView() {
             <Col xs={12} md={8} className="d-flex flex-column align-items-center">
               <h5 className="text-center mt-3 mt-md-0">Weather forecast</h5>
               <div className="d-flex flex-wrap justify-content-center gap-3">
-                {arr.map((x) => (
-                  <div key={x.date} className="shadow p-3">
+                {weatherData.map((dailyWeatherData) => (
+                  <div key={dailyWeatherData.date} className="shadow p-3">
                     <Row style={{ width: "10rem" }}>
                       <Col className="text-start">
-                        <h5 className="mb-0">{new Date(x.date).toDateString().split(" ")[0]}</h5>
+                        <h5 className="mb-0">{new Date(dailyWeatherData.date).toDateString().split(" ")[0]}</h5>
                         <p>
-                          {new Date(x.date).toDateString().split(" ")[2]}{" "}
-                          {new Date(x.date).toDateString().split(" ")[1]}{" "}
+                          {new Date(dailyWeatherData.date).toDateString().split(" ")[2]}{" "}
+                          {new Date(dailyWeatherData.date).toDateString().split(" ")[1]}{" "}
                         </p>
                         <p className="mb-0">
                           <FontAwesomeIcon icon={faTemperatureArrowUp} className="text-danger" />{" "}
-                          {Math.round(x.maxTemp)}°C
+                          {Math.round(dailyWeatherData.maxTemp)}°C
                         </p>
                         <p className="mb-0">
                           <FontAwesomeIcon icon={faTemperatureArrowDown} className="text-primary" />{" "}
-                          {Math.round(x.minTemp)}°C
+                          {Math.round(dailyWeatherData.minTemp)}°C
                         </p>
                       </Col>
                       <Col className="d-flex flex-column justify-content-between align-items-end text-end">
-                        <img src={`${import.meta.env.BASE_URL}weather-icons/icon${x.icon}.png`} width="48" />
+                        <img
+                          src={`${import.meta.env.BASE_URL}weather-icons/icon${dailyWeatherData.icon}.png`}
+                          width="48"
+                        />
                         <p className="mb-0">
-                          <FontAwesomeIcon icon={faDroplet} className="text-primary" /> {x.rain}%
+                          <FontAwesomeIcon icon={faDroplet} className="text-primary" /> {dailyWeatherData.rain}%
                         </p>
                       </Col>
                     </Row>
