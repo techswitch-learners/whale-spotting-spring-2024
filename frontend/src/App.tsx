@@ -14,6 +14,7 @@ import SightingsSearch from "./pages/SightingsSearch"
 import SightingForm from "./pages/SightingForm"
 import SightingView from "./pages/SightingView"
 import HotSpotView from "./pages/HotSpotView"
+import HotSpotSearch from "./pages/HotSpotSearch"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -60,6 +61,7 @@ const App = () => {
               <Route path="/sightings/add" element={<SightingForm />} />
               <Route path="/sightings/:id" element={<SightingView />} />
               <Route path="/hotspots/:id" element={<HotSpotView />} />
+              <Route path="/hotspots" element={<HotSpotSearch />} />
             </Routes>
           </main>
         </Router>

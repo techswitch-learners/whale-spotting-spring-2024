@@ -39,9 +39,11 @@ const Home = () => {
                 See whale sightings
               </Button>
             </LinkContainer>
-            <Button variant="translucent" size="lg">
-              Check the weather
-            </Button>
+            <LinkContainer to="/hotspots">
+              <Button variant="translucent" size="lg">
+                Check the hot spots
+              </Button>
+            </LinkContainer>
           </div>
           <div className="Home-button-container d-flex flex-column justify-content-center align-items-stretch gap-3">
             <LinkContainer to="/sightings/add">
@@ -50,7 +52,9 @@ const Home = () => {
             <LinkContainer to="/sightings">
               <Button variant="translucent">See whale sightings</Button>
             </LinkContainer>
-            <Button variant="translucent">Check the weather</Button>
+            <LinkContainer to="/hotspots">
+              <Button variant="translucent">Check the hot spots</Button>
+            </LinkContainer>
           </div>
         </div>
       </div>
