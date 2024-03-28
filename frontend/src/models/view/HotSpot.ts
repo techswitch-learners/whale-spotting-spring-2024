@@ -3,7 +3,6 @@ import Species from "./Species"
 interface ViewingSuggestion {
   id: number
   hotSpotId: number
-  hotSpot: null
   speciesId: number
   species: Species
   platforms: string
