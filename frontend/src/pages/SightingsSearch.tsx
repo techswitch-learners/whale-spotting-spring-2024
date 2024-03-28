@@ -12,6 +12,8 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings } from "../api/backendClient"
+//import { CardHeader } from "react-bootstrap"
+//import Reaction from "../models/view/Reaction"
 
 interface SightingCardProps {
   imageUrl: string
@@ -19,11 +21,13 @@ interface SightingCardProps {
   bodyOfWater: string
   description: string
   sightingTimestamp: string
+  // reactions:Array<Reaction>
 }
 
 function SightingCard({ imageUrl, species, bodyOfWater, description, sightingTimestamp }: SightingCardProps) {
   return (
     <Card className="text-start">
+      <Card.Header>{/* <Reactions reactions={reaction}/> */}</Card.Header>
       <Card.Img variant="top" src={imageUrl} />
       <Card.Body>
         <Card.Title>{species}</Card.Title>
@@ -126,6 +130,7 @@ const SightingsSearch = () => {
                   species={sighting.species.name}
                   bodyOfWater={sighting.bodyOfWater.name}
                   description={sighting.description}
+                  // reactions={sighting.reactions}
                   sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
                 />
               </Link>

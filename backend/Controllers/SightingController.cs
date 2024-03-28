@@ -52,6 +52,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
         {
             return NotFound();
         }
+
         var sighting = new SightingResponse
         {
             Id = matchingSighting.Id,
@@ -65,7 +66,9 @@ public class SightingController(WhaleSpottingContext context) : Controller
             VerificationEvent = matchingSighting.VerificationEvent,
             SightingTimestamp = matchingSighting.SightingTimestamp,
             CreationTimestamp = matchingSighting.CreationTimestamp,
-            Reactions = matchingSighting.Reactions
+            Reactions = matchingSighting
+                .Reactions.GroupBy(reaction => reaction.Type)
+                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count())
         };
 
         return Ok(sighting);
@@ -98,7 +101,12 @@ public class SightingController(WhaleSpottingContext context) : Controller
                     VerificationEvent = sighting.VerificationEvent,
                     SightingTimestamp = sighting.SightingTimestamp,
                     CreationTimestamp = sighting.CreationTimestamp,
-                    Reactions = sighting.Reactions
+                    Reactions = sighting
+                        .Reactions.GroupBy(reaction => reaction.Type)
+                        .ToDictionary(
+                            reactionGroup => reactionGroup.Key.ToString(),
+                            reactionGroup => reactionGroup.Count()
+                        )
                 })
                 .ToList()
         };
