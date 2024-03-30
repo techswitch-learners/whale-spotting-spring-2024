@@ -17,7 +17,7 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
     public DbSet<Sighting> Sightings { get; set; } = null!;
     public DbSet<Species> Species { get; set; } = null!;
     public DbSet<VerificationEvent> VerificationEvents { get; set; } = null!;
-    public DbSet<HotSpot> HotSpots { get; set; } = null!;
+    public DbSet<Hotspot> Hotspots { get; set; } = null!;
     public DbSet<ViewingSuggestion> ViewingSuggestions { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -42,38 +42,38 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
         var speciesList = speciesCsvReader.GetRecords<Species>().ToList();
         builder.Entity<Species>().HasData(speciesList);
 
-        using var streamReader = new StreamReader("Data/hotSpots.csv");
+        using var streamReader = new StreamReader("Data/Hotspots.csv");
         using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
-        var hotSpotRows = csvReader.GetRecords<HotSpotRow>().ToList();
+        var HotspotRows = csvReader.GetRecords<HotspotRow>().ToList();
 
-        var distinctHotSpots = hotSpotRows
-            .DistinctBy(hotSpot =>
-                (hotSpot.Country, hotSpot.Region, hotSpot.TownOrHarbour, hotSpot.Latitude, hotSpot.Longitude)
+        var distinctHotspots = HotspotRows
+            .DistinctBy(Hotspot =>
+                (Hotspot.Country, Hotspot.Region, Hotspot.TownOrHarbour, Hotspot.Latitude, Hotspot.Longitude)
             )
             .ToList();
 
-        for (var i = 0; i < distinctHotSpots.Count; i++)
+        for (var i = 0; i < distinctHotspots.Count; i++)
         {
-            var hotSpot = new HotSpot
+            var Hotspot = new Hotspot
             {
                 Id = i + 1,
-                Name = GetHotSpotName(distinctHotSpots[i]),
-                Latitude = distinctHotSpots[i].Latitude,
-                Longitude = distinctHotSpots[i].Longitude,
-                Country = distinctHotSpots[i].Country,
+                Name = GetHotspotName(distinctHotspots[i]),
+                Latitude = distinctHotspots[i].Latitude,
+                Longitude = distinctHotspots[i].Longitude,
+                Country = distinctHotspots[i].Country,
                 ViewingSuggestions = [],
             };
-            builder.Entity<HotSpot>().HasData(hotSpot);
+            builder.Entity<Hotspot>().HasData(Hotspot);
 
-            var viewingSuggestions = hotSpotRows
-                .Where(hotSpotRow => hotSpot.Name == GetHotSpotName(hotSpotRow))
+            var viewingSuggestions = HotspotRows
+                .Where(HotspotRow => Hotspot.Name == GetHotspotName(HotspotRow))
                 .ToList();
             foreach (var suggestion in viewingSuggestions)
             {
                 var viewingSuggestion = new ViewingSuggestion
                 {
                     Id = suggestion.Id,
-                    HotSpotId = hotSpot.Id,
+                    HotspotId = Hotspot.Id,
                     SpeciesId = speciesList.First(spec => spec.Name == suggestion.Species).Id,
                     Platforms = suggestion.Platform,
                     PlatformBoxes = suggestion
@@ -96,12 +96,12 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
         }
     }
 
-    private static string GetHotSpotName(HotSpotRow hotSpotRow)
+    private static string GetHotspotName(HotspotRow HotspotRow)
     {
-        return !string.IsNullOrEmpty(hotSpotRow.Region) && !string.IsNullOrEmpty(hotSpotRow.TownOrHarbour)
-            ? $"{hotSpotRow.TownOrHarbour}, {hotSpotRow.Region}"
-            : !string.IsNullOrEmpty(hotSpotRow.Region)
-                ? hotSpotRow.Region
-                : hotSpotRow.TownOrHarbour;
+        return !string.IsNullOrEmpty(HotspotRow.Region) && !string.IsNullOrEmpty(HotspotRow.TownOrHarbour)
+            ? $"{HotspotRow.TownOrHarbour}, {HotspotRow.Region}"
+            : !string.IsNullOrEmpty(HotspotRow.Region)
+                ? HotspotRow.Region
+                : HotspotRow.TownOrHarbour;
     }
 }

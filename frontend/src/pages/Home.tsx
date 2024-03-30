@@ -39,7 +39,7 @@ const Home = () => {
                 See whale sightings
               </Button>
             </LinkContainer>
-            <LinkContainer to="/hotspots">
+            <LinkContainer to="/Hotspots">
               <Button variant="translucent" size="lg">
                 Check the hot spots
               </Button>
@@ -52,7 +52,7 @@ const Home = () => {
             <LinkContainer to="/sightings">
               <Button variant="translucent">See whale sightings</Button>
             </LinkContainer>
-            <LinkContainer to="/hotspots">
+            <LinkContainer to="/Hotspots">
               <Button variant="translucent">Check the hot spots</Button>
             </LinkContainer>
           </div>
