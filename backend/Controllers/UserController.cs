@@ -100,14 +100,16 @@ public class UserController(UserManager<User> userManager) : Controller
             {
                 matchingUser.LockoutEnd = editUserRequest.LockoutEnd;
             }
-            // if (editUserRequest.LockoutEnabled !=null)
-            //   {
-            //     matchingUser.LockoutEnabled = editUserRequest.LockoutEnabled;
-            //   };
-            // if( editUserRequest.AccessFailedCount != null)
-            //   {
-            //     matchingUser.AccessFailedCount = editUserRequest.AccessFailedCount;
-            //   };
+            if (editUserRequest.LockoutEnabled != null)
+            {
+                matchingUser.LockoutEnabled = (bool)editUserRequest.LockoutEnabled;
+            }
+            ;
+            if (editUserRequest.AccessFailedCount != null)
+            {
+                matchingUser.AccessFailedCount = (int)editUserRequest.AccessFailedCount;
+            }
+            ;
 
             await _userManager.UpdateAsync(matchingUser);
             return Ok();

@@ -51,10 +51,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.Reactions)
             .Where(sighting => sighting.VerificationEvent != null)
             .SingleOrDefault(sighting => sighting.Id == id);
-        if (
-            matchingSighting == null
-            || matchingSighting.VerificationEvent.ApprovalStatus == Enums.ApprovalStatus.Rejected
-        )
+        if (matchingSighting == null || (int)matchingSighting.VerificationEvent!.ApprovalStatus == 0)
         {
             return NotFound();
         }
@@ -86,7 +83,9 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.BodyOfWater)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
-            .Where(sighting => sighting.VerificationEvent != null)
+            .Where(sighting =>
+                sighting.VerificationEvent != null && (int)sighting.VerificationEvent.ApprovalStatus == 1
+            )
             .ToList();
 
         var sightingsResponse = new SightingsResponse
@@ -177,6 +176,23 @@ public class SightingController(WhaleSpottingContext context) : Controller
             sighting.VerificationEventId = savedVerificationEvent.Id;
             _context.SaveChanges();
             return Ok();
+        }
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("delete/{sightingId}")]
+    public IActionResult DeleteSighting([FromRoute] int sightingId)
+    {
+        var sightingToRemove = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
+        if (sightingToRemove == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            _context.Sightings.Remove(sightingToRemove);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Search));
         }
     }
 }
