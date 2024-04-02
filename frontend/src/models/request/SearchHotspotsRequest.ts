@@ -1,6 +1,6 @@
 interface SearchHotspotsRequest {
   country: string
-  hotspotName: string
+  name: string
   species: string[]
   platforms: number[]
   months: number[]

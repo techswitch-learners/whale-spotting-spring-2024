@@ -52,3 +52,7 @@ export const getSightingById = async (id?: string) => {
 export const getHotspotById = async (id?: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/hotspots/${id}`)
 }
+
+export const getHotspots = async (searchQuery: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/hotspots?${searchQuery}`)
+}

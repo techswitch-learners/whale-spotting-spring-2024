@@ -11,11 +11,12 @@ import Hotspot from "../models/view/Hotspot"
 import SearchHotspotsRequest from "../models/request/SearchHotspotsRequest"
 import "./HotspotsSearch.scss"
 import HotspotsBottom from "../components/HotspotsBottom"
+import { getHotspots } from "../api/backendClient"
 
 function HotspotsSearch() {
   const [searchHotspotsRequest, setSearchHotspotsRequest] = useState<SearchHotspotsRequest>({
     country: "",
-    hotspotName: "",
+    name: "",
     species: [],
     platforms: [],
     months: [],
@@ -23,7 +24,7 @@ function HotspotsSearch() {
   const [hotspots, setHotspots] = useState<Hotspot[]>()
   const [error, setError] = useState<boolean>(false)
 
-  const fetchHotspotsData = async () => {
+  const fetchHotspotsData = () => {
     const searchQuery = Object.keys(searchHotspotsRequest)
       .filter((searchKey) => searchHotspotsRequest[searchKey as keyof SearchHotspotsRequest] !== "")
       .map((searchKey) => {
@@ -38,7 +39,7 @@ function HotspotsSearch() {
       })
       .join("&")
 
-    await fetch(`http://localhost:5280/hotspots?${searchQuery}`)
+    getHotspots(searchQuery)
       .then((response) => response.json())
       .then((data) => setHotspots(data))
       .catch(() => setError(true))
@@ -60,19 +61,14 @@ function HotspotsSearch() {
   }
 
   return (
-    <div className="HotspotSearch">
+    <div className="HotspotsSearch">
       <h1>Find whale-spotting hotspots</h1>
       <form onSubmit={handleSubmit}>
         <div className="d-flex justify-content-center my-3">
           <div className="d-flex flex-column justify-content-center align-items-center mx-2">
             <label>
               Town, harbour or region:{" "}
-              <input
-                type="text"
-                name="hotspotName"
-                value={searchHotspotsRequest.hotspotName}
-                onChange={handleSearchQueryChange}
-              />
+              <input type="text" name="name" value={searchHotspotsRequest.name} onChange={handleSearchQueryChange} />
             </label>
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center mx-2">

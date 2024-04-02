@@ -39,9 +39,9 @@ const Home = () => {
                 See whale sightings
               </Button>
             </LinkContainer>
-            <LinkContainer to="/Hotspots">
+            <LinkContainer to="/hotspots">
               <Button variant="translucent" size="lg">
-                Check the hot spots
+                Find whale-spotting hotspots
               </Button>
             </LinkContainer>
           </div>
@@ -52,8 +52,8 @@ const Home = () => {
             <LinkContainer to="/sightings">
               <Button variant="translucent">See whale sightings</Button>
             </LinkContainer>
-            <LinkContainer to="/Hotspots">
-              <Button variant="translucent">Check the hot spots</Button>
+            <LinkContainer to="/hotspots">
+              <Button variant="translucent">Find whale-spotting hotspots</Button>
             </LinkContainer>
           </div>
         </div>
