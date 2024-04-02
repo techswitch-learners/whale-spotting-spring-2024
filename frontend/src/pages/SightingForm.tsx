@@ -16,7 +16,6 @@ interface GetLocationProps {
 function GetLocation({ setLatitude, setLongitude }: GetLocationProps) {
   useMapEvents({
     click: (event) => {
-      // console.log(event);
       setLatitude(event.latlng.lat)
       setLongitude(event.latlng.lng)
     },
@@ -235,6 +234,7 @@ const SightingForm = () => {
                     Enter manually
                   </Button>
                 </Form.Text>
+                <ErrorList errors={errors["BodyOfWater"]} />
               </Col>
             </Form.Group>
 
