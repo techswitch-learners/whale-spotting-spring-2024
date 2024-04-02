@@ -136,7 +136,7 @@ const SightingsSearch = () => {
                   <SightingCard
                     imageUrl={sighting.imageUrl}
                     species={sighting.species.name}
-                    bodyOfWater={sighting.bodyOfWater.name}
+                    bodyOfWater={sighting.bodyOfWater}
                     description={sighting.description}
                     sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
                   />

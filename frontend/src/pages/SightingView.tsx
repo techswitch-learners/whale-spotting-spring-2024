@@ -97,7 +97,7 @@ const SightingView = () => {
                   <div className="border border-2 border-success mb-3" />
                   <div>
                     <h2 className="h5 mb-0 mt-4 ms-1">Sight Location</h2>
-                    <h3 className="h6 mb-5 ms-1">{sighting.bodyOfWater.name}</h3>
+                    <h3 className="h6 mb-5 ms-1">{sighting.bodyOfWater}</h3>
                   </div>
                 </Stack>
               </Col>

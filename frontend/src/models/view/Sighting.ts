@@ -1,4 +1,3 @@
-import BodyOfWater from "./BodyOfWater"
 import Species from "./Species"
 import Reaction from "./Reaction"
 import ReactionType from "../../types/ReactionType"
@@ -10,7 +9,7 @@ interface Sighting {
   species: Species
   description: string
   imageUrl: string
-  bodyOfWater: BodyOfWater
+  bodyOfWater: string
   sightingTimestamp: string
   reactions: Reaction
   currentUserReaction: ReactionType | null

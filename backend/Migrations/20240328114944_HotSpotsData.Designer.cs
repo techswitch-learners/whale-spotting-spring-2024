@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WhaleSpotting;
@@ -11,9 +12,11 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingContext))]
-    partial class WhaleSpottingContextModelSnapshot : ModelSnapshot
+    [Migration("20240328114944_HotSpotsData")]
+    partial class HotSpotsData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,6 +156,23 @@ namespace WhaleSpotting.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Achievements");
+                });
+
+            modelBuilder.Entity("WhaleSpotting.Models.Data.BodyOfWater", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BodiesOfWater");
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Data.HotSpot", b =>
@@ -1340,7 +1360,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 43.7806979m,
                             Longitude = 7.6722799m,
-                            Name = "Bordighera, Pelagos Sanctuary"
+                            Name = "Bordighera, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1348,7 +1368,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 43.8159671m,
                             Longitude = 7.7760567m,
-                            Name = "Sanremo, Pelagos Sanctuary"
+                            Name = "Sanremo, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1356,7 +1376,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 43.8897316m,
                             Longitude = 8.0393482m,
-                            Name = "Imperia, Pelagos Sanctuary"
+                            Name = "Imperia, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1364,7 +1384,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 43.9848226m,
                             Longitude = 8.1305992m,
-                            Name = "Andora, Pelagos Sanctuary"
+                            Name = "Andora, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1372,7 +1392,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 43.9783918m,
                             Longitude = 8.1579376m,
-                            Name = "Laigueglia, Pelagos Sanctuary"
+                            Name = "Laigueglia, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1380,7 +1400,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.1261565m,
                             Longitude = 8.2558714m,
-                            Name = "Loano, Pelagos Sanctuary"
+                            Name = "Loano, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1388,7 +1408,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.014336m,
                             Longitude = 8.1811741m,
-                            Name = "Alassio, Pelagos Sanctuary"
+                            Name = "Alassio, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1396,7 +1416,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.2975603m,
                             Longitude = 8.4645m,
-                            Name = "Savona, Pelagos Sanctuary"
+                            Name = "Savona, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1404,7 +1424,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.3890436m,
                             Longitude = 8.5611142m,
-                            Name = "Varazze, Pelagos Sanctuary"
+                            Name = "Varazze, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1412,7 +1432,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.4058612m,
                             Longitude = 8.6860167m,
-                            Name = "Arenzano, Pelagos Sanctuary"
+                            Name = "Arenzano, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1420,7 +1440,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.4071448m,
                             Longitude = 8.9347381m,
-                            Name = "Genova, Pelagos Sanctuary"
+                            Name = "Genova, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1428,7 +1448,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.3837051m,
                             Longitude = 9.0391431m,
-                            Name = "Nervi, Pelagos Sanctuary"
+                            Name = "Nervi, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1436,7 +1456,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.3614219m,
                             Longitude = 9.1437445m,
-                            Name = "Recco, Pelagos Sanctuary"
+                            Name = "Recco, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1444,7 +1464,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 44.3542792m,
                             Longitude = 9.1498178m,
-                            Name = "Camogli, Pelagos Sanctuary"
+                            Name = "Camogli, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1452,7 +1472,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 41.1357338m,
                             Longitude = 9.4967926m,
-                            Name = "Poltu Quatu, Pelagos Sanctuary"
+                            Name = "Poltu Quatu, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1460,7 +1480,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 40.7271553m,
                             Longitude = 13.9434035m,
-                            Name = "Ischia, Pelagos Sanctuary"
+                            Name = "Ischia, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -1468,7 +1488,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Italy",
                             Latitude = 40.8517983m,
                             Longitude = 14.26812m,
-                            Name = "Naples, Pelagos Sanctuary"
+                            Name = "Naples, Pelagos Sanctuary, Sardinia"
                         },
                         new
                         {
@@ -2208,9 +2228,8 @@ namespace WhaleSpotting.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BodyOfWater")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("BodyOfWaterId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreationTimestamp")
                         .HasColumnType("timestamp with time zone");
@@ -2242,6 +2261,8 @@ namespace WhaleSpotting.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BodyOfWaterId");
 
                     b.HasIndex("SpeciesId");
 
@@ -7590,6 +7611,12 @@ namespace WhaleSpotting.Migrations
 
             modelBuilder.Entity("WhaleSpotting.Models.Data.Sighting", b =>
                 {
+                    b.HasOne("WhaleSpotting.Models.Data.BodyOfWater", "BodyOfWater")
+                        .WithMany()
+                        .HasForeignKey("BodyOfWaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WhaleSpotting.Models.Data.Species", "Species")
                         .WithMany()
                         .HasForeignKey("SpeciesId")
@@ -7605,6 +7632,8 @@ namespace WhaleSpotting.Migrations
                     b.HasOne("WhaleSpotting.Models.Data.VerificationEvent", "VerificationEvent")
                         .WithMany()
                         .HasForeignKey("VerificationEventId");
+
+                    b.Navigation("BodyOfWater");
 
                     b.Navigation("Species");
 
