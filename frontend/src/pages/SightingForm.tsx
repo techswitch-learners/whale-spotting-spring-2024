@@ -7,6 +7,7 @@ import ErrorList from "../components/ErrorList"
 import Species from "../models/view/Species"
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
 import { LeafletEventHandlerFnMap, LeafletMouseEvent } from "leaflet"
+import { fetchBodyOfWater } from "../api/bodyOfWaterClient"
 
 interface GetLocationProps {
   setLatitude: (latitude: number) => void
@@ -66,24 +67,6 @@ const SightingForm = () => {
     [],
   )
 
-  const fetchBodyOfWater = async (latitude: string, longitude: string) => {
-    const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
-    try {
-      const response = await fetch(url)
-      const data = await response.json()
-      const waterBody =
-        data?.localityInfo?.informative?.find(
-          (info: { name: string; description: string }) =>
-            ["passage", "basin", "strait", "bight", "sound", "channel", "gulf", "bay", "sea", "ocean"].some(
-              (bodyOfWaterType) => info.name.toLowerCase().includes(bodyOfWaterType),
-            ) && !["time zone", "continent"].some((otherType) => info.description.toLowerCase().includes(otherType)),
-        )?.name ?? ""
-      setBodyOfWater(waterBody)
-    } catch (error) {
-      console.error("Error fetching data: ", error)
-    }
-  }
-
   useEffect(() => {
     getSpeciesList()
       .then((response) => response.json())
@@ -93,6 +76,8 @@ const SightingForm = () => {
 
   useEffect(() => {
     fetchBodyOfWater(latitude, longitude)
+      .then(setBodyOfWater)
+      .catch(() => {})
   }, [latitude, longitude])
 
   useEffect(() => {
