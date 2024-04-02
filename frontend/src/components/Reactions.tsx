@@ -1,6 +1,6 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Stack } from "react-bootstrap"
-import { addReaction, updateReaction, deleteReaction, getReactionBySightingId } from "../api/backendClient"
+import { addReaction, updateReaction, deleteReaction } from "../api/backendClient"
 import { AuthContext } from "../App"
 import { useNavigate } from "react-router-dom"
 import ReactionType from "../types/ReactionType"
@@ -27,14 +27,16 @@ const Reactions = ({ reactions, currentUserReaction, sightingId }: ReactionProps
     currentUserReaction: currentUserReaction,
     sightingId: sightingId,
   })
-  const [, setInputUserReaction] = useState<ReactionType | null>(null)
   const [, setErrors] = useState<{ [subject: string]: string[] }>({})
+
+  useEffect(() => {
+    console.log("reaction response is changed")
+  }, [reactionResponse])
 
   const deleteUserReaction = () => {
     deleteReaction(sightingId, authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
-          setInputUserReaction(null)
           response.json().then((data) => setReactionResponse(data))
         } else if (response.status === 401) {
           authContext.removeCookie("token")
@@ -53,8 +55,9 @@ const Reactions = ({ reactions, currentUserReaction, sightingId }: ReactionProps
     updateReaction({ reactionType: value, sightingId: sightingId }, authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
-          // setInputUserReaction(value)
-          response.json().then((data) => setReactionResponse(data))
+          response.json().then((data) => {
+            setReactionResponse(data)
+          })
         } else if (response.status === 401) {
           authContext.removeCookie("token")
           navigate("/login")
@@ -71,7 +74,6 @@ const Reactions = ({ reactions, currentUserReaction, sightingId }: ReactionProps
     addReaction({ reactionType: value, sightingId: sightingId }, authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
-          setInputUserReaction(value)
           response.json().then((data) => setReactionResponse(data))
         } else if (response.status === 401) {
           authContext.removeCookie("token")
@@ -85,23 +87,20 @@ const Reactions = ({ reactions, currentUserReaction, sightingId }: ReactionProps
       .catch(() => setErrors({ General: ["Unable to add reaction"] }))
   }
 
-  const handleClick = (value: ReactionType) => {
+  const handleClick = async (value: ReactionType) => {
     console.log(`current user reaction: ${currentUserReaction}`)
     console.log(`value: ${value}`)
-    if (currentUserReaction === value) {
-      deleteUserReaction()
-    } else if (value !== currentUserReaction && currentUserReaction !== null) {
-      updateUserReaction(value)
+    if (reactionResponse.currentUserReaction === value) {
+      await deleteUserReaction()
+      console.log(`---->deleteReactionResponse\n${JSON.stringify(reactionResponse)}`)
+    } else if (value !== reactionResponse.currentUserReaction && reactionResponse.currentUserReaction !== null) {
+      await updateUserReaction(value)
+      console.log(`---->updateReactionResponse\n${JSON.stringify(reactionResponse)}`)
     } else {
-      addUserReaction(value)
+      await addUserReaction(value)
+      console.log(`---->addReactionResponse\n${JSON.stringify(reactionResponse)}`)
     }
-    getReactionBySightingId(sightingId)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setReactionResponse(data)
-      })
-    console.log(`---->${JSON.stringify(reactionResponse)}`)
+    // console.log(`---->reactionResponse--${JSON.stringify(reactionResponse)}`)
   }
 
   return (
@@ -119,7 +118,9 @@ const Reactions = ({ reactions, currentUserReaction, sightingId }: ReactionProps
                 {emoji}
               </Button>
             )}
-            <span style={{ position: "relative", top: "0.75rem" }}>{reactions[key as ReactionType]}</span>
+            <span style={{ position: "relative", top: "0.75rem" }}>
+              {reactionResponse.reactions[key as ReactionType]}
+            </span>
           </div>
         ))}
       </Stack>
