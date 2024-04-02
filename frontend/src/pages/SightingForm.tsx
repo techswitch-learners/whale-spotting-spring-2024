@@ -116,8 +116,10 @@ const SightingForm = () => {
     )
       .then((response) => {
         if (response.ok) {
-          setLatitude(latitude)
-          setLongitude(longitude)
+          setLatitude(defaultLat.toFixed(3))
+          setLongitude(defaultLong.toFixed(3))
+          setBodyOfWater("")
+          setBodyOfWaterEditable(false)
           setDescription("")
           setImageUrl("")
           const form = event.target as HTMLFormElement
