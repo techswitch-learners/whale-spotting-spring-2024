@@ -39,6 +39,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
         return Ok(newSighting);
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public IActionResult GetById([FromRoute] int id)
     {
@@ -81,12 +82,13 @@ public class SightingController(WhaleSpottingContext context) : Controller
         return Ok(sighting);
     }
 
+    [Authorize]
     [HttpGet("")]
     public IActionResult Search()
     {
         var userId = AuthHelper.GetUserIdIfLoggedIn(User);
 
-        Console.WriteLine($"=================={userId}");
+        Console.WriteLine($"==================Search()-->{userId}");
 
         var sightings = _context
             .Sightings.Include(sighting => sighting.User)

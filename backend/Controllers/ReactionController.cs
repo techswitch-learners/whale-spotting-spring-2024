@@ -14,6 +14,36 @@ public class ReactionController(WhaleSpottingContext context) : Controller
 {
     private readonly WhaleSpottingContext _context = context;
 
+    [HttpGet("{sightingId}")]
+    public IActionResult GetBySightingId([FromRoute] int sightingId)
+    {
+        var userId = AuthHelper.GetUserIdIfLoggedIn(User);
+        if (_context.Reactions.Any(reaction => reaction.SightingId == sightingId))
+        {
+            var reactionsDict = _context
+                .Reactions.Where(reaction => reaction.SightingId == sightingId)
+                .GroupBy(reaction => reaction.Type)
+                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count());
+
+            var currentUserReaction = _context
+                .Reactions.SingleOrDefault(reaction => reaction.SightingId == sightingId && reaction.UserId == userId)
+                ?.Type.ToString();
+
+            return Ok(
+                new ReactionResponse
+                {
+                    SightingId = sightingId,
+                    Reactions = reactionsDict,
+                    CurrentUserReaction = currentUserReaction
+                }
+            );
+        }
+        else
+        {
+            return BadRequest("No reactions exist for this sighting.");
+        }
+    }
+
     [Authorize]
     [HttpPost("")]
     public IActionResult Add([FromBody] AddReactionRequest addReactionRequest)
@@ -37,13 +67,18 @@ public class ReactionController(WhaleSpottingContext context) : Controller
                 )
                 .Entity;
             _context.SaveChanges();
+
+            var reactionsDict = _context
+                .Reactions.Where(reaction => reaction.SightingId == newReaction.SightingId)
+                .GroupBy(reaction => reaction.Type)
+                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count());
+
             return Ok(
                 new ReactionResponse
                 {
-                    Type = newReaction.Type.ToString(),
-                    UserId = newReaction.UserId,
                     SightingId = newReaction.SightingId,
-                    Timestamp = newReaction.Timestamp
+                    Reactions = reactionsDict,
+                    CurrentUserReaction = addReactionRequest.Type
                 }
             );
         }
@@ -67,14 +102,20 @@ public class ReactionController(WhaleSpottingContext context) : Controller
         {
             matchingReaction.Type = reactionType;
             matchingReaction.Timestamp = DateTime.UtcNow;
+            // _context.Reactions.Update(matchingReaction);
             _context.SaveChanges();
+
+            var reactionsDict = _context
+                .Reactions.Where(reaction => reaction.SightingId == matchingReaction.SightingId)
+                .GroupBy(reaction => reaction.Type)
+                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count());
+
             return Ok(
                 new ReactionResponse
                 {
-                    Type = matchingReaction.Type.ToString(),
-                    UserId = matchingReaction.UserId,
                     SightingId = matchingReaction.SightingId,
-                    Timestamp = matchingReaction.Timestamp
+                    Reactions = reactionsDict,
+                    CurrentUserReaction = updateReactionRequest.Type
                 }
             );
         }
@@ -94,7 +135,20 @@ public class ReactionController(WhaleSpottingContext context) : Controller
         {
             _context.Reactions.Remove(matchingReaction);
             _context.SaveChanges();
-            return Ok("Deleted Reaction Successfully.");
+
+            var reactionsDict = _context
+                .Reactions.Where(reaction => reaction.SightingId == matchingReaction.SightingId)
+                .GroupBy(reaction => reaction.Type)
+                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count());
+
+            return Ok(
+                new ReactionResponse
+                {
+                    SightingId = matchingReaction.SightingId,
+                    Reactions = reactionsDict,
+                    CurrentUserReaction = null
+                }
+            );
         }
         return BadRequest("Cannot find the matching reaction to delete.");
     }

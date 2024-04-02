@@ -7,6 +7,8 @@ import Sighting from "../models/view/Sighting"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import { Icon } from "leaflet"
 import icon from "/favicon.ico"
+import Reactions from "../components/Reactions"
+import { AuthContext } from "../App"
 
 const customIcon = new Icon({
   iconUrl: icon,
@@ -19,6 +21,7 @@ const SightingView = () => {
   const [sighting, setSighting] = useState<Sighting>()
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
+  const authContext = useContext(AuthContext)
 
   useEffect(() => {
     backgroundContext.setBackground("white")
@@ -27,7 +30,7 @@ const SightingView = () => {
   useEffect(() => {
     setLoading(true)
     setError(false)
-    getSightingById(id)
+    getSightingById(id, authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
           response.json().then((data) => setSighting(data))
@@ -39,7 +42,7 @@ const SightingView = () => {
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
-  }, [id])
+  }, [id, authContext.cookie.token])
 
   return (
     <>
@@ -50,6 +53,13 @@ const SightingView = () => {
               <h1 className="me-3">
                 Sighting by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
               </h1>
+              <div className="reaction-buttons ms-auto">
+                <Reactions
+                  reactions={sighting.reactions}
+                  currentUserReaction={sighting.currentUserReaction}
+                  sightingId={sighting.id}
+                />
+              </div>
               <Button variant="primary" className="share-button ms-auto">
                 Share
               </Button>

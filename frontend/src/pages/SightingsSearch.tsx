@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
 import Form from "react-bootstrap/Form"
-import { BackgroundContext } from "../App"
+import { AuthContext, BackgroundContext } from "../App"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faList, faMapMarker } from "@fortawesome/free-solid-svg-icons"
 import Card from "react-bootstrap/Card"
@@ -45,11 +45,12 @@ const SightingsSearch = () => {
   const [allSightings, setAllSightings] = useState<Sighting[]>()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const authContext = useContext(AuthContext)
 
   function getData() {
     setLoading(true)
     setError(false)
-    getSightings()
+    getSightings(authContext.cookie.token)
       .then((response) => response.json())
       .then((data) => {
         setAllSightings(data.sightings)
@@ -68,7 +69,7 @@ const SightingsSearch = () => {
     setMapView(!mapView)
   }
 
-  useEffect(getData, [])
+  useEffect(getData, [authContext.cookie.token])
 
   useEffect(() => {
     backgroundContext.setBackground("white")
@@ -120,13 +121,12 @@ const SightingsSearch = () => {
         {!mapView && (
           <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
             {allSightings?.map((sighting) => (
-              <Stack>
+              <Stack key={sighting.id}>
                 <Reactions
                   reactions={sighting.reactions}
                   currentUserReaction={sighting.currentUserReaction}
                   sightingId={sighting.id}
                 />
-                {sighting.currentUserReaction}
                 <Link
                   to={`/sightings/${sighting.id}`}
                   key={sighting.id}

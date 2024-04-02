@@ -46,17 +46,33 @@ export const getSpeciesList = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/species`)
 }
 
-export const getSightings = async () => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`)
+export const getSightings = async (token?: string) => {
+  //return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
 }
 
-export const getSightingById = async (id?: string) => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${id}`)
+export const getSightingById = async (id?: string, token?: string) => {
+  // return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${id}`)
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${id}`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
+export const getReactionBySightingId = async (sightingId?: number) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/reactions/${sightingId}`)
 }
 
 export const addReaction = async (reaction: Reaction, token?: string) => {
-  console.log("AddReaction")
-  console.log(reaction)
   const reactionRequest = {
     type: reaction.reactionType,
     sightingId: reaction.sightingId,
@@ -73,7 +89,7 @@ export const addReaction = async (reaction: Reaction, token?: string) => {
 
 export const updateReaction = async (reaction: Reaction, token?: string) => {
   const newReactionRequest = {
-    reactionType: reaction.reactionType,
+    type: reaction.reactionType,
     sightingId: reaction.sightingId,
   }
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/reactions`, {
@@ -93,6 +109,6 @@ export const deleteReaction = async (sightingId: number, token?: string) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(sightingId),
+    body: JSON.stringify({ sightingId: sightingId }),
   })
 }
