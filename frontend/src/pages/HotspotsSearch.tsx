@@ -39,7 +39,7 @@ function HotspotsSearch() {
       })
       .join("&")
 
-    await fetch(`http://localhost:5280/Hotspots?${searchQuery}`)
+    await fetch(`http://localhost:5280/hotspots?${searchQuery}`)
       .then((response) => {
         if (response.status == 404) {
           setNotFound("NotFound")

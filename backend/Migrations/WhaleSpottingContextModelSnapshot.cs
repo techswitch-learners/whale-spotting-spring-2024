@@ -155,7 +155,7 @@ namespace WhaleSpotting.Migrations
                     b.ToTable("Achievements");
                 });
 
-            modelBuilder.Entity("WhaleSpotting.Models.Data.HotSpot", b =>
+            modelBuilder.Entity("WhaleSpotting.Models.Data.Hotspot", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -5,7 +5,7 @@ using WhaleSpotting.Models.Request;
 namespace WhaleSpotting.Controllers;
 
 [ApiController]
-[Route("/Hotspots")]
+[Route("/hotspots")]
 public class HotspotController(WhaleSpottingContext context) : Controller
 {
     private readonly WhaleSpottingContext _context = context;
@@ -27,7 +27,7 @@ public class HotspotController(WhaleSpottingContext context) : Controller
     }
 
     [HttpGet("")]
-    public IActionResult Search([FromQuery] SearchHotspotRequest searchRequest)
+    public IActionResult Search([FromQuery] SearchHotspotsRequest searchRequest)
     {
         var query = _context
             .ViewingSuggestions.Include(suggestion => suggestion.Hotspot)

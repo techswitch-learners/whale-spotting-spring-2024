@@ -2,7 +2,7 @@ using WhaleSpotting.Enums;
 
 namespace WhaleSpotting.Models.Request;
 
-public class SearchHotspotRequest
+public class SearchHotspotsRequest
 {
     public string? Country { get; set; }
     public string? HotspotName { get; set; }
