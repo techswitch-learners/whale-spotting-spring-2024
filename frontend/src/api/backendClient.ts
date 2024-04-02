@@ -42,8 +42,15 @@ export const getSpeciesList = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/species`)
 }
 
+// export const getSightings = async () => {
+//   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`)
+// }
+
+// export const getSightingById = async (id?: string) => {
+//   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${id}`)
+// }
+
 export const getSightings = async (token?: string) => {
-  //return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`, {
     method: "get",
     headers: {
@@ -52,9 +59,7 @@ export const getSightings = async (token?: string) => {
     },
   })
 }
-
 export const getSightingById = async (id?: string, token?: string) => {
-  // return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${id}`)
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${id}`, {
     method: "get",
     headers: {
@@ -62,10 +67,6 @@ export const getSightingById = async (id?: string, token?: string) => {
       Authorization: `Bearer ${token}`,
     },
   })
-}
-
-export const getReactionBySightingId = async (sightingId?: number) => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/reactions/${sightingId}`)
 }
 
 export const addReaction = async (reaction: Reaction, token?: string) => {
