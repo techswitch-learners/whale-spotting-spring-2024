@@ -1,4 +1,3 @@
-import BodyOfWater from "./BodyOfWater"
 import Species from "./Species"
 
 interface Sighting {
@@ -9,7 +8,7 @@ interface Sighting {
   species: Species
   description: string
   imageUrl: string
-  bodyOfWater: BodyOfWater
+  bodyOfWater: string
   sightingTimestamp: string
 }
 

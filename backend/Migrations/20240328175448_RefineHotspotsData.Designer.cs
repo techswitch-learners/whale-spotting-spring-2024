@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WhaleSpotting;
@@ -11,9 +12,11 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingContext))]
-    partial class WhaleSpottingContextModelSnapshot : ModelSnapshot
+    [Migration("20240328175448_RefineHotspotsData")]
+    partial class RefineHotspotsData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,6 +156,23 @@ namespace WhaleSpotting.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Achievements");
+                });
+
+            modelBuilder.Entity("WhaleSpotting.Models.Data.BodyOfWater", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BodiesOfWater");
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Data.HotSpot", b =>
@@ -2208,9 +2228,8 @@ namespace WhaleSpotting.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BodyOfWater")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("BodyOfWaterId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreationTimestamp")
                         .HasColumnType("timestamp with time zone");
@@ -2242,6 +2261,8 @@ namespace WhaleSpotting.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BodyOfWaterId");
 
                     b.HasIndex("SpeciesId");
 
@@ -7590,6 +7611,12 @@ namespace WhaleSpotting.Migrations
 
             modelBuilder.Entity("WhaleSpotting.Models.Data.Sighting", b =>
                 {
+                    b.HasOne("WhaleSpotting.Models.Data.BodyOfWater", "BodyOfWater")
+                        .WithMany()
+                        .HasForeignKey("BodyOfWaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WhaleSpotting.Models.Data.Species", "Species")
                         .WithMany()
                         .HasForeignKey("SpeciesId")
@@ -7605,6 +7632,8 @@ namespace WhaleSpotting.Migrations
                     b.HasOne("WhaleSpotting.Models.Data.VerificationEvent", "VerificationEvent")
                         .WithMany()
                         .HasForeignKey("VerificationEventId");
+
+                    b.Navigation("BodyOfWater");
 
                     b.Navigation("Species");
 

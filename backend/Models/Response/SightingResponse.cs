@@ -18,7 +18,7 @@ public class SightingResponse
 
     public required string ImageUrl { get; set; }
 
-    public required BodyOfWater BodyOfWater { get; set; }
+    public required string BodyOfWater { get; set; }
 
     // public required string BodyOfWater { get; set; }
 
