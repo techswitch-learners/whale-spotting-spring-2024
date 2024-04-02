@@ -12,7 +12,7 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings } from "../api/backendClient"
-import FilterSightingsRequest from "../models/request/FilterSightingsRequest"
+import SearchSightingsRequest from "../models/request/SearchSightingsRequest"
 import { DropdownButton, Dropdown } from "react-bootstrap"
 
 interface SightingCardProps {
@@ -44,7 +44,7 @@ const SightingsSearch = () => {
   const [mapView, setMapView] = useState<boolean>(false)
   const [allSightings, setAllSightings] = useState<Sighting[]>()
   const [filteredSightings, setFilteredSightings] = useState<Sighting[]>()
-  const [filterSightingsRequest, setFilterSightingsRequest] = useState<FilterSightingsRequest>({
+  const [filterSightingsRequest, setFilterSightingsRequest] = useState<SearchSightingsRequest>({
     species: [],
     bodyOfWater: "",
   })
