@@ -20,8 +20,7 @@ function HotspotsSearch() {
     platforms: [],
     months: [],
   })
-  const [hotspots, setHotspots] = useState<Hotspot[]>([])
-  const [notFound, setNotFound] = useState<string>()
+  const [hotspots, setHotspots] = useState<Hotspot[]>()
   const [error, setError] = useState<boolean>(false)
 
   const fetchHotspotsData = async () => {
@@ -40,14 +39,7 @@ function HotspotsSearch() {
       .join("&")
 
     await fetch(`http://localhost:5280/hotspots?${searchQuery}`)
-      .then((response) => {
-        if (response.status == 404) {
-          setNotFound("NotFound")
-        } else if (response.status == 200) {
-          setNotFound("Found")
-        }
-        return response.json()
-      })
+      .then((response) => response.json())
       .then((data) => setHotspots(data))
       .catch(() => setError(true))
   }
@@ -176,13 +168,12 @@ function HotspotsSearch() {
         </div>
       </form>
       <div className="d-flex justify-content-center my-3">
-        {!notFound && <h5>Click search to get relevant hotspots ^^</h5>}
         {error && <h5>Couldn't load hotspots at this time</h5>}
-        {notFound == "NotFound" && (
-          <h5>Sorry, no such hotspot been found in our database...Refresh the page and try other search criteria</h5>
+        {hotspots && hotspots.length === 0 && (
+          <h5>Sorry, no such hotspot been found in our database...try other search criteria</h5>
         )}
       </div>
-      {notFound == "Found" && (
+      {hotspots && hotspots.length > 0 && (
         <div className="search-results">
           <h5>
             {hotspots.length} hotspots of your interests have been found, click the cards for more information to

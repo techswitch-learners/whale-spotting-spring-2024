@@ -14,9 +14,9 @@ public class HotspotController(WhaleSpottingContext context) : Controller
     public IActionResult GetById(int id)
     {
         var Hotspot = _context
-            .Hotspots.Include(Hotspot => Hotspot.ViewingSuggestions)
+            .Hotspots.Include(hotspot => hotspot.ViewingSuggestions)
             .ThenInclude(suggestion => suggestion.Species)
-            .SingleOrDefault(Hotspot => Hotspot.Id == id);
+            .SingleOrDefault(hotspot => hotspot.Id == id);
 
         if (Hotspot == null)
         {
@@ -31,7 +31,7 @@ public class HotspotController(WhaleSpottingContext context) : Controller
     {
         var query = _context
             .ViewingSuggestions.Include(suggestion => suggestion.Hotspot)
-            .ThenInclude(Hotspot => Hotspot.ViewingSuggestions)
+            .ThenInclude(hotspot => hotspot.ViewingSuggestions)
             .ThenInclude(suggestion => suggestion.Species)
             .Include(suggestion => suggestion.Species)
             .AsQueryable();
@@ -61,11 +61,6 @@ public class HotspotController(WhaleSpottingContext context) : Controller
         if (searchRequest.Months != null && searchRequest.Months.Count > 0)
         {
             query = query.Where(suggestion => searchRequest.Months.Any(month => suggestion.Months.Contains(month)));
-        }
-
-        if (query.Count() == 0)
-        {
-            return NotFound();
         }
 
         return Ok(query.ToList().GroupBy(suggestion => suggestion.Hotspot).Select(group => group.Key).ToList());
