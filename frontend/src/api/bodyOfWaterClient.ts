@@ -1,4 +1,4 @@
-export const fetchBodyOfWater = async (latitude: string, longitude: string) => {
+export const getBodyOfWater = async (latitude: string, longitude: string) => {
   const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
   return await fetch(url)
     .then((response) => response.json())

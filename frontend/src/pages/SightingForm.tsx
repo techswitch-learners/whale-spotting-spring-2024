@@ -7,7 +7,7 @@ import ErrorList from "../components/ErrorList"
 import Species from "../models/view/Species"
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
 import { LeafletEventHandlerFnMap, LeafletMouseEvent } from "leaflet"
-import { fetchBodyOfWater } from "../api/bodyOfWaterClient"
+import { getBodyOfWater } from "../api/bodyOfWaterClient"
 
 interface GetLocationProps {
   setLatitude: (latitude: number) => void
@@ -75,7 +75,7 @@ const SightingForm = () => {
   }, [])
 
   useEffect(() => {
-    fetchBodyOfWater(latitude, longitude)
+    getBodyOfWater(latitude, longitude)
       .then(setBodyOfWater)
       .catch(() => {})
   }, [latitude, longitude])
