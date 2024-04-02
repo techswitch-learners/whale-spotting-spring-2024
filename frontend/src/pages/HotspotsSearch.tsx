@@ -6,11 +6,9 @@ import { Card, Col, Row, Image } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendar } from "@fortawesome/free-regular-svg-icons"
 import whalesIcon from "../assets/whales.png"
-
 import Hotspot from "../models/view/Hotspot"
 import SearchHotspotsRequest from "../models/request/SearchHotspotsRequest"
 import "./HotspotsSearch.scss"
-import HotspotsBottom from "../components/HotspotsBottom"
 import { getHotspots } from "../api/backendClient"
 
 function HotspotsSearch() {
@@ -63,6 +61,12 @@ function HotspotsSearch() {
   return (
     <div className="HotspotsSearch">
       <h1>Find whale-spotting hotspots</h1>
+      <p>
+        Data courtesy of the{" "}
+        <a href="https://wwhandbook.iwc.int/en/responsible-management" target="_blank">
+          Whale Watching Handbook
+        </a>
+      </p>
       <form onSubmit={handleSubmit}>
         <div className="d-flex justify-content-center my-3">
           <div className="d-flex flex-column justify-content-center align-items-center mx-2">
@@ -225,7 +229,6 @@ function HotspotsSearch() {
           </ul>
         </div>
       )}
-      <HotspotsBottom />
     </div>
   )
 }

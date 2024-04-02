@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDroplet, faTemperatureArrowDown, faTemperatureArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { getHotspotById } from "../api/backendClient"
 import { getWeather } from "../api/weatherClient"
-import HotspotsBottom from "../components/HotspotsBottom"
 
 const customIcon = new Icon({
   iconUrl: icon,
@@ -127,36 +126,43 @@ function HotspotView() {
               </div>
             </Col>
           </Row>
-          <h5 className="mt-4 text-center">Viewing suggestions for this Hotspot</h5>
-          <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-3 pb-4 text-center">
-            {hotspot.viewingSuggestions.map((suggestion) => (
-              <li>
-                <Card style={{ width: "18rem" }}>
-                  <Card.Img
-                    className="bg-dark"
-                    variant="top"
-                    src={suggestion.species.exampleImageUrl}
-                    style={{ height: "10rem", objectFit: "contain" }}
-                  />
-                  <Card.Body>
-                    <Card.Title>{suggestion.species.name}</Card.Title>
-                    Time of year: {suggestion.timeOfYear}
-                    <br />
-                    Platforms: {suggestion.platforms}
-                    <br />
-                    <a href={suggestion.species.wikiLink} target="_blank">
-                      Find out more about {suggestion.species.name}s
-                    </a>
-                  </Card.Body>
-                </Card>
-              </li>
-            ))}
-          </ul>
+          <div className="text-center">
+            <h5 className="mt-4">Viewing suggestions for this Hotspot</h5>
+            <p>
+              Data courtesy of the{" "}
+              <a href="https://wwhandbook.iwc.int/en/responsible-management" target="_blank">
+                Whale Watching Handbook
+              </a>
+            </p>
+            <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-3 pb-4">
+              {hotspot.viewingSuggestions.map((suggestion) => (
+                <li>
+                  <Card style={{ width: "18rem" }}>
+                    <Card.Img
+                      className="bg-dark"
+                      variant="top"
+                      src={suggestion.species.exampleImageUrl}
+                      style={{ height: "10rem", objectFit: "contain" }}
+                    />
+                    <Card.Body>
+                      <Card.Title>{suggestion.species.name}</Card.Title>
+                      Time of year: {suggestion.timeOfYear}
+                      <br />
+                      Platforms: {suggestion.platforms}
+                      <br />
+                      <a href={suggestion.species.wikiLink} target="_blank">
+                        Find out more about {suggestion.species.name}s
+                      </a>
+                    </Card.Body>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       )}
       {loading && <p>Loading...</p>}
       {error && <p>Couldn't load the hotspot at this time</p>}
-      <HotspotsBottom />
     </>
   )
 }
