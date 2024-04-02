@@ -10,6 +10,7 @@ import whalesIcon from "../assets/whales.png"
 import Hotspot from "../models/view/Hotspot"
 import SearchHotspotsRequest from "../models/request/SearchHotspotsRequest"
 import "./HotspotsSearch.scss"
+import HotspotsBottom from "../components/HotspotsBottom"
 
 function HotspotsSearch() {
   const [searchHotspotsRequest, setSearchHotspotsRequest] = useState<SearchHotspotsRequest>({
@@ -68,9 +69,9 @@ function HotspotsSearch() {
 
   return (
     <div className="HotspotSearch">
-      <h1>Find whale-spotting Hotspots</h1>
+      <h1>Find whale-spotting hotspots</h1>
       <form onSubmit={handleSubmit}>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center my-3">
           <div className="d-flex flex-column justify-content-center align-items-center mx-2">
             <label>
               Town, harbour or region:{" "}
@@ -94,12 +95,12 @@ function HotspotsSearch() {
             </label>
           </div>
         </div>
-        <br />
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center my-3">
           <DropdownButton
             id="dropdown-species-button"
             title="Species"
             className="d-flex flex-column justify-content-center align-items-center mx-2"
+            variant="secondary"
           >
             {[
               "Beaked whale",
@@ -130,6 +131,7 @@ function HotspotsSearch() {
             id="dropdown-platforms-button"
             title="Viewing Platforms"
             className="d-flex flex-column justify-content-center align-items-center mx-2"
+            variant="secondary"
           >
             {["Boat-based", "Swimming", "Land-based", "Aerial"].map((platformName, platformNumber) => (
               <Dropdown.ItemText>
@@ -144,6 +146,7 @@ function HotspotsSearch() {
             id="dropdown-months-button"
             title="Time of Year"
             className="d-flex flex-column justify-content-center align-items-center mx-2"
+            variant="secondary"
           >
             {[
               "January",
@@ -168,17 +171,24 @@ function HotspotsSearch() {
             ))}
           </DropdownButton>
         </div>
-        <button type="submit">Search</button>
+        <div className="d-flex justify-content-center my-3">
+          <button type="submit">Search</button>
+        </div>
       </form>
-      <br />
-      {!notFound && <h5>Click search to get relevant hotspots ^^</h5>}
-      {error && <p>Couldn't load hotspots at this time</p>}
-      {notFound == "NotFound" && <h5>Sorry, no such hotspot been found in our database...</h5>}
-      <br />
+      <div className="d-flex justify-content-center my-3">
+        {!notFound && <h5>Click search to get relevant hotspots ^^</h5>}
+        {error && <h5>Couldn't load hotspots at this time</h5>}
+        {notFound == "NotFound" && (
+          <h5>Sorry, no such hotspot been found in our database...Refresh the page and try other search criteria</h5>
+        )}
+      </div>
       {notFound == "Found" && (
         <div className="search-results">
-          <h5>Found {hotspots.length} relevant hotspots, click the cards for detailed information ^^</h5>
-          <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-4">
+          <h5>
+            {hotspots.length} hotspots of your interests have been found, click the cards for more information to
+            prepare your trip ^^
+          </h5>
+          <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-4 my-4">
             {hotspots.map((spot) => (
               <li key={spot.id}>
                 <Link to={`http://localhost:5173/Hotspots/${spot.id}`} className="text-decoration-none">
@@ -228,6 +238,7 @@ function HotspotsSearch() {
           </ul>
         </div>
       )}
+      <HotspotsBottom />
     </div>
   )
 }

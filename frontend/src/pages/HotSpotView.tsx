@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDroplet, faTemperatureArrowDown, faTemperatureArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { getHotspotById } from "../api/backendClient"
 import { getWeather } from "../api/weatherClient"
+import HotspotsBottom from "../components/HotspotsBottom"
 
 const customIcon = new Icon({
   iconUrl: icon,
@@ -155,6 +156,7 @@ function HotspotView() {
       )}
       {loading && <p>Loading...</p>}
       {error && <p>Couldn't load the hotspot at this time</p>}
+      <HotspotsBottom />
     </>
   )
 }
