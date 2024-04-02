@@ -37,16 +37,20 @@ export const addSighting = async (sighting: Sighting, token?: string) => {
   })
 }
 
-export const getBodiesOfWater = async () => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/bodies-of-water`)
-}
-
 export const getSpeciesList = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/species`)
 }
 
 export const getSightings = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`)
+}
+
+export const getSightingById = async (id?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${id}`)
+}
+
+export const getHotSpotById = async (id?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/hotspots/${id}`)
 }
 
 export const getUsers = async (token?: string) => {

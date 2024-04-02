@@ -12,6 +12,8 @@ import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
 import SightingsSearch from "./pages/SightingsSearch"
 import SightingForm from "./pages/SightingForm"
+import SightingView from "./pages/SightingView"
+import HotSpotView from "./pages/HotSpotView"
 import Users from "./pages/Users"
 
 export const AuthContext = createContext<{
@@ -57,6 +59,8 @@ const App = () => {
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
               <Route path="/sightings/add" element={<SightingForm />} />
+              <Route path="/sightings/:id" element={<SightingView />} />
+              <Route path="/hotspots/:id" element={<HotSpotView />} />
               <Route path="/users/all" element={<Users />}></Route>
             </Routes>
           </main>

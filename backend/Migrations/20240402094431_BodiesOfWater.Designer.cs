@@ -12,8 +12,8 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingContext))]
-    [Migration("20240326131956_HotSpotsData")]
-    partial class HotSpotsData
+    [Migration("20240402094431_BodiesOfWater")]
+    partial class BodiesOfWater
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -156,23 +156,6 @@ namespace WhaleSpotting.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Achievements");
-                });
-
-            modelBuilder.Entity("WhaleSpotting.Models.Data.BodyOfWater", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BodiesOfWater");
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Data.HotSpot", b =>
@@ -560,7 +543,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Canada",
                             Latitude = 48.1459776m,
                             Longitude = -69.7128395m,
-                            Name = "St. Lawrence River Estuary,Saguenay Fjord (near Tadoussac), Mingan region, Québec"
+                            Name = "St. Lawrence River Estuary, Québec"
                         },
                         new
                         {
@@ -1040,7 +1023,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ecuador",
                             Latitude = -1.4886678m,
                             Longitude = -80.7738641m,
-                            Name = "Isla de la Plata (Parque Nacional Machalilla), Manabí Province"
+                            Name = "Isla de la Plata, Manabí Province"
                         },
                         new
                         {
@@ -1072,7 +1055,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ecuador",
                             Latitude = -1.831239m,
                             Longitude = -78.183406m,
-                            Name = "Súa (Reserva Marino Galeras), Esmeraldas Province"
+                            Name = "Súa, Esmeraldas Province"
                         },
                         new
                         {
@@ -1080,7 +1063,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ecuador",
                             Latitude = -2.1887133m,
                             Longitude = -81.0110023m,
-                            Name = "Santa Elena (Reserva Marina Puntilla de Santa Elena), Santa Elena Province"
+                            Name = "Santa Elena, Santa Elena Province"
                         },
                         new
                         {
@@ -1104,7 +1087,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ecuador",
                             Latitude = -3.1716525m,
                             Longitude = -80.4361291m,
-                            Name = "Isla Santa Clara (Refugio de Vida Silvestre Isla Santa Clara)., Guayas Province"
+                            Name = "Isla Santa Clara, Guayas Province"
                         },
                         new
                         {
@@ -1160,7 +1143,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = -20.904305m,
                             Longitude = 165.618042m,
-                            Name = "South lagoon of New Caledonia and Tahiti, South Pacific (French Polynesia, New-Caledonia)"
+                            Name = "South lagoon of New Caledonia and Tahiti, French Polynesia and New-Caledonia"
                         },
                         new
                         {
@@ -1168,7 +1151,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = -17.5388435m,
                             Longitude = -149.8295234m,
-                            Name = "Moorea, South Pacific (French Polynesia, New-Caledonia)"
+                            Name = "Moorea, French Polynesia and New-Caledonia"
                         },
                         new
                         {
@@ -1176,7 +1159,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = -16.5004126m,
                             Longitude = -151.7414904m,
-                            Name = "Bora Bora, South Pacific (French Polynesia, New-Caledonia)"
+                            Name = "Bora Bora, French Polynesia and New-Caledonia"
                         },
                         new
                         {
@@ -1184,7 +1167,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = -22.480133m,
                             Longitude = -151.3385191m,
-                            Name = "Rurutu French Polynesia, South Pacific (French Polynesia, New-Caledonia)"
+                            Name = "Rurutu French Polynesia, French Polynesia and New-Caledonia"
                         },
                         new
                         {
@@ -1200,7 +1183,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = 43.677079m,
                             Longitude = 4.433703m,
-                            Name = "Saint Gilles (west coast),, Indian Ocean - Réunion"
+                            Name = "Saint Gilles (west coast), Réunion"
                         },
                         new
                         {
@@ -1208,7 +1191,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = 42.867945m,
                             Longitude = 1.372902m,
-                            Name = "Le Port, Indian Ocean - Réunion"
+                            Name = "Le Port, Réunion"
                         },
                         new
                         {
@@ -1216,7 +1199,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = 49.019157m,
                             Longitude = 2.247531m,
-                            Name = "Saint-Leu, Indian Ocean - Réunion"
+                            Name = "Saint-Leu, Réunion"
                         },
                         new
                         {
@@ -1224,7 +1207,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = 48.383707m,
                             Longitude = 7.47253m,
-                            Name = "Saint-Pierre, Indian Ocean - Réunion"
+                            Name = "Saint-Pierre, Réunion"
                         },
                         new
                         {
@@ -1232,7 +1215,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = -12.78064m,
                             Longitude = 45.2326964m,
-                            Name = "Mamoudzou, Indian Ocean - Mayotte"
+                            Name = "Mamoudzou, Mayotte"
                         },
                         new
                         {
@@ -1240,7 +1223,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = -12.7819879m,
                             Longitude = 45.2564226m,
-                            Name = "Dzaoudzi, Indian Ocean - Mayotte"
+                            Name = "Dzaoudzi, Mayotte"
                         },
                         new
                         {
@@ -1248,7 +1231,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = 46.227638m,
                             Longitude = 2.213749m,
-                            Name = "plage N’Gouja, Indian Ocean - Mayotte"
+                            Name = "plage N’Gouja, Mayotte"
                         },
                         new
                         {
@@ -1256,7 +1239,7 @@ namespace WhaleSpotting.Migrations
                             Country = "France",
                             Latitude = 46.227638m,
                             Longitude = 2.213749m,
-                            Name = "plage Gouela, Indian Ocean - Mayotte"
+                            Name = "plage Gouela, Mayotte"
                         },
                         new
                         {
@@ -1264,7 +1247,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Gabon",
                             Latitude = 0.4077972m,
                             Longitude = 9.4402833m,
-                            Name = "Librevillle, The entire coastline"
+                            Name = "Librevillle"
                         },
                         new
                         {
@@ -1272,7 +1255,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Gabon",
                             Latitude = -0.7149503m,
                             Longitude = 8.7843278m,
-                            Name = "Port Gentil,, The entire coastline"
+                            Name = "Port Gentil"
                         },
                         new
                         {
@@ -1280,7 +1263,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Gabon",
                             Latitude = -2.1538342m,
                             Longitude = 9.5896043m,
-                            Name = "Loango National Park, The entire coastline"
+                            Name = "Loango National Park"
                         },
                         new
                         {
@@ -1288,7 +1271,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Gabon",
                             Latitude = -3.8194511m,
                             Longitude = 11.0202729m,
-                            Name = "Mayumba National Park, The entire coastline"
+                            Name = "Mayumba National Park"
                         },
                         new
                         {
@@ -1296,7 +1279,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ireland",
                             Latitude = 51.4843274m,
                             Longitude = -9.3661093m,
-                            Name = "Baltimore, South and Southeast"
+                            Name = "Baltimore, South"
                         },
                         new
                         {
@@ -1304,7 +1287,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ireland",
                             Latitude = 52.1527666m,
                             Longitude = -6.994804m,
-                            Name = "Dunmore East, South and Southeast"
+                            Name = "Dunmore East, South"
                         },
                         new
                         {
@@ -1312,7 +1295,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ireland",
                             Latitude = 51.7058853m,
                             Longitude = -8.5222327m,
-                            Name = "Kinsale, South and Southeast"
+                            Name = "Kinsale, South"
                         },
                         new
                         {
@@ -1320,7 +1303,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ireland",
                             Latitude = 52.1757194m,
                             Longitude = -6.5863919m,
-                            Name = "Kilmore Quay, South and Southeast"
+                            Name = "Kilmore Quay, South"
                         },
                         new
                         {
@@ -1328,7 +1311,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ireland",
                             Latitude = 51.558803m,
                             Longitude = -9.1434791m,
-                            Name = "Unionhall, South and Southeast"
+                            Name = "Unionhall, South"
                         },
                         new
                         {
@@ -1336,7 +1319,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ireland",
                             Latitude = 51.6514954m,
                             Longitude = -9.9103302m,
-                            Name = "Castletownbere, South and Southeast"
+                            Name = "Castletownbere, South"
                         },
                         new
                         {
@@ -1344,7 +1327,7 @@ namespace WhaleSpotting.Migrations
                             Country = "Ireland",
                             Latitude = 52.1408534m,
                             Longitude = -10.2671142m,
-                            Name = "Dingle, South and Southeast"
+                            Name = "Dingle, South"
                         },
                         new
                         {
@@ -1352,331 +1335,147 @@ namespace WhaleSpotting.Migrations
                             Country = "Ireland",
                             Latitude = 52.1333113m,
                             Longitude = -10.3617104m,
-                            Name = "Ventry, South and Southeast"
+                            Name = "Ventry, South"
                         },
                         new
                         {
                             Id = 145,
-                            Country = "Ireland",
-                            Latitude = 51.4843274m,
-                            Longitude = -9.3661093m,
-                            Name = "Baltimore, Southwest, South, Southeast"
+                            Country = "Italy",
+                            Latitude = 43.7806979m,
+                            Longitude = 7.6722799m,
+                            Name = "Bordighera, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 146,
-                            Country = "Ireland",
-                            Latitude = 51.6514954m,
-                            Longitude = -9.9103302m,
-                            Name = "Castletownbere, Southwest, South, Southeast"
+                            Country = "Italy",
+                            Latitude = 43.8159671m,
+                            Longitude = 7.7760567m,
+                            Name = "Sanremo, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 147,
-                            Country = "Ireland",
-                            Latitude = 52.1408534m,
-                            Longitude = -10.2671142m,
-                            Name = "Dingle, Southwest, South, Southeast"
+                            Country = "Italy",
+                            Latitude = 43.8897316m,
+                            Longitude = 8.0393482m,
+                            Name = "Imperia, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 148,
-                            Country = "Ireland",
-                            Latitude = 52.1527666m,
-                            Longitude = -6.994804m,
-                            Name = "Dunmore East, Southwest, South, Southeast"
+                            Country = "Italy",
+                            Latitude = 43.9848226m,
+                            Longitude = 8.1305992m,
+                            Name = "Andora, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 149,
-                            Country = "Ireland",
-                            Latitude = 52.1757194m,
-                            Longitude = -6.5863919m,
-                            Name = "Kilmore Quay, Southwest, South, Southeast"
+                            Country = "Italy",
+                            Latitude = 43.9783918m,
+                            Longitude = 8.1579376m,
+                            Name = "Laigueglia, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 150,
-                            Country = "Ireland",
-                            Latitude = 51.7058853m,
-                            Longitude = -8.5222327m,
-                            Name = "Kinsale, Southwest, South, Southeast"
+                            Country = "Italy",
+                            Latitude = 44.1261565m,
+                            Longitude = 8.2558714m,
+                            Name = "Loano, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 151,
-                            Country = "Ireland",
-                            Latitude = 51.558803m,
-                            Longitude = -9.1434791m,
-                            Name = "Unionhall, Southwest, South, Southeast"
+                            Country = "Italy",
+                            Latitude = 44.014336m,
+                            Longitude = 8.1811741m,
+                            Name = "Alassio, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 152,
-                            Country = "Ireland",
-                            Latitude = 52.1333113m,
-                            Longitude = -10.3617104m,
-                            Name = "Ventry, Southwest, South, Southeast"
+                            Country = "Italy",
+                            Latitude = 44.2975603m,
+                            Longitude = 8.4645m,
+                            Name = "Savona, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 153,
                             Country = "Italy",
-                            Latitude = 43.7806979m,
-                            Longitude = 7.6722799m,
-                            Name = "Bordighera, Pelagos Sanctuary, Sardinia"
+                            Latitude = 44.3890436m,
+                            Longitude = 8.5611142m,
+                            Name = "Varazze, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 154,
                             Country = "Italy",
-                            Latitude = 43.8159671m,
-                            Longitude = 7.7760567m,
-                            Name = "Sanremo, Pelagos Sanctuary, Sardinia"
+                            Latitude = 44.4058612m,
+                            Longitude = 8.6860167m,
+                            Name = "Arenzano, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 155,
                             Country = "Italy",
-                            Latitude = 43.8897316m,
-                            Longitude = 8.0393482m,
-                            Name = "Imperia, Pelagos Sanctuary, Sardinia"
+                            Latitude = 44.4071448m,
+                            Longitude = 8.9347381m,
+                            Name = "Genova, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 156,
                             Country = "Italy",
-                            Latitude = 43.9848226m,
-                            Longitude = 8.1305992m,
-                            Name = "Andora, Pelagos Sanctuary, Sardinia"
+                            Latitude = 44.3837051m,
+                            Longitude = 9.0391431m,
+                            Name = "Nervi, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 157,
                             Country = "Italy",
-                            Latitude = 43.9783918m,
-                            Longitude = 8.1579376m,
-                            Name = "Laigueglia, Pelagos Sanctuary, Sardinia"
+                            Latitude = 44.3614219m,
+                            Longitude = 9.1437445m,
+                            Name = "Recco, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 158,
                             Country = "Italy",
-                            Latitude = 44.1261565m,
-                            Longitude = 8.2558714m,
-                            Name = "Loano, Pelagos Sanctuary, Sardinia"
+                            Latitude = 44.3542792m,
+                            Longitude = 9.1498178m,
+                            Name = "Camogli, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 159,
                             Country = "Italy",
-                            Latitude = 44.014336m,
-                            Longitude = 8.1811741m,
-                            Name = "Alassio, Pelagos Sanctuary, Sardinia"
+                            Latitude = 41.1357338m,
+                            Longitude = 9.4967926m,
+                            Name = "Poltu Quatu, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 160,
                             Country = "Italy",
-                            Latitude = 44.2975603m,
-                            Longitude = 8.4645m,
-                            Name = "Savona, Pelagos Sanctuary, Sardinia"
+                            Latitude = 40.7271553m,
+                            Longitude = 13.9434035m,
+                            Name = "Ischia, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 161,
                             Country = "Italy",
-                            Latitude = 44.3890436m,
-                            Longitude = 8.5611142m,
-                            Name = "Varazze, Pelagos Sanctuary, Sardinia"
+                            Latitude = 40.8517983m,
+                            Longitude = 14.26812m,
+                            Name = "Naples, Pelagos Sanctuary"
                         },
                         new
                         {
                             Id = 162,
-                            Country = "Italy",
-                            Latitude = 44.4058612m,
-                            Longitude = 8.6860167m,
-                            Name = "Arenzano, Pelagos Sanctuary, Sardinia"
-                        },
-                        new
-                        {
-                            Id = 163,
-                            Country = "Italy",
-                            Latitude = 44.4071448m,
-                            Longitude = 8.9347381m,
-                            Name = "Genova, Pelagos Sanctuary, Sardinia"
-                        },
-                        new
-                        {
-                            Id = 164,
-                            Country = "Italy",
-                            Latitude = 44.3837051m,
-                            Longitude = 9.0391431m,
-                            Name = "Nervi, Pelagos Sanctuary, Sardinia"
-                        },
-                        new
-                        {
-                            Id = 165,
-                            Country = "Italy",
-                            Latitude = 44.3614219m,
-                            Longitude = 9.1437445m,
-                            Name = "Recco, Pelagos Sanctuary, Sardinia"
-                        },
-                        new
-                        {
-                            Id = 166,
-                            Country = "Italy",
-                            Latitude = 44.3542792m,
-                            Longitude = 9.1498178m,
-                            Name = "Camogli, Pelagos Sanctuary, Sardinia"
-                        },
-                        new
-                        {
-                            Id = 167,
-                            Country = "Italy",
-                            Latitude = 41.1357338m,
-                            Longitude = 9.4967926m,
-                            Name = "Poltu Quatu, Pelagos Sanctuary, Sardinia"
-                        },
-                        new
-                        {
-                            Id = 168,
-                            Country = "Italy",
-                            Latitude = 43.7806979m,
-                            Longitude = 7.6722799m,
-                            Name = "Bordighera, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 169,
-                            Country = "Italy",
-                            Latitude = 43.8159671m,
-                            Longitude = 7.7760567m,
-                            Name = "Sanremo, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 170,
-                            Country = "Italy",
-                            Latitude = 43.8897316m,
-                            Longitude = 8.0393482m,
-                            Name = "Imperia, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 171,
-                            Country = "Italy",
-                            Latitude = 43.9848226m,
-                            Longitude = 8.1305992m,
-                            Name = "Andora, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 172,
-                            Country = "Italy",
-                            Latitude = 43.9783918m,
-                            Longitude = 8.1579376m,
-                            Name = "Laigueglia, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 173,
-                            Country = "Italy",
-                            Latitude = 44.1261565m,
-                            Longitude = 8.2558714m,
-                            Name = "Loano, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 174,
-                            Country = "Italy",
-                            Latitude = 44.014336m,
-                            Longitude = 8.1811741m,
-                            Name = "Alassio, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 175,
-                            Country = "Italy",
-                            Latitude = 44.2975603m,
-                            Longitude = 8.4645m,
-                            Name = "Savona, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 176,
-                            Country = "Italy",
-                            Latitude = 44.3890436m,
-                            Longitude = 8.5611142m,
-                            Name = "Varazze, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 177,
-                            Country = "Italy",
-                            Latitude = 44.4058612m,
-                            Longitude = 8.6860167m,
-                            Name = "Arenzano, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 178,
-                            Country = "Italy",
-                            Latitude = 44.4071448m,
-                            Longitude = 8.9347381m,
-                            Name = "Genova, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 179,
-                            Country = "Italy",
-                            Latitude = 44.3837051m,
-                            Longitude = 9.0391431m,
-                            Name = "Nervi, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 180,
-                            Country = "Italy",
-                            Latitude = 44.3614219m,
-                            Longitude = 9.1437445m,
-                            Name = "Recco, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 181,
-                            Country = "Italy",
-                            Latitude = 44.3542792m,
-                            Longitude = 9.1498178m,
-                            Name = "Camogli, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 182,
-                            Country = "Italy",
-                            Latitude = 41.1357338m,
-                            Longitude = 9.4967926m,
-                            Name = "Poltu Quatu, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 183,
-                            Country = "Italy",
-                            Latitude = 40.7271553m,
-                            Longitude = 13.9434035m,
-                            Name = "Ischia, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 184,
-                            Country = "Italy",
-                            Latitude = 40.8517983m,
-                            Longitude = 14.26812m,
-                            Name = "Naples, Pelagos Sanctuary, Sardinia, Campania Archipelago, Pontino Archipelago"
-                        },
-                        new
-                        {
-                            Id = 185,
                             Country = "Kenya",
                             Latitude = -3.3425465m,
                             Longitude = 40.0274159m,
@@ -1684,15 +1483,15 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 186,
+                            Id = 163,
                             Country = "Kenya",
                             Latitude = -0.6462266m,
                             Longitude = 38.4060986m,
-                            Name = "Ngomeni (just north of park, Malindi Watamu National Marine Park and Reserve (MWMPA)"
+                            Name = "Ngomeni, Malindi Watamu National Marine Park and Reserve (MWMPA)"
                         },
                         new
                         {
-                            Id = 187,
+                            Id = 164,
                             Country = "Maldives",
                             Latitude = 3.202778m,
                             Longitude = 73.22068m,
@@ -1700,7 +1499,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 188,
+                            Id = 165,
                             Country = "Mexico",
                             Latitude = 31.8667427m,
                             Longitude = -116.5963713m,
@@ -1708,15 +1507,15 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 189,
+                            Id = 166,
                             Country = "Mexico",
                             Latitude = 27.9672737m,
                             Longitude = -114.0210061m,
-                            Name = "Guerrero Negro/ Laguna Ojo de Liebre, Baja California Sur"
+                            Name = "Guerrero Negro/Laguna Ojo de Liebre, Baja California Sur"
                         },
                         new
                         {
-                            Id = 190,
+                            Id = 167,
                             Country = "Mexico",
                             Latitude = 26.753045m,
                             Longitude = -113.2473278m,
@@ -1724,7 +1523,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 191,
+                            Id = 168,
                             Country = "Mexico",
                             Latitude = 25.0189888m,
                             Longitude = -111.6532253m,
@@ -1732,7 +1531,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 192,
+                            Id = 169,
                             Country = "Mexico",
                             Latitude = 27.9617875m,
                             Longitude = -111.0370989m,
@@ -1740,7 +1539,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 193,
+                            Id = 170,
                             Country = "Mexico",
                             Latitude = 26.0117564m,
                             Longitude = -111.3477531m,
@@ -1748,7 +1547,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 194,
+                            Id = 171,
                             Country = "Mexico",
                             Latitude = 23.0636562m,
                             Longitude = -109.7024376m,
@@ -1756,7 +1555,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 195,
+                            Id = 172,
                             Country = "Mexico",
                             Latitude = 22.8948129m,
                             Longitude = -109.9152149m,
@@ -1764,7 +1563,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 196,
+                            Id = 173,
                             Country = "Mexico",
                             Latitude = 23.4363627m,
                             Longitude = -109.4296296m,
@@ -1772,7 +1571,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 197,
+                            Id = 174,
                             Country = "Mexico",
                             Latitude = 23.2494148m,
                             Longitude = -106.4111425m,
@@ -1780,7 +1579,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 198,
+                            Id = 175,
                             Country = "Mexico",
                             Latitude = 21.0261111m,
                             Longitude = -105.265m,
@@ -1788,7 +1587,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 199,
+                            Id = 176,
                             Country = "Mexico",
                             Latitude = 20.8690862m,
                             Longitude = -105.4410109m,
@@ -1796,7 +1595,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 200,
+                            Id = 177,
                             Country = "Mexico",
                             Latitude = 20.7811243m,
                             Longitude = -105.5288272m,
@@ -1804,7 +1603,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 201,
+                            Id = 178,
                             Country = "Mexico",
                             Latitude = 20.7544076m,
                             Longitude = -105.3760604m,
@@ -1812,7 +1611,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 202,
+                            Id = 179,
                             Country = "Mexico",
                             Latitude = 20.6986205m,
                             Longitude = -105.2964898m,
@@ -1820,7 +1619,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 203,
+                            Id = 180,
                             Country = "Mexico",
                             Latitude = 20.6870668m,
                             Longitude = -105.2284329m,
@@ -1828,7 +1627,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 204,
+                            Id = 181,
                             Country = "Mexico",
                             Latitude = 19.0536292m,
                             Longitude = -104.3170724m,
@@ -1836,7 +1635,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 205,
+                            Id = 182,
                             Country = "Mexico",
                             Latitude = 17.5390397m,
                             Longitude = -101.2701934m,
@@ -1844,7 +1643,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 206,
+                            Id = 183,
                             Country = "Mexico",
                             Latitude = 15.6677291m,
                             Longitude = -96.5545185m,
@@ -1852,7 +1651,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 207,
+                            Id = 184,
                             Country = "New Zealand",
                             Latitude = -42.3994483m,
                             Longitude = 173.6799111m,
@@ -1860,7 +1659,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 208,
+                            Id = 185,
                             Country = "New Zealand",
                             Latitude = -36.8508827m,
                             Longitude = 174.7644881m,
@@ -1868,7 +1667,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 209,
+                            Id = 186,
                             Country = "New Zealand",
                             Latitude = -45.8795455m,
                             Longitude = 170.5005957m,
@@ -1876,7 +1675,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 210,
+                            Id = 187,
                             Country = "New Zealand",
                             Latitude = -42.3994483m,
                             Longitude = 173.6799111m,
@@ -1884,7 +1683,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 211,
+                            Id = 188,
                             Country = "New Zealand",
                             Latitude = -41.0815077m,
                             Longitude = 174.3331694m,
@@ -1892,7 +1691,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 212,
+                            Id = 189,
                             Country = "New Zealand",
                             Latitude = -37.6869653m,
                             Longitude = 176.1654272m,
@@ -1900,7 +1699,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 213,
+                            Id = 190,
                             Country = "New Zealand",
                             Latitude = -36.8508827m,
                             Longitude = 174.7644881m,
@@ -1908,7 +1707,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 214,
+                            Id = 191,
                             Country = "New Zealand",
                             Latitude = -35.2167252m,
                             Longitude = 174.1540659m,
@@ -1916,7 +1715,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 215,
+                            Id = 192,
                             Country = "Norway",
                             Latitude = 69.3160799m,
                             Longitude = 16.1202284m,
@@ -1924,7 +1723,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 216,
+                            Id = 193,
                             Country = "Norway",
                             Latitude = 69.01893m,
                             Longitude = 15.1234474m,
@@ -1932,87 +1731,31 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 217,
-                            Country = "Norway",
-                            Latitude = 69.3160799m,
-                            Longitude = 16.1202284m,
-                            Name = "Andenes, Nordland, Troms, Finnmark"
-                        },
-                        new
-                        {
-                            Id = 218,
-                            Country = "Norway",
-                            Latitude = 69.01893m,
-                            Longitude = 15.1234474m,
-                            Name = "Stø, Nordland, Troms, Finnmark"
-                        },
-                        new
-                        {
-                            Id = 219,
+                            Id = 194,
                             Country = "Norway",
                             Latitude = 70.0339919m,
                             Longitude = 20.9737453m,
-                            Name = "Skjervøy, Nordland, Troms, Finnmark"
+                            Name = "Skjervøy, Troms"
                         },
                         new
                         {
-                            Id = 220,
+                            Id = 195,
                             Country = "Norway",
                             Latitude = 69.6492047m,
                             Longitude = 18.9553238m,
-                            Name = "Tromsø, Nordland, Troms, Finnmark"
+                            Name = "Tromsø, Troms"
                         },
                         new
                         {
-                            Id = 221,
+                            Id = 196,
                             Country = "Norway",
                             Latitude = 60.472024m,
                             Longitude = 8.468946m,
-                            Name = "Nordland, Troms, Finnmark"
+                            Name = "Northern regions"
                         },
                         new
                         {
-                            Id = 222,
-                            Country = "Norway",
-                            Latitude = 69.3160799m,
-                            Longitude = 16.1202284m,
-                            Name = "Andenes, Nordland/Vesterålen,Troms, Finnmark, Svalbard"
-                        },
-                        new
-                        {
-                            Id = 223,
-                            Country = "Norway",
-                            Latitude = 69.01893m,
-                            Longitude = 15.1234474m,
-                            Name = "Stø, Nordland/Vesterålen,Troms, Finnmark, Svalbard"
-                        },
-                        new
-                        {
-                            Id = 224,
-                            Country = "Norway",
-                            Latitude = 70.0339919m,
-                            Longitude = 20.9737453m,
-                            Name = "Skjervøy, Nordland/Vesterålen,Troms, Finnmark, Svalbard"
-                        },
-                        new
-                        {
-                            Id = 225,
-                            Country = "Norway",
-                            Latitude = 69.6492047m,
-                            Longitude = 18.9553238m,
-                            Name = "Tromsø, Nordland/Vesterålen,Troms, Finnmark, Svalbard"
-                        },
-                        new
-                        {
-                            Id = 226,
-                            Country = "Norway",
-                            Latitude = 60.472024m,
-                            Longitude = 8.468946m,
-                            Name = "Nordland/Vesterålen,Troms, Finnmark, Svalbard"
-                        },
-                        new
-                        {
-                            Id = 227,
+                            Id = 197,
                             Country = "Norway",
                             Latitude = 78.2231722m,
                             Longitude = 15.626723m,
@@ -2020,7 +1763,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 228,
+                            Id = 198,
                             Country = "Panama",
                             Latitude = 8.0733624m,
                             Longitude = -82.3560389m,
@@ -2028,7 +1771,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 229,
+                            Id = 199,
                             Country = "Panama",
                             Latitude = 8.9823792m,
                             Longitude = -79.5198696m,
@@ -2036,7 +1779,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 230,
+                            Id = 200,
                             Country = "Panama",
                             Latitude = 7.6321187m,
                             Longitude = -79.9989895m,
@@ -2044,7 +1787,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 231,
+                            Id = 201,
                             Country = "Panama",
                             Latitude = 8.431881238m,
                             Longitude = -78.95123703m,
@@ -2052,15 +1795,15 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 232,
+                            Id = 202,
                             Country = "Panama",
                             Latitude = 8.537981m,
                             Longitude = -80.782127m,
-                            Name = " Bahia Piña, Pacific Coast"
+                            Name = "Bahia Piña, Pacific Coast"
                         },
                         new
                         {
-                            Id = 233,
+                            Id = 203,
                             Country = "Panama",
                             Latitude = 8.7946029m,
                             Longitude = -79.5554268m,
@@ -2068,7 +1811,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 234,
+                            Id = 204,
                             Country = "Panama",
                             Latitude = 7.4693076m,
                             Longitude = -81.7568253m,
@@ -2076,7 +1819,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 235,
+                            Id = 205,
                             Country = "Peru",
                             Latitude = -4.1764859m,
                             Longitude = -81.1237446m,
@@ -2084,7 +1827,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 236,
+                            Id = 206,
                             Country = "Peru",
                             Latitude = -4.1034782m,
                             Longitude = -81.0451037m,
@@ -2092,7 +1835,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 237,
+                            Id = 207,
                             Country = "Peru",
                             Latitude = -4.2165081m,
                             Longitude = -81.1699102m,
@@ -2100,7 +1843,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 238,
+                            Id = 208,
                             Country = "Peru",
                             Latitude = -4.2506038m,
                             Longitude = -81.2332956m,
@@ -2108,7 +1851,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 239,
+                            Id = 209,
                             Country = "Peru",
                             Latitude = -4.1764859m,
                             Longitude = -81.1237446m,
@@ -2116,7 +1859,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 240,
+                            Id = 210,
                             Country = "Portugal",
                             Latitude = 37.7412488m,
                             Longitude = -25.6755944m,
@@ -2124,7 +1867,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 241,
+                            Id = 211,
                             Country = "Portugal",
                             Latitude = 32.7607074m,
                             Longitude = -16.9594723m,
@@ -2132,7 +1875,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 242,
+                            Id = 212,
                             Country = "Portugal",
                             Latitude = 39.399872m,
                             Longitude = -8.224454m,
@@ -2140,7 +1883,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 243,
+                            Id = 213,
                             Country = "Portugal",
                             Latitude = 39.399872m,
                             Longitude = -8.224454m,
@@ -2148,7 +1891,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 244,
+                            Id = 214,
                             Country = "South Africa",
                             Latitude = -34.4063429m,
                             Longitude = 19.2686949m,
@@ -2156,7 +1899,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 245,
+                            Id = 215,
                             Country = "South Africa",
                             Latitude = -34.5805396m,
                             Longitude = 19.3517529m,
@@ -2164,7 +1907,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 246,
+                            Id = 216,
                             Country = "South Africa",
                             Latitude = -34.6163984m,
                             Longitude = 19.3501046m,
@@ -2172,7 +1915,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 247,
+                            Id = 217,
                             Country = "South Africa",
                             Latitude = -34.0350789m,
                             Longitude = 23.0464579m,
@@ -2180,15 +1923,15 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 248,
+                            Id = 218,
                             Country = "South Africa",
                             Latitude = -33.9608369m,
                             Longitude = 25.6022423m,
-                            Name = "Port Elizabeth, Eastern Cape"
+                            Name = "Port Elizabeth, Eastern Cape Province"
                         },
                         new
                         {
-                            Id = 249,
+                            Id = 219,
                             Country = "South Africa",
                             Latitude = -34.1934595m,
                             Longitude = 18.435835m,
@@ -2196,7 +1939,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 250,
+                            Id = 220,
                             Country = "South Africa",
                             Latitude = -34.0620481m,
                             Longitude = 23.3713855m,
@@ -2204,7 +1947,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 251,
+                            Id = 221,
                             Country = "South Africa",
                             Latitude = -30.559482m,
                             Longitude = 22.937506m,
@@ -2212,7 +1955,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 252,
+                            Id = 222,
                             Country = "South Africa",
                             Latitude = -28.377531m,
                             Longitude = 32.4107259m,
@@ -2220,63 +1963,15 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 253,
-                            Country = "South Africa",
-                            Latitude = -34.1934595m,
-                            Longitude = 18.435835m,
-                            Name = "Simonstown, Western Cape"
-                        },
-                        new
-                        {
-                            Id = 254,
-                            Country = "South Africa",
-                            Latitude = -34.4063429m,
-                            Longitude = 19.2686949m,
-                            Name = "Hermanus, Western Cape"
-                        },
-                        new
-                        {
-                            Id = 255,
-                            Country = "South Africa",
-                            Latitude = -34.5805396m,
-                            Longitude = 19.3517529m,
-                            Name = "Gansbaai, Western Cape"
-                        },
-                        new
-                        {
-                            Id = 256,
-                            Country = "South Africa",
-                            Latitude = -34.6163984m,
-                            Longitude = 19.3501046m,
-                            Name = "Kleinbaai, Western Cape"
-                        },
-                        new
-                        {
-                            Id = 257,
-                            Country = "South Africa",
-                            Latitude = -34.0350789m,
-                            Longitude = 23.0464579m,
-                            Name = "Knysna, Western Cape"
-                        },
-                        new
-                        {
-                            Id = 258,
+                            Id = 223,
                             Country = "South Africa",
                             Latitude = -34.1836263m,
                             Longitude = 22.1243871m,
-                            Name = "Mosselbay, Western Cape"
+                            Name = "Mosselbay, Western Cape Province"
                         },
                         new
                         {
-                            Id = 259,
-                            Country = "South Africa",
-                            Latitude = -34.0620481m,
-                            Longitude = 23.3713855m,
-                            Name = "Plettenberg Bay, Western Cape"
-                        },
-                        new
-                        {
-                            Id = 260,
+                            Id = 224,
                             Country = "Spain",
                             Latitude = 28.2915637m,
                             Longitude = -16.6291304m,
@@ -2284,7 +1979,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 261,
+                            Id = 225,
                             Country = "Spain",
                             Latitude = 40.463667m,
                             Longitude = -3.74922m,
@@ -2292,7 +1987,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 262,
+                            Id = 226,
                             Country = "Sri Lanka",
                             Latitude = 5.948262m,
                             Longitude = 80.4715866m,
@@ -2300,7 +1995,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 263,
+                            Id = 227,
                             Country = "Sri Lanka",
                             Latitude = 8.5873638m,
                             Longitude = 81.2152121m,
@@ -2308,7 +2003,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 264,
+                            Id = 228,
                             Country = "Sultanate of Oman",
                             Latitude = 17.5041962m,
                             Longitude = 56.0361469m,
@@ -2316,7 +2011,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 265,
+                            Id = 229,
                             Country = "Tonga",
                             Latitude = -18.622756m,
                             Longitude = -173.9902982m,
@@ -2324,7 +2019,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 266,
+                            Id = 230,
                             Country = "Tonga",
                             Latitude = -21.1465968m,
                             Longitude = -175.2515482m,
@@ -2332,7 +2027,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 267,
+                            Id = 231,
                             Country = "Tonga",
                             Latitude = -21.178986m,
                             Longitude = -175.198242m,
@@ -2340,7 +2035,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 268,
+                            Id = 232,
                             Country = "United Kingdom",
                             Latitude = 54.9456129m,
                             Longitude = -1.9479664m,
@@ -2348,7 +2043,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 269,
+                            Id = 233,
                             Country = "United Kingdom",
                             Latitude = 55.378051m,
                             Longitude = -3.435973m,
@@ -2356,7 +2051,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 270,
+                            Id = 234,
                             Country = "United Kingdom",
                             Latitude = 55.378051m,
                             Longitude = -3.435973m,
@@ -2364,7 +2059,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 271,
+                            Id = 235,
                             Country = "United Kingdom",
                             Latitude = 56.4906712m,
                             Longitude = -4.2026458m,
@@ -2372,7 +2067,7 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 272,
+                            Id = 236,
                             Country = "United Kingdom",
                             Latitude = 60.1529871m,
                             Longitude = -1.1492932m,
@@ -2380,123 +2075,59 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 273,
+                            Id = 237,
                             Country = "United States of America",
-                            Latitude = 37.09024m,
-                            Longitude = -95.712891m,
-                            Name = "Southwest(Pacific)"
+                            Latitude = 37.740862m,
+                            Longitude = -122.642870m,
+                            Name = "Southwest (Pacific)"
                         },
                         new
                         {
-                            Id = 274,
+                            Id = 238,
                             Country = "United States of America",
                             Latitude = 39.5333379m,
                             Longitude = -74.6868815m,
-                            Name = "Northeast(Atlantic)"
+                            Name = "Northeast (Atlantic)"
                         },
                         new
                         {
-                            Id = 275,
+                            Id = 239,
                             Country = "United States of America",
                             Latitude = 25.304304m,
                             Longitude = -90.065918m,
-                            Name = "(Gulf of Mexico)"
+                            Name = "Gulf of Mexico"
                         },
                         new
                         {
-                            Id = 276,
+                            Id = 240,
                             Country = "United States of America",
                             Latitude = 61.1892616m,
                             Longitude = -149.8065058m,
-                            Name = "Alaska(Pacific)"
+                            Name = "Alaska (Pacific)"
                         },
                         new
                         {
-                            Id = 277,
+                            Id = 241,
                             Country = "United States of America",
-                            Latitude = 34.30856m,
-                            Longitude = -78.1469792m,
-                            Name = "Northwest"
+                            Latitude = 45.656575m,
+                            Longitude = -124.341473m,
+                            Name = "Northwest (Pacific)"
                         },
                         new
                         {
-                            Id = 278,
-                            Country = "United States of America",
-                            Latitude = 37.09024m,
-                            Longitude = -95.712891m,
-                            Name = "Southwest"
-                        },
-                        new
-                        {
-                            Id = 279,
+                            Id = 242,
                             Country = "United States of America",
                             Latitude = 37.09024m,
                             Longitude = -95.712891m,
-                            Name = "Southeast(Pacific)"
+                            Name = "Southeast (Gulf of Mexico)"
                         },
                         new
                         {
-                            Id = 280,
-                            Country = "United States of America",
-                            Latitude = 63.588753m,
-                            Longitude = -154.4930619m,
-                            Name = "Alaska"
-                        },
-                        new
-                        {
-                            Id = 281,
+                            Id = 243,
                             Country = "United States of America",
                             Latitude = 19.8986819m,
                             Longitude = -155.6658568m,
-                            Name = "Hawaii"
-                        },
-                        new
-                        {
-                            Id = 282,
-                            Country = "United States of America",
-                            Latitude = 37.09024m,
-                            Longitude = -95.712891m,
-                            Name = "Southeast"
-                        },
-                        new
-                        {
-                            Id = 283,
-                            Country = "United States of America",
-                            Latitude = 25.304304m,
-                            Longitude = -90.065918m,
-                            Name = "Northwest(Gulf of Mexico)"
-                        },
-                        new
-                        {
-                            Id = 284,
-                            Country = "United States of America",
-                            Latitude = 37.09024m,
-                            Longitude = -95.712891m,
-                            Name = "Southeast(Gulf of Mexico)"
-                        },
-                        new
-                        {
-                            Id = 285,
-                            Country = "United States of America",
-                            Latitude = 63.588753m,
-                            Longitude = -154.4930619m,
-                            Name = "Alaska(Gulf of Mexico)"
-                        },
-                        new
-                        {
-                            Id = 286,
-                            Country = "United States of America",
-                            Latitude = 52.0767026m,
-                            Longitude = -123.8302432m,
-                            Name = "Northwest(Pacific)"
-                        },
-                        new
-                        {
-                            Id = 287,
-                            Country = "United States of America",
-                            Latitude = 21.3072314m,
-                            Longitude = -157.8619256m,
-                            Name = "Hawaii(Pacific)"
+                            Name = "Hawaii (Pacific)"
                         });
                 });
 
@@ -2580,8 +2211,9 @@ namespace WhaleSpotting.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BodyOfWaterId")
-                        .HasColumnType("integer");
+                    b.Property<string>("BodyOfWater")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreationTimestamp")
                         .HasColumnType("timestamp with time zone");
@@ -2613,8 +2245,6 @@ namespace WhaleSpotting.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BodyOfWaterId");
 
                     b.HasIndex("SpeciesId");
 
@@ -5104,6 +4734,16 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 229,
+                            HotSpotId = 137,
+                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 1, 2, 3 },
+                            Platforms = "Unknown",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer-Autumn-Winter"
+                        },
+                        new
+                        {
                             Id = 219,
                             HotSpotId = 138,
                             Months = new[] { 0, 1, 8, 9, 10, 11 },
@@ -5111,6 +4751,16 @@ namespace WhaleSpotting.Migrations
                             Platforms = "Unknown",
                             SpeciesId = 6,
                             TimeOfYear = "Autumn-Winter"
+                        },
+                        new
+                        {
+                            Id = 232,
+                            HotSpotId = 138,
+                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 1, 2, 3 },
+                            Platforms = "Unknown",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer-Autumn-Winter"
                         },
                         new
                         {
@@ -5134,6 +4784,16 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 234,
+                            HotSpotId = 139,
+                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 1, 2, 3 },
+                            Platforms = "Unknown",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer-Autumn-Winter"
+                        },
+                        new
+                        {
                             Id = 221,
                             HotSpotId = 140,
                             Months = new[] { 0, 1, 8, 9, 10, 11 },
@@ -5141,6 +4801,16 @@ namespace WhaleSpotting.Migrations
                             Platforms = "Unknown",
                             SpeciesId = 6,
                             TimeOfYear = "Autumn-Winter"
+                        },
+                        new
+                        {
+                            Id = 233,
+                            HotSpotId = 140,
+                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 1, 2, 3 },
+                            Platforms = "Unknown",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer-Autumn-Winter"
                         },
                         new
                         {
@@ -5164,6 +4834,16 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 235,
+                            HotSpotId = 141,
+                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 1, 2, 3 },
+                            Platforms = "Unknown",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer-Autumn-Winter"
+                        },
+                        new
+                        {
                             Id = 224,
                             HotSpotId = 142,
                             Months = new[] { 2, 3, 4, 5, 6, 7, 8, 9, 10 },
@@ -5171,6 +4851,16 @@ namespace WhaleSpotting.Migrations
                             Platforms = "Unknown",
                             SpeciesId = 10,
                             TimeOfYear = "Spring-Summer-Autumn"
+                        },
+                        new
+                        {
+                            Id = 230,
+                            HotSpotId = 142,
+                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 1, 2, 3 },
+                            Platforms = "Unknown",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer-Autumn-Winter"
                         },
                         new
                         {
@@ -5184,6 +4874,16 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 231,
+                            HotSpotId = 143,
+                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 1, 2, 3 },
+                            Platforms = "Unknown",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer-Autumn-Winter"
+                        },
+                        new
+                        {
                             Id = 228,
                             HotSpotId = 144,
                             Months = new[] { 2, 3, 4, 5, 6, 7, 8, 9, 10 },
@@ -5194,78 +4894,8 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 229,
-                            HotSpotId = 145,
-                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0, 1, 2, 3 },
-                            Platforms = "Unknown",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer-Autumn-Winter"
-                        },
-                        new
-                        {
-                            Id = 230,
-                            HotSpotId = 146,
-                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0, 1, 2, 3 },
-                            Platforms = "Unknown",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer-Autumn-Winter"
-                        },
-                        new
-                        {
-                            Id = 231,
-                            HotSpotId = 147,
-                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0, 1, 2, 3 },
-                            Platforms = "Unknown",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer-Autumn-Winter"
-                        },
-                        new
-                        {
-                            Id = 232,
-                            HotSpotId = 148,
-                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0, 1, 2, 3 },
-                            Platforms = "Unknown",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer-Autumn-Winter"
-                        },
-                        new
-                        {
-                            Id = 233,
-                            HotSpotId = 149,
-                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0, 1, 2, 3 },
-                            Platforms = "Unknown",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer-Autumn-Winter"
-                        },
-                        new
-                        {
-                            Id = 234,
-                            HotSpotId = 150,
-                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0, 1, 2, 3 },
-                            Platforms = "Unknown",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer-Autumn-Winter"
-                        },
-                        new
-                        {
-                            Id = 235,
-                            HotSpotId = 151,
-                            Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0, 1, 2, 3 },
-                            Platforms = "Unknown",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer-Autumn-Winter"
-                        },
-                        new
-                        {
                             Id = 236,
-                            HotSpotId = 152,
+                            HotSpotId = 144,
                             Months = new[] { 0, 1, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -5275,307 +4905,17 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 237,
-                            HotSpotId = 153,
+                            HotSpotId = 145,
                             Months = new[] { 4, 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
                             SpeciesId = 6,
                             TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 286,
-                            HotSpotId = 153,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 238,
-                            HotSpotId = 154,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 287,
-                            HotSpotId = 154,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 239,
-                            HotSpotId = 155,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 288,
-                            HotSpotId = 155,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 240,
-                            HotSpotId = 156,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 289,
-                            HotSpotId = 156,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 241,
-                            HotSpotId = 157,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 290,
-                            HotSpotId = 157,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 242,
-                            HotSpotId = 158,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 291,
-                            HotSpotId = 158,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 243,
-                            HotSpotId = 159,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 292,
-                            HotSpotId = 159,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 244,
-                            HotSpotId = 160,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 293,
-                            HotSpotId = 160,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 245,
-                            HotSpotId = 161,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 294,
-                            HotSpotId = 161,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 246,
-                            HotSpotId = 162,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 295,
-                            HotSpotId = 162,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 247,
-                            HotSpotId = 163,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 296,
-                            HotSpotId = 163,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 248,
-                            HotSpotId = 164,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 297,
-                            HotSpotId = 164,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 249,
-                            HotSpotId = 165,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 298,
-                            HotSpotId = 165,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 250,
-                            HotSpotId = 166,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 299,
-                            HotSpotId = 166,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
-                        },
-                        new
-                        {
-                            Id = 251,
-                            HotSpotId = 167,
-                            Months = new[] { 4, 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "May - August"
-                        },
-                        new
-                        {
-                            Id = 300,
-                            HotSpotId = 167,
-                            Months = new[] { 4, 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Big motorized boat, sailing boat",
-                            SpeciesId = 1,
-                            TimeOfYear = "May - October"
                         },
                         new
                         {
                             Id = 252,
-                            HotSpotId = 168,
+                            HotSpotId = 145,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5585,7 +4925,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 269,
-                            HotSpotId = 168,
+                            HotSpotId = 145,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5594,8 +4934,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 286,
+                            HotSpotId = 145,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 238,
+                            HotSpotId = 146,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 253,
-                            HotSpotId = 169,
+                            HotSpotId = 146,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5605,7 +4965,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 270,
-                            HotSpotId = 169,
+                            HotSpotId = 146,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5614,8 +4974,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 287,
+                            HotSpotId = 146,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 239,
+                            HotSpotId = 147,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 254,
-                            HotSpotId = 170,
+                            HotSpotId = 147,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5625,7 +5005,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 271,
-                            HotSpotId = 170,
+                            HotSpotId = 147,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5634,8 +5014,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 288,
+                            HotSpotId = 147,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 240,
+                            HotSpotId = 148,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 255,
-                            HotSpotId = 171,
+                            HotSpotId = 148,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5645,7 +5045,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 272,
-                            HotSpotId = 171,
+                            HotSpotId = 148,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5654,8 +5054,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 289,
+                            HotSpotId = 148,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 241,
+                            HotSpotId = 149,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 256,
-                            HotSpotId = 172,
+                            HotSpotId = 149,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5665,7 +5085,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 273,
-                            HotSpotId = 172,
+                            HotSpotId = 149,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5674,8 +5094,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 290,
+                            HotSpotId = 149,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 242,
+                            HotSpotId = 150,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 257,
-                            HotSpotId = 173,
+                            HotSpotId = 150,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5685,7 +5125,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 274,
-                            HotSpotId = 173,
+                            HotSpotId = 150,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5694,8 +5134,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 291,
+                            HotSpotId = 150,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 243,
+                            HotSpotId = 151,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 258,
-                            HotSpotId = 174,
+                            HotSpotId = 151,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5705,7 +5165,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 275,
-                            HotSpotId = 174,
+                            HotSpotId = 151,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5714,8 +5174,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 292,
+                            HotSpotId = 151,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 244,
+                            HotSpotId = 152,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 259,
-                            HotSpotId = 175,
+                            HotSpotId = 152,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5725,7 +5205,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 276,
-                            HotSpotId = 175,
+                            HotSpotId = 152,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5734,8 +5214,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 293,
+                            HotSpotId = 152,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 245,
+                            HotSpotId = 153,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 260,
-                            HotSpotId = 176,
+                            HotSpotId = 153,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5745,7 +5245,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 277,
-                            HotSpotId = 176,
+                            HotSpotId = 153,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5754,8 +5254,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 294,
+                            HotSpotId = 153,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 246,
+                            HotSpotId = 154,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 261,
-                            HotSpotId = 177,
+                            HotSpotId = 154,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5765,7 +5285,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 278,
-                            HotSpotId = 177,
+                            HotSpotId = 154,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5774,8 +5294,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 295,
+                            HotSpotId = 154,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 247,
+                            HotSpotId = 155,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 262,
-                            HotSpotId = 178,
+                            HotSpotId = 155,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5785,7 +5325,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 279,
-                            HotSpotId = 178,
+                            HotSpotId = 155,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5794,8 +5334,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 296,
+                            HotSpotId = 155,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 248,
+                            HotSpotId = 156,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 263,
-                            HotSpotId = 179,
+                            HotSpotId = 156,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5805,7 +5365,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 280,
-                            HotSpotId = 179,
+                            HotSpotId = 156,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5814,8 +5374,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 297,
+                            HotSpotId = 156,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 249,
+                            HotSpotId = 157,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 264,
-                            HotSpotId = 180,
+                            HotSpotId = 157,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5825,7 +5405,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 281,
-                            HotSpotId = 180,
+                            HotSpotId = 157,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5834,8 +5414,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 298,
+                            HotSpotId = 157,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 250,
+                            HotSpotId = 158,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 265,
-                            HotSpotId = 181,
+                            HotSpotId = 158,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5845,7 +5445,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 282,
-                            HotSpotId = 181,
+                            HotSpotId = 158,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5854,8 +5454,28 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 299,
+                            HotSpotId = 158,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
+                            Id = 251,
+                            HotSpotId = 159,
+                            Months = new[] { 4, 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "May - August"
+                        },
+                        new
+                        {
                             Id = 266,
-                            HotSpotId = 182,
+                            HotSpotId = 159,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5865,7 +5485,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 283,
-                            HotSpotId = 182,
+                            HotSpotId = 159,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5874,8 +5494,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 300,
+                            HotSpotId = 159,
+                            Months = new[] { 4, 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Big motorized boat, sailing boat",
+                            SpeciesId = 1,
+                            TimeOfYear = "May - October"
+                        },
+                        new
+                        {
                             Id = 267,
-                            HotSpotId = 183,
+                            HotSpotId = 160,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5885,7 +5515,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 284,
-                            HotSpotId = 183,
+                            HotSpotId = 160,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5895,7 +5525,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 268,
-                            HotSpotId = 184,
+                            HotSpotId = 161,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5905,7 +5535,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 285,
-                            HotSpotId = 184,
+                            HotSpotId = 161,
                             Months = new[] { 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Big motorized boat, sailing boat",
@@ -5915,7 +5545,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 301,
-                            HotSpotId = 185,
+                            HotSpotId = 162,
                             Months = new[] { 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Small boats",
@@ -5925,7 +5555,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 302,
-                            HotSpotId = 186,
+                            HotSpotId = 163,
                             Months = new[] { 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Small boats",
@@ -5935,7 +5565,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 303,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -5945,7 +5575,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 304,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -5955,7 +5585,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 305,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -5965,7 +5595,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 306,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -5975,7 +5605,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 307,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -5985,7 +5615,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 308,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -5995,7 +5625,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 309,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6005,7 +5635,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 310,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6015,7 +5645,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 311,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6025,7 +5655,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 312,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6035,7 +5665,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 313,
-                            HotSpotId = 187,
+                            HotSpotId = 164,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6045,7 +5675,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 314,
-                            HotSpotId = 188,
+                            HotSpotId = 165,
                             Months = new[] { 0, 1, 2, 3, 4, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Medium and senior vessels",
@@ -6055,7 +5685,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 315,
-                            HotSpotId = 189,
+                            HotSpotId = 166,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6065,7 +5695,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 316,
-                            HotSpotId = 190,
+                            HotSpotId = 167,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6075,7 +5705,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 317,
-                            HotSpotId = 191,
+                            HotSpotId = 168,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6085,7 +5715,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 318,
-                            HotSpotId = 192,
+                            HotSpotId = 169,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6095,7 +5725,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 319,
-                            HotSpotId = 193,
+                            HotSpotId = 170,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6105,7 +5735,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 333,
-                            HotSpotId = 193,
+                            HotSpotId = 170,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6115,7 +5745,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 320,
-                            HotSpotId = 194,
+                            HotSpotId = 171,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6125,7 +5755,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 321,
-                            HotSpotId = 195,
+                            HotSpotId = 172,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6135,7 +5765,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 322,
-                            HotSpotId = 196,
+                            HotSpotId = 173,
                             Months = new[] { 1, 2 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6145,7 +5775,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 323,
-                            HotSpotId = 197,
+                            HotSpotId = 174,
                             Months = new[] { 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6155,7 +5785,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 324,
-                            HotSpotId = 198,
+                            HotSpotId = 175,
                             Months = new[] { 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6165,7 +5795,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 325,
-                            HotSpotId = 199,
+                            HotSpotId = 176,
                             Months = new[] { 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6175,7 +5805,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 326,
-                            HotSpotId = 200,
+                            HotSpotId = 177,
                             Months = new[] { 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6185,7 +5815,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 327,
-                            HotSpotId = 201,
+                            HotSpotId = 178,
                             Months = new[] { 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6195,7 +5825,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 328,
-                            HotSpotId = 202,
+                            HotSpotId = 179,
                             Months = new[] { 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boats different sizes.",
@@ -6205,7 +5835,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 329,
-                            HotSpotId = 203,
+                            HotSpotId = 180,
                             Months = new[] { 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6215,7 +5845,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 330,
-                            HotSpotId = 204,
+                            HotSpotId = 181,
                             Months = new[] { 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6225,7 +5855,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 331,
-                            HotSpotId = 205,
+                            HotSpotId = 182,
                             Months = new[] { 0, 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6235,7 +5865,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 332,
-                            HotSpotId = 206,
+                            HotSpotId = 183,
                             Months = new[] { 0, 1 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized small boats",
@@ -6245,7 +5875,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 334,
-                            HotSpotId = 207,
+                            HotSpotId = 184,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 3 },
                             Platforms = "Boat, Aerial",
@@ -6255,7 +5885,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 336,
-                            HotSpotId = 207,
+                            HotSpotId = 184,
                             Months = new[] { 5, 6 },
                             PlatformBoxes = new[] { 0, 3 },
                             Platforms = "Boat, Aerial",
@@ -6265,7 +5895,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 337,
-                            HotSpotId = 207,
+                            HotSpotId = 184,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6275,7 +5905,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 335,
-                            HotSpotId = 208,
+                            HotSpotId = 185,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6285,7 +5915,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 338,
-                            HotSpotId = 209,
+                            HotSpotId = 186,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6295,7 +5925,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 339,
-                            HotSpotId = 210,
+                            HotSpotId = 187,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6305,7 +5935,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 340,
-                            HotSpotId = 211,
+                            HotSpotId = 188,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6315,7 +5945,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 341,
-                            HotSpotId = 212,
+                            HotSpotId = 189,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6325,7 +5955,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 342,
-                            HotSpotId = 213,
+                            HotSpotId = 190,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6335,7 +5965,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 343,
-                            HotSpotId = 214,
+                            HotSpotId = 191,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat",
@@ -6345,7 +5975,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 344,
-                            HotSpotId = 215,
+                            HotSpotId = 192,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6354,8 +5984,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 346,
+                            HotSpotId = 192,
+                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Motorised boat",
+                            SpeciesId = 9,
+                            TimeOfYear = "All year round"
+                        },
+                        new
+                        {
                             Id = 350,
-                            HotSpotId = 215,
+                            HotSpotId = 192,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6364,8 +6004,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 353,
+                            HotSpotId = 192,
+                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Motorised boat",
+                            SpeciesId = 8,
+                            TimeOfYear = "All year round"
+                        },
+                        new
+                        {
                             Id = 359,
-                            HotSpotId = 215,
+                            HotSpotId = 192,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6375,7 +6025,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 345,
-                            HotSpotId = 216,
+                            HotSpotId = 193,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6384,38 +6034,8 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 351,
-                            HotSpotId = 216,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Motorised boat",
-                            SpeciesId = 12,
-                            TimeOfYear = "Unknown"
-                        },
-                        new
-                        {
-                            Id = 360,
-                            HotSpotId = 216,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Motorised boat",
-                            SpeciesId = 10,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 346,
-                            HotSpotId = 217,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Motorised boat",
-                            SpeciesId = 9,
-                            TimeOfYear = "All year round"
-                        },
-                        new
-                        {
                             Id = 347,
-                            HotSpotId = 218,
+                            HotSpotId = 193,
                             Months = new[] { 0, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6424,48 +6044,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 348,
-                            HotSpotId = 219,
-                            Months = new[] { 0, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Motorised boat",
-                            SpeciesId = 9,
-                            TimeOfYear = "Nov-Jan, depending on if/where the herring will be overwintering in fjords"
-                        },
-                        new
-                        {
-                            Id = 349,
-                            HotSpotId = 220,
-                            Months = new[] { 0, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Motorised boat",
-                            SpeciesId = 9,
-                            TimeOfYear = "Nov-Jan, depending on if/where the herring will be overwintering in fjords"
-                        },
-                        new
-                        {
-                            Id = 352,
-                            HotSpotId = 221,
-                            Months = new[] { 0, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Motorised boat",
-                            SpeciesId = 9,
-                            TimeOfYear = "Nov-Jan, depending on if/where the herring will be overwintering in fjords"
-                        },
-                        new
-                        {
-                            Id = 353,
-                            HotSpotId = 222,
+                            Id = 351,
+                            HotSpotId = 193,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
-                            SpeciesId = 8,
-                            TimeOfYear = "All year round"
+                            SpeciesId = 12,
+                            TimeOfYear = "Unknown"
                         },
                         new
                         {
                             Id = 354,
-                            HotSpotId = 223,
+                            HotSpotId = 193,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6474,18 +6064,48 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 360,
+                            HotSpotId = 193,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Motorised boat",
+                            SpeciesId = 10,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 348,
+                            HotSpotId = 194,
+                            Months = new[] { 0, 10, 11 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Motorised boat",
+                            SpeciesId = 9,
+                            TimeOfYear = "Nov-Jan, depending on if/where the herring will be overwintering in fjords"
+                        },
+                        new
+                        {
                             Id = 355,
-                            HotSpotId = 224,
+                            HotSpotId = 194,
                             Months = new[] { 0, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
                             SpeciesId = 8,
+                            TimeOfYear = "Nov-Jan, depending on if/where the herring will be overwintering in fjords"
+                        },
+                        new
+                        {
+                            Id = 349,
+                            HotSpotId = 195,
+                            Months = new[] { 0, 10, 11 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Motorised boat",
+                            SpeciesId = 9,
                             TimeOfYear = "Nov-Jan, depending on if/where the herring will be overwintering in fjords"
                         },
                         new
                         {
                             Id = 356,
-                            HotSpotId = 225,
+                            HotSpotId = 195,
                             Months = new[] { 0, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6494,8 +6114,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 352,
+                            HotSpotId = 196,
+                            Months = new[] { 0, 10, 11 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Motorised boat",
+                            SpeciesId = 9,
+                            TimeOfYear = "Nov-Jan, depending on if/where the herring will be overwintering in fjords"
+                        },
+                        new
+                        {
                             Id = 357,
-                            HotSpotId = 226,
+                            HotSpotId = 196,
                             Months = new[] { 0, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6505,7 +6135,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 358,
-                            HotSpotId = 227,
+                            HotSpotId = 197,
                             Months = new[] { 0, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6515,7 +6145,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 361,
-                            HotSpotId = 227,
+                            HotSpotId = 197,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6525,7 +6155,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 362,
-                            HotSpotId = 227,
+                            HotSpotId = 197,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6535,7 +6165,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 363,
-                            HotSpotId = 227,
+                            HotSpotId = 197,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6545,7 +6175,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 364,
-                            HotSpotId = 227,
+                            HotSpotId = 197,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6555,7 +6185,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 365,
-                            HotSpotId = 227,
+                            HotSpotId = 197,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorised boat",
@@ -6565,7 +6195,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 366,
-                            HotSpotId = 228,
+                            HotSpotId = 198,
                             Months = new[] { 0, 1, 2, 3, 6, 7, 8, 9, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat-based and live-aboard",
@@ -6575,7 +6205,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 367,
-                            HotSpotId = 229,
+                            HotSpotId = 199,
                             Months = new[] { 0, 1, 2, 3, 6, 7, 8, 9, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat-based and live-aboard",
@@ -6585,7 +6215,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 368,
-                            HotSpotId = 230,
+                            HotSpotId = 200,
                             Months = new[] { 0, 1, 2, 3, 6, 7, 8, 9, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat-based and live-aboard",
@@ -6595,7 +6225,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 369,
-                            HotSpotId = 231,
+                            HotSpotId = 201,
                             Months = new[] { 0, 1, 2, 3, 6, 7, 8, 9, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat-based and live-aboard",
@@ -6605,7 +6235,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 370,
-                            HotSpotId = 232,
+                            HotSpotId = 202,
                             Months = new[] { 0, 1, 2, 3, 6, 7, 8, 9, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat-based and live-aboard",
@@ -6615,7 +6245,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 371,
-                            HotSpotId = 233,
+                            HotSpotId = 203,
                             Months = new[] { 0, 1, 2, 3, 6, 7, 8, 9, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat-based and live-aboard",
@@ -6625,7 +6255,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 372,
-                            HotSpotId = 234,
+                            HotSpotId = 204,
                             Months = new[] { 0, 1, 2, 3, 6, 7, 8, 9, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Boat-based and live-aboard",
@@ -6635,7 +6265,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 373,
-                            HotSpotId = 235,
+                            HotSpotId = 205,
                             Months = new[] { 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat (yachts, artisanal fishing boats)",
@@ -6645,7 +6275,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 374,
-                            HotSpotId = 236,
+                            HotSpotId = 206,
                             Months = new[] { 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat (yachts, artisanal fishing boats)",
@@ -6655,7 +6285,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 375,
-                            HotSpotId = 237,
+                            HotSpotId = 207,
                             Months = new[] { 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat (yachts, artisanal fishing boats)",
@@ -6665,7 +6295,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 376,
-                            HotSpotId = 238,
+                            HotSpotId = 208,
                             Months = new[] { 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat (yachts, artisanal fishing boats)",
@@ -6675,7 +6305,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 377,
-                            HotSpotId = 239,
+                            HotSpotId = 209,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat (yachts, artisanal fishing boats)",
@@ -6685,7 +6315,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 378,
-                            HotSpotId = 239,
+                            HotSpotId = 209,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat (yachts, artisanal fishing boats)",
@@ -6695,7 +6325,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 379,
-                            HotSpotId = 240,
+                            HotSpotId = 210,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6705,7 +6335,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 382,
-                            HotSpotId = 240,
+                            HotSpotId = 210,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6715,7 +6345,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 385,
-                            HotSpotId = 240,
+                            HotSpotId = 210,
                             Months = new[] { 3, 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6725,7 +6355,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 387,
-                            HotSpotId = 240,
+                            HotSpotId = 210,
                             Months = new[] { 3, 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6735,7 +6365,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 390,
-                            HotSpotId = 240,
+                            HotSpotId = 210,
                             Months = new[] { 3, 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6745,7 +6375,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 392,
-                            HotSpotId = 240,
+                            HotSpotId = 210,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6755,7 +6385,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 380,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "motorized boat",
@@ -6765,7 +6395,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 381,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 3, 4, 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6775,7 +6405,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 383,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6785,7 +6415,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 386,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6795,7 +6425,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 388,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6805,7 +6435,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 391,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6815,7 +6445,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 393,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6825,7 +6455,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 396,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6835,7 +6465,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 397,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6845,7 +6475,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 398,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6855,7 +6485,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 399,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6865,7 +6495,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 400,
-                            HotSpotId = 241,
+                            HotSpotId = 211,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6875,7 +6505,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 384,
-                            HotSpotId = 242,
+                            HotSpotId = 212,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6885,7 +6515,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 389,
-                            HotSpotId = 242,
+                            HotSpotId = 212,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6895,7 +6525,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 394,
-                            HotSpotId = 242,
+                            HotSpotId = 212,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6905,7 +6535,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 395,
-                            HotSpotId = 243,
+                            HotSpotId = 213,
                             Months = new[] { 5, 6, 7, 8 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -6915,7 +6545,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 401,
-                            HotSpotId = 244,
+                            HotSpotId = 214,
                             Months = new[] { 6, 7, 8, 9, 10 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat",
@@ -6925,7 +6555,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 407,
-                            HotSpotId = 244,
+                            HotSpotId = 214,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -6934,8 +6564,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 415,
+                            HotSpotId = 214,
+                            Months = new[] { 5, 6, 7, 8, 9, 10 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "Vessel based; land based",
+                            SpeciesId = 13,
+                            TimeOfYear = "Jun-Nov"
+                        },
+                        new
+                        {
                             Id = 422,
-                            HotSpotId = 244,
+                            HotSpotId = 214,
                             Months = new[] { 9 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -6945,7 +6585,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 402,
-                            HotSpotId = 245,
+                            HotSpotId = 215,
                             Months = new[] { 6, 7, 8, 9, 10 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat",
@@ -6955,7 +6595,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 408,
-                            HotSpotId = 245,
+                            HotSpotId = 215,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -6964,8 +6604,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 416,
+                            HotSpotId = 215,
+                            Months = new[] { 5, 6, 7, 8, 9, 10 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "Vessel based; land based",
+                            SpeciesId = 13,
+                            TimeOfYear = "Jun-Nov"
+                        },
+                        new
+                        {
                             Id = 403,
-                            HotSpotId = 246,
+                            HotSpotId = 216,
                             Months = new[] { 6, 7, 8, 9, 10 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat",
@@ -6975,7 +6625,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 409,
-                            HotSpotId = 246,
+                            HotSpotId = 216,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -6984,8 +6634,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 417,
+                            HotSpotId = 216,
+                            Months = new[] { 5, 6, 7, 8, 9, 10 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "Vessel based; land based",
+                            SpeciesId = 13,
+                            TimeOfYear = "Jun-Nov"
+                        },
+                        new
+                        {
                             Id = 404,
-                            HotSpotId = 247,
+                            HotSpotId = 217,
                             Months = new[] { 0, 1, 2, 3, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -6995,7 +6655,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 410,
-                            HotSpotId = 247,
+                            HotSpotId = 217,
                             Months = new[] { 0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 2 },
                             Platforms = "Vessel Based; Land based",
@@ -7004,8 +6664,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 418,
+                            HotSpotId = 217,
+                            Months = new[] { 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "Vessel based",
+                            SpeciesId = 13,
+                            TimeOfYear = "Jul-Oct"
+                        },
+                        new
+                        {
                             Id = 405,
-                            HotSpotId = 248,
+                            HotSpotId = 218,
                             Months = new[] { 8, 9, 10 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -7015,7 +6685,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 421,
-                            HotSpotId = 248,
+                            HotSpotId = 218,
                             Months = new[] { 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -7025,7 +6695,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 406,
-                            HotSpotId = 249,
+                            HotSpotId = 219,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -7034,8 +6704,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 414,
+                            HotSpotId = 219,
+                            Months = new[] { 5, 6, 7, 8, 9, 10 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "Vessel based; land based",
+                            SpeciesId = 13,
+                            TimeOfYear = "Jun-Nov"
+                        },
+                        new
+                        {
                             Id = 411,
-                            HotSpotId = 250,
+                            HotSpotId = 220,
                             Months = new[] { 0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 2 },
                             Platforms = "Vessel Based; Land based",
@@ -7044,8 +6724,18 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
+                            Id = 420,
+                            HotSpotId = 220,
+                            Months = new[] { 5, 6, 7, 8, 9 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "Vessel based; Land based",
+                            SpeciesId = 13,
+                            TimeOfYear = "Jun-Oct"
+                        },
+                        new
+                        {
                             Id = 412,
-                            HotSpotId = 251,
+                            HotSpotId = 221,
                             Months = new[] { 5, 6, 7, 8, 9, 10 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel Based",
@@ -7055,7 +6745,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 413,
-                            HotSpotId = 252,
+                            HotSpotId = 222,
                             Months = new[] { 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Vessel based",
@@ -7064,58 +6754,8 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 414,
-                            HotSpotId = 253,
-                            Months = new[] { 5, 6, 7, 8, 9, 10 },
-                            PlatformBoxes = new[] { 0, 2 },
-                            Platforms = "Vessel based; land based",
-                            SpeciesId = 13,
-                            TimeOfYear = "Jun-Nov"
-                        },
-                        new
-                        {
-                            Id = 415,
-                            HotSpotId = 254,
-                            Months = new[] { 5, 6, 7, 8, 9, 10 },
-                            PlatformBoxes = new[] { 0, 2 },
-                            Platforms = "Vessel based; land based",
-                            SpeciesId = 13,
-                            TimeOfYear = "Jun-Nov"
-                        },
-                        new
-                        {
-                            Id = 416,
-                            HotSpotId = 255,
-                            Months = new[] { 5, 6, 7, 8, 9, 10 },
-                            PlatformBoxes = new[] { 0, 2 },
-                            Platforms = "Vessel based; land based",
-                            SpeciesId = 13,
-                            TimeOfYear = "Jun-Nov"
-                        },
-                        new
-                        {
-                            Id = 417,
-                            HotSpotId = 256,
-                            Months = new[] { 5, 6, 7, 8, 9, 10 },
-                            PlatformBoxes = new[] { 0, 2 },
-                            Platforms = "Vessel based; land based",
-                            SpeciesId = 13,
-                            TimeOfYear = "Jun-Nov"
-                        },
-                        new
-                        {
-                            Id = 418,
-                            HotSpotId = 257,
-                            Months = new[] { 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "Vessel based",
-                            SpeciesId = 13,
-                            TimeOfYear = "Jul-Oct"
-                        },
-                        new
-                        {
                             Id = 419,
-                            HotSpotId = 258,
+                            HotSpotId = 223,
                             Months = new[] { 5, 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0, 2 },
                             Platforms = "Vessel Based; Land based",
@@ -7124,18 +6764,8 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 420,
-                            HotSpotId = 259,
-                            Months = new[] { 5, 6, 7, 8, 9 },
-                            PlatformBoxes = new[] { 0, 2 },
-                            Platforms = "Vessel based; Land based",
-                            SpeciesId = 13,
-                            TimeOfYear = "Jun-Oct"
-                        },
-                        new
-                        {
                             Id = 423,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7145,7 +6775,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 424,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7155,7 +6785,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 425,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7165,7 +6795,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 426,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7175,7 +6805,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 427,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7185,7 +6815,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 428,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7195,7 +6825,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 429,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7205,7 +6835,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 430,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7215,7 +6845,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 431,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7225,7 +6855,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 432,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7235,7 +6865,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 433,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7245,7 +6875,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 434,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7255,7 +6885,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 435,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7265,7 +6895,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 436,
-                            HotSpotId = 260,
+                            HotSpotId = 224,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7275,7 +6905,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 437,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7285,7 +6915,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 438,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7295,7 +6925,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 439,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7305,7 +6935,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 440,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7315,7 +6945,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 441,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7325,7 +6955,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 442,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7335,7 +6965,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 443,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7345,7 +6975,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 444,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7355,7 +6985,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 445,
-                            HotSpotId = 261,
+                            HotSpotId = 225,
                             Months = new[] { 4, 5 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7365,7 +6995,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 446,
-                            HotSpotId = 262,
+                            HotSpotId = 226,
                             Months = new[] { 0, 1, 2, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7375,7 +7005,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 448,
-                            HotSpotId = 262,
+                            HotSpotId = 226,
                             Months = new[] { 0, 1, 2, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7385,7 +7015,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 450,
-                            HotSpotId = 262,
+                            HotSpotId = 226,
                             Months = new[] { 0, 1, 2, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7395,7 +7025,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 447,
-                            HotSpotId = 263,
+                            HotSpotId = 227,
                             Months = new[] { 2, 3, 4, 5, 6 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7405,7 +7035,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 449,
-                            HotSpotId = 263,
+                            HotSpotId = 227,
                             Months = new[] { 2, 3, 4, 5, 6 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7415,7 +7045,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 451,
-                            HotSpotId = 263,
+                            HotSpotId = 227,
                             Months = new[] { 2, 3, 4, 5, 6 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7425,7 +7055,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 452,
-                            HotSpotId = 264,
+                            HotSpotId = 228,
                             Months = new[] { 0, 1, 2, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "Motorized boat",
@@ -7435,7 +7065,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 453,
-                            HotSpotId = 265,
+                            HotSpotId = 229,
                             Months = new[] { 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0, 1 },
                             Platforms = "Boat, swim with",
@@ -7445,7 +7075,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 454,
-                            HotSpotId = 266,
+                            HotSpotId = 230,
                             Months = new[] { 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0, 1 },
                             Platforms = "Boat, swim with",
@@ -7455,7 +7085,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 455,
-                            HotSpotId = 267,
+                            HotSpotId = 231,
                             Months = new[] { 6, 7, 8, 9 },
                             PlatformBoxes = new[] { 0, 1 },
                             Platforms = "Boat, swim with",
@@ -7465,7 +7095,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 456,
-                            HotSpotId = 268,
+                            HotSpotId = 232,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7475,7 +7105,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 457,
-                            HotSpotId = 269,
+                            HotSpotId = 233,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7485,7 +7115,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 458,
-                            HotSpotId = 270,
+                            HotSpotId = 234,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7495,7 +7125,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 459,
-                            HotSpotId = 270,
+                            HotSpotId = 234,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7505,7 +7135,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 460,
-                            HotSpotId = 271,
+                            HotSpotId = 235,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7515,7 +7145,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 461,
-                            HotSpotId = 272,
+                            HotSpotId = 236,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0, 1, 2, 3 },
                             Platforms = "Unknown",
@@ -7525,7 +7155,7 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 462,
-                            HotSpotId = 273,
+                            HotSpotId = 237,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7535,217 +7165,17 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 464,
-                            HotSpotId = 273,
+                            HotSpotId = 237,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
                             SpeciesId = 5,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 480,
-                            HotSpotId = 273,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 10,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 492,
-                            HotSpotId = 273,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 9,
-                            TimeOfYear = "Year round (Southeast, Hawaii)"
-                        },
-                        new
-                        {
-                            Id = 463,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 5,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 466,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 473,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer (Northeast, Alaska, Northwest, Southwest)"
-                        },
-                        new
-                        {
-                            Id = 479,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 10,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 482,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 13,
-                            TimeOfYear = "Summer (Northeast)"
-                        },
-                        new
-                        {
-                            Id = 484,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 14,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 486,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 15,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 490,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0, 1, 2, 3 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 9,
-                            TimeOfYear = "Summer (Northeast, Southwest)"
-                        },
-                        new
-                        {
-                            Id = 494,
-                            HotSpotId = 274,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 9,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 499,
-                            HotSpotId = 274,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 12,
-                            TimeOfYear = "Year-round"
-                        },
-                        new
-                        {
-                            Id = 465,
-                            HotSpotId = 275,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 5,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 467,
-                            HotSpotId = 276,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 470,
-                            HotSpotId = 276,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 7,
-                            TimeOfYear = "Summer (Alaska)"
-                        },
-                        new
-                        {
-                            Id = 487,
-                            HotSpotId = 276,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 15,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 468,
-                            HotSpotId = 277,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 6,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 471,
-                            HotSpotId = 277,
-                            Months = new[] { 2, 3, 4 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 7,
-                            TimeOfYear = "Spring (Northwest, Southwest)"
-                        },
-                        new
-                        {
-                            Id = 476,
-                            HotSpotId = 277,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer (Northeast, Alaska, Northwest, Southwest)"
-                        },
-                        new
-                        {
-                            Id = 481,
-                            HotSpotId = 277,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 10,
                             TimeOfYear = "Summer"
                         },
                         new
                         {
                             Id = 469,
-                            HotSpotId = 278,
+                            HotSpotId = 237,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7755,117 +7185,37 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 472,
-                            HotSpotId = 278,
+                            HotSpotId = 237,
                             Months = new[] { 2, 3, 4 },
                             PlatformBoxes = new[] { 2 },
                             Platforms = "shore-based",
                             SpeciesId = 7,
-                            TimeOfYear = "Spring (Northwest, Southwest)"
+                            TimeOfYear = "Spring"
                         },
                         new
                         {
                             Id = 477,
-                            HotSpotId = 278,
+                            HotSpotId = 237,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 2 },
                             Platforms = "shore-based",
                             SpeciesId = 8,
-                            TimeOfYear = "Summer (Northeast, Alaska, Northwest, Southwest)"
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 480,
+                            HotSpotId = 237,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 10,
+                            TimeOfYear = "Summer"
                         },
                         new
                         {
                             Id = 489,
-                            HotSpotId = 278,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 15,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 497,
-                            HotSpotId = 278,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 9,
-                            TimeOfYear = "Year-Round (Northwest)"
-                        },
-                        new
-                        {
-                            Id = 474,
-                            HotSpotId = 279,
-                            Months = new[] { 0, 1, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 8,
-                            TimeOfYear = "Winter & Spring (Southeast, Hawaii)"
-                        },
-                        new
-                        {
-                            Id = 485,
-                            HotSpotId = 279,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 14,
-                            TimeOfYear = "Summer"
-                        },
-                        new
-                        {
-                            Id = 475,
-                            HotSpotId = 280,
-                            Months = new[] { 5, 6, 7 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 8,
-                            TimeOfYear = "Summer (Northeast, Alaska, Northwest, Southwest)"
-                        },
-                        new
-                        {
-                            Id = 478,
-                            HotSpotId = 281,
-                            Months = new[] { 0, 1, 2, 3, 4, 11 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 8,
-                            TimeOfYear = "Winter & Spring (Southeast, Hawaii)"
-                        },
-                        new
-                        {
-                            Id = 493,
-                            HotSpotId = 281,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
-                            SpeciesId = 9,
-                            TimeOfYear = "Year round (Southeast, Hawaii)"
-                        },
-                        new
-                        {
-                            Id = 498,
-                            HotSpotId = 281,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 9,
-                            TimeOfYear = "Year-Round (Northwest)"
-                        },
-                        new
-                        {
-                            Id = 483,
-                            HotSpotId = 282,
-                            Months = new[] { 0, 1, 11 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 13,
-                            TimeOfYear = "Winter (Southeast)"
-                        },
-                        new
-                        {
-                            Id = 488,
-                            HotSpotId = 283,
+                            HotSpotId = 237,
                             Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7875,17 +7225,97 @@ namespace WhaleSpotting.Migrations
                         new
                         {
                             Id = 491,
-                            HotSpotId = 284,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 0 },
-                            Platforms = "motorized boat",
+                            HotSpotId = 237,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "motorized boat and shore-based",
                             SpeciesId = 9,
-                            TimeOfYear = "Year round (Southeast, Hawaii)"
+                            TimeOfYear = "Summer"
                         },
                         new
                         {
-                            Id = 500,
-                            HotSpotId = 284,
+                            Id = 463,
+                            HotSpotId = 238,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 5,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 466,
+                            HotSpotId = 238,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 473,
+                            HotSpotId = 238,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 479,
+                            HotSpotId = 238,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 10,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 482,
+                            HotSpotId = 238,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 13,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 484,
+                            HotSpotId = 238,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 14,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 486,
+                            HotSpotId = 238,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 15,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 490,
+                            HotSpotId = 238,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "motorized boat and shore-based",
+                            SpeciesId = 9,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 495,
+                            HotSpotId = 238,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -7894,28 +7324,188 @@ namespace WhaleSpotting.Migrations
                         },
                         new
                         {
-                            Id = 495,
-                            HotSpotId = 285,
-                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                            Id = 465,
+                            HotSpotId = 239,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 5,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 467,
+                            HotSpotId = 240,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 470,
+                            HotSpotId = 240,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 7,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 475,
+                            HotSpotId = 240,
+                            Months = new[] { 5, 6, 7 },
                             PlatformBoxes = new[] { 2 },
                             Platforms = "shore-based",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 487,
+                            HotSpotId = 240,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 15,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 493,
+                            HotSpotId = 240,
+                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "motorized boat and shore-based",
                             SpeciesId = 9,
-                            TimeOfYear = "Rare (Hawaii)"
+                            TimeOfYear = "Year-Round"
+                        },
+                        new
+                        {
+                            Id = 468,
+                            HotSpotId = 241,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 6,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 471,
+                            HotSpotId = 241,
+                            Months = new[] { 2, 3, 4 },
+                            PlatformBoxes = new[] { 2 },
+                            Platforms = "shore-based",
+                            SpeciesId = 7,
+                            TimeOfYear = "Spring"
+                        },
+                        new
+                        {
+                            Id = 476,
+                            HotSpotId = 241,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 2 },
+                            Platforms = "shore-based",
+                            SpeciesId = 8,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 481,
+                            HotSpotId = 241,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 10,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 488,
+                            HotSpotId = 241,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 15,
+                            TimeOfYear = "Summer"
+                        },
+                        new
+                        {
+                            Id = 494,
+                            HotSpotId = 241,
+                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "motorized boat and shore-based",
+                            SpeciesId = 9,
+                            TimeOfYear = "Year-Round"
+                        },
+                        new
+                        {
+                            Id = 474,
+                            HotSpotId = 242,
+                            Months = new[] { 0, 1, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 2 },
+                            Platforms = "shore-based",
+                            SpeciesId = 8,
+                            TimeOfYear = "Winter & Spring"
+                        },
+                        new
+                        {
+                            Id = 483,
+                            HotSpotId = 242,
+                            Months = new[] { 0, 1, 11 },
+                            PlatformBoxes = new[] { 2 },
+                            Platforms = "shore-based",
+                            SpeciesId = 13,
+                            TimeOfYear = "Winter"
+                        },
+                        new
+                        {
+                            Id = 485,
+                            HotSpotId = 242,
+                            Months = new[] { 5, 6, 7 },
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 14,
+                            TimeOfYear = "Summer"
                         },
                         new
                         {
                             Id = 496,
-                            HotSpotId = 286,
+                            HotSpotId = 242,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                            PlatformBoxes = new[] { 2 },
-                            Platforms = "shore-based",
-                            SpeciesId = 9,
-                            TimeOfYear = "Year-Round (Northwest)"
+                            PlatformBoxes = new[] { 0 },
+                            Platforms = "motorized boat",
+                            SpeciesId = 12,
+                            TimeOfYear = "Year-round"
                         },
                         new
                         {
-                            Id = 501,
-                            HotSpotId = 287,
+                            Id = 478,
+                            HotSpotId = 243,
+                            Months = new[] { 0, 1, 2, 3, 4, 11 },
+                            PlatformBoxes = new[] { 2 },
+                            Platforms = "shore-based",
+                            SpeciesId = 8,
+                            TimeOfYear = "Winter & Spring"
+                        },
+                        new
+                        {
+                            Id = 492,
+                            HotSpotId = 243,
+                            Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                            PlatformBoxes = new[] { 0, 2 },
+                            Platforms = "motorized boat and shore-based",
+                            SpeciesId = 9,
+                            TimeOfYear = "Rare"
+                        },
+                        new
+                        {
+                            Id = 497,
+                            HotSpotId = 243,
                             Months = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                             PlatformBoxes = new[] { 0 },
                             Platforms = "motorized boat",
@@ -8003,12 +7593,6 @@ namespace WhaleSpotting.Migrations
 
             modelBuilder.Entity("WhaleSpotting.Models.Data.Sighting", b =>
                 {
-                    b.HasOne("WhaleSpotting.Models.Data.BodyOfWater", "BodyOfWater")
-                        .WithMany()
-                        .HasForeignKey("BodyOfWaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WhaleSpotting.Models.Data.Species", "Species")
                         .WithMany()
                         .HasForeignKey("SpeciesId")
@@ -8024,8 +7608,6 @@ namespace WhaleSpotting.Migrations
                     b.HasOne("WhaleSpotting.Models.Data.VerificationEvent", "VerificationEvent")
                         .WithMany()
                         .HasForeignKey("VerificationEventId");
-
-                    b.Navigation("BodyOfWater");
 
                     b.Navigation("Species");
 
