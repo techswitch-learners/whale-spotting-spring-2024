@@ -1,5 +1,5 @@
 import "./SightingsSearch.scss"
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext, useEffect, FormEvent } from "react"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
@@ -12,6 +12,8 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings } from "../api/backendClient"
+import FilterSightingsRequest from "../models/request/FilterSightingsRequest"
+import { DropdownButton, Dropdown } from "react-bootstrap"
 
 interface SightingCardProps {
   imageUrl: string
@@ -41,6 +43,11 @@ const SightingsSearch = () => {
   const backgroundContext = useContext(BackgroundContext)
   const [mapView, setMapView] = useState<boolean>(false)
   const [allSightings, setAllSightings] = useState<Sighting[]>()
+  const [filteredSightings, setFilteredSightings] = useState<Sighting[]>()
+  const [filterSightingsRequest, setFilterSightingsRequest] = useState<FilterSightingsRequest>({
+    species: [],
+    bodyOfWater: "",
+  })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
@@ -68,6 +75,25 @@ const SightingsSearch = () => {
   useEffect(() => {
     backgroundContext.setBackground("white")
   }, [backgroundContext])
+
+  useEffect(() => {
+    setFilteredSightings(allSightings)
+  }, [allSightings])
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target
+    setFilterSightingsRequest((prevParams) => ({
+      ...prevParams,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault()
+    setFilteredSightings(
+      allSightings?.filter((sighting) => filterSightingsRequest.species.includes(sighting.species.name)),
+    )
+  }
 
   return (
     <div className="SightingsSearch d-flex flex-column text-center">
@@ -113,23 +139,59 @@ const SightingsSearch = () => {
           </div>
         )}
         {!mapView && (
-          <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
-            {allSightings?.map((sighting) => (
-              <Link
-                to={`/sightings/${sighting.id}`}
-                key={sighting.id}
-                className="text-decoration-none"
-                style={{ width: "13rem" }}
+          <div>
+            <form onSubmit={handleSubmit}>
+              <DropdownButton
+                id="dropdown-species-button"
+                title="Species"
+                className="d-flex flex-column justify-content-center align-items-center mx-2"
+                variant="secondary"
               >
-                <SightingCard
-                  imageUrl={sighting.imageUrl}
-                  species={sighting.species.name}
-                  bodyOfWater={sighting.bodyOfWater}
-                  description={sighting.description}
-                  sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
-                />
-              </Link>
-            ))}
+                {[
+                  "Beaked whale",
+                  "Beluga whale",
+                  "Blue whale",
+                  "Bowhead whale",
+                  "Bryde's whale",
+                  "Fin whale",
+                  "Gray whale",
+                  "Humpback whale",
+                  "Killer whale",
+                  "Minke whale",
+                  "Narwhal",
+                  "Pilot whale",
+                  "Right whale",
+                  "Sei whale",
+                  "Sperm whale",
+                ].map((speciesName) => (
+                  <Dropdown.ItemText>
+                    <label>
+                      <input type="checkbox" name="species" value={speciesName} onChange={handleFilterChange} />{" "}
+                      {speciesName}
+                    </label>
+                  </Dropdown.ItemText>
+                ))}
+              </DropdownButton>
+              <button type="submit">Filter sightings</button>
+            </form>
+            <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
+              {filteredSightings?.map((sighting) => (
+                <Link
+                  to={`/sightings/${sighting.id}`}
+                  key={sighting.id}
+                  className="text-decoration-none"
+                  style={{ width: "13rem" }}
+                >
+                  <SightingCard
+                    imageUrl={sighting.imageUrl}
+                    species={sighting.species.name}
+                    bodyOfWater={sighting.bodyOfWater}
+                    description={sighting.description}
+                    sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
+                  />
+                </Link>
+              ))}
+            </div>
           </div>
         )}
         {loading && <p>Loading...</p>}
