@@ -82,6 +82,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
     }
 
     [Authorize]
+    [AllowAnonymous]
     [HttpGet("")]
     public IActionResult Search()
     {
