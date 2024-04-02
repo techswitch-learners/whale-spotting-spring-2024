@@ -20,8 +20,6 @@ public class SightingResponse
 
     public required string BodyOfWater { get; set; }
 
-    // public required string BodyOfWater { get; set; }
-
     public VerificationEvent? VerificationEvent { get; set; }
 
     public required DateTime SightingTimestamp { get; set; }

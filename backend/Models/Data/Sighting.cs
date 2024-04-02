@@ -27,8 +27,6 @@ public class Sighting
 
     public string BodyOfWater { get; set; } = null!;
 
-    // public string BodyOfWater { get; set; } = null!;
-
     public int? VerificationEventId { get; set; }
 
     [ForeignKey(nameof(VerificationEventId))]
