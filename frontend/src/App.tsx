@@ -12,6 +12,7 @@ import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
 import SightingsSearch from "./pages/SightingsSearch"
 import SightingForm from "./pages/SightingForm"
+import Users from "./pages/Users"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -56,6 +57,7 @@ const App = () => {
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
               <Route path="/sightings/add" element={<SightingForm />} />
+              <Route path="/users/all" element={<Users />}></Route>
             </Routes>
           </main>
         </Router>

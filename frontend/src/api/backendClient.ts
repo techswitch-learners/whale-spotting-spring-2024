@@ -48,3 +48,12 @@ export const getSpeciesList = async () => {
 export const getSightings = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings`)
 }
+
+export const getUsers = async (token?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/all`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
