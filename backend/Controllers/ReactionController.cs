@@ -14,36 +14,6 @@ public class ReactionController(WhaleSpottingContext context) : Controller
 {
     private readonly WhaleSpottingContext _context = context;
 
-    [HttpGet("{sightingId}")]
-    public IActionResult GetBySightingId([FromRoute] int sightingId)
-    {
-        var userId = AuthHelper.GetUserIdIfLoggedIn(User);
-        if (_context.Reactions.Any(reaction => reaction.SightingId == sightingId))
-        {
-            var reactionsDict = _context
-                .Reactions.Where(reaction => reaction.SightingId == sightingId)
-                .GroupBy(reaction => reaction.Type)
-                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count());
-
-            var currentUserReaction = _context
-                .Reactions.SingleOrDefault(reaction => reaction.SightingId == sightingId && reaction.UserId == userId)
-                ?.Type.ToString();
-
-            return Ok(
-                new ReactionResponse
-                {
-                    SightingId = sightingId,
-                    Reactions = reactionsDict,
-                    CurrentUserReaction = currentUserReaction
-                }
-            );
-        }
-        else
-        {
-            return BadRequest("No reactions exist for this sighting.");
-        }
-    }
-
     [Authorize]
     [HttpPost("")]
     public IActionResult Add([FromBody] AddReactionRequest addReactionRequest)
@@ -102,7 +72,6 @@ public class ReactionController(WhaleSpottingContext context) : Controller
         {
             matchingReaction.Type = reactionType;
             matchingReaction.Timestamp = DateTime.UtcNow;
-            // _context.Reactions.Update(matchingReaction);
             _context.SaveChanges();
 
             var reactionsDict = _context
