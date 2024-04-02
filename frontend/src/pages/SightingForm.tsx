@@ -49,6 +49,7 @@ const SightingForm = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
   const [errors, setErrors] = useState<{ [subject: string]: string[] }>({})
+
   const toggleMap = () => {
     setShowMap(!showMap)
   }
@@ -84,11 +85,14 @@ const SightingForm = () => {
   }
 
   useEffect(() => {
-    fetchBodyOfWater(latitude, longitude)
     getSpeciesList()
       .then((response) => response.json())
       .then((content) => setSpeciesList(content.speciesList))
       .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    fetchBodyOfWater(latitude, longitude)
   }, [latitude, longitude])
 
   useEffect(() => {
