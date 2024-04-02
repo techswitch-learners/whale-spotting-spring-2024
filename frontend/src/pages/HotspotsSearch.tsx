@@ -10,6 +10,7 @@ import Hotspot from "../models/view/Hotspot"
 import SearchHotspotsRequest from "../models/request/SearchHotspotsRequest"
 import "./HotspotsSearch.scss"
 import { getHotspots } from "../api/backendClient"
+import { faHelicopter, faPersonHiking, faPersonSwimming, faSailboat } from "@fortawesome/free-solid-svg-icons"
 
 function HotspotsSearch() {
   const [searchHotspotsRequest, setSearchHotspotsRequest] = useState<SearchHotspotsRequest>({
@@ -221,7 +222,42 @@ function HotspotsSearch() {
                         </Col>
                       </Row>
                     </Card.Body>
-                    <Card.Footer></Card.Footer>
+                    <Card.Footer>
+                      <Row className="d-flex justify-content-start align-items-center mx-3">
+                        <Col className="d-flex align-items-center">
+                          <FontAwesomeIcon
+                            icon={faSailboat}
+                            className={
+                              spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(0))
+                                ? "text-secondary"
+                                : "opacity-50"
+                            }
+                          />
+                        </Col>
+                        <Col className="d-flex align-items-center">
+                          <FontAwesomeIcon
+                            icon={faPersonSwimming}
+                            className={`fs-5 ${spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(1)) ? "text-secondary" : "opacity-50"}`}
+                          />
+                        </Col>
+                        <Col className="d-flex align-items-center">
+                          <FontAwesomeIcon
+                            icon={faPersonHiking}
+                            className={`fs-5 ${spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(2)) ? "text-secondary" : "opacity-50"}`}
+                          />
+                        </Col>
+                        <Col className="d-flex align-items-center">
+                          <FontAwesomeIcon
+                            icon={faHelicopter}
+                            className={
+                              spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(3))
+                                ? "text-secondary"
+                                : "opacity-50"
+                            }
+                          />
+                        </Col>
+                      </Row>
+                    </Card.Footer>
                   </Card>
                 </Link>
               </li>
