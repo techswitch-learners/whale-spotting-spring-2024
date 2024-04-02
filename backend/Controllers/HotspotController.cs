@@ -42,11 +42,9 @@ public class HotspotController(WhaleSpottingContext context) : Controller
                 EF.Functions.ILike(suggestion.Hotspot.Country, $"%{searchRequest.Country}%")
             );
         }
-        if (!string.IsNullOrEmpty(searchRequest.HotspotName))
+        if (!string.IsNullOrEmpty(searchRequest.Name))
         {
-            query = query.Where(suggestion =>
-                EF.Functions.ILike(suggestion.Hotspot.Name, $"%{searchRequest.HotspotName}%")
-            );
+            query = query.Where(suggestion => EF.Functions.ILike(suggestion.Hotspot.Name, $"%{searchRequest.Name}%"));
         }
         if (searchRequest.Species != null && searchRequest.Species.Count > 0)
         {

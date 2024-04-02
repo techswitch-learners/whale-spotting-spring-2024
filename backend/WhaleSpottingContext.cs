@@ -41,19 +41,19 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
         var speciesList = speciesCsvReader.GetRecords<Species>().ToList();
         builder.Entity<Species>().HasData(speciesList);
 
-        using var streamReader = new StreamReader("Data/Hotspots.csv");
+        using var streamReader = new StreamReader("Data/hotspots.csv");
         using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
-        var HotspotRows = csvReader.GetRecords<HotspotRow>().ToList();
+        var hotspotRows = csvReader.GetRecords<HotspotRow>().ToList();
 
-        var distinctHotspots = HotspotRows
-            .DistinctBy(Hotspot =>
-                (Hotspot.Country, Hotspot.Region, Hotspot.TownOrHarbour, Hotspot.Latitude, Hotspot.Longitude)
+        var distinctHotspots = hotspotRows
+            .DistinctBy(hotspot =>
+                (hotspot.Country, hotspot.Region, hotspot.TownOrHarbour, hotspot.Latitude, hotspot.Longitude)
             )
             .ToList();
 
         for (var i = 0; i < distinctHotspots.Count; i++)
         {
-            var Hotspot = new Hotspot
+            var hotspot = new Hotspot
             {
                 Id = i + 1,
                 Name = GetHotspotName(distinctHotspots[i]),
@@ -62,17 +62,17 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
                 Country = distinctHotspots[i].Country,
                 ViewingSuggestions = [],
             };
-            builder.Entity<Hotspot>().HasData(Hotspot);
+            builder.Entity<Hotspot>().HasData(hotspot);
 
-            var viewingSuggestions = HotspotRows
-                .Where(HotspotRow => Hotspot.Name == GetHotspotName(HotspotRow))
+            var viewingSuggestions = hotspotRows
+                .Where(hotspotRow => hotspot.Name == GetHotspotName(hotspotRow))
                 .ToList();
             foreach (var suggestion in viewingSuggestions)
             {
                 var viewingSuggestion = new ViewingSuggestion
                 {
                     Id = suggestion.Id,
-                    HotspotId = Hotspot.Id,
+                    HotspotId = hotspot.Id,
                     SpeciesId = speciesList.First(spec => spec.Name == suggestion.Species).Id,
                     Platforms = suggestion.Platform,
                     PlatformBoxes = suggestion
@@ -95,12 +95,12 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
         }
     }
 
-    private static string GetHotspotName(HotspotRow HotspotRow)
+    private static string GetHotspotName(HotspotRow hotspotRow)
     {
-        return !string.IsNullOrEmpty(HotspotRow.Region) && !string.IsNullOrEmpty(HotspotRow.TownOrHarbour)
-            ? $"{HotspotRow.TownOrHarbour}, {HotspotRow.Region}"
-            : !string.IsNullOrEmpty(HotspotRow.Region)
-                ? HotspotRow.Region
-                : HotspotRow.TownOrHarbour;
+        return !string.IsNullOrEmpty(hotspotRow.Region) && !string.IsNullOrEmpty(hotspotRow.TownOrHarbour)
+            ? $"{hotspotRow.TownOrHarbour}, {hotspotRow.Region}"
+            : !string.IsNullOrEmpty(hotspotRow.Region)
+                ? hotspotRow.Region
+                : hotspotRow.TownOrHarbour;
     }
 }
