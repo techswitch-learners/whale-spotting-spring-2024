@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react"
+import React, { FormEvent, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
@@ -9,10 +9,12 @@ import whalesIcon from "../assets/whales.png"
 import Hotspot from "../models/view/Hotspot"
 import SearchHotspotsRequest from "../models/request/SearchHotspotsRequest"
 import "./HotspotsSearch.scss"
-import { getHotspots } from "../api/backendClient"
+import { getHotspots, getMonthList, getSpeciesList } from "../api/backendClient"
 import { faHelicopter, faPersonHiking, faPersonSwimming, faSailboat } from "@fortawesome/free-solid-svg-icons"
+import Species from "../models/view/Species"
 
 function HotspotsSearch() {
+  // const [searchParams] = useSearchParams();
   const [searchHotspotsRequest, setSearchHotspotsRequest] = useState<SearchHotspotsRequest>({
     country: "",
     name: "",
@@ -22,27 +24,22 @@ function HotspotsSearch() {
   })
   const [hotspots, setHotspots] = useState<Hotspot[]>()
   const [error, setError] = useState<boolean>(false)
+  const [speciesList, setSpeciesList] = useState<Species[]>()
+  const [monthList, setMonthList] = useState<string[]>()
 
-  const fetchHotspotsData = () => {
-    const searchQuery = Object.keys(searchHotspotsRequest)
-      .filter((searchKey) => searchHotspotsRequest[searchKey as keyof SearchHotspotsRequest] !== "")
-      .map((searchKey) => {
-        const searchValues = searchHotspotsRequest[searchKey as keyof SearchHotspotsRequest]
-        if (Array.isArray(searchValues)) {
-          return searchValues
-            .map((eachValue) => `${encodeURIComponent(searchKey)}=${encodeURIComponent(eachValue)}`)
-            .join("&")
-        } else {
-          return `${encodeURIComponent(searchKey)}=${encodeURIComponent(searchValues)}`
-        }
-      })
-      .join("&")
-
-    getHotspots(searchQuery)
+  useEffect(() => {
+    getSpeciesList()
       .then((response) => response.json())
-      .then((data) => setHotspots(data))
-      .catch(() => setError(true))
-  }
+      .then((content) => setSpeciesList(content.speciesList))
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    getMonthList()
+      .then((response) => response.json())
+      .then((content) => setMonthList(content))
+      .catch(() => {})
+  }, [])
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
@@ -57,6 +54,25 @@ function HotspotsSearch() {
       ...prevParams,
       [name]: value,
     }))
+  }
+
+  const fetchHotspotsData = () => {
+    const searchParams = new URLSearchParams()
+    Object.keys(searchHotspotsRequest).forEach((searchKey) => {
+      const searchValues = searchHotspotsRequest[searchKey as keyof SearchHotspotsRequest]
+      if (Array.isArray(searchValues)) {
+        searchValues.forEach((eachValue) => {
+          searchParams.append(searchKey, eachValue.toString())
+        })
+      } else {
+        searchParams.set(searchKey, searchValues)
+      }
+    })
+
+    getHotspots(searchParams.toString())
+      .then((response) => response.json())
+      .then((data) => setHotspots(data))
+      .catch(() => setError(true))
   }
 
   return (
@@ -95,27 +111,11 @@ function HotspotsSearch() {
             className="d-flex flex-column justify-content-center align-items-center mx-2"
             variant="secondary"
           >
-            {[
-              "Beaked whale",
-              "Beluga whale",
-              "Blue whale",
-              "Bowhead whale",
-              "Bryde's whale",
-              "Fin whale",
-              "Gray whale",
-              "Humpback whale",
-              "Killer whale",
-              "Minke whale",
-              "Narwhal",
-              "Pilot whale",
-              "Right whale",
-              "Sei whale",
-              "Sperm whale",
-            ].map((speciesName) => (
+            {speciesList?.map((species) => (
               <Dropdown.ItemText>
                 <label>
-                  <input type="checkbox" name="species" value={speciesName} onChange={handleSearchQueryChange} />{" "}
-                  {speciesName}
+                  <input type="checkbox" name="species" value={species.name} onChange={handleSearchQueryChange} />{" "}
+                  {species.name}
                 </label>
               </Dropdown.ItemText>
             ))}
@@ -141,20 +141,7 @@ function HotspotsSearch() {
             className="d-flex flex-column justify-content-center align-items-center mx-2"
             variant="secondary"
           >
-            {[
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
-            ].map((monthName, monthNumber) => (
+            {monthList?.map((monthName, monthNumber) => (
               <Dropdown.ItemText>
                 <label>
                   <input type="checkbox" name="months" value={monthNumber} onChange={handleSearchQueryChange} />{" "}
@@ -202,17 +189,15 @@ function HotspotsSearch() {
                               className="position-absolute d-flex flex-wrap justify-content-center gap-1"
                               style={{ top: "3rem", left: "1rem", right: "1rem", bottom: "1rem" }}
                             >
-                              {["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"].map(
-                                (monthLetter, monthNumber) => (
-                                  <div
-                                    className={`fw-bold border border-2 border-tertiary d-flex justify-content-center align-items-center 
+                              {monthList?.map((monthLetter, monthNumber) => (
+                                <div
+                                  className={`fw-bold border border-2 border-tertiary d-flex justify-content-center align-items-center 
                                                       ${spot.viewingSuggestions.some((suggestion) => suggestion.months.includes(monthNumber)) ? "bg-tertiary text-white" : ""}`}
-                                    style={{ width: "20%", fontSize: "0.5rem" }}
-                                  >
-                                    {monthLetter}
-                                  </div>
-                                ),
-                              )}
+                                  style={{ width: "20%", fontSize: "0.5rem" }}
+                                >
+                                  {monthLetter[0]}
+                                </div>
+                              ))}
                             </div>
                           </span>
                         </Col>

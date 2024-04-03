@@ -11,9 +11,9 @@ import Card from "react-bootstrap/Card"
 import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
-import { getSightings } from "../api/backendClient"
-import SearchSightingsRequest from "../models/request/SearchSightingsRequest"
-import { DropdownButton, Dropdown } from "react-bootstrap"
+import { getSightings, getSpeciesList } from "../api/backendClient"
+import { DropdownButton, Dropdown, Row } from "react-bootstrap"
+import Species from "../models/view/Species"
 
 interface SightingCardProps {
   imageUrl: string
@@ -44,12 +44,20 @@ const SightingsSearch = () => {
   const [mapView, setMapView] = useState<boolean>(false)
   const [allSightings, setAllSightings] = useState<Sighting[]>()
   const [filteredSightings, setFilteredSightings] = useState<Sighting[]>()
-  const [filterSightingsRequest, setFilterSightingsRequest] = useState<SearchSightingsRequest>({
-    species: [],
-    bodyOfWater: "",
-  })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [speciesList, setSpeciesList] = useState<Species[]>()
+  const [startDate, setStartDate] = useState<string>("")
+  const [endDate, setEndDate] = useState<string>("")
+  const [bodyOfWater, setBodyOfWater] = useState<string>("")
+  const [selectedSpeciesSet, setSelectedSpeciesSet] = useState<Set<string>>(new Set<string>())
+
+  useEffect(() => {
+    getSpeciesList()
+      .then((response) => response.json())
+      .then((content) => setSpeciesList(content.speciesList))
+      .catch(() => {})
+  }, [])
 
   function getData() {
     setLoading(true)
@@ -80,18 +88,16 @@ const SightingsSearch = () => {
     setFilteredSightings(allSightings)
   }, [allSightings])
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target
-    setFilterSightingsRequest((prevParams) => ({
-      ...prevParams,
-      [name]: value,
-    }))
-  }
-
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
     setFilteredSightings(
-      allSightings?.filter((sighting) => filterSightingsRequest.species.includes(sighting.species.name)),
+      allSightings?.filter(
+        (sighting) =>
+          (selectedSpeciesSet.size === 0 || selectedSpeciesSet.has(sighting.species.name)) &&
+          (!bodyOfWater || sighting.bodyOfWater.match(new RegExp(bodyOfWater, "i"))) &&
+          (!startDate || new Date(sighting.sightingTimestamp) >= new Date(startDate)) &&
+          (!endDate || new Date(sighting.sightingTimestamp) <= new Date(endDate)),
+      ),
     )
   }
 
@@ -140,40 +146,64 @@ const SightingsSearch = () => {
         )}
         {!mapView && (
           <div>
-            <form onSubmit={handleSubmit}>
-              <DropdownButton
-                id="dropdown-species-button"
-                title="Species"
-                className="d-flex flex-column justify-content-center align-items-center mx-2"
-                variant="secondary"
-              >
-                {[
-                  "Beaked whale",
-                  "Beluga whale",
-                  "Blue whale",
-                  "Bowhead whale",
-                  "Bryde's whale",
-                  "Fin whale",
-                  "Gray whale",
-                  "Humpback whale",
-                  "Killer whale",
-                  "Minke whale",
-                  "Narwhal",
-                  "Pilot whale",
-                  "Right whale",
-                  "Sei whale",
-                  "Sperm whale",
-                ].map((speciesName) => (
-                  <Dropdown.ItemText>
-                    <label>
-                      <input type="checkbox" name="species" value={speciesName} onChange={handleFilterChange} />{" "}
-                      {speciesName}
-                    </label>
-                  </Dropdown.ItemText>
-                ))}
-              </DropdownButton>
+            <Form onSubmit={handleSubmit} className="d-flex justify-content-center my-3">
+              <Row>
+                <Form.Group className="col-8" controlId="bodyOfWater">
+                  <Form.Label className="text-md-end">Body of water</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={bodyOfWater}
+                    onChange={(event) => setBodyOfWater(event.target.value)}
+                  />
+                </Form.Group>
+                <DropdownButton
+                  id="dropdown-species-button"
+                  title="Species"
+                  className="d-flex flex-column justify-content-center align-items-center mx-2"
+                  variant="secondary"
+                >
+                  {speciesList?.map((species) => (
+                    <Dropdown.ItemText>
+                      <Form.Group controlId={`species${species.id}`}>
+                        <Form.Control
+                          type="checkbox"
+                          name="species"
+                          value={species.name}
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              selectedSpeciesSet.add(event.target.value)
+                            } else {
+                              selectedSpeciesSet.delete(event.target.value)
+                            }
+                            setSelectedSpeciesSet(selectedSpeciesSet)
+                          }}
+                        />{" "}
+                        <Form.Label>{species.name}</Form.Label>
+                      </Form.Group>
+                    </Dropdown.ItemText>
+                  ))}
+                </DropdownButton>
+              </Row>
+              <Form.Group className="mb-3 text-start" controlId="startDate">
+                <Form.Label className="text-md-end">Start date</Form.Label>
+                <Form.Control
+                  type="date"
+                  max={endDate ? new Date(endDate).toISOString().split("T")[0] : new Date().toISOString().split("T")[0]}
+                  onChange={(event) => setStartDate(event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 text-start" controlId="endDate">
+                <Form.Label className="text-md-end">End date</Form.Label>
+                <Form.Control
+                  type="date"
+                  min={startDate ? new Date(startDate).toISOString().split("T")[0] : undefined}
+                  max={new Date().toISOString().split("T")[0]}
+                  onChange={(event) => setEndDate(event.target.value)}
+                />
+              </Form.Group>
+
               <button type="submit">Filter sightings</button>
-            </form>
+            </Form>
             <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
               {filteredSightings?.map((sighting) => (
                 <Link
