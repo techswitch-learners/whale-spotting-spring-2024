@@ -51,7 +51,6 @@ const ReactionsCard = ({ reactions, currentUserReaction, sightingId }: Reactions
   }
 
   const updateUserReaction = (value: ReactionType) => {
-    console.log("update")
     updateReaction({ reactionType: value, sightingId: sightingId }, authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
@@ -87,15 +86,13 @@ const ReactionsCard = ({ reactions, currentUserReaction, sightingId }: Reactions
       .catch(() => setErrors({ General: ["Unable to add reaction"] }))
   }
 
-  const handleClick = async (value: ReactionType) => {
-    console.log(`current user reaction: ${currentUserReaction}`)
-    console.log(`value: ${value}`)
+  const handleClick = (value: ReactionType) => {
     if (reactionResponse.currentUserReaction === value) {
-      await deleteUserReaction()
+      deleteUserReaction()
     } else if (value !== reactionResponse.currentUserReaction && reactionResponse.currentUserReaction !== null) {
-      await updateUserReaction(value)
+      updateUserReaction(value)
     } else {
-      await addUserReaction(value)
+      addUserReaction(value)
     }
   }
 

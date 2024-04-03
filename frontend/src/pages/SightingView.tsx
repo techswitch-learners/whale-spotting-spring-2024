@@ -7,7 +7,7 @@ import Sighting from "../models/view/Sighting"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import { Icon } from "leaflet"
 import icon from "/favicon.ico"
-import ReactionsCard from "../components/Reactions"
+import ReactionsCard from "../components/ReactionsCard"
 import { AuthContext } from "../App"
 
 const customIcon = new Icon({

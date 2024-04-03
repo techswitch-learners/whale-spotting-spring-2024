@@ -12,7 +12,7 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings } from "../api/backendClient"
-import ReactionsCard from "../components/Reactions"
+import ReactionsCard from "../components/ReactionsCard"
 import { Stack } from "react-bootstrap"
 
 interface SightingCardProps {
