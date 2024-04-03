@@ -41,6 +41,11 @@ public class WhaleSpottingContext(DbContextOptions<WhaleSpottingContext> options
         var speciesList = speciesCsvReader.GetRecords<Species>().ToList();
         builder.Entity<Species>().HasData(speciesList);
 
+        using var achievementsStreamReader = new StreamReader("Data/whaleSpottingAchievements.csv");
+        using var achievementsCsvReader = new CsvReader(achievementsStreamReader, CultureInfo.InvariantCulture);
+        var achievementsList = achievementsCsvReader.GetRecords<Achievement>().ToList();
+        builder.Entity<Achievement>().HasData(achievementsList);
+
         using var streamReader = new StreamReader("Data/hotSpots.csv");
         using var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
         var hotSpotRows = csvReader.GetRecords<HotSpotRow>().ToList();

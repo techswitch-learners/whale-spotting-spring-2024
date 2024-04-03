@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WhaleSpotting.Enums;
 using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Request;
@@ -35,6 +36,10 @@ public class SightingController(WhaleSpottingContext context) : Controller
                 }
             )
             .Entity;
+
+        var matchingUser = _context.Users.Single(user => user.Id == userId);
+        matchingUser.Experience += (int)Experience.Sighting;
+
         _context.SaveChanges();
         return Ok(newSighting);
     }

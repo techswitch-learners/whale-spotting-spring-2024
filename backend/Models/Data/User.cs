@@ -6,8 +6,6 @@ public class User : IdentityUser<int>
 {
     public required string ProfileImageUrl { get; set; }
 
-    public List<Achievement> Achievements { get; set; } = [];
-
     public int Experience { get; set; } = 0;
 
     public decimal? FavoriteLocationLatitude { get; set; }

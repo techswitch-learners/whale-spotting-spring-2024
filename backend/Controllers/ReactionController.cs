@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WhaleSpotting.Enums;
 using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
@@ -36,6 +37,21 @@ public class ReactionController(WhaleSpottingContext context) : Controller
                     }
                 )
                 .Entity;
+
+            var sightingUser = _context
+                .Sightings.Include(sighting => sighting.User)
+                .Single(sighting => sighting.Id == addReactionRequest.SightingId)
+                .User;
+
+            sightingUser.Experience +=
+                reactionType == ReactionType.LetsParty
+                    ? (int)Experience.LetsParty
+                    : reactionType == ReactionType.NiceCatch
+                        ? (int)Experience.NiceCatch
+                        : reactionType == ReactionType.SoSo
+                            ? (int)Experience.SoSo
+                            : (int)Experience.Suspicious;
+
             _context.SaveChanges();
 
             var reactionsDict = _context
@@ -70,8 +86,32 @@ public class ReactionController(WhaleSpottingContext context) : Controller
             && Enum.TryParse<ReactionType>(updateReactionRequest.Type, true, out var reactionType)
         )
         {
+            var sightingUser = _context
+                .Sightings.Include(sighting => sighting.User)
+                .Single(sighting => sighting.Id == updateReactionRequest.SightingId)
+                .User;
+
+            sightingUser.Experience -=
+                matchingReaction.Type == ReactionType.LetsParty
+                    ? (int)Experience.LetsParty
+                    : matchingReaction.Type == ReactionType.NiceCatch
+                        ? (int)Experience.NiceCatch
+                        : matchingReaction.Type == ReactionType.SoSo
+                            ? (int)Experience.SoSo
+                            : (int)Experience.Suspicious;
+
             matchingReaction.Type = reactionType;
             matchingReaction.Timestamp = DateTime.UtcNow;
+
+            sightingUser.Experience +=
+                reactionType == ReactionType.LetsParty
+                    ? (int)Experience.LetsParty
+                    : reactionType == ReactionType.NiceCatch
+                        ? (int)Experience.NiceCatch
+                        : reactionType == ReactionType.SoSo
+                            ? (int)Experience.SoSo
+                            : (int)Experience.Suspicious;
+
             _context.SaveChanges();
 
             var reactionsDict = _context
@@ -102,6 +142,20 @@ public class ReactionController(WhaleSpottingContext context) : Controller
 
         if (matchingReaction != null)
         {
+            var sightingUser = _context
+                .Sightings.Include(sighting => sighting.User)
+                .Single(sighting => sighting.Id == deleteReactionRequest.SightingId)
+                .User;
+
+            sightingUser.Experience -=
+                matchingReaction.Type == ReactionType.LetsParty
+                    ? (int)Experience.LetsParty
+                    : matchingReaction.Type == ReactionType.NiceCatch
+                        ? (int)Experience.NiceCatch
+                        : matchingReaction.Type == ReactionType.SoSo
+                            ? (int)Experience.SoSo
+                            : (int)Experience.Suspicious;
+
             _context.Reactions.Remove(matchingReaction);
             _context.SaveChanges();
 
