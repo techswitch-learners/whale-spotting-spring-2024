@@ -7,7 +7,7 @@ import Sighting from "../models/view/Sighting"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import { Icon } from "leaflet"
 import icon from "/favicon.ico"
-import Reactions from "../components/Reactions"
+import ReactionsCard from "../components/Reactions"
 import { AuthContext } from "../App"
 
 const customIcon = new Icon({
@@ -54,7 +54,7 @@ const SightingView = () => {
                 Sighting by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
               </h1>
               <div className="reaction-buttons ms-auto">
-                <Reactions
+                <ReactionsCard
                   reactions={sighting.reactions}
                   currentUserReaction={sighting.currentUserReaction}
                   sightingId={sighting.id}

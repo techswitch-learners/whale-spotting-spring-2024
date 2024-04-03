@@ -12,7 +12,7 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings } from "../api/backendClient"
-import Reactions from "../components/Reactions"
+import ReactionsCard from "../components/Reactions"
 import { Stack } from "react-bootstrap"
 
 interface SightingCardProps {
@@ -50,6 +50,7 @@ const SightingsSearch = () => {
   function getData() {
     setLoading(true)
     setError(false)
+    console.log(authContext.cookie.token)
     getSightings(authContext.cookie.token)
       .then((response) => response.json())
       .then((data) => {
@@ -122,7 +123,7 @@ const SightingsSearch = () => {
           <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
             {allSightings?.map((sighting) => (
               <Stack key={sighting.id}>
-                <Reactions
+                <ReactionsCard
                   reactions={sighting.reactions}
                   currentUserReaction={sighting.currentUserReaction}
                   sightingId={sighting.id}

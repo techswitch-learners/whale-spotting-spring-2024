@@ -12,11 +12,8 @@ public static class AuthHelper
 
     public static int? GetUserIdIfLoggedIn(ClaimsPrincipal claimsPrincipal)
     {
-        Console.WriteLine("*****************GetUserIdIfLoggedIn***********");
-        ;
         try
         {
-            Console.WriteLine($">>>>>>>>>>>>>>>>>>>>>{GetUserId(claimsPrincipal)}");
             return GetUserId(claimsPrincipal);
         }
         catch (InvalidOperationException)

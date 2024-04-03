@@ -4,7 +4,7 @@ import { addReaction, updateReaction, deleteReaction } from "../api/backendClien
 import { AuthContext } from "../App"
 import { useNavigate } from "react-router-dom"
 import ReactionType from "../types/ReactionType"
-import Reaction from "../models/view/Reaction"
+import Reactions from "../models/view/Reactions"
 
 const emojis = {
   LetsParty: "🤩",
@@ -12,17 +12,17 @@ const emojis = {
   SoSo: "😐",
   Suspicious: "🤔",
 }
-interface ReactionProps {
-  reactions: Reaction
+interface ReactionsCardProps {
+  reactions: Reactions
   currentUserReaction: ReactionType | null
   sightingId: number
 }
 
-const Reactions = ({ reactions, currentUserReaction, sightingId }: ReactionProps) => {
+const ReactionsCard = ({ reactions, currentUserReaction, sightingId }: ReactionsCardProps) => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
 
-  const [reactionResponse, setReactionResponse] = useState<ReactionProps>({
+  const [reactionResponse, setReactionResponse] = useState<ReactionsCardProps>({
     reactions: reactions,
     currentUserReaction: currentUserReaction,
     sightingId: sightingId,
@@ -92,15 +92,11 @@ const Reactions = ({ reactions, currentUserReaction, sightingId }: ReactionProps
     console.log(`value: ${value}`)
     if (reactionResponse.currentUserReaction === value) {
       await deleteUserReaction()
-      console.log(`---->deleteReactionResponse\n${JSON.stringify(reactionResponse)}`)
     } else if (value !== reactionResponse.currentUserReaction && reactionResponse.currentUserReaction !== null) {
       await updateUserReaction(value)
-      console.log(`---->updateReactionResponse\n${JSON.stringify(reactionResponse)}`)
     } else {
       await addUserReaction(value)
-      console.log(`---->addReactionResponse\n${JSON.stringify(reactionResponse)}`)
     }
-    // console.log(`---->reactionResponse--${JSON.stringify(reactionResponse)}`)
   }
 
   return (
@@ -128,4 +124,4 @@ const Reactions = ({ reactions, currentUserReaction, sightingId }: ReactionProps
   )
 }
 
-export default Reactions
+export default ReactionsCard

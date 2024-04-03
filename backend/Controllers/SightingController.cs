@@ -88,8 +88,6 @@ public class SightingController(WhaleSpottingContext context) : Controller
     {
         var userId = AuthHelper.GetUserIdIfLoggedIn(User);
 
-        Console.WriteLine($"==================Search()-->{userId}");
-
         var sightings = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
