@@ -10,6 +10,12 @@ interface Sighting {
   imageUrl: string
   bodyOfWater: string
   sightingTimestamp: string
+  verificationEvent: {
+    admin: {
+      userName: string
+    }
+    comment: string | null
+  }
 }
 
 export default Sighting
