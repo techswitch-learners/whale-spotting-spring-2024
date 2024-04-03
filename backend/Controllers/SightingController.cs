@@ -143,6 +143,43 @@ public class SightingController(WhaleSpottingContext context) : Controller
         return Ok(sightingsResponse);
     }
 
+    [Authorize(Roles = "Admin")]
+    [HttpGet("rejected")]
+    public IActionResult ViewRejectedSigthings()
+    {
+        var pendingSightings = _context
+            .Sightings.Include(sighting => sighting.User)
+            .Include(sighting => sighting.Species)
+            .Include(sighting => sighting.VerificationEvent)
+            .Include(sighting => sighting.Reactions)
+            .Where(sighting =>
+                sighting.VerificationEvent != null && (int)sighting.VerificationEvent.ApprovalStatus == 0
+            )
+            .ToList();
+
+        var sightingsResponse = new SightingsResponse
+        {
+            Sightings = pendingSightings
+                .Select(sighting => new SightingResponse
+                {
+                    Id = sighting.Id,
+                    Latitude = sighting.Latitude,
+                    Longitude = sighting.Longitude,
+                    UserName = sighting.User.UserName!,
+                    Species = sighting.Species,
+                    Description = sighting.Description,
+                    ImageUrl = sighting.ImageUrl,
+                    BodyOfWater = sighting.BodyOfWater,
+                    VerificationEvent = sighting.VerificationEvent,
+                    SightingTimestamp = sighting.SightingTimestamp,
+                    CreationTimestamp = sighting.CreationTimestamp,
+                    Reactions = sighting.Reactions
+                })
+                .ToList()
+        };
+        return Ok(sightingsResponse);
+    }
+
     [HttpPost("{sightingId}/verify")]
     public IActionResult VerifySighting(
         [FromRoute] int sightingId,
@@ -171,7 +208,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             _context.SaveChanges();
             sighting.VerificationEventId = savedVerificationEvent.Id;
             _context.SaveChanges();
-            return Ok();
+            return NoContent();
         }
     }
 
