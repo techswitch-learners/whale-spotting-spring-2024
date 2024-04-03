@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WhaleSpotting.Models.Data;
-using WhaleSpotting.Models.Request;
 using WhaleSpotting.Models.Response;
 
 namespace WhaleSpotting.Controllers;
@@ -38,22 +37,19 @@ public class UserController(UserManager<User> userManager) : Controller
     public async Task<IActionResult> GetAll()
     {
         var allUsers = await _userManager.Users.ToListAsync();
-        var filteredUsers = new List<AdminUserResponse>();
+        var existingUsers = new List<UserResponse>();
 
         foreach (var user in allUsers)
         {
-            var existingUser = new AdminUserResponse
+            var existingUser = new UserResponse
             {
                 Id = user.Id,
                 UserName = user.UserName!,
                 ProfileImageUrl = user.ProfileImageUrl,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                AccessFailedCount = user.AccessFailedCount,
             };
-            filteredUsers.Add(existingUser);
+            existingUsers.Add(existingUser);
         }
-        return Ok(filteredUsers);
+        return Ok(existingUsers);
     }
 
     [Authorize(Roles = "Admin")]
@@ -74,7 +70,7 @@ public class UserController(UserManager<User> userManager) : Controller
 
     [Authorize(Roles = "Admin")]
     [HttpPatch("edit/{userId}")]
-    public async Task<IActionResult> EditUserInfo([FromRoute] int userId, [FromBody] EditUserRequest editUserRequest)
+    public async Task<IActionResult> EditProfilePicture([FromRoute] int userId)
     {
         var matchingUser = await _userManager.FindByIdAsync(userId.ToString());
         if (matchingUser == null)
@@ -83,25 +79,9 @@ public class UserController(UserManager<User> userManager) : Controller
         }
         else
         {
-            if (editUserRequest.UserName != null)
-            {
-                matchingUser.UserName = editUserRequest.UserName;
-            }
-            if (editUserRequest.ProfileImageUrl != null)
-            {
-                matchingUser.ProfileImageUrl = editUserRequest.ProfileImageUrl;
-            }
-            if (editUserRequest.Email != null)
-            {
-                matchingUser.Email = editUserRequest.Email;
-            }
-            if (editUserRequest.PhoneNumber != null)
-            {
-                matchingUser.PhoneNumber = editUserRequest.PhoneNumber;
-            }
-            ;
+            matchingUser.ProfileImageUrl = "https://picsum.photos/seed/picsum/200/300";
             await _userManager.UpdateAsync(matchingUser);
-            return Ok();
+            return NoContent();
         }
     }
 }
