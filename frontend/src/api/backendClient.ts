@@ -112,6 +112,16 @@ export const verifySighting = async (verificationEvent: VerificationEvent, sight
   })
 }
 
+export const editApprovalStatus = async (sightingId?: number, token?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/edit/${sightingId}`, {
+    method: "patch",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
 export const deleteSighting = async (sightingId?: number, token?: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${sightingId}`, {
     method: "delete",

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import Sighting from "../models/view/Sighting"
-import { deleteSighting, getRejectedSightings } from "../api/backendClient"
+import { deleteSighting, editApprovalStatus, getRejectedSightings } from "../api/backendClient"
 import { AuthContext } from "../App"
 import { Button, Card } from "react-bootstrap"
 
@@ -48,6 +48,14 @@ const RejectedSightings = () => {
       })
     }
 
+    function handleRestore(id: number, authContext: string | undefined) {
+      editApprovalStatus(id, authContext).then((response) => {
+        if (response.ok) {
+          setRejectedSightings(rejectedSightings?.filter((sighting) => sighting.id != id))
+        }
+      })
+    }
+
     return (
       <Card className="text-start">
         <Card.Img variant="top" src={imageUrl} style={{ height: "13rem", objectFit: "cover" }} />
@@ -61,7 +69,9 @@ const RejectedSightings = () => {
           <Card.Text>Comment: {comment}</Card.Text>
         </Card.Body>
         <Card.Footer className="d-flex justify-content-center">
-          <Button className="mx-4">Restore</Button>
+          <Button className="mx-4" onClick={() => handleRestore(id, authContext.cookie.token)}>
+            Restore
+          </Button>
           <Button className="mx-4" variant="danger" onClick={() => handleDeleteSighting(id, authContext.cookie.token)}>
             Delete forever
           </Button>

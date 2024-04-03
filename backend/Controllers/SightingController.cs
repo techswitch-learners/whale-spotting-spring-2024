@@ -152,9 +152,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.Species)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
-            .Where(sighting =>
-                sighting.VerificationEvent != null && (int)sighting.VerificationEvent.ApprovalStatus == 0
-            )
+            .Where(sighting => sighting.VerificationEvent != null && sighting.VerificationEvent.ApprovalStatus == 0)
             .ToList();
 
         var sightingsResponse = new SightingsResponse
@@ -224,6 +222,26 @@ public class SightingController(WhaleSpottingContext context) : Controller
         else
         {
             _context.Sightings.Remove(sightingToRemove);
+            _context.SaveChanges();
+            return NoContent();
+        }
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPatch("edit/{sightingId}")]
+    public IActionResult EditApprovalStatus([FromRoute] int sightingId)
+    {
+        var matchingVerificationEvent = _context.VerificationEvents.FirstOrDefault(ev => ev.SightingId == sightingId);
+        var matchingSighting = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
+        if (matchingSighting == null || matchingVerificationEvent == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            matchingSighting.VerificationEvent = null;
+            _context.SaveChanges();
+            _context.VerificationEvents.Remove(matchingVerificationEvent);
             _context.SaveChanges();
             return NoContent();
         }
