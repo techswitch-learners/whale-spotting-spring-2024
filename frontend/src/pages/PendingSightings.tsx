@@ -12,12 +12,6 @@ const PendingSightings = () => {
   const [comments, setComments] = useState<string[]>([])
   const authContext = useContext(AuthContext)
 
-  const textStyle = {
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  }
-
   interface SightingCardProps {
     id: number
     index: number
@@ -59,6 +53,7 @@ const PendingSightings = () => {
       )
         .then((response) => {
           if (response.ok) {
+            setComments([])
             setPendingSightings(pendingSightings?.filter((sighting) => sighting.id != id))
           } else if (response.status === 403 || response.status === 401) {
             authContext.removeCookie("token")
@@ -69,14 +64,14 @@ const PendingSightings = () => {
     }
 
     return (
-      <Card className="text-start">
-        <Card.Img variant="top" src={imageUrl} style={{ height: "13rem", objectFit: "cover" }} />
+      <Card className="text-start" style={{ width: "15rem" }}>
+        <Card.Img variant="top" src={imageUrl} style={{ height: "15rem", objectFit: "cover" }} />
         <Card.Body>
           <Card.Text>Posted by: {userName}</Card.Text>
           <Card.Text>Species: {species}</Card.Text>
           <Card.Text>Body of Water: {bodyOfWater}</Card.Text>
-          <Card.Text style={textStyle}>Description: {description}</Card.Text>
-          <Card.Text>Timestamp: {sightingTimestamp}</Card.Text>
+          <Card.Text>Description: {description}</Card.Text>
+          <Card.Text>Posted on: {sightingTimestamp}</Card.Text>
         </Card.Body>
         <Card.Footer className="d-flex justify-content-center align-items-center">
           <Form>
@@ -89,14 +84,10 @@ const PendingSightings = () => {
                 onChange={(e) => handleCommentChange(e.target.value, index)}
               />
             </FormGroup>
-            <div>
-              <Button className="mx-4" onClick={() => handleSubmit("approve", id, index)}>
-                Approve
-              </Button>
-              <Button className="mx-4" variant="danger" onClick={() => handleSubmit("reject", id, index)}>
-                Reject
-              </Button>
-            </div>
+            <Button onClick={() => handleSubmit("approve", id, index)}>Approve</Button>
+            <Button className="mx-3" variant="danger" onClick={() => handleSubmit("reject", id, index)}>
+              Reject
+            </Button>
           </Form>
         </Card.Footer>
       </Card>

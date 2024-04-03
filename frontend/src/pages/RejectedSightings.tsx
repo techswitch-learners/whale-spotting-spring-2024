@@ -12,12 +12,6 @@ const RejectedSightings = () => {
 
   const authContext = useContext(AuthContext)
 
-  const textStyle = {
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  }
-
   interface RejectedSightingCardProps {
     id: number
     imageUrl: string
@@ -57,23 +51,23 @@ const RejectedSightings = () => {
     }
 
     return (
-      <Card className="text-start">
-        <Card.Img variant="top" src={imageUrl} style={{ height: "13rem", objectFit: "cover" }} />
+      <Card className="text-start" style={{ width: "15rem" }}>
+        <Card.Img variant="top" src={imageUrl} style={{ height: "15rem", objectFit: "cover" }} />
         <Card.Body>
           <Card.Text>Posted by: {userName}</Card.Text>
           <Card.Text>Species: {species}</Card.Text>
           <Card.Text>Body of Water: {bodyOfWater}</Card.Text>
-          <Card.Text style={textStyle}>Description: {description}</Card.Text>
+          <Card.Text>Description: {description}</Card.Text>
           <Card.Text>Timestamp: {sightingTimestamp}</Card.Text>
           <Card.Text>Responsible admin: {adminUserName}</Card.Text>
           <Card.Text>Comment: {comment}</Card.Text>
         </Card.Body>
-        <Card.Footer className="d-flex justify-content-center">
-          <Button className="mx-4" onClick={() => handleRestore(id, authContext.cookie.token)}>
+        <Card.Footer className="d-flex justify-content-center align-items-center">
+          <Button className="mx-2" onClick={() => handleRestore(id, authContext.cookie.token)}>
             Restore
           </Button>
-          <Button className="mx-4" variant="danger" onClick={() => handleDeleteSighting(id, authContext.cookie.token)}>
-            Delete forever
+          <Button className="mx-2" variant="danger" onClick={() => handleDeleteSighting(id, authContext.cookie.token)}>
+            Delete
           </Button>
         </Card.Footer>
       </Card>
