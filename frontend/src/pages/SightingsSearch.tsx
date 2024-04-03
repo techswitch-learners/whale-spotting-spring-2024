@@ -164,10 +164,10 @@ const SightingsSearch = () => {
                 >
                   {speciesList?.map((species) => (
                     <Dropdown.ItemText>
-                      <Form.Group controlId={`species${species.id}`}>
-                        <Form.Control
-                          type="checkbox"
+                      <Form.Group controlId={`species${species.id}`} className="d-flex">
+                        <Form.Check
                           name="species"
+                          label={species.name}
                           value={species.name}
                           onChange={(event) => {
                             if (event.target.checked) {
@@ -177,8 +177,7 @@ const SightingsSearch = () => {
                             }
                             setSelectedSpeciesSet(selectedSpeciesSet)
                           }}
-                        />{" "}
-                        <Form.Label>{species.name}</Form.Label>
+                        />
                       </Form.Group>
                     </Dropdown.ItemText>
                   ))}
