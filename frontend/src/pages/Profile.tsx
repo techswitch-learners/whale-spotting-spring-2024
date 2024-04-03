@@ -9,7 +9,12 @@ const Profile = () => {
     return <Navigate to="/login" />
   }
 
-  return <h1 className="text-center">Profile</h1>
+  return (
+    <>
+      <h1 className="text-center">Profile</h1>
+      <p></p>
+    </>
+  )
 }
 
 export default Profile
