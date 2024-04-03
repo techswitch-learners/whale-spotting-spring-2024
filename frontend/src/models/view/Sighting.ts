@@ -15,6 +15,7 @@ interface Sighting {
       userName: string
     }
     comment: string | null
+    timestamp: string
   }
 }
 

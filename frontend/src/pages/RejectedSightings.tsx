@@ -22,6 +22,7 @@ const RejectedSightings = () => {
     sightingTimestamp: string
     adminUserName: string
     comment: string | null
+    verificationTimestamp: string
   }
   function RejectedSightingCard({
     id,
@@ -33,6 +34,7 @@ const RejectedSightings = () => {
     userName,
     adminUserName,
     comment,
+    verificationTimestamp,
   }: RejectedSightingCardProps) {
     function handleDeleteSighting(id: number, authContext: string | undefined) {
       deleteSighting(id, authContext).then((response) => {
@@ -58,9 +60,10 @@ const RejectedSightings = () => {
           <Card.Text>Species: {species}</Card.Text>
           <Card.Text>Body of Water: {bodyOfWater}</Card.Text>
           <Card.Text>Description: {description}</Card.Text>
-          <Card.Text>Timestamp: {sightingTimestamp}</Card.Text>
-          <Card.Text>Responsible admin: {adminUserName}</Card.Text>
+          <Card.Text>Posted on: {sightingTimestamp}</Card.Text>
+          <Card.Text>Admin: {adminUserName}</Card.Text>
           <Card.Text>Comment: {comment}</Card.Text>
+          <Card.Text>Rejected on: {verificationTimestamp}</Card.Text>
         </Card.Body>
         <Card.Footer className="d-flex justify-content-center align-items-center">
           <Button className="mx-2" onClick={() => handleRestore(id, authContext.cookie.token)}>
@@ -109,6 +112,7 @@ const RejectedSightings = () => {
               sightingTimestamp={sighting.sightingTimestamp.split("T")[0]}
               adminUserName={sighting.verificationEvent?.admin.userName}
               comment={sighting.verificationEvent ? sighting.verificationEvent.comment : "The admin left no comment"}
+              verificationTimestamp={sighting.verificationEvent?.timestamp.split("T")[0]}
             />
           ))}
         </div>
