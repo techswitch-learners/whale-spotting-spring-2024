@@ -115,7 +115,6 @@ public class SightingController(WhaleSpottingContext context) : Controller
         var pendingSightings = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
-            .Include(sighting => sighting.BodyOfWater)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
             .Where(sighting => sighting.VerificationEvent == null)
@@ -177,7 +176,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("delete/{sightingId}")]
+    [HttpDelete("{sightingId}")]
     public IActionResult DeleteSighting([FromRoute] int sightingId)
     {
         var sightingToRemove = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
@@ -189,7 +188,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
         {
             _context.Sightings.Remove(sightingToRemove);
             _context.SaveChanges();
-            return RedirectToAction(nameof(Search));
+            return NoContent();
         }
     }
 }

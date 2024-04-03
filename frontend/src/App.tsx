@@ -11,11 +11,12 @@ import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
 import SightingsSearch from "./pages/SightingsSearch"
+import PendingSightings from "./pages/PendingSightings"
 import SightingForm from "./pages/SightingForm"
 import SightingView from "./pages/SightingView"
 import HotSpotView from "./pages/HotSpotView"
-import Error404 from "./pages/Error404"
 import Users from "./pages/Users"
+import Error404 from "./pages/Error404"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -59,6 +60,7 @@ const App = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
+              <Route path="/sightings/pending" element={<PendingSightings />} />
               <Route path="/sightings/add" element={<SightingForm />} />
               <Route path="/sightings/:id" element={<SightingView />} />
               <Route path="/hotspots/:id" element={<HotSpotView />} />

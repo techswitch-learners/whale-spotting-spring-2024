@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import { Navigate } from "react-router-dom"
 import { getUsers } from "../api/backendClient"
-import AdminUser from "../models/view/AdminUser"
+import AdminUser from "../models/view/DetailedUser"
 import { AuthContext } from "../App"
+import { deleteUser } from "../api/backendClient"
 
 const Users = () => {
   const [allUsers, setAllUsers] = useState<AdminUser[]>()
@@ -29,8 +29,16 @@ const Users = () => {
 
   useEffect(getData, [authContext])
 
-  if (!authContext.cookie.token) {
-    return <Navigate to="/login" />
+  // if (!authContext.cookie.token) {
+  //   return <Navigate to="/login" />
+  // }
+
+  function handleClick(id: number, authContext: string | undefined) {
+    deleteUser(id, authContext).then((response) => {
+      if (response.ok) {
+        setAllUsers(allUsers?.filter((user) => user.id != id))
+      }
+    })
   }
 
   return (
@@ -40,7 +48,8 @@ const Users = () => {
           <ul>
             {allUsers.map((user) => (
               <li key={user.id}>
-                Id: {user.id}, Username: {user.userName}, LockoutEnd: {user.lockOutEnd}, Email: {user.email}
+                Id: {user.id}, Username: {user.userName}, Phone: {user.phoneNumber}, Email: {user.email}
+                <button onClick={() => handleClick(user.id, authContext.cookie.token)}> Delete user</button>
               </li>
             ))}
           </ul>

@@ -46,10 +46,9 @@ public class UserController(UserManager<User> userManager) : Controller
             {
                 Id = user.Id,
                 UserName = user.UserName!,
+                ProfileImageUrl = user.ProfileImageUrl,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                LockoutEnd = user.LockoutEnd,
-                LockoutEnabled = user.LockoutEnabled,
                 AccessFailedCount = user.AccessFailedCount,
             };
             filteredUsers.Add(existingUser);
@@ -58,7 +57,7 @@ public class UserController(UserManager<User> userManager) : Controller
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("delete/{userId}")]
+    [HttpDelete("{userId}")]
     public async Task<IActionResult> DeleteUser([FromRoute] int userId)
     {
         var userToRemove = await _userManager.FindByIdAsync(userId.ToString());
@@ -69,7 +68,7 @@ public class UserController(UserManager<User> userManager) : Controller
         else
         {
             await _userManager.DeleteAsync(userToRemove);
-            return RedirectToAction(nameof(GetAll));
+            return NoContent();
         }
     }
 
@@ -88,6 +87,10 @@ public class UserController(UserManager<User> userManager) : Controller
             {
                 matchingUser.UserName = editUserRequest.UserName;
             }
+            if (editUserRequest.ProfileImageUrl != null)
+            {
+                matchingUser.ProfileImageUrl = editUserRequest.ProfileImageUrl;
+            }
             if (editUserRequest.Email != null)
             {
                 matchingUser.Email = editUserRequest.Email;
@@ -96,21 +99,7 @@ public class UserController(UserManager<User> userManager) : Controller
             {
                 matchingUser.PhoneNumber = editUserRequest.PhoneNumber;
             }
-            if (editUserRequest.LockoutEnd != null)
-            {
-                matchingUser.LockoutEnd = editUserRequest.LockoutEnd;
-            }
-            if (editUserRequest.LockoutEnabled != null)
-            {
-                matchingUser.LockoutEnabled = (bool)editUserRequest.LockoutEnabled;
-            }
             ;
-            if (editUserRequest.AccessFailedCount != null)
-            {
-                matchingUser.AccessFailedCount = (int)editUserRequest.AccessFailedCount;
-            }
-            ;
-
             await _userManager.UpdateAsync(matchingUser);
             return Ok();
         }

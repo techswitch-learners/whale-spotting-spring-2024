@@ -1,10 +1,9 @@
 interface AdminUser {
   id: number
+  profileImageUrl: string
   userName: string
   email: string | null
   phoneNumber: string | null
-  lockOutEnd: string
-  lockoutEnabled: boolean
   accessFailedCount: number
 }
 
