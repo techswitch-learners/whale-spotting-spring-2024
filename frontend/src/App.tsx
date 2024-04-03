@@ -17,6 +17,7 @@ import SightingView from "./pages/SightingView"
 import HotSpotView from "./pages/HotSpotView"
 import Users from "./pages/Users"
 import Error404 from "./pages/Error404"
+import RejectedSightings from "./pages/RejectedSightings"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -61,6 +62,7 @@ const App = () => {
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
               <Route path="/sightings/pending" element={<PendingSightings />} />
+              <Route path="sightings/rejected" element={<RejectedSightings />} />
               <Route path="/sightings/add" element={<SightingForm />} />
               <Route path="/sightings/:id" element={<SightingView />} />
               <Route path="/hotspots/:id" element={<HotSpotView />} />
