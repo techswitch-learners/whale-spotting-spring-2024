@@ -12,7 +12,7 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings, getSpeciesList } from "../api/backendClient"
-import { DropdownButton, Dropdown, Row } from "react-bootstrap"
+import { DropdownButton, Dropdown, Row, Col } from "react-bootstrap"
 import Species from "../models/view/Species"
 
 interface SightingCardProps {
@@ -146,63 +146,74 @@ const SightingsSearch = () => {
         )}
         {!mapView && (
           <div>
-            <Form onSubmit={handleSubmit} className="d-flex justify-content-center my-3">
-              <Row>
-                <Form.Group className="col-8" controlId="bodyOfWater">
-                  <Form.Label className="text-md-end">Body of water</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={bodyOfWater}
-                    onChange={(event) => setBodyOfWater(event.target.value)}
-                  />
-                </Form.Group>
-                <DropdownButton
-                  id="dropdown-species-button"
-                  title="Species"
-                  className="d-flex flex-column justify-content-center align-items-center mx-2"
-                  variant="secondary"
-                >
-                  {speciesList?.map((species) => (
-                    <Dropdown.ItemText>
-                      <Form.Group controlId={`species${species.id}`} className="d-flex">
-                        <Form.Check
-                          name="species"
-                          label={species.name}
-                          value={species.name}
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              selectedSpeciesSet.add(event.target.value)
-                            } else {
-                              selectedSpeciesSet.delete(event.target.value)
-                            }
-                            setSelectedSpeciesSet(selectedSpeciesSet)
-                          }}
-                        />
-                      </Form.Group>
-                    </Dropdown.ItemText>
-                  ))}
-                </DropdownButton>
-              </Row>
-              <Form.Group className="mb-3 text-start" controlId="startDate">
-                <Form.Label className="text-md-end">Start date</Form.Label>
-                <Form.Control
-                  type="date"
-                  max={endDate ? new Date(endDate).toISOString().split("T")[0] : new Date().toISOString().split("T")[0]}
-                  onChange={(event) => setStartDate(event.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3 text-start" controlId="endDate">
-                <Form.Label className="text-md-end">End date</Form.Label>
-                <Form.Control
-                  type="date"
-                  min={startDate ? new Date(startDate).toISOString().split("T")[0] : undefined}
-                  max={new Date().toISOString().split("T")[0]}
-                  onChange={(event) => setEndDate(event.target.value)}
-                />
-              </Form.Group>
-
-              <button type="submit">Filter sightings</button>
-            </Form>
+            <Card className="mx-auto" style={{ maxWidth: "25rem" }}>
+              <Card.Body>
+                <Form onSubmit={handleSubmit}>
+                  <Row className="mb-3">
+                    <Form.Group className="col-8" controlId="bodyOfWater">
+                      <Form.Label className="text-start">Body of water</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={bodyOfWater}
+                        onChange={(event) => setBodyOfWater(event.target.value)}
+                      />
+                    </Form.Group>
+                    <Col xs={4}>
+                      <DropdownButton
+                        id="dropdown-species-button"
+                        title="Species"
+                        className="d-flex flex-column justify-content-center align-items-center mx-2"
+                        variant="secondary"
+                      >
+                        {speciesList?.map((species) => (
+                          <Dropdown.ItemText>
+                            <Form.Group controlId={`species${species.id}`} className="d-flex">
+                              <Form.Check
+                                name="species"
+                                label={species.name}
+                                value={species.name}
+                                onChange={(event) => {
+                                  if (event.target.checked) {
+                                    selectedSpeciesSet.add(event.target.value)
+                                  } else {
+                                    selectedSpeciesSet.delete(event.target.value)
+                                  }
+                                  setSelectedSpeciesSet(selectedSpeciesSet)
+                                }}
+                              />
+                            </Form.Group>
+                          </Dropdown.ItemText>
+                        ))}
+                      </DropdownButton>
+                    </Col>
+                  </Row>
+                  <Row className="mb-3">
+                    <Form.Group className="col-6" controlId="startDate">
+                      <Form.Label className="text-start">Start date</Form.Label>
+                      <Form.Control
+                        type="date"
+                        max={
+                          endDate
+                            ? new Date(endDate).toISOString().split("T")[0]
+                            : new Date().toISOString().split("T")[0]
+                        }
+                        onChange={(event) => setStartDate(event.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className="col-6" controlId="endDate">
+                      <Form.Label className="text-start">End date</Form.Label>
+                      <Form.Control
+                        type="date"
+                        min={startDate ? new Date(startDate).toISOString().split("T")[0] : undefined}
+                        max={new Date().toISOString().split("T")[0]}
+                        onChange={(event) => setEndDate(event.target.value)}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <button type="submit">Filter sightings</button>
+                </Form>
+              </Card.Body>
+            </Card>
             <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
               {filteredSightings?.map((sighting) => (
                 <Link
