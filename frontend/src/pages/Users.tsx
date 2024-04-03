@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import { getUsers } from "../api/backendClient"
-import AdminUser from "../models/view/DetailedUser"
+import DetailedUser from "../models/view/DetailedUser"
 import { AuthContext } from "../App"
-import { deleteUser } from "../api/backendClient"
+import { deleteUser, editProfilePicture } from "../api/backendClient"
+import { Button, Card } from "react-bootstrap"
 
 const Users = () => {
-  const [allUsers, setAllUsers] = useState<AdminUser[]>()
+  const [allUsers, setAllUsers] = useState<DetailedUser[]>()
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
   const [unauthorisedAccess, setUnauthorisedAccess] = useState(false)
@@ -15,7 +16,6 @@ const Users = () => {
   function getData() {
     getUsers(authContext.cookie.token)
       .then((response) => {
-        console.log(response.status)
         if (response.ok) {
           response.json().then((data) => setAllUsers(data))
         } else if (response.status === 403 || response.status === 401) {
@@ -29,11 +29,15 @@ const Users = () => {
 
   useEffect(getData, [authContext])
 
-  // if (!authContext.cookie.token) {
-  //   return <Navigate to="/login" />
-  // }
+  function handleProfilePicture(id: number, authContext: string | undefined) {
+    editProfilePicture(id, authContext).then((response) => {
+      if (response.ok) {
+        getData()
+      }
+    })
+  }
 
-  function handleClick(id: number, authContext: string | undefined) {
+  function handleDeleteUser(id: number, authContext: string | undefined) {
     deleteUser(id, authContext).then((response) => {
       if (response.ok) {
         setAllUsers(allUsers?.filter((user) => user.id != id))
@@ -41,19 +45,48 @@ const Users = () => {
     })
   }
 
+  interface UserCardProps {
+    id: number
+    userName: string
+    profileImageUrl: string
+  }
+
+  function UserCard({ id, userName, profileImageUrl }: UserCardProps) {
+    return (
+      <Card className="text-start">
+        <Card.Img
+          variant="top"
+          src={profileImageUrl}
+          style={{ height: "13rem", width: "auto" }}
+          alt="User does not have a profile picture"
+        />
+        <Card.Body>
+          <Card.Title>{userName}</Card.Title>
+        </Card.Body>
+        <Card.Footer>
+          <Button className="mx-2" onClick={() => handleProfilePicture(id, authContext.cookie.token)}>
+            {" "}
+            Reset Profile Picture
+          </Button>
+          <Button className="mx-2" variant="danger" onClick={() => handleDeleteUser(id, authContext.cookie.token)}>
+            Delete
+          </Button>
+        </Card.Footer>
+      </Card>
+    )
+  }
+
   return (
-    <div>
+    <div className="mb-3">
       {allUsers && (
-        <div>
-          <ul>
+        <>
+          <h2 className="text-center">Total users: {allUsers.length}</h2>
+          <div className="d-flex flex-wrap justify-content-center gap-4 pb-3">
             {allUsers.map((user) => (
-              <li key={user.id}>
-                Id: {user.id}, Username: {user.userName}, Phone: {user.phoneNumber}, Email: {user.email}
-                <button onClick={() => handleClick(user.id, authContext.cookie.token)}> Delete user</button>
-              </li>
+              <UserCard key={user.id} id={user.id} userName={user.userName} profileImageUrl={user.profileImageUrl} />
             ))}
-          </ul>
-        </div>
+          </div>
+        </>
       )}
       {unauthorisedAccess && <p>You shouldn't be here</p>}
       {loading && <p>Loading...</p>}
