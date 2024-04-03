@@ -61,3 +61,22 @@ export const getUsers = async (token?: string) => {
     },
   })
 }
+
+export const deleteUser = async (userId?: number, token?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
+export const getPendingSightings = async (token?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/pending`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}

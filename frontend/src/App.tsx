@@ -14,6 +14,7 @@ import SightingsSearch from "./pages/SightingsSearch"
 import SightingForm from "./pages/SightingForm"
 import SightingView from "./pages/SightingView"
 import HotSpotView from "./pages/HotSpotView"
+import Error404 from "./pages/Error404"
 import Users from "./pages/Users"
 
 export const AuthContext = createContext<{
@@ -62,6 +63,7 @@ const App = () => {
               <Route path="/sightings/:id" element={<SightingView />} />
               <Route path="/hotspots/:id" element={<HotSpotView />} />
               <Route path="/users/all" element={<Users />}></Route>
+              <Route path="*" element={<Error404 />} />
             </Routes>
           </main>
         </Router>
