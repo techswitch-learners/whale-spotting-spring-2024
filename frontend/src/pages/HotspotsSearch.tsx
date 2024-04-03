@@ -9,7 +9,7 @@ import whalesIcon from "../assets/whales.png"
 import Hotspot from "../models/view/Hotspot"
 import SearchHotspotsRequest from "../models/request/SearchHotspotsRequest"
 import "./HotspotsSearch.scss"
-import { getHotspots, getMonthList, getSpeciesList } from "../api/backendClient"
+import { getHotspots, getMonths, getSpeciesList } from "../api/backendClient"
 import { faHelicopter, faPersonHiking, faPersonSwimming, faSailboat } from "@fortawesome/free-solid-svg-icons"
 import Species from "../models/view/Species"
 
@@ -32,10 +32,8 @@ function HotspotsSearch() {
       .then((response) => response.json())
       .then((content) => setSpeciesList(content.speciesList))
       .catch(() => {})
-  }, [])
 
-  useEffect(() => {
-    getMonthList()
+    getMonths()
       .then((response) => response.json())
       .then((content) => setMonthList(content))
       .catch(() => {})

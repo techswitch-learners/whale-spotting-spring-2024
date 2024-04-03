@@ -57,6 +57,6 @@ export const getHotspots = async (searchQuery: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/hotspots?${searchQuery}`)
 }
 
-export const getMonthList = async () => {
+export const getMonths = async () => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/months`)
 }
