@@ -1,5 +1,5 @@
 interface VerificationEvent {
-  comment: string | undefined
+  comment?: string
   approvalStatus: number
 }
 
