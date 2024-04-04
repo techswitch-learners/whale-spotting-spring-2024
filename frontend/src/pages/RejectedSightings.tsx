@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react"
-import Sighting from "../models/view/Sighting"
 import { deleteSighting, editApprovalStatus, getRejectedSightings } from "../api/backendClient"
 import { AuthContext, BackgroundContext } from "../App"
 import { Button, Card } from "react-bootstrap"
 import Error403 from "./Error403"
+import Sighting from "../models/view/Sighting"
+import { Link } from "react-router-dom"
 
 interface RejectedSightingCardProps {
   sighting: Sighting
@@ -14,21 +15,26 @@ function RejectedSightingCard({ sighting, handleRestore, handleDeleteSighting }:
   return (
     <Card className="text-start" style={{ width: "15rem" }}>
       <Card.Img variant="top" src={sighting.imageUrl} style={{ height: "15rem", objectFit: "cover" }} />
+      <Card.Header>
+        Posted by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
+      </Card.Header>
       <Card.Body>
-        <Card.Text>Posted by: {sighting.userName}</Card.Text>
-        <Card.Text>Species: {sighting.species.name}</Card.Text>
-        <Card.Text>Body of Water: {sighting.bodyOfWater}</Card.Text>
-        <Card.Text>Description: {sighting.description}</Card.Text>
-        <Card.Text>Posted on: {sighting.sightingTimestamp.split("T")[0]}</Card.Text>
-        <Card.Text>Admin: {sighting.verificationEvent.admin.userName}</Card.Text>
+        <Card.Title>{sighting.species.name}</Card.Title>
+        <Card.Subtitle>{sighting.bodyOfWater}</Card.Subtitle>
+        <Card.Text>{sighting.description}</Card.Text>
+        <hr />
+        <Card.Text className="mb-0">Seen on {sighting.sightingTimestamp.split("T")[0]}</Card.Text>
+        <Card.Text className="mb-0">Posted on {sighting.creationTimestamp.split("T")[0]}</Card.Text>
+        <Card.Text>Rejected on {sighting.verificationEvent.timestamp.split("T")[0]}</Card.Text>
+        <hr />
+        <Card.Text className="mb-0">Rejected by {sighting.verificationEvent.admin.userName}</Card.Text>
         <Card.Text>Comment: {sighting.verificationEvent.comment ?? "No comment provided"}</Card.Text>
-        <Card.Text>Rejected on: {sighting.verificationEvent.timestamp.split("T")[0]}</Card.Text>
       </Card.Body>
-      <Card.Footer className="d-flex justify-content-center align-items-center">
-        <Button className="mx-2" onClick={() => handleRestore(sighting.id)}>
+      <Card.Footer className="p-3">
+        <Button className="me-2" onClick={() => handleRestore(sighting.id)}>
           Restore
         </Button>
-        <Button className="mx-2" variant="danger" onClick={() => handleDeleteSighting(sighting.id)}>
+        <Button variant="danger" onClick={() => handleDeleteSighting(sighting.id)}>
           Delete
         </Button>
       </Card.Footer>
