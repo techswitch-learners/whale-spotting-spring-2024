@@ -60,12 +60,14 @@ const Users = () => {
   function UserCard({ id, userName, profileImageUrl }: UserCardProps) {
     return (
       <Card className="text-start">
-        <Card.Img
-          variant="top"
-          src={profileImageUrl}
-          style={{ height: "13rem", width: "auto" }}
-          alt="User does not have a profile picture"
-        />
+        {profileImageUrl && (
+          <Card.Img
+            variant="top"
+            src={profileImageUrl}
+            style={{ height: "13rem", width: "auto" }}
+            alt="user's profile picture"
+          />
+        )}
         <Card.Body>
           <Card.Title>{userName}</Card.Title>
         </Card.Body>
