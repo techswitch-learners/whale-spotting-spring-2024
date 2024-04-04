@@ -110,7 +110,12 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
             nameof(UserController.GetByUserName),
             nameof(UserController)[..^"Controller".Length],
             new { newUser.UserName },
-            new UserResponse { Id = newUser.Id, UserName = newUser.UserName, }
+            new UserResponse
+            {
+                Id = newUser.Id,
+                UserName = newUser.UserName,
+                ProfileImageUrl = string.Empty
+            }
         );
     }
 }

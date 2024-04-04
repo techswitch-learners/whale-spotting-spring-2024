@@ -66,7 +66,7 @@ const App = () => {
               <Route path="/sightings/add" element={<SightingForm />} />
               <Route path="/sightings/:id" element={<SightingView />} />
               <Route path="/hotspots/:id" element={<HotSpotView />} />
-              <Route path="/users/all" element={<Users />}></Route>
+              <Route path="/users" element={<Users />}></Route>
               <Route path="*" element={<Error404 />} />
             </Routes>
           </main>

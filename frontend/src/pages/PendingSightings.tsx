@@ -8,10 +8,10 @@ import { Link, Navigate, useNavigate } from "react-router-dom"
 
 interface SightingCardProps {
   sighting: Sighting
-  handleSubmit: (id: number, status: string, setComment: (comment?: string) => void, comment?: string) => void
+  handleSubmit: (id: number, status: string, setComment: (comment: string) => void, comment: string) => void
 }
 function PendingSightingCard({ sighting, handleSubmit }: SightingCardProps) {
-  const [comment, setComment] = useState<string>()
+  const [comment, setComment] = useState<string>("")
 
   return (
     <Card className="text-start" style={{ width: "15rem" }}>
@@ -59,7 +59,7 @@ const PendingSightings = () => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
 
-  const handleSubmit = (id: number, status: string, setComment: (comment?: string) => void, comment?: string) => {
+  const handleSubmit = (id: number, status: string, setComment: (comment: string) => void, comment: string) => {
     setError(false)
     const approvalStatus = status === "approve" ? 1 : 0
 
@@ -73,7 +73,7 @@ const PendingSightings = () => {
     )
       .then((response) => {
         if (response.ok) {
-          setComment(undefined)
+          setComment("")
           setPendingSightings(pendingSightings?.filter((sighting) => sighting.id != id))
         } else if (response.status === 403) {
           setUnauthorisedAccess(true)
@@ -90,7 +90,6 @@ const PendingSightings = () => {
     setError(false)
     getPendingSightings(authContext.cookie.token)
       .then((response) => {
-        console.log(response.status)
         if (response.ok) {
           response.json().then((data) => setPendingSightings(data.sightings))
         } else if (response.status === 403) {

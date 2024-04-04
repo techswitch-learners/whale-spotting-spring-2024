@@ -19,7 +19,7 @@ public class VerificationEvent
 
     public required ApprovalStatus ApprovalStatus { get; set; }
 
-    public string? Comment { get; set; }
+    public required string Comment { get; set; }
 
     public DateTime Timestamp { get; init; } = DateTime.Now;
 }

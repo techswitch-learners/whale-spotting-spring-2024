@@ -1,5 +1,5 @@
 interface VerificationEvent {
-  comment?: string
+  comment: string
   approvalStatus: number
 }
 

@@ -15,7 +15,7 @@ interface Sighting {
     admin: {
       userName: string
     }
-    comment: string | null
+    comment: string
     timestamp: string
   }
 }

@@ -202,7 +202,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             {
                 SightingId = sightingId,
                 AdminId = userId,
-                ApprovalStatus = verificationEventRequest.ApprovalStatus,
+                ApprovalStatus = verificationEventRequest.ApprovalStatus!.Value,
                 Comment = verificationEventRequest.Comment,
                 Timestamp = DateTime.UtcNow,
             };

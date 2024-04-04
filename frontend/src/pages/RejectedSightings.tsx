@@ -28,7 +28,7 @@ function RejectedSightingCard({ sighting, handleRestore, handleDeleteSighting }:
         <Card.Text>Rejected on {sighting.verificationEvent.timestamp.split("T")[0]}</Card.Text>
         <hr />
         <Card.Text className="mb-0">Rejected by {sighting.verificationEvent.admin.userName}</Card.Text>
-        <Card.Text>Comment: {sighting.verificationEvent.comment ?? "No comment provided"}</Card.Text>
+        <Card.Text>Comment: {sighting.verificationEvent.comment || "No comment provided"}</Card.Text>
       </Card.Body>
       <Card.Footer className="p-3">
         <Button className="me-2" onClick={() => handleRestore(sighting.id)}>

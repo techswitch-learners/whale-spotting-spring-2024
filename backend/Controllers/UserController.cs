@@ -18,7 +18,14 @@ public class UserController(UserManager<User> userManager) : Controller
     public async Task<IActionResult> GetCurrent()
     {
         var matchingUser = (await _userManager.FindByNameAsync(AuthHelper.GetUserName(User)))!;
-        return Ok(new UserResponse { Id = matchingUser.Id, UserName = matchingUser.UserName!, });
+        return Ok(
+            new UserResponse
+            {
+                Id = matchingUser.Id,
+                UserName = matchingUser.UserName!,
+                ProfileImageUrl = matchingUser.ProfileImageUrl
+            }
+        );
     }
 
     [HttpGet("{userName}")]
@@ -29,7 +36,14 @@ public class UserController(UserManager<User> userManager) : Controller
         {
             return NotFound();
         }
-        return Ok(new UserResponse { Id = matchingUser.Id, UserName = matchingUser.UserName!, });
+        return Ok(
+            new UserResponse
+            {
+                Id = matchingUser.Id,
+                UserName = matchingUser.UserName!,
+                ProfileImageUrl = matchingUser.ProfileImageUrl
+            }
+        );
     }
 
     [Authorize(Roles = "Admin")]
