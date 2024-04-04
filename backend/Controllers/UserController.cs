@@ -36,20 +36,16 @@ public class UserController(UserManager<User> userManager) : Controller
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
-        var allUsers = await _userManager.Users.ToListAsync();
-        var existingUsers = new List<UserResponse>();
-
-        foreach (var user in allUsers)
-        {
-            var existingUser = new UserResponse
+        var allUsers = await _userManager
+            .Users.Select(user => new UserResponse
             {
                 Id = user.Id,
                 UserName = user.UserName!,
                 ProfileImageUrl = user.ProfileImageUrl,
-            };
-            existingUsers.Add(existingUser);
-        }
-        return Ok(existingUsers);
+            })
+            .ToListAsync();
+
+        return Ok(allUsers);
     }
 
     [Authorize(Roles = "Admin")]
