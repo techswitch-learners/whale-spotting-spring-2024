@@ -1,35 +1,39 @@
 @import "../main.scss";
 
 .SightingsSearch {
-  .leaflet-container {
-    height: 60vh;
-  }
-
   .SightingCard {
     transition:
       transform 0.5s,
       box-shadow 0.5s;
-  }
 
-  .SightingCard:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
-  }
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
+    }
 
-  .card-img-top {
-    height: 13rem;
-    object-fit: cover;
-  }
+    .card-img-top {
+      height: 13rem;
+      object-fit: cover;
+    }
 
-  .card-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    .card-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   #layout-switch {
     width: 4rem;
     height: 2rem;
+
+    &:focus + label .fa-location-pin {
+      color: lighten($color: $primary, $amount: 18);
+    }
+
+    &:checked + label .fa-location-pin {
+      color: $primary;
+    }
   }
 
   .fa-list {
@@ -45,13 +49,5 @@
     left: 2.625rem;
     color: #bfbfbf;
     transition: color 0.3s;
-  }
-
-  #layout-switch:focus + label .fa-location-pin {
-    color: lighten($color: $primary, $amount: 18);
-  }
-
-  #layout-switch:checked + label .fa-location-pin {
-    color: $primary;
   }
 }

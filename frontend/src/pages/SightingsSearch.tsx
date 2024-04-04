@@ -125,7 +125,7 @@ const SightingsSearch = () => {
         {mapView && (
           <div className="mapContainer">
             <p>Click on the icon to see more details about the whale sighting</p>
-            <MapContainer center={[26.115, -16.523]} zoom={1} scrollWheelZoom={true}>
+            <MapContainer center={[26.115, -16.523]} zoom={1} scrollWheelZoom={true} style={{ height: "60vh" }}>
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
