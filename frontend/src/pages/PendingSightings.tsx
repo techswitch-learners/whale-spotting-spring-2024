@@ -40,7 +40,7 @@ function PendingSightingCard({ sighting, handleSubmit }: SightingCardProps) {
           <Button
             className="mx-3"
             variant="danger"
-            onClick={() => handleSubmit(sighting.id, "approve", setComment, comment)}
+            onClick={() => handleSubmit(sighting.id, "reject", setComment, comment)}
           >
             Reject
           </Button>

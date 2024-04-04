@@ -20,11 +20,9 @@ function RejectedSightingCard({ sighting, handleRestore, handleDeleteSighting }:
         <Card.Text>Body of Water: {sighting.bodyOfWater}</Card.Text>
         <Card.Text>Description: {sighting.description}</Card.Text>
         <Card.Text>Posted on: {sighting.sightingTimestamp.split("T")[0]}</Card.Text>
-        <Card.Text>Admin: {sighting.verificationEvent?.admin.userName}</Card.Text>
-        <Card.Text>
-          Comment: {sighting.verificationEvent ? sighting.verificationEvent.comment : "The admin left no comment"}
-        </Card.Text>
-        <Card.Text>Rejected on: {sighting.verificationEvent?.timestamp.split("T")[0]}</Card.Text>
+        <Card.Text>Admin: {sighting.verificationEvent.admin.userName}</Card.Text>
+        <Card.Text>Comment: {sighting.verificationEvent.comment ?? "No comment provided"}</Card.Text>
+        <Card.Text>Rejected on: {sighting.verificationEvent.timestamp.split("T")[0]}</Card.Text>
       </Card.Body>
       <Card.Footer className="d-flex justify-content-center align-items-center">
         <Button className="mx-2" onClick={() => handleRestore(sighting.id)}>

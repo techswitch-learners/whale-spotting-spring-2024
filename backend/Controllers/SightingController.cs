@@ -151,6 +151,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
             .Include(sighting => sighting.VerificationEvent)
+            .ThenInclude(ve => ve!.Admin)
             .Include(sighting => sighting.Reactions)
             .Where(sighting =>
                 sighting.VerificationEvent != null
