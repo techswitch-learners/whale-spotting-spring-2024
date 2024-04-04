@@ -40,7 +40,7 @@ const Faqs = () => {
   return (
     <>
       <h1>Questions</h1>
-      <Accordion defaultActiveKey="0" flush>
+      <Accordion flush>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Q1. How can I get experience?</Accordion.Header>
           <Accordion.Body>
