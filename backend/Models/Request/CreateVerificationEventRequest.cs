@@ -2,7 +2,7 @@ using WhaleSpotting.Enums;
 
 namespace WhaleSpotting.Models.Data.Request;
 
-public class VerificationEventRequest
+public class CreateVerificationEventRequest
 {
     public string? Comment { get; set; }
 

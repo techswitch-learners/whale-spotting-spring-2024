@@ -181,7 +181,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
     [HttpPost("{sightingId}/verify")]
     public IActionResult VerifySighting(
         [FromRoute] int sightingId,
-        [FromBody] VerificationEventRequest verificationEventRequest
+        [FromBody] CreateVerificationEventRequest verificationEventRequest
     )
     {
         var sighting = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
