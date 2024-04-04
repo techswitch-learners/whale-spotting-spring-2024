@@ -6,6 +6,39 @@ import { deleteUser, resetProfilePicture } from "../api/backendClient"
 import { Button, Card } from "react-bootstrap"
 import whale from "/android-chrome-512x512.png"
 import Error403 from "./Error403"
+import { Navigate, useNavigate } from "react-router-dom"
+
+interface UserCardProps {
+  userName: string
+  profileImageUrl: string
+  handleProfilePicture: (userName: string) => void
+  handleDeleteUser: (userName: string) => void
+}
+
+function UserCard({ userName, profileImageUrl, handleDeleteUser, handleProfilePicture }: UserCardProps) {
+  return (
+    <Card className="text-start">
+      <Card.Img
+        variant="top"
+        src={profileImageUrl || whale}
+        style={{ height: "13rem", width: "auto" }}
+        alt="user's profile picture"
+      />
+      <Card.Body>
+        <Card.Title>{userName}</Card.Title>
+      </Card.Body>
+      <Card.Footer>
+        <Button className="mx-2" onClick={() => handleProfilePicture(userName)}>
+          {" "}
+          Reset Profile Picture
+        </Button>
+        <Button className="mx-2" variant="danger" onClick={() => handleDeleteUser(userName)}>
+          Delete
+        </Button>
+      </Card.Footer>
+    </Card>
+  )
+}
 
 const Users = () => {
   const backgroundContext = useContext(BackgroundContext)
@@ -15,75 +48,58 @@ const Users = () => {
   const [unauthorisedAccess, setUnauthorisedAccess] = useState(false)
 
   const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
 
   function getData() {
     getUsers(authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
           response.json().then((data) => setAllUsers(data))
-        } else if (response.status === 403 || response.status === 401) {
-          authContext.removeCookie("token")
+        } else if (response.status === 403) {
           setUnauthorisedAccess(true)
+        } else if (response.status === 401) {
+          authContext.removeCookie("token")
+          navigate("/login")
         }
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
   }
 
-  useEffect(getData, [authContext])
+  useEffect(getData, [authContext, navigate])
 
   useEffect(() => {
     backgroundContext.setBackground("white")
   }, [backgroundContext])
 
-  function handleProfilePicture(userName: string, authContext: string | undefined) {
-    resetProfilePicture(userName, authContext).then((response) => {
+  function handleProfilePicture(userName: string) {
+    resetProfilePicture(userName, authContext.cookie.token).then((response) => {
       if (response.ok) {
         getData()
+      } else if (response.status === 403) {
+        setUnauthorisedAccess(true)
+      } else if (response.status === 401) {
+        authContext.removeCookie("token")
+        navigate("/login")
       }
     })
   }
 
-  function handleDeleteUser(userName: string, authContext: string | undefined) {
-    deleteUser(userName, authContext).then((response) => {
+  function handleDeleteUser(userName: string) {
+    deleteUser(userName, authContext.cookie.token).then((response) => {
       if (response.ok) {
         setAllUsers(allUsers?.filter((user) => user.userName != userName))
+      } else if (response.status === 403) {
+        setUnauthorisedAccess(true)
+      } else if (response.status === 401) {
+        authContext.removeCookie("token")
+        navigate("/login")
       }
     })
   }
 
-  interface UserCardProps {
-    userName: string
-    profileImageUrl: string
-  }
-
-  function UserCard({ userName, profileImageUrl }: UserCardProps) {
-    return (
-      <Card className="text-start">
-        <Card.Img
-          variant="top"
-          src={profileImageUrl || whale}
-          style={{ height: "13rem", width: "auto" }}
-          alt="user's profile picture"
-        />
-        <Card.Body>
-          <Card.Title>{userName}</Card.Title>
-        </Card.Body>
-        <Card.Footer>
-          <Button className="mx-2" onClick={() => handleProfilePicture(userName, authContext.cookie.token)}>
-            {" "}
-            Reset Profile Picture
-          </Button>
-          <Button
-            className="mx-2"
-            variant="danger"
-            onClick={() => handleDeleteUser(userName, authContext.cookie.token)}
-          >
-            Delete
-          </Button>
-        </Card.Footer>
-      </Card>
-    )
+  if (!authContext.cookie.token) {
+    return <Navigate to="/login" />
   }
 
   return (
@@ -93,7 +109,13 @@ const Users = () => {
           <h2 className="text-center">Total users: {allUsers.length}</h2>
           <div className="d-flex flex-wrap justify-content-center gap-4 pb-3">
             {allUsers.map((user) => (
-              <UserCard key={user.id} userName={user.userName} profileImageUrl={user.profileImageUrl} />
+              <UserCard
+                key={user.id}
+                userName={user.userName}
+                profileImageUrl={user.profileImageUrl}
+                handleDeleteUser={handleDeleteUser}
+                handleProfilePicture={handleProfilePicture}
+              />
             ))}
           </div>
         </>

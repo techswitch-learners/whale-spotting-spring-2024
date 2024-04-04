@@ -4,7 +4,7 @@ import { AuthContext, BackgroundContext } from "../App"
 import { Button, Card, Form, FormGroup } from "react-bootstrap"
 import Error403 from "./Error403"
 import Sighting from "../models/view/Sighting"
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 
 interface SightingCardProps {
   sighting: Sighting
@@ -57,6 +57,7 @@ const PendingSightings = () => {
   const [error, setError] = useState(false)
   const [unauthorisedAccess, setUnauthorisedAccess] = useState(false)
   const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleSubmit = (id: number, status: string, setComment: (comment?: string) => void, comment?: string) => {
     setError(false)
@@ -74,9 +75,11 @@ const PendingSightings = () => {
         if (response.ok) {
           setComment(undefined)
           setPendingSightings(pendingSightings?.filter((sighting) => sighting.id != id))
-        } else if (response.status === 403 || response.status === 401) {
-          authContext.removeCookie("token")
+        } else if (response.status === 403) {
           setUnauthorisedAccess(true)
+        } else if (response.status === 401) {
+          authContext.removeCookie("token")
+          navigate("/login")
         }
       })
       .catch(() => setError(true))
@@ -90,20 +93,26 @@ const PendingSightings = () => {
         console.log(response.status)
         if (response.ok) {
           response.json().then((data) => setPendingSightings(data.sightings))
-        } else if (response.status === 403 || response.status === 401) {
-          authContext.removeCookie("token")
+        } else if (response.status === 403) {
           setUnauthorisedAccess(true)
+        } else if (response.status === 401) {
+          authContext.removeCookie("token")
+          navigate("/login")
         }
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
   }
 
-  useEffect(getData, [authContext])
+  useEffect(getData, [authContext, navigate])
 
   useEffect(() => {
     backgroundContext.setBackground("white")
   }, [backgroundContext])
+
+  if (!authContext.cookie.token) {
+    return <Navigate to="/login" />
+  }
 
   return (
     <div className="d-flex flex-column text-center">

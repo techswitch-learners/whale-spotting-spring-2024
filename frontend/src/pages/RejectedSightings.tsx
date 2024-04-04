@@ -4,7 +4,7 @@ import { AuthContext, BackgroundContext } from "../App"
 import { Button, Card } from "react-bootstrap"
 import Error403 from "./Error403"
 import Sighting from "../models/view/Sighting"
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 
 interface RejectedSightingCardProps {
   sighting: Sighting
@@ -50,11 +50,17 @@ const RejectedSightings = () => {
   const [unauthorisedAccess, setUnauthorisedAccess] = useState(false)
 
   const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
 
   function handleDeleteSighting(id: number) {
     deleteSighting(id, authContext.cookie.token).then((response) => {
       if (response.ok) {
         setRejectedSightings(rejectedSightings?.filter((sighting) => sighting.id != id))
+      } else if (response.status === 403) {
+        setUnauthorisedAccess(true)
+      } else if (response.status === 401) {
+        authContext.removeCookie("token")
+        navigate("/login")
       }
     })
   }
@@ -63,6 +69,11 @@ const RejectedSightings = () => {
     editApprovalStatus(id, authContext.cookie.token).then((response) => {
       if (response.ok) {
         setRejectedSightings(rejectedSightings?.filter((sighting) => sighting.id != id))
+      } else if (response.status === 403) {
+        setUnauthorisedAccess(true)
+      } else if (response.status === 401) {
+        authContext.removeCookie("token")
+        navigate("/login")
       }
     })
   }
@@ -75,20 +86,26 @@ const RejectedSightings = () => {
         console.log(response.status)
         if (response.ok) {
           response.json().then((data) => setRejectedSightings(data.sightings))
-        } else if (response.status === 403 || response.status === 401) {
-          authContext.removeCookie("token")
+        } else if (response.status === 403) {
           setUnauthorisedAccess(true)
+        } else if (response.status === 401) {
+          authContext.removeCookie("token")
+          navigate("/login")
         }
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
   }
 
-  useEffect(getData, [authContext])
+  useEffect(getData, [authContext, navigate])
 
   useEffect(() => {
     backgroundContext.setBackground("white")
   }, [backgroundContext])
+
+  if (!authContext.cookie.token) {
+    return <Navigate to="/login" />
+  }
 
   return (
     <div className="d-flex flex-column text-center">
