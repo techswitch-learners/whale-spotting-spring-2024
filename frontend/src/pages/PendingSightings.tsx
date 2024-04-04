@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react"
 import Sighting from "../models/view/Sighting"
 import { getPendingSightings, verifySighting } from "../api/backendClient"
-import { AuthContext } from "../App"
+import { AuthContext, BackgroundContext } from "../App"
 import { Button, Card, Form, FormGroup } from "react-bootstrap"
 
 const PendingSightings = () => {
+  const backgroundContext = useContext(BackgroundContext)
   const [pendingSightings, setPendingSightings] = useState<Sighting[]>()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -111,6 +112,10 @@ const PendingSightings = () => {
   }
 
   useEffect(getData, [authContext])
+
+  useEffect(() => {
+    backgroundContext.setBackground("white")
+  }, [backgroundContext])
 
   return (
     <div className="d-flex flex-column text-center">

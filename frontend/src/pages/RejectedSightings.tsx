@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react"
 import Sighting from "../models/view/Sighting"
 import { deleteSighting, editApprovalStatus, getRejectedSightings } from "../api/backendClient"
-import { AuthContext } from "../App"
+import { AuthContext, BackgroundContext } from "../App"
 import { Button, Card } from "react-bootstrap"
 
 const RejectedSightings = () => {
+  const backgroundContext = useContext(BackgroundContext)
   const [rejectedSightings, setRejectedSightings] = useState<Sighting[]>()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -76,6 +77,7 @@ const RejectedSightings = () => {
       </Card>
     )
   }
+
   function getData() {
     setLoading(true)
     setError(false)
@@ -94,6 +96,10 @@ const RejectedSightings = () => {
   }
 
   useEffect(getData, [authContext])
+
+  useEffect(() => {
+    backgroundContext.setBackground("white")
+  }, [backgroundContext])
 
   return (
     <div className="d-flex flex-column text-center">

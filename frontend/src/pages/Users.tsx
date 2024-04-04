@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react"
 import { getUsers } from "../api/backendClient"
 import DetailedUser from "../models/view/DetailedUser"
-import { AuthContext } from "../App"
+import { AuthContext, BackgroundContext } from "../App"
 import { deleteUser, editProfilePicture } from "../api/backendClient"
 import { Button, Card } from "react-bootstrap"
 import whale from "/android-chrome-512x512.png"
 
 const Users = () => {
+  const backgroundContext = useContext(BackgroundContext)
   const [allUsers, setAllUsers] = useState<DetailedUser[]>()
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -29,6 +30,10 @@ const Users = () => {
   }
 
   useEffect(getData, [authContext])
+
+  useEffect(() => {
+    backgroundContext.setBackground("white")
+  }, [backgroundContext])
 
   function handleProfilePicture(id: number, authContext: string | undefined) {
     editProfilePicture(id, authContext, whale).then((response) => {
