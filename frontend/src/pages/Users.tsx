@@ -17,22 +17,22 @@ interface UserCardProps {
 
 function UserCard({ userName, profileImageUrl, handleDeleteUser, handleProfilePicture }: UserCardProps) {
   return (
-    <Card className="text-start">
+    <Card className="text-start" style={{ width: "15rem" }}>
       <Card.Img
+        className="p-2 bg-dark"
         variant="top"
         src={profileImageUrl || whale}
-        style={{ height: "13rem", width: "auto" }}
+        style={{ height: "15rem", objectFit: "contain" }}
         alt="user's profile picture"
       />
       <Card.Body>
         <Card.Title>{userName}</Card.Title>
       </Card.Body>
-      <Card.Footer>
-        <Button className="mx-2" onClick={() => handleProfilePicture(userName)}>
-          {" "}
-          Reset Profile Picture
+      <Card.Footer className="text-center">
+        <Button className="me-2" onClick={() => handleProfilePicture(userName)}>
+          Reset picture
         </Button>
-        <Button className="mx-2" variant="danger" onClick={() => handleDeleteUser(userName)}>
+        <Button variant="danger" onClick={() => handleDeleteUser(userName)}>
           Delete
         </Button>
       </Card.Footer>
