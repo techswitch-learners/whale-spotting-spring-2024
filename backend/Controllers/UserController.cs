@@ -70,7 +70,7 @@ public class UserController(UserManager<User> userManager) : Controller
 
     [Authorize(Roles = "Admin")]
     [HttpPatch("edit/{userId}")]
-    public async Task<IActionResult> EditProfilePicture([FromRoute] int userId)
+    public async Task<IActionResult> EditProfilePicture([FromRoute] int userId, [FromBody] string imageURL)
     {
         var matchingUser = await _userManager.FindByIdAsync(userId.ToString());
         if (matchingUser == null)
@@ -79,7 +79,7 @@ public class UserController(UserManager<User> userManager) : Controller
         }
         else
         {
-            matchingUser.ProfileImageUrl = "https://picsum.photos/seed/picsum/200/300";
+            matchingUser.ProfileImageUrl = imageURL;
             await _userManager.UpdateAsync(matchingUser);
             return NoContent();
         }

@@ -73,13 +73,14 @@ export const deleteUser = async (userId?: number, token?: string) => {
   })
 }
 
-export const editProfilePicture = async (userId?: number, token?: string) => {
+export const editProfilePicture = async (userId?: number, token?: string, url?: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/edit/${userId}`, {
     method: "patch",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify(url),
   })
 }
 

@@ -4,6 +4,7 @@ import DetailedUser from "../models/view/DetailedUser"
 import { AuthContext } from "../App"
 import { deleteUser, editProfilePicture } from "../api/backendClient"
 import { Button, Card } from "react-bootstrap"
+import whale from "/android-chrome-512x512.png"
 
 const Users = () => {
   const [allUsers, setAllUsers] = useState<DetailedUser[]>()
@@ -30,7 +31,7 @@ const Users = () => {
   useEffect(getData, [authContext])
 
   function handleProfilePicture(id: number, authContext: string | undefined) {
-    editProfilePicture(id, authContext).then((response) => {
+    editProfilePicture(id, authContext, whale).then((response) => {
       if (response.ok) {
         getData()
       }
