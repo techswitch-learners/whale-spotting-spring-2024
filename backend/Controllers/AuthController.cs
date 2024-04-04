@@ -73,7 +73,7 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
                 }
             );
         }
-        var newUser = new User { UserName = registerUserRequest.UserName, ProfileImageUrl = "", };
+        var newUser = new User { UserName = registerUserRequest.UserName, ProfileImageUrl = string.Empty, };
         var result = await _userManager.CreateAsync(newUser, registerUserRequest.Password);
         if (!result.Succeeded)
         {

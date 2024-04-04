@@ -73,14 +73,13 @@ export const deleteUser = async (username?: string, token?: string) => {
   })
 }
 
-export const editProfilePicture = async (userName?: string, token?: string, url?: string) => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/${userName}/profile-picture`, {
-    method: "patch",
+export const resetProfilePicture = async (userName?: string, token?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/${userName}/profile-image`, {
+    method: "delete",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(url),
   })
 }
 

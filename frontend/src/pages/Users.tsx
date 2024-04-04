@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { getUsers } from "../api/backendClient"
 import DetailedUser from "../models/view/DetailedUser"
 import { AuthContext, BackgroundContext } from "../App"
-import { deleteUser, editProfilePicture } from "../api/backendClient"
+import { deleteUser, resetProfilePicture } from "../api/backendClient"
 import { Button, Card } from "react-bootstrap"
 import whale from "/android-chrome-512x512.png"
 import Error403 from "./Error403"
@@ -37,7 +37,7 @@ const Users = () => {
   }, [backgroundContext])
 
   function handleProfilePicture(userName: string, authContext: string | undefined) {
-    editProfilePicture(userName, authContext, whale).then((response) => {
+    resetProfilePicture(userName, authContext).then((response) => {
       if (response.ok) {
         getData()
       }
@@ -60,14 +60,12 @@ const Users = () => {
   function UserCard({ userName, profileImageUrl }: UserCardProps) {
     return (
       <Card className="text-start">
-        {profileImageUrl && (
-          <Card.Img
-            variant="top"
-            src={profileImageUrl}
-            style={{ height: "13rem", width: "auto" }}
-            alt="user's profile picture"
-          />
-        )}
+        <Card.Img
+          variant="top"
+          src={profileImageUrl || whale}
+          style={{ height: "13rem", width: "auto" }}
+          alt="user's profile picture"
+        />
         <Card.Body>
           <Card.Title>{userName}</Card.Title>
         </Card.Body>

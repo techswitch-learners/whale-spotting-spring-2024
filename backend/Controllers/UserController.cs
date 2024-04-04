@@ -65,8 +65,8 @@ public class UserController(UserManager<User> userManager) : Controller
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPatch("{userName}/profile-picture")]
-    public async Task<IActionResult> EditProfilePicture([FromRoute] string userName, [FromBody] string imageURL)
+    [HttpDelete("{userName}/profile-image")]
+    public async Task<IActionResult> ResetProfileImage([FromRoute] string userName)
     {
         var matchingUser = await _userManager.FindByNameAsync(userName);
         if (matchingUser == null)
@@ -75,7 +75,7 @@ public class UserController(UserManager<User> userManager) : Controller
         }
         else
         {
-            matchingUser.ProfileImageUrl = imageURL;
+            matchingUser.ProfileImageUrl = string.Empty;
             await _userManager.UpdateAsync(matchingUser);
             return NoContent();
         }
