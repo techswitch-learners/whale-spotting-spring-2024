@@ -49,10 +49,10 @@ public class UserController(UserManager<User> userManager) : Controller
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("{userId}")]
-    public async Task<IActionResult> DeleteUser([FromRoute] int userId)
+    [HttpDelete("{userName}")]
+    public async Task<IActionResult> DeleteUser([FromRoute] string userName)
     {
-        var userToRemove = await _userManager.FindByIdAsync(userId.ToString());
+        var userToRemove = await _userManager.FindByNameAsync(userName);
         if (userToRemove == null)
         {
             return NotFound();
@@ -65,10 +65,10 @@ public class UserController(UserManager<User> userManager) : Controller
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPatch("edit/{userId}")]
-    public async Task<IActionResult> EditProfilePicture([FromRoute] int userId, [FromBody] string imageURL)
+    [HttpPatch("edit/{userName}")]
+    public async Task<IActionResult> EditProfilePicture([FromRoute] string userName, [FromBody] string imageURL)
     {
-        var matchingUser = await _userManager.FindByIdAsync(userId.ToString());
+        var matchingUser = await _userManager.FindByNameAsync(userName);
         if (matchingUser == null)
         {
             return NotFound();

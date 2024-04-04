@@ -35,29 +35,28 @@ const Users = () => {
     backgroundContext.setBackground("white")
   }, [backgroundContext])
 
-  function handleProfilePicture(id: number, authContext: string | undefined) {
-    editProfilePicture(id, authContext, whale).then((response) => {
+  function handleProfilePicture(userName: string, authContext: string | undefined) {
+    editProfilePicture(userName, authContext, whale).then((response) => {
       if (response.ok) {
         getData()
       }
     })
   }
 
-  function handleDeleteUser(id: number, authContext: string | undefined) {
-    deleteUser(id, authContext).then((response) => {
+  function handleDeleteUser(userName: string, authContext: string | undefined) {
+    deleteUser(userName, authContext).then((response) => {
       if (response.ok) {
-        setAllUsers(allUsers?.filter((user) => user.id != id))
+        setAllUsers(allUsers?.filter((user) => user.userName != userName))
       }
     })
   }
 
   interface UserCardProps {
-    id: number
     userName: string
     profileImageUrl: string
   }
 
-  function UserCard({ id, userName, profileImageUrl }: UserCardProps) {
+  function UserCard({ userName, profileImageUrl }: UserCardProps) {
     return (
       <Card className="text-start">
         {profileImageUrl && (
@@ -72,11 +71,15 @@ const Users = () => {
           <Card.Title>{userName}</Card.Title>
         </Card.Body>
         <Card.Footer>
-          <Button className="mx-2" onClick={() => handleProfilePicture(id, authContext.cookie.token)}>
+          <Button className="mx-2" onClick={() => handleProfilePicture(userName, authContext.cookie.token)}>
             {" "}
             Reset Profile Picture
           </Button>
-          <Button className="mx-2" variant="danger" onClick={() => handleDeleteUser(id, authContext.cookie.token)}>
+          <Button
+            className="mx-2"
+            variant="danger"
+            onClick={() => handleDeleteUser(userName, authContext.cookie.token)}
+          >
             Delete
           </Button>
         </Card.Footer>
@@ -91,7 +94,7 @@ const Users = () => {
           <h2 className="text-center">Total users: {allUsers.length}</h2>
           <div className="d-flex flex-wrap justify-content-center gap-4 pb-3">
             {allUsers.map((user) => (
-              <UserCard key={user.id} id={user.id} userName={user.userName} profileImageUrl={user.profileImageUrl} />
+              <UserCard key={user.id} userName={user.userName} profileImageUrl={user.profileImageUrl} />
             ))}
           </div>
         </>

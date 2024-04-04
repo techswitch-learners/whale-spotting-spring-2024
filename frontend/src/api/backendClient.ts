@@ -63,8 +63,8 @@ export const getUsers = async (token?: string) => {
   })
 }
 
-export const deleteUser = async (userId?: number, token?: string) => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`, {
+export const deleteUser = async (username?: string, token?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/${username}`, {
     method: "delete",
     headers: {
       "Content-Type": "application/json",
@@ -73,8 +73,8 @@ export const deleteUser = async (userId?: number, token?: string) => {
   })
 }
 
-export const editProfilePicture = async (userId?: number, token?: string, url?: string) => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/edit/${userId}`, {
+export const editProfilePicture = async (userName?: string, token?: string, url?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/edit/${userName}`, {
     method: "patch",
     headers: {
       "Content-Type": "application/json",
