@@ -235,8 +235,8 @@ public class SightingController(WhaleSpottingContext context) : Controller
     [HttpPatch("{sightingId}/verification")]
     public IActionResult ResetApprovalStatus([FromRoute] int sightingId)
     {
+        var matchingVerificationEvent = _context.VerificationEvents.FirstOrDefault(ve => ve.SightingId == sightingId);
         var matchingSighting = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
-        var matchingVerificationEvent = matchingSighting?.VerificationEvent;
         if (matchingSighting == null || matchingVerificationEvent == null)
         {
             return NotFound();
