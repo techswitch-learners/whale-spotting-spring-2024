@@ -5,6 +5,7 @@ import { AuthContext, BackgroundContext } from "../App"
 import { deleteUser, editProfilePicture } from "../api/backendClient"
 import { Button, Card } from "react-bootstrap"
 import whale from "/android-chrome-512x512.png"
+import Error403 from "./Error403"
 
 const Users = () => {
   const backgroundContext = useContext(BackgroundContext)
@@ -99,7 +100,7 @@ const Users = () => {
           </div>
         </>
       )}
-      {unauthorisedAccess && <p>You shouldn't be here</p>}
+      {unauthorisedAccess && <Error403 />}
       {loading && <p>Loading...</p>}
       {error && <p>Sorry, unable to load user data at this time</p>}
     </div>

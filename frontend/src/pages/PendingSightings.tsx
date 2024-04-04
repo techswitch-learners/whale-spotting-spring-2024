@@ -3,13 +3,13 @@ import Sighting from "../models/view/Sighting"
 import { getPendingSightings, verifySighting } from "../api/backendClient"
 import { AuthContext, BackgroundContext } from "../App"
 import { Button, Card, Form, FormGroup } from "react-bootstrap"
+import Error403 from "./Error403"
 
 interface SightingCardProps {
-  id: number
   sighting: Sighting
   handleSubmit: (id: number, status: string, setComment: (comment?: string) => void, comment?: string) => void
 }
-function PendingSightingCard({ id, sighting, handleSubmit }: SightingCardProps) {
+function PendingSightingCard({ sighting, handleSubmit }: SightingCardProps) {
   const [comment, setComment] = useState<string>()
   const handleCommentChange = (value: string) => {
     setComment(value)
@@ -27,7 +27,7 @@ function PendingSightingCard({ id, sighting, handleSubmit }: SightingCardProps) 
       </Card.Body>
       <Card.Footer className="d-flex justify-content-center align-items-center">
         <Form>
-          <FormGroup controlId={`commentTextArea${id}`} className="mb-2 text-start">
+          <FormGroup controlId={`commentTextArea${sighting.id}`} className="mb-2 text-start">
             <Form.Label>Comment(optional):</Form.Label>
             <Form.Control
               as="textarea"
@@ -36,8 +36,12 @@ function PendingSightingCard({ id, sighting, handleSubmit }: SightingCardProps) 
               onChange={(e) => handleCommentChange(e.target.value)}
             />
           </FormGroup>
-          <Button onClick={() => handleSubmit(id, "approve", setComment, comment)}>Approve</Button>
-          <Button className="mx-3" variant="danger" onClick={() => handleSubmit(id, "approve", setComment, comment)}>
+          <Button onClick={() => handleSubmit(sighting.id, "approve", setComment, comment)}>Approve</Button>
+          <Button
+            className="mx-3"
+            variant="danger"
+            onClick={() => handleSubmit(sighting.id, "approve", setComment, comment)}
+          >
             Reject
           </Button>
         </Form>
@@ -103,16 +107,18 @@ const PendingSightings = () => {
 
   return (
     <div className="d-flex flex-column text-center">
-      <h1>Pending Sightings</h1>
       {pendingSightings && (
-        <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
-          {pendingSightings.map((sighting) => (
-            <PendingSightingCard key={sighting.id} id={sighting.id} sighting={sighting} handleSubmit={handleSubmit} />
-          ))}
-        </div>
+        <>
+          <h1>Pending Sightings</h1>
+          <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
+            {pendingSightings.map((sighting) => (
+              <PendingSightingCard key={sighting.id} sighting={sighting} handleSubmit={handleSubmit} />
+            ))}
+          </div>
+        </>
       )}
 
-      {unauthorisedAccess && <p>You shouldn't be here</p>}
+      {unauthorisedAccess && <Error403 />}
       {loading && <p>Loading...</p>}
       {error && <p>There was an error</p>}
     </div>
