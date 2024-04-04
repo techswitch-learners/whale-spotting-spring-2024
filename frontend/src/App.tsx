@@ -62,7 +62,7 @@ const App = () => {
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
               <Route path="/sightings/pending" element={<PendingSightings />} />
-              <Route path="sightings/rejected" element={<RejectedSightings />} />
+              <Route path="/sightings/rejected" element={<RejectedSightings />} />
               <Route path="/sightings/add" element={<SightingForm />} />
               <Route path="/sightings/:id" element={<SightingView />} />
               <Route path="/hotspots/:id" element={<HotSpotView />} />
