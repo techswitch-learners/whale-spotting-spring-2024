@@ -51,6 +51,8 @@ const Users = () => {
   const navigate = useNavigate()
 
   function getData() {
+    setLoading(true)
+    setError(false)
     getUsers(authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
