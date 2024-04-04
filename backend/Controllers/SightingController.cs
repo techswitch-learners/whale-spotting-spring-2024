@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WhaleSpotting.Enums;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Data.Request;
 using WhaleSpotting.Models.Request;
@@ -47,9 +48,9 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.Species)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
-            .Where(sighting => sighting.VerificationEvent != null)
             .SingleOrDefault(sighting => sighting.Id == id);
-        if (matchingSighting == null || (int)matchingSighting.VerificationEvent!.ApprovalStatus == 0)
+        // TODO: Restrict unverified posts to admins and post owners
+        if (matchingSighting == null)
         {
             return NotFound();
         }
@@ -68,7 +69,6 @@ public class SightingController(WhaleSpottingContext context) : Controller
             CreationTimestamp = matchingSighting.CreationTimestamp,
             Reactions = matchingSighting.Reactions
         };
-
         return Ok(sighting);
     }
 
@@ -81,10 +81,10 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
             .Where(sighting =>
-                sighting.VerificationEvent != null && (int)sighting.VerificationEvent.ApprovalStatus == 1
+                sighting.VerificationEvent != null
+                && sighting.VerificationEvent.ApprovalStatus == ApprovalStatus.Approved
             )
             .ToList();
-
         var sightingsResponse = new SightingsResponse
         {
             Sightings = sightings
@@ -152,7 +152,10 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.Species)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
-            .Where(sighting => sighting.VerificationEvent != null && sighting.VerificationEvent.ApprovalStatus == 0)
+            .Where(sighting =>
+                sighting.VerificationEvent != null
+                && sighting.VerificationEvent.ApprovalStatus == ApprovalStatus.Rejected
+            )
             .ToList();
 
         var sightingsResponse = new SightingsResponse
@@ -178,6 +181,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
         return Ok(sightingsResponse);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost("{sightingId}/verify")]
     public IActionResult VerifySighting(
         [FromRoute] int sightingId,
