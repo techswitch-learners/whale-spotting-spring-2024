@@ -11,8 +11,6 @@ public class AchievementController(WhaleSpottingContext context) : Controller
 {
     private readonly WhaleSpottingContext _context = context;
 
-    [Authorize]
-    [AllowAnonymous]
     [HttpGet("")]
     public IActionResult GetAchievementsByUser()
     {

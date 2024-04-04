@@ -105,3 +105,7 @@ export const deleteReaction = async (sightingId: number, token?: string) => {
 export const getHotSpotById = async (id?: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/hotspots/${id}`)
 }
+
+export const getAchievements = async () => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/achievements`)
+}
