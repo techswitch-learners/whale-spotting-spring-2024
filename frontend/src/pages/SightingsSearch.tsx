@@ -8,12 +8,24 @@ import { BackgroundContext } from "../App"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faList, faMapMarker } from "@fortawesome/free-solid-svg-icons"
 import Card from "react-bootstrap/Card"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings, getSpeciesList } from "../api/backendClient"
 import { DropdownButton, Dropdown, Row, Col, Button } from "react-bootstrap"
 import Species from "../models/view/Species"
+
+function getFilteredSightings(allSightings: Sighting[], searchParams: URLSearchParams) {
+  return allSightings.filter(
+    (sighting) =>
+      (!searchParams.has("species") || searchParams.has("species", sighting.species.name)) &&
+      (!searchParams.has("bodyOfWater") ||
+        sighting.bodyOfWater.match(new RegExp(searchParams.get("bodyOfWater")!, "i"))) &&
+      (!searchParams.has("startDate") ||
+        new Date(sighting.sightingTimestamp) >= new Date(searchParams.get("startDate")!)) &&
+      (!searchParams.has("endDate") || new Date(sighting.sightingTimestamp) <= new Date(searchParams.get("endDate")!)),
+  )
+}
 
 interface SightingCardProps {
   imageUrl: string
@@ -40,6 +52,7 @@ function SightingCard({ imageUrl, species, bodyOfWater, description, sightingTim
 }
 
 const SightingsSearch = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const backgroundContext = useContext(BackgroundContext)
   const [mapView, setMapView] = useState<boolean>(false)
   const [allSightings, setAllSightings] = useState<Sighting[]>()
@@ -47,10 +60,9 @@ const SightingsSearch = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [speciesList, setSpeciesList] = useState<Species[]>()
-  const [startDate, setStartDate] = useState<string>("")
-  const [endDate, setEndDate] = useState<string>("")
-  const [bodyOfWater, setBodyOfWater] = useState<string>("")
-  const [selectedSpeciesSet, setSelectedSpeciesSet] = useState<Set<string>>(new Set<string>())
+  const [searchParamsInProgress, setSearchParamsInProgress] = useState<URLSearchParams>(
+    new URLSearchParams(searchParams),
+  )
 
   useEffect(() => {
     getSpeciesList()
@@ -59,7 +71,7 @@ const SightingsSearch = () => {
       .catch(() => {})
   }, [])
 
-  function getData() {
+  const getData = () => {
     setLoading(true)
     setError(false)
     getSightings()
@@ -81,24 +93,18 @@ const SightingsSearch = () => {
   useEffect(getData, [])
 
   useEffect(() => {
+    if (allSightings) {
+      setFilteredSightings(getFilteredSightings(allSightings, searchParams))
+    }
+  }, [allSightings, searchParams])
+
+  useEffect(() => {
     backgroundContext.setBackground("white")
   }, [backgroundContext])
 
-  useEffect(() => {
-    setFilteredSightings(allSightings)
-  }, [allSightings])
-
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
-    setFilteredSightings(
-      allSightings?.filter(
-        (sighting) =>
-          (selectedSpeciesSet.size === 0 || selectedSpeciesSet.has(sighting.species.name)) &&
-          (!bodyOfWater || sighting.bodyOfWater.match(new RegExp(bodyOfWater, "i"))) &&
-          (!startDate || new Date(sighting.sightingTimestamp) >= new Date(startDate)) &&
-          (!endDate || new Date(sighting.sightingTimestamp) <= new Date(endDate)),
-      ),
-    )
+    setSearchParams(new URLSearchParams(searchParamsInProgress))
   }
 
   return (
@@ -154,8 +160,15 @@ const SightingsSearch = () => {
                       <Form.Label className="text-start">Body of water</Form.Label>
                       <Form.Control
                         type="text"
-                        value={bodyOfWater}
-                        onChange={(event) => setBodyOfWater(event.target.value)}
+                        value={searchParamsInProgress.get("bodyOfWater") ?? ""}
+                        onChange={(event) => {
+                          if (event.target.value) {
+                            searchParamsInProgress.set("bodyOfWater", event.target.value)
+                          } else {
+                            searchParamsInProgress.delete("bodyOfWater")
+                          }
+                          setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
+                        }}
                       />
                     </Form.Group>
                     <Col xs={4} className="d-flex flex-column justify-content-end">
@@ -172,13 +185,14 @@ const SightingsSearch = () => {
                                 name="species"
                                 label={species.name}
                                 value={species.name}
+                                checked={searchParamsInProgress.has("species", species.name)}
                                 onChange={(event) => {
                                   if (event.target.checked) {
-                                    selectedSpeciesSet.add(event.target.value)
+                                    searchParamsInProgress.append("species", event.target.value)
                                   } else {
-                                    selectedSpeciesSet.delete(event.target.value)
+                                    searchParamsInProgress.delete("species", event.target.value)
                                   }
-                                  setSelectedSpeciesSet(selectedSpeciesSet)
+                                  setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
                                 }}
                               />
                             </Form.Group>
@@ -192,21 +206,41 @@ const SightingsSearch = () => {
                       <Form.Label className="text-start">Start date</Form.Label>
                       <Form.Control
                         type="date"
+                        value={searchParamsInProgress.get("startDate") ?? ""}
                         max={
-                          endDate
-                            ? new Date(endDate).toISOString().split("T")[0]
+                          searchParamsInProgress.has("endDate")
+                            ? new Date(searchParamsInProgress.get("endDate")!).toISOString().split("T")[0]
                             : new Date().toISOString().split("T")[0]
                         }
-                        onChange={(event) => setStartDate(event.target.value)}
+                        onChange={(event) => {
+                          if (event.target.value) {
+                            searchParamsInProgress.set("startDate", event.target.value)
+                          } else {
+                            searchParamsInProgress.delete("startDate")
+                          }
+                          setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
+                        }}
                       />
                     </Form.Group>
                     <Form.Group className="col-6" controlId="endDate">
                       <Form.Label className="text-start">End date</Form.Label>
                       <Form.Control
                         type="date"
-                        min={startDate ? new Date(startDate).toISOString().split("T")[0] : undefined}
+                        value={searchParamsInProgress.get("endDate") ?? ""}
+                        min={
+                          searchParamsInProgress.has("startDate")
+                            ? new Date(searchParamsInProgress.get("startDate")!).toISOString().split("T")[0]
+                            : undefined
+                        }
                         max={new Date().toISOString().split("T")[0]}
-                        onChange={(event) => setEndDate(event.target.value)}
+                        onChange={(event) => {
+                          if (event.target.value) {
+                            searchParamsInProgress.set("endDate", event.target.value)
+                          } else {
+                            searchParamsInProgress.delete("endDate")
+                          }
+                          setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
+                        }}
                       />
                     </Form.Group>
                   </Row>
