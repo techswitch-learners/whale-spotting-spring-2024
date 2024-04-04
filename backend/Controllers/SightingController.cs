@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WhaleSpotting.Enums;
 using WhaleSpotting.Models.Data;
+using WhaleSpotting.Models.Data.Request;
 using WhaleSpotting.Models.Request;
 using WhaleSpotting.Models.Response;
 
@@ -47,6 +49,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
             .SingleOrDefault(sighting => sighting.Id == id);
+        // TODO: Restrict unverified posts to admins and post owners
         if (matchingSighting == null)
         {
             return NotFound();
@@ -66,7 +69,6 @@ public class SightingController(WhaleSpottingContext context) : Controller
             CreationTimestamp = matchingSighting.CreationTimestamp,
             Reactions = matchingSighting.Reactions
         };
-
         return Ok(sighting);
     }
 
@@ -78,8 +80,11 @@ public class SightingController(WhaleSpottingContext context) : Controller
             .Include(sighting => sighting.Species)
             .Include(sighting => sighting.VerificationEvent)
             .Include(sighting => sighting.Reactions)
+            .Where(sighting =>
+                sighting.VerificationEvent != null
+                && sighting.VerificationEvent.ApprovalStatus == ApprovalStatus.Approved
+            )
             .ToList();
-
         var sightingsResponse = new SightingsResponse
         {
             Sightings = sightings
@@ -101,5 +106,149 @@ public class SightingController(WhaleSpottingContext context) : Controller
                 .ToList()
         };
         return Ok(sightingsResponse);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("pending")]
+    public IActionResult ViewPendingSightings()
+    {
+        var pendingSightings = _context
+            .Sightings.Include(sighting => sighting.User)
+            .Include(sighting => sighting.Species)
+            .Include(sighting => sighting.VerificationEvent)
+            .Include(sighting => sighting.Reactions)
+            .Where(sighting => sighting.VerificationEvent == null)
+            .ToList();
+
+        var sightingsResponse = new SightingsResponse
+        {
+            Sightings = pendingSightings
+                .Select(sighting => new SightingResponse
+                {
+                    Id = sighting.Id,
+                    Latitude = sighting.Latitude,
+                    Longitude = sighting.Longitude,
+                    UserName = sighting.User.UserName!,
+                    Species = sighting.Species,
+                    Description = sighting.Description,
+                    ImageUrl = sighting.ImageUrl,
+                    BodyOfWater = sighting.BodyOfWater,
+                    VerificationEvent = sighting.VerificationEvent,
+                    SightingTimestamp = sighting.SightingTimestamp,
+                    CreationTimestamp = sighting.CreationTimestamp,
+                    Reactions = sighting.Reactions
+                })
+                .ToList()
+        };
+        return Ok(sightingsResponse);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("rejected")]
+    public IActionResult ViewRejectedSigthings()
+    {
+        var pendingSightings = _context
+            .Sightings.Include(sighting => sighting.User)
+            .Include(sighting => sighting.Species)
+            .Include(sighting => sighting.VerificationEvent)
+            .ThenInclude(ve => ve!.Admin)
+            .Include(sighting => sighting.Reactions)
+            .Where(sighting =>
+                sighting.VerificationEvent != null
+                && sighting.VerificationEvent.ApprovalStatus == ApprovalStatus.Rejected
+            )
+            .ToList();
+
+        var sightingsResponse = new SightingsResponse
+        {
+            Sightings = pendingSightings
+                .Select(sighting => new SightingResponse
+                {
+                    Id = sighting.Id,
+                    Latitude = sighting.Latitude,
+                    Longitude = sighting.Longitude,
+                    UserName = sighting.User.UserName!,
+                    Species = sighting.Species,
+                    Description = sighting.Description,
+                    ImageUrl = sighting.ImageUrl,
+                    BodyOfWater = sighting.BodyOfWater,
+                    VerificationEvent = sighting.VerificationEvent,
+                    SightingTimestamp = sighting.SightingTimestamp,
+                    CreationTimestamp = sighting.CreationTimestamp,
+                    Reactions = sighting.Reactions
+                })
+                .ToList()
+        };
+        return Ok(sightingsResponse);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost("{sightingId}/verify")]
+    public IActionResult VerifySighting(
+        [FromRoute] int sightingId,
+        [FromBody] CreateVerificationEventRequest verificationEventRequest
+    )
+    {
+        var sighting = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
+        var userId = AuthHelper.GetUserId(User);
+
+        if (sighting == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            var newVerificationEvent = new VerificationEvent
+            {
+                SightingId = sightingId,
+                AdminId = userId,
+                ApprovalStatus = verificationEventRequest.ApprovalStatus!.Value,
+                Comment = verificationEventRequest.Comment,
+                Timestamp = DateTime.UtcNow,
+            };
+
+            var savedVerificationEvent = _context.VerificationEvents.Add(newVerificationEvent).Entity;
+            _context.SaveChanges();
+            sighting.VerificationEventId = savedVerificationEvent.Id;
+            _context.SaveChanges();
+            return NoContent();
+        }
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{sightingId}")]
+    public IActionResult DeleteSighting([FromRoute] int sightingId)
+    {
+        var sightingToRemove = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
+        if (sightingToRemove == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            _context.Sightings.Remove(sightingToRemove);
+            _context.SaveChanges();
+            return NoContent();
+        }
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPatch("{sightingId}/verification")]
+    public IActionResult ResetApprovalStatus([FromRoute] int sightingId)
+    {
+        var matchingVerificationEvent = _context.VerificationEvents.FirstOrDefault(ve => ve.SightingId == sightingId);
+        var matchingSighting = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
+        if (matchingSighting == null || matchingVerificationEvent == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            matchingSighting.VerificationEvent = null;
+            _context.SaveChanges();
+            _context.VerificationEvents.Remove(matchingVerificationEvent);
+            _context.SaveChanges();
+            return NoContent();
+        }
     }
 }
