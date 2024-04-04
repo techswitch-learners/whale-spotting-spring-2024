@@ -69,8 +69,10 @@ const Users = () => {
   useEffect(getData, [authContext, navigate])
 
   useEffect(() => {
-    backgroundContext.setBackground("white")
-  }, [backgroundContext])
+    if (!unauthorisedAccess) {
+      backgroundContext.setBackground("white")
+    }
+  }, [backgroundContext, unauthorisedAccess])
 
   function handleProfilePicture(userName: string) {
     resetProfilePicture(userName, authContext.cookie.token).then((response) => {
@@ -98,6 +100,10 @@ const Users = () => {
     })
   }
 
+  if (unauthorisedAccess) {
+    return <Error403 />
+  }
+
   if (!authContext.cookie.token) {
     return <Navigate to="/login" />
   }
@@ -120,7 +126,6 @@ const Users = () => {
           </div>
         </>
       )}
-      {unauthorisedAccess && <Error403 />}
       {loading && <p>Loading...</p>}
       {error && <p>Sorry, unable to load user data at this time</p>}
     </div>

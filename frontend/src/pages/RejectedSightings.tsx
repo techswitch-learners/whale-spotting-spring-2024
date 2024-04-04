@@ -83,7 +83,6 @@ const RejectedSightings = () => {
     setError(false)
     getRejectedSightings(authContext.cookie.token)
       .then((response) => {
-        console.log(response.status)
         if (response.ok) {
           response.json().then((data) => setRejectedSightings(data.sightings))
         } else if (response.status === 403) {
@@ -100,31 +99,34 @@ const RejectedSightings = () => {
   useEffect(getData, [authContext, navigate])
 
   useEffect(() => {
-    backgroundContext.setBackground("white")
-  }, [backgroundContext])
+    if (!unauthorisedAccess) {
+      backgroundContext.setBackground("white")
+    }
+  }, [backgroundContext, unauthorisedAccess])
 
   if (!authContext.cookie.token) {
     return <Navigate to="/login" />
   }
 
+  if (unauthorisedAccess) {
+    return <Error403 />
+  }
+
   return (
     <div className="d-flex flex-column text-center">
+      <h1>Rejected Sightings</h1>
       {rejectedSightings && (
-        <>
-          <h1>Rejected Sightings</h1>
-          <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
-            {rejectedSightings.map((sighting) => (
-              <RejectedSightingCard
-                key={sighting.id}
-                sighting={sighting}
-                handleDeleteSighting={handleDeleteSighting}
-                handleRestore={handleRestore}
-              />
-            ))}
-          </div>
-        </>
+        <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
+          {rejectedSightings.map((sighting) => (
+            <RejectedSightingCard
+              key={sighting.id}
+              sighting={sighting}
+              handleDeleteSighting={handleDeleteSighting}
+              handleRestore={handleRestore}
+            />
+          ))}
+        </div>
       )}
-      {unauthorisedAccess && <Error403 />}
       {loading && <p>Loading...</p>}
       {error && <p>There was an error</p>}
     </div>

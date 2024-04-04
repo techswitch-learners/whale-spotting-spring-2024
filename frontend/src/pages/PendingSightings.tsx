@@ -106,27 +106,30 @@ const PendingSightings = () => {
   useEffect(getData, [authContext, navigate])
 
   useEffect(() => {
-    backgroundContext.setBackground("white")
-  }, [backgroundContext])
+    if (!unauthorisedAccess) {
+      backgroundContext.setBackground("white")
+    }
+  }, [backgroundContext, unauthorisedAccess])
 
   if (!authContext.cookie.token) {
     return <Navigate to="/login" />
   }
 
+  if (unauthorisedAccess) {
+    return <Error403 />
+  }
+
   return (
     <div className="d-flex flex-column text-center">
+      <h1>Pending Sightings</h1>
       {pendingSightings && (
-        <>
-          <h1>Pending Sightings</h1>
-          <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
-            {pendingSightings.map((sighting) => (
-              <PendingSightingCard key={sighting.id} sighting={sighting} handleSubmit={handleSubmit} />
-            ))}
-          </div>
-        </>
+        <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
+          {pendingSightings.map((sighting) => (
+            <PendingSightingCard key={sighting.id} sighting={sighting} handleSubmit={handleSubmit} />
+          ))}
+        </div>
       )}
 
-      {unauthorisedAccess && <Error403 />}
       {loading && <p>Loading...</p>}
       {error && <p>There was an error</p>}
     </div>

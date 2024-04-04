@@ -30,10 +30,8 @@ export const AuthContext = createContext<{
 })
 
 export const BackgroundContext = createContext<{
-  background: string
   setBackground: (background: string) => void
 }>({
-  background: "white",
   setBackground: () => {},
 })
 
@@ -48,7 +46,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={{ cookie, setCookie, removeCookie }}>
-      <BackgroundContext.Provider value={{ background, setBackground }}>
+      <BackgroundContext.Provider value={{ setBackground }}>
         <Router>
           <NavbarTop />
           <main className="container-fluid">
