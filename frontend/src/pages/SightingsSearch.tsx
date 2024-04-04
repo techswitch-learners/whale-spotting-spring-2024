@@ -12,7 +12,7 @@ import { Link } from "react-router-dom"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 import { getSightings, getSpeciesList } from "../api/backendClient"
-import { DropdownButton, Dropdown, Row, Col } from "react-bootstrap"
+import { DropdownButton, Dropdown, Row, Col, Button } from "react-bootstrap"
 import Species from "../models/view/Species"
 
 interface SightingCardProps {
@@ -25,7 +25,7 @@ interface SightingCardProps {
 
 function SightingCard({ imageUrl, species, bodyOfWater, description, sightingTimestamp }: SightingCardProps) {
   return (
-    <Card className="text-start">
+    <Card className="SightingCard text-start">
       <Card.Img variant="top" src={imageUrl} />
       <Card.Body>
         <Card.Title>{species}</Card.Title>
@@ -146,11 +146,11 @@ const SightingsSearch = () => {
         )}
         {!mapView && (
           <div>
-            <Card className="mx-auto" style={{ maxWidth: "25rem" }}>
+            <Card className="mt-3 mx-auto bg-light" style={{ maxWidth: "25rem" }}>
               <Card.Body>
                 <Form onSubmit={handleSubmit}>
                   <Row className="mb-3">
-                    <Form.Group className="col-8" controlId="bodyOfWater">
+                    <Form.Group className="col-8 d-flex flex-column justify-content-end" controlId="bodyOfWater">
                       <Form.Label className="text-start">Body of water</Form.Label>
                       <Form.Control
                         type="text"
@@ -158,12 +158,12 @@ const SightingsSearch = () => {
                         onChange={(event) => setBodyOfWater(event.target.value)}
                       />
                     </Form.Group>
-                    <Col xs={4}>
+                    <Col xs={4} className="d-flex flex-column justify-content-end">
                       <DropdownButton
                         id="dropdown-species-button"
                         title="Species"
                         className="d-flex flex-column justify-content-center align-items-center mx-2"
-                        variant="secondary"
+                        variant="primary"
                       >
                         {speciesList?.map((species) => (
                           <Dropdown.ItemText>
@@ -187,7 +187,7 @@ const SightingsSearch = () => {
                       </DropdownButton>
                     </Col>
                   </Row>
-                  <Row className="mb-3">
+                  <Row className="mb-4 text-start">
                     <Form.Group className="col-6" controlId="startDate">
                       <Form.Label className="text-start">Start date</Form.Label>
                       <Form.Control
@@ -210,7 +210,7 @@ const SightingsSearch = () => {
                       />
                     </Form.Group>
                   </Row>
-                  <button type="submit">Filter sightings</button>
+                  <Button type="submit">Filter sightings</Button>
                 </Form>
               </Card.Body>
             </Card>

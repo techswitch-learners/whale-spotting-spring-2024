@@ -5,13 +5,13 @@
     height: 60vh;
   }
 
-  .card {
+  .SightingCard {
     transition:
       transform 0.5s,
       box-shadow 0.5s;
   }
 
-  .card:hover {
+  .SightingCard:hover {
     transform: scale(1.05);
     box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
   }
