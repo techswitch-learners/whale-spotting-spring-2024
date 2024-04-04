@@ -10,6 +10,7 @@ interface Sighting {
   imageUrl: string
   bodyOfWater: string
   sightingTimestamp: string
+  creationTimestamp: string
   verificationEvent: {
     admin: {
       userName: string

@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react"
-import Sighting from "../models/view/Sighting"
 import { getPendingSightings, verifySighting } from "../api/backendClient"
 import { AuthContext, BackgroundContext } from "../App"
 import { Button, Card, Form, FormGroup } from "react-bootstrap"
 import Error403 from "./Error403"
+import Sighting from "../models/view/Sighting"
+import { Link } from "react-router-dom"
 
 interface SightingCardProps {
   sighting: Sighting
@@ -11,37 +12,36 @@ interface SightingCardProps {
 }
 function PendingSightingCard({ sighting, handleSubmit }: SightingCardProps) {
   const [comment, setComment] = useState<string>()
-  const handleCommentChange = (value: string) => {
-    setComment(value)
-  }
 
   return (
     <Card className="text-start" style={{ width: "15rem" }}>
       <Card.Img variant="top" src={sighting.imageUrl} style={{ height: "15rem", objectFit: "cover" }} />
+      <Card.Header>
+        Posted by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
+      </Card.Header>
       <Card.Body>
-        <Card.Text>Posted by: {sighting.userName}</Card.Text>
-        <Card.Text>Species: {sighting.species.name}</Card.Text>
-        <Card.Text>Body of Water: {sighting.bodyOfWater}</Card.Text>
-        <Card.Text>Description: {sighting.description}</Card.Text>
-        <Card.Text>Posted on: {sighting.sightingTimestamp.split("T")[0]}</Card.Text>
+        <Card.Title>{sighting.species.name}</Card.Title>
+        <Card.Subtitle>{sighting.bodyOfWater}</Card.Subtitle>
+        <Card.Text>{sighting.description}</Card.Text>
+        <hr />
+        <Card.Text className="mb-0">Seen on {sighting.sightingTimestamp.split("T")[0]}</Card.Text>
+        <Card.Text>Posted on {sighting.creationTimestamp.split("T")[0]}</Card.Text>
       </Card.Body>
-      <Card.Footer className="d-flex justify-content-center align-items-center">
+      <Card.Footer className="p-3">
         <Form>
-          <FormGroup controlId={`commentTextArea${sighting.id}`} className="mb-2 text-start">
-            <Form.Label>Comment(optional):</Form.Label>
+          <FormGroup controlId={`commentTextArea${sighting.id}`} className="mb-3 text-start">
+            <Form.Label>Comment (optional):</Form.Label>
             <Form.Control
               as="textarea"
               placeholder="Leave your comments"
               value={comment}
-              onChange={(e) => handleCommentChange(e.target.value)}
+              onChange={(e) => setComment(e.target.value)}
             />
           </FormGroup>
-          <Button onClick={() => handleSubmit(sighting.id, "approve", setComment, comment)}>Approve</Button>
-          <Button
-            className="mx-3"
-            variant="danger"
-            onClick={() => handleSubmit(sighting.id, "reject", setComment, comment)}
-          >
+          <Button className="me-2" onClick={() => handleSubmit(sighting.id, "approve", setComment, comment)}>
+            Approve
+          </Button>
+          <Button variant="danger" onClick={() => handleSubmit(sighting.id, "reject", setComment, comment)}>
             Reject
           </Button>
         </Form>
