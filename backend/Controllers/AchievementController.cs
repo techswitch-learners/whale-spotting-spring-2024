@@ -1,16 +1,20 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Response;
 
 namespace WhaleSpotting.Controllers;
 
 [ApiController]
-[Route("/achievement")]
+[Route("/achievements")]
 public class AchievementController(WhaleSpottingContext context) : Controller
 {
     private readonly WhaleSpottingContext _context = context;
 
+    [Authorize]
+    [AllowAnonymous]
     [HttpGet("")]
-    public IActionResult GetAchievements()
+    public IActionResult GetAchievementsByUser()
     {
         var achievements = _context.Achievements.ToList();
 
