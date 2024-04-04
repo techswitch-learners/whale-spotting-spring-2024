@@ -228,10 +228,10 @@ public class SightingController(WhaleSpottingContext context) : Controller
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPatch("edit/{sightingId}")]
+    [HttpPatch("{sightingId}/verification")]
     public IActionResult EditApprovalStatus([FromRoute] int sightingId)
     {
-        var matchingVerificationEvent = _context.VerificationEvents.FirstOrDefault(ev => ev.SightingId == sightingId);
+        var matchingVerificationEvent = _context.VerificationEvents.FirstOrDefault(ve => ve.SightingId == sightingId);
         var matchingSighting = _context.Sightings.FirstOrDefault(sighting => sighting.Id == sightingId);
         if (matchingSighting == null || matchingVerificationEvent == null)
         {

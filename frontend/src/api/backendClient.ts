@@ -74,7 +74,7 @@ export const deleteUser = async (username?: string, token?: string) => {
 }
 
 export const editProfilePicture = async (userName?: string, token?: string, url?: string) => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/edit/${userName}`, {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/${userName}/profile-picture`, {
     method: "patch",
     headers: {
       "Content-Type": "application/json",
@@ -114,7 +114,7 @@ export const verifySighting = async (verificationEvent: VerificationEvent, sight
 }
 
 export const editApprovalStatus = async (sightingId?: number, token?: string) => {
-  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/edit/${sightingId}`, {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${sightingId}/verification`, {
     method: "patch",
     headers: {
       "Content-Type": "application/json",

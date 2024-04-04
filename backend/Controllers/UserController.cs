@@ -65,7 +65,7 @@ public class UserController(UserManager<User> userManager) : Controller
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPatch("edit/{userName}")]
+    [HttpPatch("{userName}/profile-picture")]
     public async Task<IActionResult> EditProfilePicture([FromRoute] string userName, [FromBody] string imageURL)
     {
         var matchingUser = await _userManager.FindByNameAsync(userName);
