@@ -11,10 +11,14 @@ import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
 import SightingsSearch from "./pages/SightingsSearch"
+import PendingSightings from "./pages/PendingSightings"
+import RejectedSightings from "./pages/RejectedSightings"
 import SightingForm from "./pages/SightingForm"
 import SightingView from "./pages/SightingView"
 import HotspotsSearch from "./pages/HotspotsSearch"
 import HotspotView from "./pages/HotspotView"
+import Users from "./pages/Users"
+import Error404 from "./pages/Error404"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -27,10 +31,8 @@ export const AuthContext = createContext<{
 })
 
 export const BackgroundContext = createContext<{
-  background: string
   setBackground: (background: string) => void
 }>({
-  background: "white",
   setBackground: () => {},
 })
 
@@ -45,7 +47,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={{ cookie, setCookie, removeCookie }}>
-      <BackgroundContext.Provider value={{ background, setBackground }}>
+      <BackgroundContext.Provider value={{ setBackground }}>
         <Router>
           <NavbarTop />
           <main className="container-fluid">
@@ -58,10 +60,14 @@ const App = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
+              <Route path="/sightings/pending" element={<PendingSightings />} />
+              <Route path="/sightings/rejected" element={<RejectedSightings />} />
               <Route path="/sightings/add" element={<SightingForm />} />
               <Route path="/sightings/:id" element={<SightingView />} />
               <Route path="/hotspots" element={<HotspotsSearch />} />
               <Route path="/hotspots/:id" element={<HotspotView />} />
+              <Route path="/users" element={<Users />}></Route>
+              <Route path="*" element={<Error404 />} />
             </Routes>
           </main>
         </Router>

@@ -73,7 +73,7 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
                 }
             );
         }
-        var newUser = new User { UserName = registerUserRequest.UserName, ProfileImageUrl = "", };
+        var newUser = new User { UserName = registerUserRequest.UserName, ProfileImageUrl = string.Empty, };
         var result = await _userManager.CreateAsync(newUser, registerUserRequest.Password);
         if (!result.Succeeded)
         {
@@ -110,7 +110,12 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
             nameof(UserController.GetByUserName),
             nameof(UserController)[..^"Controller".Length],
             new { newUser.UserName },
-            new UserResponse { Id = newUser.Id, UserName = newUser.UserName, }
+            new UserResponse
+            {
+                Id = newUser.Id,
+                UserName = newUser.UserName,
+                ProfileImageUrl = string.Empty
+            }
         );
     }
 }
