@@ -164,6 +164,7 @@ function HotspotView() {
       {loading && (
         <p>
           Loading...
+          <br />
           <Spinner />
         </p>
       )}

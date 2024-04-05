@@ -133,7 +133,9 @@ const PendingSightings = () => {
 
       {loading && (
         <p>
-          Loading... <Spinner />
+          Loading...
+          <br />
+          <Spinner />
         </p>
       )}
       {error && <p>Couldn't load data at this time</p>}

@@ -177,6 +177,7 @@ function HotspotsSearch() {
         {loading && (
           <p>
             Loading...
+            <br />
             <Spinner />
           </p>
         )}

@@ -131,6 +131,7 @@ const RejectedSightings = () => {
       {loading && (
         <p>
           Loading...
+          <br />
           <Spinner />
         </p>
       )}

@@ -270,6 +270,7 @@ const SightingsSearch = () => {
         {loading && (
           <p>
             Loading...
+            <br />
             <Spinner />
           </p>
         )}

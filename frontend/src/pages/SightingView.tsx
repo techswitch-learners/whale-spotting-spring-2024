@@ -122,6 +122,7 @@ const SightingView = () => {
       {loading && (
         <p>
           Loading...
+          <br />
           <Spinner />
         </p>
       )}
