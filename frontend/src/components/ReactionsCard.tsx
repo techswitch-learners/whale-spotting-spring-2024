@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { Button, Stack } from "react-bootstrap"
+import { Button, Card, CardBody } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
 import { addReaction, updateReaction, deleteReaction } from "../api/backendClient"
@@ -94,25 +94,29 @@ const ReactionsCard = ({ reactions, currentUserReaction, sightingId }: Reactions
 
   return (
     <>
-      <Stack direction="horizontal">
-        {Object.entries(emojis).map(([key, emoji]) => (
-          <div key={key}>
-            {key === reactionResponse.currentUserReaction && (
-              <Button variant={"warning"} onClick={() => handleClick(key as ReactionType)}>
-                {emoji}
-              </Button>
-            )}
-            {!(key === reactionResponse.currentUserReaction) && (
-              <Button variant="light" onClick={() => handleClick(key as ReactionType)}>
-                {emoji}
-              </Button>
-            )}
-            <span style={{ position: "relative", top: "0.75rem" }}>
-              {reactionResponse.reactions[key as ReactionType]}
-            </span>
-          </div>
-        ))}
-      </Stack>
+      <Card>
+        <CardBody className="d-flex justify-content-between p-2">
+          {Object.entries(emojis).map(([key, emoji]) => (
+            <div key={key} className="d-flex flex-column mx-1">
+              {key === reactionResponse.currentUserReaction && (
+                <Button
+                  variant="warning"
+                  className="border border-warning"
+                  onClick={() => handleClick(key as ReactionType)}
+                >
+                  {emoji}
+                </Button>
+              )}
+              {key !== reactionResponse.currentUserReaction && (
+                <Button variant="light" className="border" onClick={() => handleClick(key as ReactionType)}>
+                  {emoji}
+                </Button>
+              )}
+              <span>{reactionResponse.reactions[key as ReactionType] || "0"}</span>
+            </div>
+          ))}
+        </CardBody>
+      </Card>
     </>
   )
 }

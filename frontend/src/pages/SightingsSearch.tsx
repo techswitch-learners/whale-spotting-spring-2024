@@ -251,7 +251,7 @@ const SightingsSearch = () => {
               {filteredSightings && filteredSightings.length === 0 && <h5>No sightings found</h5>}
               {filteredSightings && filteredSightings.length > 0 && (
                 <Container>
-                  <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-4 my-4">
+                  <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-5 my-4">
                     {filteredSightings.map((sighting) => (
                       <li key={sighting.id}>
                         <ReactionsCard

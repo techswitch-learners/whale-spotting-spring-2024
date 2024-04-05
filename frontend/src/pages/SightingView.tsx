@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react"
-import { Card, Row, Col, Stack, Button, Container, Image } from "react-bootstrap"
+import { Card, Row, Col, Stack, Container, Image } from "react-bootstrap"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import { Link, useParams } from "react-router-dom"
 import { Icon } from "leaflet"
@@ -49,21 +49,18 @@ const SightingView = () => {
       {sighting && (
         <Container className="pb-4">
           <Stack gap={5}>
-            <Stack direction="horizontal">
+            <div className="d-flex flex-wrap justify-content-center justify-content-md-between">
               <h1 className="me-3">
                 Sighting by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
               </h1>
-              <div className="reaction-buttons ms-auto">
+              <div className="reaction-buttons">
                 <ReactionsCard
                   reactions={sighting.reactions}
                   currentUserReaction={sighting.currentUserReaction}
                   sightingId={sighting.id}
                 />
               </div>
-              <Button variant="primary" className="share-button ms-auto">
-                Share
-              </Button>
-            </Stack>
+            </div>
 
             <Row>
               <Col className="species-card d-flex flex-column justify-content-center" sm={5}>
