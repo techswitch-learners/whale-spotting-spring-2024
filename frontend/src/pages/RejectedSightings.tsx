@@ -11,7 +11,8 @@ interface RejectedSightingCardProps {
   handleRestore: (id: number) => void
   handleDeleteSighting: (id: number) => void
 }
-function RejectedSightingCard({ sighting, handleRestore, handleDeleteSighting }: RejectedSightingCardProps) {
+
+const RejectedSightingCard = ({ sighting, handleRestore, handleDeleteSighting }: RejectedSightingCardProps) => {
   return (
     <Card className="text-start" style={{ width: "15rem" }}>
       <Card.Img variant="top" src={sighting.imageUrl} style={{ height: "15rem", objectFit: "cover" }} />

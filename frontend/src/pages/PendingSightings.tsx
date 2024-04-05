@@ -10,7 +10,8 @@ interface SightingCardProps {
   sighting: Sighting
   handleSubmit: (id: number, status: string, setComment: (comment: string) => void, comment: string) => void
 }
-function PendingSightingCard({ sighting, handleSubmit }: SightingCardProps) {
+
+const PendingSightingCard = ({ sighting, handleSubmit }: SightingCardProps) => {
   const [comment, setComment] = useState<string>("")
 
   return (

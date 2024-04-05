@@ -4,7 +4,6 @@ import { useCookies } from "react-cookie"
 import { CookieSetOptions } from "universal-cookie"
 import NavbarTop from "./components/NavbarTop"
 import Home from "./pages/Home"
-import About from "./pages/About"
 import Faqs from "./pages/Faqs"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
@@ -50,10 +49,9 @@ const App = () => {
       <BackgroundContext.Provider value={{ setBackground }}>
         <Router>
           <NavbarTop />
-          <main className="container-fluid">
+          <main className="container-fluid d-flex flex-column align-items-stretch text-center">
             <Routes>
               <Route index element={<Home />} />
-              <Route path="/about" element={<About />} />
               <Route path="/faqs" element={<Faqs />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

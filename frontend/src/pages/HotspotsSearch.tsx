@@ -55,7 +55,7 @@ function HotspotsSearch() {
   }, [backgroundContext])
 
   return (
-    <div className="HotspotsSearch text-center">
+    <div className="HotspotsSearch text-center h-100">
       <h1>Find whale-spotting hotspots</h1>
       <p className="mb-3">
         Data courtesy of the{" "}
@@ -175,8 +175,8 @@ function HotspotsSearch() {
       </div>
       {hotspots && hotspots.length > 0 && (
         <Container>
-          <h5>{hotspots.length} hotspots found</h5>
-          <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-4 my-4">
+          <h5 className="mb-4">{hotspots.length} hotspots found</h5>
+          <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-4 mb-0">
             {hotspots
               .sort((hotspot1, hotspot2) => hotspot1.name.localeCompare(hotspot2.name))
               .map((spot) => (
