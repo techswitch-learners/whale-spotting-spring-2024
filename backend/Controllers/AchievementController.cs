@@ -11,7 +11,7 @@ public class AchievementController(WhaleSpottingContext context) : Controller
     [HttpGet("")]
     public IActionResult GetAll()
     {
-        var achievements = _context.Achievements.ToList();
+        var achievements = _context.Achievements.OrderBy(achievement => achievement.MinExperience).ToList();
 
         return Ok(achievements);
     }
