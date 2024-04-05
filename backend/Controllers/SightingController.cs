@@ -43,6 +43,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
     }
 
     [Authorize]
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public IActionResult GetById([FromRoute] int id)
     {
