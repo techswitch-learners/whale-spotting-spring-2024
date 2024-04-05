@@ -50,8 +50,8 @@ const ReactionsCard = ({ reactions, currentUserReaction, sightingId }: Reactions
       .catch(() => setErrors({ General: ["Unable to delete your reaction"] }))
   }
 
-  const updateUserReaction = (value: ReactionType) => {
-    updateReaction({ reactionType: value, sightingId: sightingId }, authContext.cookie.token)
+  const updateUserReaction = (type: ReactionType) => {
+    updateReaction({ type, sightingId }, authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
           response.json().then((data) => {
@@ -69,8 +69,8 @@ const ReactionsCard = ({ reactions, currentUserReaction, sightingId }: Reactions
       .catch(() => setErrors({ General: ["Unable to update reaction"] }))
   }
 
-  const addUserReaction = (value: ReactionType) => {
-    addReaction({ reactionType: value, sightingId: sightingId }, authContext.cookie.token)
+  const addUserReaction = (type: ReactionType) => {
+    addReaction({ type, sightingId }, authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
           response.json().then((data) => setReactionResponse(data))
@@ -86,13 +86,13 @@ const ReactionsCard = ({ reactions, currentUserReaction, sightingId }: Reactions
       .catch(() => setErrors({ General: ["Unable to add reaction"] }))
   }
 
-  const handleClick = (value: ReactionType) => {
-    if (reactionResponse.currentUserReaction === value) {
+  const handleClick = (type: ReactionType) => {
+    if (reactionResponse.currentUserReaction === type) {
       deleteUserReaction()
-    } else if (value !== reactionResponse.currentUserReaction && reactionResponse.currentUserReaction !== null) {
-      updateUserReaction(value)
+    } else if (type !== reactionResponse.currentUserReaction && reactionResponse.currentUserReaction !== null) {
+      updateUserReaction(type)
     } else {
-      addUserReaction(value)
+      addUserReaction(type)
     }
   }
 

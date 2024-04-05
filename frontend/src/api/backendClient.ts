@@ -1,5 +1,5 @@
+import AddOrUpdateReactionRequest from "../models/request/AddOrUpdateReactionRequest"
 import Sighting from "../models/request/AddSightingRequest"
-import Reaction from "../models/request/ReactionRequest"
 import VerifySightingRequest from "../models/request/VerifySightingRequest"
 
 export const loginUser = async (username: string, password: string) => {
@@ -62,33 +62,25 @@ export const getSightingById = async (id?: string, token?: string) => {
   })
 }
 
-export const addReaction = async (reaction: Reaction, token?: string) => {
-  const reactionRequest = {
-    type: reaction.reactionType,
-    sightingId: reaction.sightingId,
-  }
+export const addReaction = async (addReactionRequest: AddOrUpdateReactionRequest, token?: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/reactions`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(reactionRequest),
+    body: JSON.stringify(addReactionRequest),
   })
 }
 
-export const updateReaction = async (reaction: Reaction, token?: string) => {
-  const newReactionRequest = {
-    type: reaction.reactionType,
-    sightingId: reaction.sightingId,
-  }
+export const updateReaction = async (updateReactionRequest: AddOrUpdateReactionRequest, token?: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/reactions`, {
     method: "patch",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(newReactionRequest),
+    body: JSON.stringify(updateReactionRequest),
   })
 }
 
