@@ -1,5 +1,5 @@
 import Sighting from "../models/request/AddSightingRequest"
-import VerificationEvent from "../models/request/VerificationEvent"
+import VerifySightingRequest from "../models/request/VerifySightingRequest"
 
 export const loginUser = async (username: string, password: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
@@ -109,14 +109,18 @@ export const getRejectedSightings = async (token?: string) => {
   })
 }
 
-export const verifySighting = async (verificationEvent: VerificationEvent, sightingId: number, token?: string) => {
+export const verifySighting = async (
+  verifySightingRequest: VerifySightingRequest,
+  sightingId: number,
+  token?: string,
+) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/sightings/${sightingId}/verify`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(verificationEvent),
+    body: JSON.stringify(verifySightingRequest),
   })
 }
 

@@ -1,31 +1,35 @@
-import React, { FormEvent, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { FormEvent, useContext, useEffect, useState } from "react"
+import { Link, useSearchParams } from "react-router-dom"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
-import { Card, Col, Row, Image } from "react-bootstrap"
+import { Card, Col, Row, Image, Form, Button, Container } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendar } from "@fortawesome/free-regular-svg-icons"
 import whalesIcon from "../assets/whales.png"
 import Hotspot from "../models/view/Hotspot"
-import SearchHotspotsRequest from "../models/request/SearchHotspotsRequest"
 import "./HotspotsSearch.scss"
 import { getHotspots, getMonths, getSpeciesList } from "../api/backendClient"
 import { faHelicopter, faPersonHiking, faPersonSwimming, faSailboat } from "@fortawesome/free-solid-svg-icons"
 import Species from "../models/view/Species"
+import { BackgroundContext } from "../App"
 
 function HotspotsSearch() {
-  // const [searchParams] = useSearchParams();
-  const [searchHotspotsRequest, setSearchHotspotsRequest] = useState<SearchHotspotsRequest>({
-    country: "",
-    name: "",
-    species: [],
-    platforms: [],
-    months: [],
-  })
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParamsInProgress, setSearchParamsInProgress] = useState<URLSearchParams>(
+    new URLSearchParams(searchParams),
+  )
+
+  const backgroundContext = useContext(BackgroundContext)
+
   const [hotspots, setHotspots] = useState<Hotspot[]>()
-  const [error, setError] = useState<boolean>(false)
   const [speciesList, setSpeciesList] = useState<Species[]>()
   const [monthList, setMonthList] = useState<string[]>()
+  const [error, setError] = useState<boolean>(false)
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault()
+    setSearchParams(new URLSearchParams(searchParamsInProgress))
+  }
 
   useEffect(() => {
     getSpeciesList()
@@ -39,214 +43,230 @@ function HotspotsSearch() {
       .catch(() => {})
   }, [])
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault()
-    fetchHotspotsData()
-  }
-
-  const handleSearchQueryChange = (
-    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const { name, value } = event.target
-    setSearchHotspotsRequest((prevParams) => ({
-      ...prevParams,
-      [name]: value,
-    }))
-  }
-
-  const fetchHotspotsData = () => {
-    const searchParams = new URLSearchParams()
-    Object.keys(searchHotspotsRequest).forEach((searchKey) => {
-      const searchValues = searchHotspotsRequest[searchKey as keyof SearchHotspotsRequest]
-      if (Array.isArray(searchValues)) {
-        searchValues.forEach((eachValue) => {
-          searchParams.append(searchKey, eachValue.toString())
-        })
-      } else {
-        searchParams.set(searchKey, searchValues)
-      }
-    })
-
+  useEffect(() => {
     getHotspots(searchParams.toString())
       .then((response) => response.json())
       .then((data) => setHotspots(data))
       .catch(() => setError(true))
-  }
+  }, [searchParams])
+
+  useEffect(() => {
+    backgroundContext.setBackground("white")
+  }, [backgroundContext])
 
   return (
-    <div className="HotspotsSearch">
+    <div className="HotspotsSearch text-center">
       <h1>Find whale-spotting hotspots</h1>
-      <p>
+      <p className="mb-3">
         Data courtesy of the{" "}
         <a href="https://wwhandbook.iwc.int/en/responsible-management" target="_blank">
           Whale Watching Handbook
         </a>
       </p>
-      <form onSubmit={handleSubmit}>
-        <div className="d-flex justify-content-center my-3">
-          <div className="d-flex flex-column justify-content-center align-items-center mx-2">
-            <label>
-              Town, harbour or region:{" "}
-              <input type="text" name="name" value={searchHotspotsRequest.name} onChange={handleSearchQueryChange} />
-            </label>
-          </div>
-          <div className="d-flex flex-column justify-content-center align-items-center mx-2">
-            <label>
-              Country:{" "}
-              <input
-                type="text"
-                name="country"
-                value={searchHotspotsRequest.country}
-                onChange={handleSearchQueryChange}
-              />
-            </label>
-          </div>
-        </div>
-        <div className="d-flex justify-content-center my-3">
-          <DropdownButton
-            id="dropdown-species-button"
-            title="Species"
-            className="d-flex flex-column justify-content-center align-items-center mx-2"
-            variant="secondary"
-          >
-            {speciesList?.map((species) => (
-              <Dropdown.ItemText>
-                <label>
-                  <input type="checkbox" name="species" value={species.name} onChange={handleSearchQueryChange} />{" "}
-                  {species.name}
-                </label>
-              </Dropdown.ItemText>
-            ))}
-          </DropdownButton>
-          <DropdownButton
-            id="dropdown-platforms-button"
-            title="Viewing Platforms"
-            className="d-flex flex-column justify-content-center align-items-center mx-2"
-            variant="secondary"
-          >
-            {["Boat-based", "Swimming", "Land-based", "Aerial"].map((platformName, platformNumber) => (
-              <Dropdown.ItemText>
-                <label>
-                  <input type="checkbox" name="platforms" value={platformNumber} onChange={handleSearchQueryChange} />{" "}
-                  {platformName}
-                </label>
-              </Dropdown.ItemText>
-            ))}
-          </DropdownButton>
-          <DropdownButton
-            id="dropdown-months-button"
-            title="Time of Year"
-            className="d-flex flex-column justify-content-center align-items-center mx-2"
-            variant="secondary"
-          >
-            {monthList?.map((monthName, monthNumber) => (
-              <Dropdown.ItemText>
-                <label>
-                  <input type="checkbox" name="months" value={monthNumber} onChange={handleSearchQueryChange} />{" "}
-                  {monthName}
-                </label>
-              </Dropdown.ItemText>
-            ))}
-          </DropdownButton>
-        </div>
-        <div className="d-flex justify-content-center my-3">
-          <button type="submit">Search</button>
-        </div>
-      </form>
+      <Card className="mx-auto bg-light" style={{ maxWidth: "25rem" }}>
+        <Card.Body>
+          <Form onSubmit={handleSubmit}>
+            <Row className="g-3 mb-3">
+              <Form.Group className="col-12 col-sm-7 text-start" controlId="name">
+                <Form.Label>Town, harbour or region</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={searchParamsInProgress.get("name") ?? ""}
+                  onChange={(event) => {
+                    if (event.target.value) {
+                      searchParamsInProgress.set("name", event.target.value)
+                    } else {
+                      searchParamsInProgress.delete("name")
+                    }
+                    setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="col-12 col-sm-5 text-start" controlId="country">
+                <Form.Label>Country</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={searchParamsInProgress.get("country") ?? ""}
+                  onChange={(event) => {
+                    if (event.target.value) {
+                      searchParamsInProgress.set("country", event.target.value)
+                    } else {
+                      searchParamsInProgress.delete("country")
+                    }
+                    setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
+                  }}
+                />
+              </Form.Group>
+            </Row>
+            <div className="mb-4 d-flex flex-wrap justify-content-center gap-2">
+              <DropdownButton id="dropdown-months-button" title="Months" variant="primary">
+                {monthList?.map((monthName, monthNumber) => (
+                  <Dropdown.ItemText>
+                    <Form.Group controlId={`month${monthNumber}`}>
+                      <Form.Check
+                        label={monthName}
+                        value={monthName}
+                        checked={searchParamsInProgress.has("months", monthName)}
+                        onChange={(event) => {
+                          if (event.target.checked) {
+                            searchParamsInProgress.append("months", event.target.value)
+                          } else {
+                            searchParamsInProgress.delete("months", event.target.value)
+                          }
+                          setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
+                        }}
+                      />
+                    </Form.Group>
+                  </Dropdown.ItemText>
+                ))}
+              </DropdownButton>
+              <DropdownButton id="dropdown-species-button" title="Species" variant="primary">
+                {speciesList?.map((species) => (
+                  <Dropdown.ItemText>
+                    <Form.Group controlId={`species${species.id}`}>
+                      <Form.Check
+                        label={species.name}
+                        value={species.name}
+                        checked={searchParamsInProgress.has("species", species.name)}
+                        onChange={(event) => {
+                          if (event.target.checked) {
+                            searchParamsInProgress.append("species", event.target.value)
+                          } else {
+                            searchParamsInProgress.delete("species", event.target.value)
+                          }
+                          setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
+                        }}
+                      />
+                    </Form.Group>
+                  </Dropdown.ItemText>
+                ))}
+              </DropdownButton>
+              <DropdownButton id="dropdown-platforms-button" title="Viewing options" variant="primary">
+                {["Boat-based", "Swimming", "Land-based", "Aerial"].map((platformName, platformNumber) => (
+                  <Dropdown.ItemText>
+                    <Form.Group controlId={`platform${platformNumber}`}>
+                      <Form.Check
+                        label={platformName}
+                        value={platformNumber}
+                        checked={searchParamsInProgress.has("platforms", platformNumber.toString())}
+                        onChange={(event) => {
+                          if (event.target.checked) {
+                            searchParamsInProgress.append("platforms", event.target.value)
+                          } else {
+                            searchParamsInProgress.delete("platforms", event.target.value)
+                          }
+                          setSearchParamsInProgress(new URLSearchParams(searchParamsInProgress))
+                        }}
+                      />
+                    </Form.Group>
+                  </Dropdown.ItemText>
+                ))}
+              </DropdownButton>
+            </div>
+            <Button type="submit" variant="secondary">
+              Search hotspots
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
       <div className="d-flex justify-content-center my-3">
         {error && <h5>Couldn't load hotspots at this time</h5>}
-        {hotspots && hotspots.length === 0 && (
-          <h5>Sorry, no such hotspot been found in our database...try other search criteria</h5>
-        )}
+        {hotspots && hotspots.length === 0 && <h5>No hotspots found</h5>}
       </div>
       {hotspots && hotspots.length > 0 && (
-        <div className="search-results">
-          <h5>
-            {hotspots.length} hotspots of your interests have been found, click the cards for more information to
-            prepare your trip ^^
-          </h5>
+        <Container>
+          <h5>{hotspots.length} hotspots found</h5>
           <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-4 my-4">
-            {hotspots.map((spot) => (
-              <li key={spot.id}>
-                <Link to={`http://localhost:5173/Hotspots/${spot.id}`} className="text-decoration-none">
-                  <Card style={{ width: "18rem" }}>
-                    <Card.Header className="d-flex flex-column justify-content-between" style={{ height: "7.5rem" }}>
-                      <Card.Title>{spot.name}</Card.Title>
-                      <Card.Subtitle className="text-end">{spot.country}</Card.Subtitle>
-                    </Card.Header>
-                    <Card.Body>
-                      <Row>
-                        <Col>
-                          <span className="position-relative d-inline-block">
-                            <FontAwesomeIcon
-                              icon={faCalendar}
-                              className="text-tertiary"
-                              style={{ fontSize: "7.5rem" }}
-                            />
-                            <div
-                              className="position-absolute d-flex flex-wrap justify-content-center gap-1"
-                              style={{ top: "3rem", left: "1rem", right: "1rem", bottom: "1rem" }}
-                            >
-                              {monthList?.map((monthLetter, monthNumber) => (
-                                <div
-                                  className={`fw-bold border border-2 border-tertiary d-flex justify-content-center align-items-center 
+            {hotspots
+              .sort((hotspot1, hotspot2) => hotspot1.name.localeCompare(hotspot2.name))
+              .map((spot) => (
+                <li key={spot.id}>
+                  <Link to={`http://localhost:5173/Hotspots/${spot.id}`} className="text-decoration-none">
+                    <Card className="HotspotCard" style={{ width: "20rem" }}>
+                      <Card.Header className="d-flex flex-column justify-content-between" style={{ height: "7.5rem" }}>
+                        <Card.Title>{spot.name}</Card.Title>
+                        <Card.Subtitle className="text-end">{spot.country}</Card.Subtitle>
+                      </Card.Header>
+                      <Card.Body>
+                        <Row>
+                          <Col className="border-end">
+                            <p className="mb-2">Possible months</p>
+                            <span className="position-relative d-inline-block">
+                              <FontAwesomeIcon
+                                icon={faCalendar}
+                                className="text-tertiary"
+                                style={{ fontSize: "7.5rem" }}
+                              />
+                              <div
+                                className="position-absolute d-flex flex-wrap justify-content-center gap-1"
+                                style={{ top: "3rem", left: "1rem", right: "1rem", bottom: "1rem" }}
+                              >
+                                {monthList?.map((monthLetter, monthNumber) => (
+                                  <div
+                                    className={`fw-bold border border-2 border-tertiary d-flex justify-content-center align-items-center 
                                                       ${spot.viewingSuggestions.some((suggestion) => suggestion.months.includes(monthNumber)) ? "bg-tertiary text-white" : ""}`}
-                                  style={{ width: "20%", fontSize: "0.5rem" }}
-                                >
-                                  {monthLetter[0]}
-                                </div>
-                              ))}
-                            </div>
-                          </span>
-                        </Col>
-                        <Col className="d-flex flex-column justify-content-center align-items-center">
-                          <Image src={whalesIcon} thumbnail className="border-0" />
-                          <span className="fs-3">&times; {spot.viewingSuggestions.length}</span>
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                    <Card.Footer>
-                      <Row className="d-flex justify-content-start align-items-center mx-3">
-                        <Col className="d-flex align-items-center">
-                          <FontAwesomeIcon
-                            icon={faSailboat}
-                            className={
-                              spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(0))
-                                ? "text-secondary"
-                                : "opacity-50"
-                            }
-                          />
-                        </Col>
-                        <Col className="d-flex align-items-center">
-                          <FontAwesomeIcon
-                            icon={faPersonSwimming}
-                            className={`fs-5 ${spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(1)) ? "text-secondary" : "opacity-50"}`}
-                          />
-                        </Col>
-                        <Col className="d-flex align-items-center">
-                          <FontAwesomeIcon
-                            icon={faPersonHiking}
-                            className={`fs-5 ${spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(2)) ? "text-secondary" : "opacity-50"}`}
-                          />
-                        </Col>
-                        <Col className="d-flex align-items-center">
-                          <FontAwesomeIcon
-                            icon={faHelicopter}
-                            className={
-                              spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(3))
-                                ? "text-secondary"
-                                : "opacity-50"
-                            }
-                          />
-                        </Col>
-                      </Row>
-                    </Card.Footer>
-                  </Card>
-                </Link>
-              </li>
-            ))}
+                                    style={{ width: "20%", fontSize: "0.5rem" }}
+                                  >
+                                    {monthLetter[0]}
+                                  </div>
+                                ))}
+                              </div>
+                            </span>
+                          </Col>
+                          <Col className="d-flex flex-column justify-content-center align-items-center">
+                            <p className="mb-2">Possible species</p>
+                            <Image src={whalesIcon} thumbnail className="border-0" />
+                            <span className="fs-3">&times; {spot.viewingSuggestions.length}</span>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                      <Card.Footer>
+                        <p className="mb-2">Possible viewing options</p>
+                        <Row className="d-flex justify-content-start align-items-center mx-3">
+                          <Col className="d-flex justify-content-center align-items-center">
+                            <FontAwesomeIcon
+                              icon={faSailboat}
+                              title="Boat-based"
+                              className={
+                                spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(0))
+                                  ? "text-secondary"
+                                  : "opacity-50"
+                              }
+                            />
+                          </Col>
+                          <Col className="d-flex justify-content-center align-items-center">
+                            <FontAwesomeIcon
+                              icon={faPersonSwimming}
+                              title="Swimming"
+                              className={`fs-5 ${spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(1)) ? "text-secondary" : "opacity-50"}`}
+                            />
+                          </Col>
+                          <Col className="d-flex justify-content-center align-items-center">
+                            <FontAwesomeIcon
+                              icon={faPersonHiking}
+                              title="Land-based"
+                              className={`fs-5 ${spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(2)) ? "text-secondary" : "opacity-50"}`}
+                            />
+                          </Col>
+                          <Col className="d-flex justify-content-center align-items-center">
+                            <FontAwesomeIcon
+                              icon={faHelicopter}
+                              title="Aerial"
+                              className={
+                                spot.viewingSuggestions.some((suggestion) => suggestion.platformBoxes.includes(3))
+                                  ? "text-secondary"
+                                  : "opacity-50"
+                              }
+                            />
+                          </Col>
+                        </Row>
+                      </Card.Footer>
+                    </Card>
+                  </Link>
+                </li>
+              ))}
           </ul>
-        </div>
+        </Container>
       )}
     </div>
   )
