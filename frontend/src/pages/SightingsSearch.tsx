@@ -144,9 +144,9 @@ const SightingsSearch = () => {
                     <Popup>
                       {
                         <div>
+                          <h5>{sighting.species.name}</h5>
                           <h6>
-                            {sighting.species.name} observed on the {sighting.bodyOfWater} on{" "}
-                            {sighting.sightingTimestamp.split("T")[0]}{" "}
+                            observed on the {sighting.bodyOfWater} on {sighting.sightingTimestamp.split("T")[0]}
                           </h6>
                           <p>
                             <Link to={`/sightings/${sighting.id}`} className="text-decoration-none">
