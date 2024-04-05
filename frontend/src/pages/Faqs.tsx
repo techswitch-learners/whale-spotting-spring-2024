@@ -44,13 +44,13 @@ const Faqs = () => {
       <Accordion flush>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Q1. How can I get experience?</Accordion.Header>
-          <Accordion.Body className="align-left">
-            You can gain experience by adding whale sighting reports. Every time you add a sighting report, you earn 50
-            experience points (exp). To upload your sighting, please use the following link:
-            <Link to={"/sightings/add"}>Upload Your Sighting</Link> Additionally, if your sighting report receives
+          <Accordion.Body className="text-start">
+            You can gain experience by adding whale sighting reports. Every time you add a sighting report and it gets
+            approved, you earn 50 experience points (exp). Follow this link to{" "}
+            <Link to={"/sightings/add"}>upload your sighting</Link>. Additionally, if your sighting report receives
             reactions from other viewers, you can earn extra experience points. Here's how the reactions translate into
             experience:
-            <ListGroup className="align-left">
+            <ListGroup className="text-start my-3">
               <ListGroup.Item>🤩 : +10 exp</ListGroup.Item>
               <ListGroup.Item>😊 : +6 exp</ListGroup.Item>
               <ListGroup.Item>😐 : +3 exp</ListGroup.Item>
@@ -62,12 +62,12 @@ const Faqs = () => {
 
         <Accordion.Item eventKey="1">
           <Accordion.Header>Q2. How can I get badges?</Accordion.Header>
-          <Accordion.Body className="align-left">
+          <Accordion.Body className="text-start">
             Badges are a way to showcase your progress and achievement levels in our whale spotting community. You gain
             experience points (exp) by adding sighting reports and receiving reactions. As you accumulate experience,
             you get promoted to new achievement levels, each with its unique badge. Here's a brief overview of the
             achievement levels and the minimum experience needed for each:
-            <Table className="align-left" striped bordered hover>
+            <Table className="text-start my-3" striped bordered hover>
               <thead>
                 <tr>
                   <th>Badge</th>
