@@ -22,7 +22,7 @@ interface SightingCardProps {
 function SightingCard({ sighting }: SightingCardProps) {
   return (
     <Card className="SightingCard text-start">
-      <Card.Img variant="top" src={sighting.imageUrl} />
+      <Card.Img variant="top" src={sighting.imageUrl} className="image-fluid" />
       <Card.Body>
         <Card.Title>{sighting.species.name}</Card.Title>
         <Card.Subtitle>{sighting.bodyOfWater}</Card.Subtitle>
