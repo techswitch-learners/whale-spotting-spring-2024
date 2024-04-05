@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
 import { Card, Col, Container, Row } from "react-bootstrap"
-import { useParams } from "react-router-dom"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
-import { Icon } from "leaflet"
-import icon from "/favicon.ico"
-import Weather from "../models/view/Weather"
-import HotSpot from "../models/view/HotSpot"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useParams } from "react-router-dom"
 import { faDroplet, faTemperatureArrowDown, faTemperatureArrowUp } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Icon } from "leaflet"
 import { getHotSpotById } from "../api/backendClient"
 import { getWeather } from "../api/weatherClient"
+import HotSpot from "../models/view/HotSpot"
+import Weather from "../models/view/Weather"
+import icon from "/favicon.ico"
 
 const customIcon = new Icon({
   iconUrl: icon,

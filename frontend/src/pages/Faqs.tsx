@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react"
-import Achievements from "../models/view/Achievements"
+import { Image, ListGroup, Table } from "react-bootstrap"
+import Accordion from "react-bootstrap/Accordion"
+import { Link } from "react-router-dom"
 import { BackgroundContext } from "../App"
 import { getAchievements } from "../api/backendClient"
-import Accordion from "react-bootstrap/Accordion"
-import { Image, ListGroup, Table } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import Achievements from "../models/view/Achievements"
 
 const Faqs = () => {
   const backgroundContext = useContext(BackgroundContext)

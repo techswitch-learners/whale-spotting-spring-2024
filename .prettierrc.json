@@ -1,6 +1,7 @@
 {
   "semi": false,
   "printWidth": 120,
+  "importOrder": ["^react(.*)$", "<THIRD_PARTY_MODULES>", "^[./]"],
   "overrides": [
     {
       "files": ["*.svg", "*.csproj"],
@@ -8,5 +9,6 @@
         "parser": "xml"
       }
     }
-  ]
+  ],
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

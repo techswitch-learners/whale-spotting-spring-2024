@@ -1,13 +1,13 @@
 import { useContext, useState, FormEventHandler, useEffect, useMemo } from "react"
-import { useNavigate, Link, Navigate } from "react-router-dom"
 import { Button, CardText, Form, Spinner, Row, Col, Card, CardBody } from "react-bootstrap"
+import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
+import { useNavigate, Link, Navigate } from "react-router-dom"
+import { LeafletEventHandlerFnMap, LeafletMouseEvent } from "leaflet"
 import { AuthContext, BackgroundContext } from "../App"
 import { addSighting, getSpeciesList } from "../api/backendClient"
+import { getBodyOfWater } from "../api/bodyOfWaterClient"
 import ErrorList from "../components/ErrorList"
 import Species from "../models/view/Species"
-import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet"
-import { LeafletEventHandlerFnMap, LeafletMouseEvent } from "leaflet"
-import { getBodyOfWater } from "../api/bodyOfWaterClient"
 
 interface GetLocationProps {
   setLatitude: (latitude: number) => void

@@ -1,14 +1,14 @@
 import { useContext, useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
 import { Card, Row, Col, Stack, Button, Container, Image } from "react-bootstrap"
-import { BackgroundContext } from "../App"
-import { getSightingById } from "../api/backendClient"
-import Sighting from "../models/view/Sighting"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
+import { Link, useParams } from "react-router-dom"
 import { Icon } from "leaflet"
-import icon from "/favicon.ico"
-import ReactionsCard from "../components/ReactionsCard"
+import { BackgroundContext } from "../App"
 import { AuthContext } from "../App"
+import { getSightingById } from "../api/backendClient"
+import ReactionsCard from "../components/ReactionsCard"
+import Sighting from "../models/view/Sighting"
+import icon from "/favicon.ico"
 
 const customIcon = new Icon({
   iconUrl: icon,

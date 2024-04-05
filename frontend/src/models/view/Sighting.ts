@@ -1,6 +1,7 @@
-import Species from "./Species"
-import Reaction from "./Reactions"
 import ReactionType from "../../types/ReactionType"
+import Reaction from "./Reactions"
+import Species from "./Species"
+
 interface Sighting {
   id: number
   latitude: number

@@ -1,8 +1,8 @@
 import { useContext, useState, FormEventHandler } from "react"
-import { useNavigate, Link, Navigate } from "react-router-dom"
 import { Button, Card, CardText, Form, Spinner } from "react-bootstrap"
-import { loginUser } from "../api/backendClient"
+import { useNavigate, Link, Navigate } from "react-router-dom"
 import { AuthContext } from "../App"
+import { loginUser } from "../api/backendClient"
 
 const Login = () => {
   const navigate = useNavigate()

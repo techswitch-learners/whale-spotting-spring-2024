@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import { Button, Stack } from "react-bootstrap"
-import { addReaction, updateReaction, deleteReaction } from "../api/backendClient"
-import { AuthContext } from "../App"
 import { useNavigate } from "react-router-dom"
-import ReactionType from "../types/ReactionType"
+import { AuthContext } from "../App"
+import { addReaction, updateReaction, deleteReaction } from "../api/backendClient"
 import Reactions from "../models/view/Reactions"
+import ReactionType from "../types/ReactionType"
 
 const emojis = {
   LetsParty: "🤩",
