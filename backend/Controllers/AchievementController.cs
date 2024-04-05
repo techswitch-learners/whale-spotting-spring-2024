@@ -1,7 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WhaleSpotting.Helpers;
-using WhaleSpotting.Models.Response;
 
 namespace WhaleSpotting.Controllers;
 
