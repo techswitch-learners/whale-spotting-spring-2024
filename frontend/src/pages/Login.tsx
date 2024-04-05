@@ -44,7 +44,7 @@ const Login = () => {
   }
 
   return (
-    <div className="d-flex flex-column justify-content-center mx-auto" style={{ maxWidth: "20rem", minHeight: "100%" }}>
+    <div className="d-flex flex-column justify-content-center flex-grow-1 mw-100 mx-auto" style={{ width: "20rem" }}>
       <Card className="text-center">
         <Card.Header>Welcome back.</Card.Header>
         <Card.Body>

@@ -4,7 +4,6 @@ import { useCookies } from "react-cookie"
 import { CookieSetOptions } from "universal-cookie"
 import NavbarTop from "./components/NavbarTop"
 import Home from "./pages/Home"
-import About from "./pages/About"
 import Faqs from "./pages/Faqs"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
@@ -12,12 +11,13 @@ import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
 import SightingsSearch from "./pages/SightingsSearch"
 import PendingSightings from "./pages/PendingSightings"
+import RejectedSightings from "./pages/RejectedSightings"
 import SightingForm from "./pages/SightingForm"
 import SightingView from "./pages/SightingView"
-import HotSpotView from "./pages/HotSpotView"
+import HotspotsSearch from "./pages/HotspotsSearch"
+import HotspotView from "./pages/HotspotView"
 import Users from "./pages/Users"
 import Error404 from "./pages/Error404"
-import RejectedSightings from "./pages/RejectedSightings"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -49,10 +49,9 @@ const App = () => {
       <BackgroundContext.Provider value={{ setBackground }}>
         <Router>
           <NavbarTop />
-          <main className="container-fluid">
+          <main className="container-fluid d-flex flex-column align-items-stretch text-center">
             <Routes>
               <Route index element={<Home />} />
-              <Route path="/about" element={<About />} />
               <Route path="/faqs" element={<Faqs />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
@@ -63,7 +62,8 @@ const App = () => {
               <Route path="/sightings/rejected" element={<RejectedSightings />} />
               <Route path="/sightings/add" element={<SightingForm />} />
               <Route path="/sightings/:id" element={<SightingView />} />
-              <Route path="/hotspots/:id" element={<HotSpotView />} />
+              <Route path="/hotspots" element={<HotspotsSearch />} />
+              <Route path="/hotspots/:id" element={<HotspotView />} />
               <Route path="/users" element={<Users />}></Route>
               <Route path="*" element={<Error404 />} />
             </Routes>

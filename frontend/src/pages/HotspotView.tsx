@@ -5,10 +5,10 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon } from "leaflet"
 import icon from "/favicon.ico"
 import Weather from "../models/view/Weather"
-import HotSpot from "../models/view/HotSpot"
+import Hotspot from "../models/view/Hotspot"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDroplet, faTemperatureArrowDown, faTemperatureArrowUp } from "@fortawesome/free-solid-svg-icons"
-import { getHotSpotById } from "../api/backendClient"
+import { getHotspotById } from "../api/backendClient"
 import { getWeather } from "../api/weatherClient"
 
 const customIcon = new Icon({
@@ -16,26 +16,27 @@ const customIcon = new Icon({
   iconSize: [24, 24],
 })
 
-function HotSpotView() {
+function HotspotView() {
   const { id } = useParams()
-  const [hotSpot, setHotSpot] = useState<HotSpot>()
+  const [hotspot, setHotspot] = useState<Hotspot>()
   const [weather, setWeather] = useState<Weather>()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<boolean>(false)
 
-  useEffect(() => {
-    getHotSpotById(id)
+  const fetchHotspotData = () => {
+    getHotspotById(id)
       .then((response) => response.json())
-      .then((data) => setHotSpot(data))
+      .then((data) => setHotspot(data))
       .catch(() => setError(true))
       .finally(() => setLoading(false))
-  }, [id])
+  }
+  useEffect(fetchHotspotData, [id])
 
   const loadWeather = () => {
     setWeather(undefined)
 
-    const lat = hotSpot?.latitude
-    const lon = hotSpot?.longitude
+    const lat = hotspot?.latitude
+    const lon = hotspot?.longitude
 
     if (lat !== undefined && lon !== undefined) {
       getWeather(lat, lon)
@@ -45,7 +46,7 @@ function HotSpotView() {
         .finally(() => setLoading(false))
     }
   }
-  useEffect(loadWeather, [hotSpot])
+  useEffect(loadWeather, [hotspot])
 
   const weatherData = []
   if (weather) {
@@ -62,17 +63,17 @@ function HotSpotView() {
 
   return (
     <>
-      {hotSpot && weather && (
+      {hotspot && weather && (
         <Container>
-          <h1 className="text-center">{hotSpot.name}</h1>
-          <h2 className="text-center mb-4">{hotSpot.country}</h2>
+          <h1 className="text-center">{hotspot.name}</h1>
+          <h2 className="text-center mb-4">{hotspot.country}</h2>
           <Row>
             <Col xs={12} md={4} className="d-flex flex-column align-items-center">
               <h5 className="text-center">Hotspot location</h5>
               <MapContainer
                 className="mw-100"
                 style={{ height: "20rem", width: "32rem" }}
-                center={[30, hotSpot.longitude]}
+                center={[30, hotspot.longitude]}
                 zoom={1}
                 scrollWheelZoom={true}
               >
@@ -81,11 +82,11 @@ function HotSpotView() {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker
-                  key={hotSpot.id}
-                  position={[Number(hotSpot.latitude), Number(hotSpot.longitude)]}
+                  key={hotspot.id}
+                  position={[Number(hotspot.latitude), Number(hotspot.longitude)]}
                   icon={customIcon}
                 >
-                  <Popup>{hotSpot.name}</Popup>
+                  <Popup>{hotspot.name}</Popup>
                 </Marker>
               </MapContainer>
             </Col>
@@ -125,37 +126,45 @@ function HotSpotView() {
               </div>
             </Col>
           </Row>
-          <h5 className="mt-4 text-center">Viewing suggestions for this hotspot</h5>
-          <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-3 pb-4 text-center">
-            {hotSpot.viewingSuggestions.map((suggestion) => (
-              <li>
-                <Card style={{ width: "18rem" }}>
-                  <Card.Img
-                    className="bg-dark"
-                    variant="top"
-                    src={suggestion.species.exampleImageUrl}
-                    style={{ height: "10rem", objectFit: "contain" }}
-                  />
-                  <Card.Body>
-                    <Card.Title>{suggestion.species.name}</Card.Title>
-                    Time of year: {suggestion.timeOfYear}
-                    <br />
-                    Platforms: {suggestion.platforms}
-                    <br />
-                    <a href={suggestion.species.wikiLink} target="_blank">
-                      Find out more about {suggestion.species.name}s
-                    </a>
-                  </Card.Body>
-                </Card>
-              </li>
-            ))}
-          </ul>
+          <div className="text-center">
+            <h5 className="mt-4">Viewing suggestions for this Hotspot</h5>
+            <p>
+              Data courtesy of the{" "}
+              <a href="https://wwhandbook.iwc.int/en/responsible-management" target="_blank">
+                Whale Watching Handbook
+              </a>
+            </p>
+            <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-3 pb-4">
+              {hotspot.viewingSuggestions.map((suggestion) => (
+                <li>
+                  <Card style={{ width: "18rem" }}>
+                    <Card.Img
+                      className="bg-dark"
+                      variant="top"
+                      src={suggestion.species.exampleImageUrl}
+                      style={{ height: "10rem", objectFit: "contain" }}
+                    />
+                    <Card.Body>
+                      <Card.Title>{suggestion.species.name}</Card.Title>
+                      Time of year: {suggestion.timeOfYear}
+                      <br />
+                      Platforms: {suggestion.platforms}
+                      <br />
+                      <a href={suggestion.species.wikiLink} target="_blank">
+                        Find out more about {suggestion.species.name}s
+                      </a>
+                    </Card.Body>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       )}
       {loading && <p>Loading...</p>}
-      {error && <p>Couldn't load hotspot at this time</p>}
+      {error && <p>Couldn't load the hotspot at this time</p>}
     </>
   )
 }
 
-export default HotSpotView
+export default HotspotView

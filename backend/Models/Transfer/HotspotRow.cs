@@ -1,6 +1,6 @@
 namespace WhaleSpotting.Models.Transfer;
 
-public class HotSpotRow
+public class HotspotRow
 {
     public int Id { get; set; }
     public required string Country { get; set; }

@@ -12,14 +12,14 @@ const Error403 = () => {
 
   return (
     <>
-      <div className="Home min-h-100 d-flex flex-column justify-content-center align-items-center">
+      <div className="d-flex flex-column justify-content-center flex-grow-1">
         <h1 className="text-center" style={{ color: "#135d9b" }}>
           Error 403
         </h1>
-        <h2 className="text-center mb-5 fw-normal" style={{ color: "#135d9b" }}>
+        <h2 className="text-center fw-normal mb-0" style={{ color: "#135d9b" }}>
           Whale not allowed
         </h2>
-        <img src={divingWhale} style={{ width: "20rem", height: "20rem" }} />
+        <img src={divingWhale} className="mx-auto" style={{ width: "20rem", height: "20rem" }} />
       </div>
       <NavbarBottom />
     </>
