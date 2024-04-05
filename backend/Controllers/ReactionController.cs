@@ -32,7 +32,7 @@ public class ReactionController(WhaleSpottingContext context) : Controller
                     {
                         Type = reactionType,
                         UserId = userId,
-                        SightingId = addReactionRequest.SightingId,
+                        SightingId = addReactionRequest.SightingId!.Value,
                         Timestamp = DateTime.UtcNow
                     }
                 )

@@ -6,9 +6,10 @@ namespace WhaleSpotting.Models.Request;
 
 public class UpdateReactionRequest
 {
+    [Required(ErrorMessage = "Reaction type is required.")]
     public required string Type { get; set; }
 
-    [Required(ErrorMessage = "Sighting is required.")]
+    [Required(ErrorMessage = "Sighting ID is required.")]
     [SightingExists]
-    public required int SightingId { get; set; }
+    public required int? SightingId { get; set; }
 }

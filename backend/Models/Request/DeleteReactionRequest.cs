@@ -6,7 +6,7 @@ namespace WhaleSpotting.Models.Request;
 
 public class DeleteReactionRequest
 {
-    [Required(ErrorMessage = "Sighting is required.")]
+    [Required(ErrorMessage = "Sighting ID is required.")]
     [SightingExists]
-    public required int SightingId { get; set; }
+    public required int? SightingId { get; set; }
 }
