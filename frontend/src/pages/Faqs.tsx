@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 import { BackgroundContext } from "../App"
 import { getAchievements } from "../api/backendClient"
 import Achievement from "../models/view/Achievement"
-import "./Faqs.scss"
 
 const Faqs = () => {
   const backgroundContext = useContext(BackgroundContext)
