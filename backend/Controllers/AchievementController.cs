@@ -9,7 +9,7 @@ public class AchievementController(WhaleSpottingContext context) : Controller
     private readonly WhaleSpottingContext _context = context;
 
     [HttpGet("")]
-    public IActionResult GetAchievements()
+    public IActionResult GetAll()
     {
         var achievements = _context.Achievements.ToList();
 
