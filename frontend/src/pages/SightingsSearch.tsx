@@ -74,13 +74,9 @@ const SightingsSearch = () => {
   const getData = () => {
     setLoading(true)
     setError(false)
-    console.log(authContext.cookie.token)
     getSightings(authContext.cookie.token)
       .then((response) => response.json())
-      .then((data) => {
-        setAllSightings(data.sightings)
-        console.log(data.sightings)
-      })
+      .then((data) => setAllSightings(data.sightings))
       .catch(() => setError(true))
       .finally(() => setLoading(false))
   }
