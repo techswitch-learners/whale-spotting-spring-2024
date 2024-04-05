@@ -1,8 +1,8 @@
 import { useContext, useState, FormEventHandler } from "react"
-import { useNavigate, Link, Navigate } from "react-router-dom"
 import { Button, Card, CardText, Form, Spinner } from "react-bootstrap"
-import { loginUser } from "../api/backendClient"
+import { useNavigate, Link, Navigate } from "react-router-dom"
 import { AuthContext } from "../App"
+import { loginUser } from "../api/backendClient"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -44,7 +44,7 @@ const Login = () => {
   }
 
   return (
-    <div className="d-flex flex-column justify-content-center mx-auto" style={{ maxWidth: "20rem", minHeight: "100%" }}>
+    <div className="d-flex flex-column justify-content-center flex-grow-1 mw-100 mx-auto" style={{ width: "20rem" }}>
       <Card className="text-center">
         <Card.Header>Welcome back.</Card.Header>
         <Card.Body>

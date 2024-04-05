@@ -1,8 +1,8 @@
 import { useContext, useState, FormEventHandler } from "react"
-import { Link, Navigate } from "react-router-dom"
 import { Button, Card, CardText, Form, Spinner } from "react-bootstrap"
-import { registerUser } from "../api/backendClient"
+import { Link, Navigate } from "react-router-dom"
 import { AuthContext } from "../App"
+import { registerUser } from "../api/backendClient"
 import ErrorList from "../components/ErrorList"
 
 const Register = () => {
@@ -40,7 +40,7 @@ const Register = () => {
   }
 
   return (
-    <div className="d-flex flex-column justify-content-center mx-auto" style={{ maxWidth: "20rem", minHeight: "100%" }}>
+    <div className="d-flex flex-column justify-content-center flex-grow-1 mw-100 mx-auto" style={{ width: "20rem" }}>
       <Card className="text-center">
         <Card.Header>Welcome.</Card.Header>
         <Card.Body>

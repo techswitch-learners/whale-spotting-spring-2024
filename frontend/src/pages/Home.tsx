@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react"
-import { BackgroundContext } from "../App"
-import whaleAnimation from "../assets/whale-animation.gif"
-import eye from "../assets/eye.svg"
-import { Button } from "react-bootstrap"
+import { Button, Col, Row } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
+import { BackgroundContext } from "../App"
+import eye from "../assets/eye.svg"
+import whaleAnimation from "../assets/whale-animation.gif"
 import NavbarBottom from "../components/NavbarBottom"
 
 const Home = () => {
@@ -15,8 +15,8 @@ const Home = () => {
 
   return (
     <>
-      <div className="Home row min-h-100">
-        <div className="col-lg d-flex flex-column justify-content-center pe-lg-5">
+      <Row className="Home flex-grow-1">
+        <Col lg={6} className="d-flex flex-column justify-content-center pe-lg-5">
           <h1 className="display-3 text-center text-white" aria-label="Welcome Whale Spotters!">
             Welcome
             <br />
@@ -26,8 +26,8 @@ const Home = () => {
             <img src={eye} id="eyeId" alt="Eye taking the place of letter O" />
             tters!
           </h1>
-        </div>
-        <div className="col-lg d-flex flex-column justify-content-center">
+        </Col>
+        <Col lg={6} className="d-flex flex-column justify-content-center">
           <div className="Home-button-container d-flex flex-column justify-content-center align-items-stretch gap-3">
             <LinkContainer to="/sightings/add">
               <Button variant="translucent" size="lg">
@@ -39,9 +39,11 @@ const Home = () => {
                 See whale sightings
               </Button>
             </LinkContainer>
-            <Button variant="translucent" size="lg">
-              Check the weather
-            </Button>
+            <LinkContainer to="/hotspots">
+              <Button variant="translucent" size="lg">
+                Find whale-spotting hotspots
+              </Button>
+            </LinkContainer>
           </div>
           <div className="Home-button-container d-flex flex-column justify-content-center align-items-stretch gap-3">
             <LinkContainer to="/sightings/add">
@@ -50,10 +52,12 @@ const Home = () => {
             <LinkContainer to="/sightings">
               <Button variant="translucent">See whale sightings</Button>
             </LinkContainer>
-            <Button variant="translucent">Check the weather</Button>
+            <LinkContainer to="/hotspots">
+              <Button variant="translucent">Find whale-spotting hotspots</Button>
+            </LinkContainer>
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
       <NavbarBottom />
     </>
   )

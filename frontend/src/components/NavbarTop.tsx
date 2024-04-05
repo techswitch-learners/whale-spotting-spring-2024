@@ -1,16 +1,17 @@
 import { useContext } from "react"
-import { LinkContainer } from "react-router-bootstrap"
 import { Container, Nav, Navbar } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { LinkContainer } from "react-router-bootstrap"
 import {
   faHouse,
-  faCircleInfo,
   faCircleQuestion,
   faUserPen,
   faUserLock,
   faUserPlus,
   IconDefinition,
+  faPerson,
+  faHand,
 } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AuthContext } from "../App"
 
 interface NavbarLinkProps {
@@ -44,8 +45,14 @@ const NavbarTop = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="gap-2 w-100 mt-2 mb-1 my-lg-0">
             <NavbarLink to="/" text="Home" icon={faHouse} />
-            <NavbarLink to="/about" text="About" icon={faCircleInfo} />
             <NavbarLink to="/faqs" text="FAQs" icon={faCircleQuestion} />
+            {authContext.cookie.token && (
+              <>
+                <NavbarLink to="/sightings/pending" text="Pending" icon={faCircleQuestion} />
+                <NavbarLink to="/sightings/rejected" text="Rejected" icon={faHand} />
+                <NavbarLink to="/users" text="Users" icon={faPerson} />
+              </>
+            )}
             <hr className="ms-lg-auto my-0 border-light" />
             {authContext.cookie.token ? (
               <>

@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react"
+import Card from "react-bootstrap/esm/Card"
 import { Link, Navigate } from "react-router-dom"
 import { AuthContext, BackgroundContext } from "../App"
 import { getSightings, getUser } from "../api/backendClient"
 import Sighting from "../models/view/Sighting"
-import Card from "react-bootstrap/esm/Card"
+
 // import calf from "../../public/achievement-badges-images/calf.png"
 // import { Image } from "react-bootstrap"
 
@@ -90,7 +91,7 @@ const Profile = () => {
         {/* <p style={{color:'black',fontSize: '20px' }}>Experience Points: {experiencePoints}</p> */}
         {/* <p style={{color:'black',fontSize: '20px' }}>  Achievement Name: {achievementName} </p>  */}
       </div>
-      <p>Please find below Approved sightings</p>
+      <p>Please find below approved sightings</p>
       <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
         {allSightings?.map((sighting) => (
           <Link
@@ -128,6 +129,26 @@ const Profile = () => {
           </Link>
         ))}
       </div>
+      <p>Please find below Pending sightings</p>
+      <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
+        {allSightings?.map((sighting) => (
+          <Link
+            to={`/sightings/${sighting.id}`}
+            key={sighting.id}
+            className="text-decoration-none"
+            style={{ width: "13rem" }}
+          >
+            <SightingCard
+              imageUrl={sighting.imageUrl}
+              species={sighting.species.name}
+              bodyOfWater={sighting.bodyOfWater}
+              description={sighting.description}
+              sightingTimestamp={"Observed on " + sighting.sightingTimestamp.split("T")[0]}
+            />
+          </Link>
+        ))}
+      </div>
+
       {loading && <p>Loading...</p>}
       {error && <p>Error fetching sighting from the backend</p>}
     </div>

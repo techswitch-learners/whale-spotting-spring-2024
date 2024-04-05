@@ -6,32 +6,32 @@ namespace WhaleSpotting.Controllers;
 
 [ApiController]
 [Route("/hotspots")]
-public class HotSpotController(WhaleSpottingContext context) : Controller
+public class HotspotController(WhaleSpottingContext context) : Controller
 {
     private readonly WhaleSpottingContext _context = context;
 
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-        var hotSpot = _context
-            .HotSpots.Include(hotspot => hotspot.ViewingSuggestions)
+        var hotspot = _context
+            .Hotspots.Include(hotspot => hotspot.ViewingSuggestions)
             .ThenInclude(suggestion => suggestion.Species)
             .SingleOrDefault(hotspot => hotspot.Id == id);
 
-        if (hotSpot == null)
+        if (hotspot == null)
         {
             return NotFound();
         }
 
-        return Ok(hotSpot);
+        return Ok(hotspot);
     }
 
     [HttpGet("")]
-    public IActionResult Search([FromQuery] SearchHotSpotRequest searchRequest)
+    public IActionResult Search([FromQuery] SearchHotspotsRequest searchRequest)
     {
         var query = _context
-            .ViewingSuggestions.Include(suggestion => suggestion.HotSpot)
-            .ThenInclude(hotSpot => hotSpot.ViewingSuggestions)
+            .ViewingSuggestions.Include(suggestion => suggestion.Hotspot)
+            .ThenInclude(hotspot => hotspot.ViewingSuggestions)
             .ThenInclude(suggestion => suggestion.Species)
             .Include(suggestion => suggestion.Species)
             .AsQueryable();
@@ -39,14 +39,12 @@ public class HotSpotController(WhaleSpottingContext context) : Controller
         if (!string.IsNullOrEmpty(searchRequest.Country))
         {
             query = query.Where(suggestion =>
-                EF.Functions.ILike(suggestion.HotSpot.Country, $"%{searchRequest.Country}%")
+                EF.Functions.ILike(suggestion.Hotspot.Country, $"%{searchRequest.Country}%")
             );
         }
-        if (!string.IsNullOrEmpty(searchRequest.HotSpotName))
+        if (!string.IsNullOrEmpty(searchRequest.Name))
         {
-            query = query.Where(suggestion =>
-                EF.Functions.ILike(suggestion.HotSpot.Name, $"%{searchRequest.HotSpotName}%")
-            );
+            query = query.Where(suggestion => EF.Functions.ILike(suggestion.Hotspot.Name, $"%{searchRequest.Name}%"));
         }
         if (searchRequest.Species != null && searchRequest.Species.Count > 0)
         {
@@ -63,6 +61,6 @@ public class HotSpotController(WhaleSpottingContext context) : Controller
             query = query.Where(suggestion => searchRequest.Months.Any(month => suggestion.Months.Contains(month)));
         }
 
-        return Ok(query.ToList().GroupBy(suggestion => suggestion.HotSpot).Select(group => group.Key).ToList());
+        return Ok(query.ToList().GroupBy(suggestion => suggestion.Hotspot).Select(group => group.Key).ToList());
     }
 }

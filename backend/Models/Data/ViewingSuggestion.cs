@@ -7,10 +7,10 @@ public class ViewingSuggestion
 {
     public int Id { get; set; }
 
-    public int HotSpotId { get; set; }
+    public int HotspotId { get; set; }
 
-    [ForeignKey(nameof(HotSpotId))]
-    public HotSpot HotSpot { get; set; } = null!;
+    [ForeignKey(nameof(HotspotId))]
+    public Hotspot Hotspot { get; set; } = null!;
 
     public int SpeciesId { get; set; }
 

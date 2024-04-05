@@ -1,7 +1,7 @@
 import { Container, Navbar } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCode } from "@fortawesome/free-solid-svg-icons"
 import { faCopyright } from "@fortawesome/free-regular-svg-icons"
+import { faCode } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const NavbarBottom = () => {
   return (

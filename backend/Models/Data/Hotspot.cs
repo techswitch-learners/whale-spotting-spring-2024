@@ -1,6 +1,6 @@
 namespace WhaleSpotting.Models.Data;
 
-public class HotSpot
+public class Hotspot
 {
     public int Id { get; set; }
 

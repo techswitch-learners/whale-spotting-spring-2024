@@ -1,20 +1,23 @@
 import { createContext, useState, useEffect } from "react"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useCookies } from "react-cookie"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { CookieSetOptions } from "universal-cookie"
 import NavbarTop from "./components/NavbarTop"
-import Home from "./pages/Home"
-import About from "./pages/About"
+import Error404 from "./pages/Error404"
 import Faqs from "./pages/Faqs"
+import Home from "./pages/Home"
+import HotspotView from "./pages/HotspotView"
+import HotspotsSearch from "./pages/HotspotsSearch"
 import Login from "./pages/Login"
-import Register from "./pages/Register"
-import Profile from "./pages/Profile"
 import Logout from "./pages/Logout"
-import SightingsSearch from "./pages/SightingsSearch"
+import PendingSightings from "./pages/PendingSightings"
+import Profile from "./pages/Profile"
+import Register from "./pages/Register"
+import RejectedSightings from "./pages/RejectedSightings"
 import SightingForm from "./pages/SightingForm"
 import SightingView from "./pages/SightingView"
-import HotSpotView from "./pages/HotSpotView"
-import Error404 from "./pages/Error404"
+import SightingsSearch from "./pages/SightingsSearch"
+import Users from "./pages/Users"
 
 export const AuthContext = createContext<{
   cookie: { token?: string }
@@ -27,10 +30,8 @@ export const AuthContext = createContext<{
 })
 
 export const BackgroundContext = createContext<{
-  background: string
   setBackground: (background: string) => void
 }>({
-  background: "white",
   setBackground: () => {},
 })
 
@@ -45,22 +46,25 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={{ cookie, setCookie, removeCookie }}>
-      <BackgroundContext.Provider value={{ background, setBackground }}>
+      <BackgroundContext.Provider value={{ setBackground }}>
         <Router>
           <NavbarTop />
-          <main className="container-fluid">
+          <main className="container-fluid d-flex flex-column align-items-stretch text-center">
             <Routes>
               <Route index element={<Home />} />
-              <Route path="/about" element={<About />} />
               <Route path="/faqs" element={<Faqs />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/sightings" element={<SightingsSearch />} />
+              <Route path="/sightings/pending" element={<PendingSightings />} />
+              <Route path="/sightings/rejected" element={<RejectedSightings />} />
               <Route path="/sightings/add" element={<SightingForm />} />
               <Route path="/sightings/:id" element={<SightingView />} />
-              <Route path="/hotspots/:id" element={<HotSpotView />} />
+              <Route path="/hotspots" element={<HotspotsSearch />} />
+              <Route path="/hotspots/:id" element={<HotspotView />} />
+              <Route path="/users" element={<Users />}></Route>
               <Route path="*" element={<Error404 />} />
             </Routes>
           </main>
