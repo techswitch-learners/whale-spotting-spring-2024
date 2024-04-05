@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Button, Card, Form, FormGroup } from "react-bootstrap"
+import { Button, Card, Form, FormGroup, Spinner } from "react-bootstrap"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { AuthContext, BackgroundContext } from "../App"
 import { getPendingSightings, verifySighting } from "../api/backendClient"
@@ -131,8 +131,12 @@ const PendingSightings = () => {
         </div>
       )}
 
-      {loading && <p>Loading...</p>}
-      {error && <p>There was an error</p>}
+      {loading && (
+        <p>
+          Loading... <Spinner />
+        </p>
+      )}
+      {error && <p>Couldn't load data at this time</p>}
     </div>
   )
 }

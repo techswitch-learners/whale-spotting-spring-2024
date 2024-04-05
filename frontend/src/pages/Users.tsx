@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Button, Card } from "react-bootstrap"
+import { Button, Card, Spinner } from "react-bootstrap"
 import { Navigate, useNavigate } from "react-router-dom"
 import { AuthContext, BackgroundContext } from "../App"
 import { getUsers } from "../api/backendClient"
@@ -128,8 +128,13 @@ const Users = () => {
           </div>
         </>
       )}
-      {loading && <p>Loading...</p>}
-      {error && <p>Sorry, unable to load user data at this time</p>}
+      {loading && (
+        <p>
+          Loading...
+          <Spinner />
+        </p>
+      )}
+      {error && <p>Couldn't load data at this time</p>}
     </div>
   )
 }

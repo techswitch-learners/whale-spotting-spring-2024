@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, FormEvent } from "react"
-import { DropdownButton, Dropdown, Row, Button, Container } from "react-bootstrap"
+import { DropdownButton, Dropdown, Row, Button, Container, Spinner } from "react-bootstrap"
 import Card from "react-bootstrap/Card"
 import Form from "react-bootstrap/Form"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
@@ -267,8 +267,13 @@ const SightingsSearch = () => {
             </div>
           </div>
         )}
-        {loading && <p>Loading...</p>}
-        {error && <p>Sorry, unable to load sightings at this time</p>}
+        {loading && (
+          <p>
+            Loading...
+            <Spinner />
+          </p>
+        )}
+        {error && <p>Couldn't load data at this time</p>}
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Card, Col, Container, Row } from "react-bootstrap"
+import { Card, Col, Container, Row, Spinner } from "react-bootstrap"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { useParams } from "react-router-dom"
 import { faDroplet, faTemperatureArrowDown, faTemperatureArrowUp } from "@fortawesome/free-solid-svg-icons"
@@ -161,8 +161,13 @@ function HotspotView() {
           </div>
         </Container>
       )}
-      {loading && <p>Loading...</p>}
-      {error && <p>Couldn't load the hotspot at this time</p>}
+      {loading && (
+        <p>
+          Loading...
+          <Spinner />
+        </p>
+      )}
+      {error && <p>Couldn't load data at this time</p>}
     </>
   )
 }
