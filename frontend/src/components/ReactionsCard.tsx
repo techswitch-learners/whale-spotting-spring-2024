@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { Button, Stack } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
@@ -28,10 +28,6 @@ const ReactionsCard = ({ reactions, currentUserReaction, sightingId }: Reactions
     sightingId: sightingId,
   })
   const [, setErrors] = useState<{ [subject: string]: string[] }>({})
-
-  useEffect(() => {
-    console.log("reaction response is changed")
-  }, [reactionResponse])
 
   const deleteUserReaction = () => {
     deleteReaction(sightingId, authContext.cookie.token)
