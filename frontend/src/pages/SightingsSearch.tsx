@@ -99,7 +99,7 @@ const SightingsSearch = () => {
   }, [allSightings, searchParams])
 
   useEffect(() => {
-    backgroundContext.setBackground("white")
+    backgroundContext.setBackground("linear-gradient(to bottom, white, #5694bf 50%, rgb(216 230 241)")
   }, [backgroundContext])
 
   const handleSubmit = (event: FormEvent) => {
@@ -143,7 +143,21 @@ const SightingsSearch = () => {
                     position={[Number(sighting.latitude), Number(sighting.longitude)]}
                     icon={customIcon}
                   >
-                    <Popup>{sighting.description}</Popup>
+                    <Popup>
+                      {
+                        <div>
+                          <h5>{sighting.species.name}</h5>
+                          <h6>
+                            observed on the {sighting.bodyOfWater} on {sighting.sightingTimestamp.split("T")[0]}
+                          </h6>
+                          <p>
+                            <Link to={`/sightings/${sighting.id}`} className="text-decoration-none">
+                              Find more about this sighting
+                            </Link>
+                          </p>
+                        </div>
+                      }
+                    </Popup>
                   </Marker>
                 ))}
               </MarkerClusterGroup>
