@@ -16,7 +16,12 @@ const PendingSightingCard = ({ sighting, handleSubmit }: SightingCardProps) => {
 
   return (
     <Card className="text-start" style={{ width: "15rem" }}>
-      <Card.Img variant="top" src={sighting.imageUrl} style={{ height: "15rem", objectFit: "cover" }} />
+      <Card.Img
+        variant="top"
+        src={sighting.imageUrl}
+        alt="whale sighting image"
+        style={{ height: "15rem", objectFit: "cover" }}
+      />
       <Card.Header>
         Posted by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
       </Card.Header>

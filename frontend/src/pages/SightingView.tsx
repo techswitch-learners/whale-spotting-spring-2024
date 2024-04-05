@@ -1,10 +1,12 @@
 import { useContext, useState, useEffect } from "react"
-import { Card, Row, Col, Stack, Button, Container, Image, Spinner } from "react-bootstrap"
+import { Card, Row, Col, Stack, Container, Image, Button, Spinner } from "react-bootstrap"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import { Link, useParams } from "react-router-dom"
 import { Icon } from "leaflet"
 import { BackgroundContext } from "../App"
+import { AuthContext } from "../App"
 import { getSightingById } from "../api/backendClient"
+import ReactionsCard from "../components/ReactionsCard"
 import Sighting from "../models/view/Sighting"
 import icon from "/favicon.ico"
 
@@ -19,6 +21,7 @@ const SightingView = () => {
   const [sighting, setSighting] = useState<Sighting>()
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
+  const authContext = useContext(AuthContext)
 
   useEffect(() => {
     backgroundContext.setBackground("white")
@@ -27,7 +30,7 @@ const SightingView = () => {
   useEffect(() => {
     setLoading(true)
     setError(false)
-    getSightingById(id)
+    getSightingById(id, authContext.cookie.token)
       .then((response) => {
         if (response.ok) {
           response.json().then((data) => setSighting(data))
@@ -39,21 +42,25 @@ const SightingView = () => {
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
-  }, [id])
+  }, [id, authContext.cookie.token])
 
   return (
     <>
       {sighting && (
         <Container className="pb-4">
           <Stack gap={5}>
-            <Stack direction="horizontal">
+            <div className="d-flex flex-wrap justify-content-center justify-content-md-between">
               <h1 className="me-3">
                 Sighting by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
               </h1>
-              <Button variant="primary" className="share-button ms-auto">
-                Share
-              </Button>
-            </Stack>
+              <div className="reaction-buttons">
+                <ReactionsCard
+                  reactions={sighting.reactions}
+                  currentUserReaction={sighting.currentUserReaction}
+                  sightingId={sighting.id}
+                />
+              </div>
+            </div>
 
             <Row>
               <Col className="species-card d-flex flex-column justify-content-center" sm={5}>
@@ -74,7 +81,7 @@ const SightingView = () => {
               </Col>
               <Col className="sighting-card" sm={7}>
                 <Card>
-                  <Card.Img variant="top" src={sighting.imageUrl} />
+                  <Card.Img variant="top" src={sighting.imageUrl} alt="whale sighting image" />
                   <Card.Body>
                     <Card.Text>{sighting.description}</Card.Text>
                   </Card.Body>
