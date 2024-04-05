@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using WhaleSpotting.Enums;
+using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Request;
 using WhaleSpotting.Models.Response;
@@ -13,9 +14,14 @@ namespace WhaleSpotting.Controllers;
 
 [ApiController]
 [Route("/auth")]
-public class AuthController(UserManager<User> userManager, RoleManager<Role> roleManager, IConfiguration configuration)
-    : Controller
+public class AuthController(
+    WhaleSpottingContext context,
+    UserManager<User> userManager,
+    RoleManager<Role> roleManager,
+    IConfiguration configuration
+) : Controller
 {
+    private readonly WhaleSpottingContext _context = context;
     private readonly UserManager<User> _userManager = userManager;
     private readonly RoleManager<Role> _roleManager = roleManager;
     private readonly IConfiguration _configuration = configuration;
@@ -73,7 +79,7 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
                 }
             );
         }
-        var newUser = new User { UserName = registerUserRequest.UserName, ProfileImageUrl = "", };
+        var newUser = new User { UserName = registerUserRequest.UserName, ProfileImageUrl = string.Empty, };
         var result = await _userManager.CreateAsync(newUser, registerUserRequest.Password);
         if (!result.Succeeded)
         {
@@ -106,11 +112,20 @@ public class AuthController(UserManager<User> userManager, RoleManager<Role> rol
             return BadRequest(errorResponse);
         }
         await _userManager.AddToRoleAsync(newUser, RoleType.User.ToString());
+        var achievements = _context.Achievements.ToList();
+
         return CreatedAtAction(
             nameof(UserController.GetByUserName),
             nameof(UserController)[..^"Controller".Length],
             new { newUser.UserName },
-            new UserResponse { Id = newUser.Id, UserName = newUser.UserName, }
+            new UserResponse
+            {
+                Id = newUser.Id,
+                UserName = newUser.UserName,
+                ProfileImageUrl = newUser.ProfileImageUrl,
+                Experience = newUser.Experience,
+                Achievement = AchievementHelper.GetAchievementForExperience(achievements, newUser.Experience),
+            }
         );
     }
 }

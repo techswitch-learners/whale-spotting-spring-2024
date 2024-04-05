@@ -22,8 +22,7 @@ $btn-border-radius-sm: 1000px;
 
 html,
 body,
-#root,
-main {
+#root {
   height: 100%;
 }
 
@@ -32,15 +31,11 @@ body {
   background-size: cover !important;
   background-attachment: fixed !important;
   background-repeat: no-repeat !important;
-  transition: background 1s;
 }
 
 main {
-  padding: 5rem 0;
-}
-
-.min-h-100 {
   min-height: 100%;
+  padding: 5rem 0;
 }
 
 @media (max-width: 680px) {

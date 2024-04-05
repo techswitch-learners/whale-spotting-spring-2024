@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Security.Claims;
 
 namespace WhaleSpotting.Helpers;

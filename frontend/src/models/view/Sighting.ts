@@ -12,8 +12,16 @@ interface Sighting {
   imageUrl: string
   bodyOfWater: string
   sightingTimestamp: string
+  creationTimestamp: string
   reactions: Reaction
   currentUserReaction: ReactionType | null
+  verificationEvent: {
+    admin: {
+      userName: string
+    }
+    comment: string
+    timestamp: string
+  }
 }
 
 export default Sighting

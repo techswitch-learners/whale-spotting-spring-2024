@@ -8,13 +8,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace WhaleSpotting.Migrations
 {
     /// <inheritdoc />
-    public partial class HotSpotsData : Migration
+    public partial class HotspotsData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "HotSpots",
+                name: "Hotspots",
                 columns: table => new
                 {
                     Id = table
@@ -30,7 +30,7 @@ namespace WhaleSpotting.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HotSpots", x => x.Id);
+                    table.PrimaryKey("PK_Hotspots", x => x.Id);
                 }
             );
 
@@ -44,7 +44,7 @@ namespace WhaleSpotting.Migrations
                             "Npgsql:ValueGenerationStrategy",
                             NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
                         ),
-                    HotSpotId = table.Column<int>(type: "integer", nullable: false),
+                    HotspotId = table.Column<int>(type: "integer", nullable: false),
                     SpeciesId = table.Column<int>(type: "integer", nullable: false),
                     Platforms = table.Column<string>(type: "text", nullable: false),
                     PlatformBoxes = table.Column<int[]>(type: "integer[]", nullable: false),
@@ -55,9 +55,9 @@ namespace WhaleSpotting.Migrations
                 {
                     table.PrimaryKey("PK_ViewingSuggestions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ViewingSuggestions_HotSpots_HotSpotId",
-                        column: x => x.HotSpotId,
-                        principalTable: "HotSpots",
+                        name: "FK_ViewingSuggestions_Hotspots_HotspotId",
+                        column: x => x.HotspotId,
+                        principalTable: "Hotspots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade
                     );
@@ -72,7 +72,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.InsertData(
-                table: "HotSpots",
+                table: "Hotspots",
                 columns: new[] { "Id", "Country", "Latitude", "Longitude", "Name" },
                 values: new object[,]
                 {
@@ -414,7 +414,7 @@ namespace WhaleSpotting.Migrations
 
             migrationBuilder.InsertData(
                 table: "ViewingSuggestions",
-                columns: new[] { "Id", "HotSpotId", "Months", "PlatformBoxes", "Platforms", "SpeciesId", "TimeOfYear" },
+                columns: new[] { "Id", "HotspotId", "Months", "PlatformBoxes", "Platforms", "SpeciesId", "TimeOfYear" },
                 values: new object[,]
                 {
                     {
@@ -3182,9 +3182,9 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.CreateIndex(
-                name: "IX_ViewingSuggestions_HotSpotId",
+                name: "IX_ViewingSuggestions_HotspotId",
                 table: "ViewingSuggestions",
-                column: "HotSpotId"
+                column: "HotspotId"
             );
 
             migrationBuilder.CreateIndex(
@@ -3199,7 +3199,7 @@ namespace WhaleSpotting.Migrations
         {
             migrationBuilder.DropTable(name: "ViewingSuggestions");
 
-            migrationBuilder.DropTable(name: "HotSpots");
+            migrationBuilder.DropTable(name: "Hotspots");
         }
     }
 }

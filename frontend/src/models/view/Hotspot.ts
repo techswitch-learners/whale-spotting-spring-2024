@@ -2,7 +2,7 @@ import Species from "./Species"
 
 interface ViewingSuggestion {
   id: number
-  hotSpotId: number
+  hotspotId: number
   speciesId: number
   species: Species
   platforms: string
@@ -11,7 +11,7 @@ interface ViewingSuggestion {
   months: number[]
 }
 
-interface HotSpot {
+interface Hotspot {
   id: number
   name: string
   latitude: number
@@ -20,4 +20,4 @@ interface HotSpot {
   viewingSuggestions: ViewingSuggestion[]
 }
 
-export default HotSpot
+export default Hotspot

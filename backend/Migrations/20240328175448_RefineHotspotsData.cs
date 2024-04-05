@@ -11,7 +11,7 @@ namespace WhaleSpotting.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 145,
                 column: "Name",
@@ -19,7 +19,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 146,
                 column: "Name",
@@ -27,7 +27,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 147,
                 column: "Name",
@@ -35,7 +35,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 148,
                 column: "Name",
@@ -43,7 +43,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 149,
                 column: "Name",
@@ -51,7 +51,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 150,
                 column: "Name",
@@ -59,7 +59,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 151,
                 column: "Name",
@@ -67,7 +67,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 152,
                 column: "Name",
@@ -75,7 +75,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 153,
                 column: "Name",
@@ -83,7 +83,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 154,
                 column: "Name",
@@ -91,7 +91,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 155,
                 column: "Name",
@@ -99,7 +99,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 156,
                 column: "Name",
@@ -107,7 +107,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 157,
                 column: "Name",
@@ -115,7 +115,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 158,
                 column: "Name",
@@ -123,7 +123,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 159,
                 column: "Name",
@@ -131,7 +131,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 160,
                 column: "Name",
@@ -139,7 +139,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 161,
                 column: "Name",
@@ -151,7 +151,7 @@ namespace WhaleSpotting.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 145,
                 column: "Name",
@@ -159,7 +159,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 146,
                 column: "Name",
@@ -167,7 +167,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 147,
                 column: "Name",
@@ -175,7 +175,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 148,
                 column: "Name",
@@ -183,7 +183,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 149,
                 column: "Name",
@@ -191,7 +191,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 150,
                 column: "Name",
@@ -199,7 +199,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 151,
                 column: "Name",
@@ -207,7 +207,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 152,
                 column: "Name",
@@ -215,7 +215,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 153,
                 column: "Name",
@@ -223,7 +223,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 154,
                 column: "Name",
@@ -231,7 +231,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 155,
                 column: "Name",
@@ -239,7 +239,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 156,
                 column: "Name",
@@ -247,7 +247,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 157,
                 column: "Name",
@@ -255,7 +255,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 158,
                 column: "Name",
@@ -263,7 +263,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 159,
                 column: "Name",
@@ -271,7 +271,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 160,
                 column: "Name",
@@ -279,7 +279,7 @@ namespace WhaleSpotting.Migrations
             );
 
             migrationBuilder.UpdateData(
-                table: "HotSpots",
+                table: "Hotspots",
                 keyColumn: "Id",
                 keyValue: 161,
                 column: "Name",

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Response;
@@ -19,20 +20,18 @@ public class UserController(UserManager<User> userManager, WhaleSpottingContext 
     public async Task<IActionResult> GetCurrent()
     {
         var matchingUser = (await _userManager.FindByNameAsync(AuthHelper.GetUserName(User)))!;
+        var achievements = _context.Achievements.ToList();
 
-        var achievement = _context
-            .Achievements.Where(achievement => achievement.MinExperience <= matchingUser.Experience)
-            .OrderByDescending(achievement => achievement.MinExperience)
-            .First();
-
-        var userView = new UserAchievementResponse
-        {
-            Id = matchingUser.Id,
-            UserName = matchingUser.UserName!,
-            Experience = matchingUser.Experience,
-            UserAchievement = achievement,
-        };
-        return Ok(userView);
+        return Ok(
+            new UserResponse
+            {
+                Id = matchingUser.Id,
+                UserName = matchingUser.UserName!,
+                ProfileImageUrl = matchingUser.ProfileImageUrl,
+                Experience = matchingUser.Experience,
+                Achievement = AchievementHelper.GetAchievementForExperience(achievements, matchingUser.Experience),
+            }
+        );
     }
 
     [HttpGet("{userName}")]
@@ -44,25 +43,69 @@ public class UserController(UserManager<User> userManager, WhaleSpottingContext 
             return NotFound();
         }
 
-        foreach (var item in _context.Achievements)
+        var achievements = _context.Achievements.ToList();
+
+        return Ok(
+            new UserResponse
+            {
+                Id = matchingUser.Id,
+                UserName = matchingUser.UserName!,
+                ProfileImageUrl = matchingUser.ProfileImageUrl,
+                Experience = matchingUser.Experience,
+                Achievement = AchievementHelper.GetAchievementForExperience(achievements, matchingUser.Experience),
+            }
+        );
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAll()
+    {
+        var achievements = _context.Achievements.ToList();
+        var allUsers = await _userManager
+            .Users.Select(user => new UserResponse
+            {
+                Id = user.Id,
+                UserName = user.UserName!,
+                ProfileImageUrl = user.ProfileImageUrl,
+                Experience = user.Experience,
+                Achievement = AchievementHelper.GetAchievementForExperience(achievements, user.Experience),
+            })
+            .ToListAsync();
+
+        return Ok(allUsers);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{userName}")]
+    public async Task<IActionResult> DeleteUser([FromRoute] string userName)
+    {
+        var userToRemove = await _userManager.FindByNameAsync(userName);
+        if (userToRemove == null)
         {
-            Console.WriteLine(
-                $"User {userName}'s Experience: {matchingUser.Experience}, current achievement: {item.Name}"
-            );
+            return NotFound();
         }
-
-        var achievement = _context
-            .Achievements.Where(achievement => achievement.MinExperience <= matchingUser.Experience)
-            .OrderByDescending(achievement => achievement.MinExperience)
-            .First();
-
-        var userView = new UserAchievementResponse
+        else
         {
-            Id = matchingUser.Id,
-            UserName = matchingUser.UserName!,
-            Experience = matchingUser.Experience,
-            UserAchievement = achievement,
-        };
-        return Ok(userView);
+            await _userManager.DeleteAsync(userToRemove);
+            return NoContent();
+        }
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{userName}/profile-image")]
+    public async Task<IActionResult> ResetProfileImage([FromRoute] string userName)
+    {
+        var matchingUser = await _userManager.FindByNameAsync(userName);
+        if (matchingUser == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            matchingUser.ProfileImageUrl = string.Empty;
+            await _userManager.UpdateAsync(matchingUser);
+            return NoContent();
+        }
     }
 }
