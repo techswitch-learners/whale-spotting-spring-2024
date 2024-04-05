@@ -19,7 +19,12 @@ const Error403 = () => {
         <h2 className="text-center fw-normal mb-0" style={{ color: "#135d9b" }}>
           Whale not allowed
         </h2>
-        <img src={divingWhale} className="mx-auto" style={{ width: "20rem", height: "20rem" }} />
+        <img
+          src={divingWhale}
+          alt="animated image of a cartoon whale"
+          className="mx-auto"
+          style={{ width: "20rem", height: "20rem" }}
+        />
       </div>
       <NavbarBottom />
     </>

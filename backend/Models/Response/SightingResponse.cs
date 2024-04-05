@@ -26,5 +26,7 @@ public class SightingResponse
 
     public required DateTime CreationTimestamp { get; init; }
 
-    public required List<Reaction> Reactions { get; set; }
+    public required Dictionary<string, int> Reactions { get; set; }
+
+    public string? CurrentUserReaction { get; set; }
 }

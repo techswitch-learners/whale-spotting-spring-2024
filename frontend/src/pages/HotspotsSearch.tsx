@@ -215,7 +215,7 @@ function HotspotsSearch() {
                           </Col>
                           <Col className="d-flex flex-column justify-content-center align-items-center">
                             <p className="mb-2">Possible species</p>
-                            <Image src={whalesIcon} thumbnail className="border-0" />
+                            <Image src={whalesIcon} alt="three cartoon whales" thumbnail className="border-0" />
                             <span className="fs-3">&times; {spot.viewingSuggestions.length}</span>
                           </Col>
                         </Row>

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Response;
 
@@ -9,21 +10,26 @@ namespace WhaleSpotting.Controllers;
 
 [ApiController]
 [Route("/users")]
-public class UserController(UserManager<User> userManager) : Controller
+public class UserController(UserManager<User> userManager, WhaleSpottingContext context) : Controller
 {
     private readonly UserManager<User> _userManager = userManager;
+    private readonly WhaleSpottingContext _context = context;
 
     [Authorize]
     [HttpGet("current")]
     public async Task<IActionResult> GetCurrent()
     {
         var matchingUser = (await _userManager.FindByNameAsync(AuthHelper.GetUserName(User)))!;
+        var achievements = _context.Achievements.ToList();
+
         return Ok(
             new UserResponse
             {
                 Id = matchingUser.Id,
                 UserName = matchingUser.UserName!,
-                ProfileImageUrl = matchingUser.ProfileImageUrl
+                ProfileImageUrl = matchingUser.ProfileImageUrl,
+                Experience = matchingUser.Experience,
+                Achievement = AchievementHelper.GetAchievementForExperience(achievements, matchingUser.Experience),
             }
         );
     }
@@ -36,12 +42,17 @@ public class UserController(UserManager<User> userManager) : Controller
         {
             return NotFound();
         }
+
+        var achievements = _context.Achievements.ToList();
+
         return Ok(
             new UserResponse
             {
                 Id = matchingUser.Id,
                 UserName = matchingUser.UserName!,
-                ProfileImageUrl = matchingUser.ProfileImageUrl
+                ProfileImageUrl = matchingUser.ProfileImageUrl,
+                Experience = matchingUser.Experience,
+                Achievement = AchievementHelper.GetAchievementForExperience(achievements, matchingUser.Experience),
             }
         );
     }
@@ -50,12 +61,15 @@ public class UserController(UserManager<User> userManager) : Controller
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
+        var achievements = _context.Achievements.ToList();
         var allUsers = await _userManager
             .Users.Select(user => new UserResponse
             {
                 Id = user.Id,
                 UserName = user.UserName!,
                 ProfileImageUrl = user.ProfileImageUrl,
+                Experience = user.Experience,
+                Achievement = AchievementHelper.GetAchievementForExperience(achievements, user.Experience),
             })
             .ToListAsync();
 
