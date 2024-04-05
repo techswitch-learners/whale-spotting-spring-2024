@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Button, Card } from "react-bootstrap"
+import { Button, Card, Spinner } from "react-bootstrap"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { AuthContext, BackgroundContext } from "../App"
 import { deleteSighting, editApprovalStatus, getRejectedSightings } from "../api/backendClient"
@@ -133,8 +133,14 @@ const RejectedSightings = () => {
           ))}
         </div>
       )}
-      {loading && <p>Loading...</p>}
-      {error && <p>There was an error</p>}
+      {loading && (
+        <p>
+          Loading...
+          <br />
+          <Spinner />
+        </p>
+      )}
+      {error && <p>Couldn't load data at this time</p>}
     </div>
   )
 }
