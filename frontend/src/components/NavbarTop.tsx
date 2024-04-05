@@ -1,7 +1,6 @@
 import { useContext } from "react"
-import { LinkContainer } from "react-router-bootstrap"
 import { Container, Nav, Navbar } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { LinkContainer } from "react-router-bootstrap"
 import {
   faHouse,
   faCircleQuestion,
@@ -12,6 +11,7 @@ import {
   faPerson,
   faHand,
 } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AuthContext } from "../App"
 
 interface NavbarLinkProps {

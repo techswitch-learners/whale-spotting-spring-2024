@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react"
-import { deleteSighting, editApprovalStatus, getRejectedSightings } from "../api/backendClient"
-import { AuthContext, BackgroundContext } from "../App"
 import { Button, Card } from "react-bootstrap"
-import Error403 from "./Error403"
-import Sighting from "../models/view/Sighting"
 import { Link, Navigate, useNavigate } from "react-router-dom"
+import { AuthContext, BackgroundContext } from "../App"
+import { deleteSighting, editApprovalStatus, getRejectedSightings } from "../api/backendClient"
+import Sighting from "../models/view/Sighting"
+import Error403 from "./Error403"
 
 interface RejectedSightingCardProps {
   sighting: Sighting

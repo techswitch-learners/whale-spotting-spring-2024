@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react"
-import { BackgroundContext } from "../App"
-import whaleAnimation from "../assets/whale-animation.gif"
-import eye from "../assets/eye.svg"
 import { Button, Col, Row } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
+import { BackgroundContext } from "../App"
+import eye from "../assets/eye.svg"
+import whaleAnimation from "../assets/whale-animation.gif"
 import NavbarBottom from "../components/NavbarBottom"
 
 const Home = () => {

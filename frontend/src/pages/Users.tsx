@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react"
-import { getUsers } from "../api/backendClient"
-import DetailedUser from "../models/view/DetailedUser"
-import { AuthContext, BackgroundContext } from "../App"
-import { deleteUser, resetProfilePicture } from "../api/backendClient"
 import { Button, Card } from "react-bootstrap"
-import whale from "/android-chrome-512x512.png"
-import Error403 from "./Error403"
 import { Navigate, useNavigate } from "react-router-dom"
+import { AuthContext, BackgroundContext } from "../App"
+import { getUsers } from "../api/backendClient"
+import { deleteUser, resetProfilePicture } from "../api/backendClient"
+import DetailedUser from "../models/view/DetailedUser"
+import Error403 from "./Error403"
+import whale from "/android-chrome-512x512.png"
 
 interface UserCardProps {
   userName: string
