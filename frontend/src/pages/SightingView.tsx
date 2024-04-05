@@ -74,7 +74,7 @@ const SightingView = () => {
               </Col>
               <Col className="sighting-card" sm={7}>
                 <Card>
-                  <Card.Img variant="top" src={sighting.imageUrl} />
+                  <Card.Img variant="top" src={sighting.imageUrl} alt="whale sighting image" />
                   <Card.Body>
                     <Card.Text>{sighting.description}</Card.Text>
                   </Card.Body>

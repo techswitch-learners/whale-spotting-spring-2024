@@ -23,7 +23,7 @@ function UserCard({ userName, profileImageUrl, handleDeleteUser, handleProfilePi
         variant="top"
         src={profileImageUrl || whale}
         style={{ height: "15rem", objectFit: "contain" }}
-        alt="user's profile picture"
+        alt="user profile picture"
       />
       <Card.Body>
         <Card.Title>{userName}</Card.Title>
