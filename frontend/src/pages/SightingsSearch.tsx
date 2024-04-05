@@ -141,7 +141,21 @@ const SightingsSearch = () => {
                     position={[Number(sighting.latitude), Number(sighting.longitude)]}
                     icon={customIcon}
                   >
-                    <Popup>{sighting.description}</Popup>
+                    <Popup>
+                      {
+                        <div>
+                          <h6>
+                            {sighting.species.name} observed on the {sighting.bodyOfWater} on{" "}
+                            {sighting.sightingTimestamp.split("T")[0]}{" "}
+                          </h6>
+                          <p>
+                            <Link to={`/sightings/${sighting.id}`} className="text-decoration-none">
+                              Find more about this sighting
+                            </Link>
+                          </p>
+                        </div>
+                      }
+                    </Popup>
                   </Marker>
                 ))}
               </MarkerClusterGroup>
