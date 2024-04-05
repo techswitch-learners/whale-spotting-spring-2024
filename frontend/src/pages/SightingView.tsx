@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react"
-import { Card, Row, Col, Stack, Container, Image } from "react-bootstrap"
+import { Card, Row, Col, Stack, Container, Image, Spinner } from "react-bootstrap"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import { Link, useParams } from "react-router-dom"
 import { Icon } from "leaflet"
@@ -81,7 +81,12 @@ const SightingView = () => {
               </Col>
               <Col className="sighting-card" sm={7}>
                 <Card>
-                  <Card.Img variant="top" src={sighting.imageUrl} alt="whale sighting image" />
+                  <Card.Img
+                    variant="top"
+                    src={sighting.imageUrl}
+                    alt="whale sighting image"
+                    style={{ objectFit: "contain", height: "25rem" }}
+                  />
                   <Card.Body>
                     <Card.Text>{sighting.description}</Card.Text>
                   </Card.Body>
@@ -126,8 +131,14 @@ const SightingView = () => {
         </Container>
       )}
 
-      {loading && <p>Loading...</p>}
-      {error && <p>Error fetching sighting from the backend</p>}
+      {loading && (
+        <p>
+          Loading...
+          <br />
+          <Spinner />
+        </p>
+      )}
+      {error && <p>Couldn't load data at this time</p>}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useEffect, useState } from "react"
-import { Card, Col, Row, Image, Form, Button, Container } from "react-bootstrap"
+import { Card, Col, Row, Image, Form, Button, Container, Spinner } from "react-bootstrap"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 import { Link, useSearchParams } from "react-router-dom"
@@ -25,6 +25,7 @@ function HotspotsSearch() {
   const [speciesList, setSpeciesList] = useState<Species[]>()
   const [monthList, setMonthList] = useState<string[]>()
   const [error, setError] = useState<boolean>(false)
+  const [loading, setLoading] = useState(true)
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
@@ -44,14 +45,17 @@ function HotspotsSearch() {
   }, [])
 
   useEffect(() => {
+    setLoading(true)
+    setError(false)
     getHotspots(searchParams.toString())
       .then((response) => response.json())
       .then((data) => setHotspots(data))
       .catch(() => setError(true))
+      .finally(() => setLoading(false))
   }, [searchParams])
 
   useEffect(() => {
-    backgroundContext.setBackground("white")
+    backgroundContext.setBackground("linear-gradient(to bottom, white, #5694bf 50%, rgb(216 230 241)")
   }, [backgroundContext])
 
   return (
@@ -170,7 +174,14 @@ function HotspotsSearch() {
         </Card.Body>
       </Card>
       <div className="d-flex justify-content-center my-3">
-        {error && <h5>Couldn't load hotspots at this time</h5>}
+        {loading && (
+          <p>
+            Loading...
+            <br />
+            <Spinner />
+          </p>
+        )}
+        {error && <h5>Couldn't load data at this time</h5>}
         {hotspots && hotspots.length === 0 && <h5>No hotspots found</h5>}
       </div>
       {hotspots && hotspots.length > 0 && (

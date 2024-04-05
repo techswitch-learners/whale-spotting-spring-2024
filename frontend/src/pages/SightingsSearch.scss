@@ -13,7 +13,8 @@
 
     .card-img-top {
       height: 13rem;
-      object-fit: cover;
+      width: 13rem;
+      object-fit: contain;
     }
 
     .card-text {
