@@ -52,3 +52,13 @@ export const getSightingById = async (id?: string) => {
 export const getHotSpotById = async (id?: string) => {
   return await fetch(`${import.meta.env.VITE_BACKEND_URL}/hotspots/${id}`)
 }
+
+export const getUser = async (token?: string) => {
+  return await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/current`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
