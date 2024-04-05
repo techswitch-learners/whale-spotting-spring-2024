@@ -1,3 +1,5 @@
+import ReactionType from "../../types/ReactionType"
+import Reaction from "./Reactions"
 import Species from "./Species"
 
 interface Sighting {
@@ -11,6 +13,8 @@ interface Sighting {
   bodyOfWater: string
   sightingTimestamp: string
   creationTimestamp: string
+  reactions: Reaction
+  currentUserReaction: ReactionType | null
   verificationEvent: {
     admin: {
       userName: string

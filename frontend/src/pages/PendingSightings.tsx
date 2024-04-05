@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Button, Card, Form, FormGroup } from "react-bootstrap"
+import { Button, Card, Form, FormGroup, Spinner } from "react-bootstrap"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { AuthContext, BackgroundContext } from "../App"
 import { getPendingSightings, verifySighting } from "../api/backendClient"
@@ -16,7 +16,12 @@ const PendingSightingCard = ({ sighting, handleSubmit }: SightingCardProps) => {
 
   return (
     <Card className="text-start" style={{ width: "15rem" }}>
-      <Card.Img variant="top" src={sighting.imageUrl} style={{ height: "15rem", objectFit: "cover" }} />
+      <Card.Img
+        variant="top"
+        src={sighting.imageUrl}
+        alt="whale sighting image"
+        style={{ height: "15rem", objectFit: "cover" }}
+      />
       <Card.Header>
         Posted by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
       </Card.Header>
@@ -131,8 +136,14 @@ const PendingSightings = () => {
         </div>
       )}
 
-      {loading && <p>Loading...</p>}
-      {error && <p>There was an error</p>}
+      {loading && (
+        <p>
+          Loading...
+          <br />
+          <Spinner />
+        </p>
+      )}
+      {error && <p>Couldn't load data at this time</p>}
     </div>
   )
 }

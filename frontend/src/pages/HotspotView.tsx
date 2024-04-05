@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Card, Col, Container, Row } from "react-bootstrap"
+import { Card, Col, Container, Row, Spinner } from "react-bootstrap"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { useParams } from "react-router-dom"
 import { faDroplet, faTemperatureArrowDown, faTemperatureArrowUp } from "@fortawesome/free-solid-svg-icons"
@@ -114,6 +114,7 @@ function HotspotView() {
                       <Col className="d-flex flex-column justify-content-between align-items-end text-end">
                         <img
                           src={`${import.meta.env.BASE_URL}weather-icons/icon${dailyWeatherData.icon}.png`}
+                          alt="weather icon"
                           width="48"
                         />
                         <p className="mb-0">
@@ -142,6 +143,7 @@ function HotspotView() {
                       className="bg-dark"
                       variant="top"
                       src={suggestion.species.exampleImageUrl}
+                      alt="example image of a whale species "
                       style={{ height: "10rem", objectFit: "contain" }}
                     />
                     <Card.Body>
@@ -161,8 +163,14 @@ function HotspotView() {
           </div>
         </Container>
       )}
-      {loading && <p>Loading...</p>}
-      {error && <p>Couldn't load the hotspot at this time</p>}
+      {loading && (
+        <p>
+          Loading...
+          <br />
+          <Spinner />
+        </p>
+      )}
+      {error && <p>Couldn't load data at this time</p>}
     </>
   )
 }

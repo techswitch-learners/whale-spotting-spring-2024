@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Button, Card } from "react-bootstrap"
+import { Button, Card, Spinner } from "react-bootstrap"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { AuthContext, BackgroundContext } from "../App"
 import { deleteSighting, editApprovalStatus, getRejectedSightings } from "../api/backendClient"
@@ -15,7 +15,12 @@ interface RejectedSightingCardProps {
 const RejectedSightingCard = ({ sighting, handleRestore, handleDeleteSighting }: RejectedSightingCardProps) => {
   return (
     <Card className="text-start" style={{ width: "15rem" }}>
-      <Card.Img variant="top" src={sighting.imageUrl} style={{ height: "15rem", objectFit: "cover" }} />
+      <Card.Img
+        variant="top"
+        src={sighting.imageUrl}
+        alt="whale sighting image"
+        style={{ height: "15rem", objectFit: "cover" }}
+      />
       <Card.Header>
         Posted by <Link to={`/users/${sighting.userName}`}>{sighting.userName}</Link>
       </Card.Header>
@@ -128,8 +133,14 @@ const RejectedSightings = () => {
           ))}
         </div>
       )}
-      {loading && <p>Loading...</p>}
-      {error && <p>There was an error</p>}
+      {loading && (
+        <p>
+          Loading...
+          <br />
+          <Spinner />
+        </p>
+      )}
+      {error && <p>Couldn't load data at this time</p>}
     </div>
   )
 }

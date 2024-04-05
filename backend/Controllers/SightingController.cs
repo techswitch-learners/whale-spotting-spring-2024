@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WhaleSpotting.Enums;
+using WhaleSpotting.Helpers;
 using WhaleSpotting.Models.Data;
 using WhaleSpotting.Models.Data.Request;
 using WhaleSpotting.Models.Request;
@@ -36,13 +37,18 @@ public class SightingController(WhaleSpottingContext context) : Controller
                 }
             )
             .Entity;
+
         _context.SaveChanges();
         return Ok(newSighting);
     }
 
+    [Authorize]
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public IActionResult GetById([FromRoute] int id)
     {
+        var userId = AuthHelper.GetUserIdIfLoggedIn(User);
+
         var matchingSighting = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
@@ -54,6 +60,7 @@ public class SightingController(WhaleSpottingContext context) : Controller
         {
             return NotFound();
         }
+
         var sighting = new SightingResponse
         {
             Id = matchingSighting.Id,
@@ -67,14 +74,24 @@ public class SightingController(WhaleSpottingContext context) : Controller
             VerificationEvent = matchingSighting.VerificationEvent,
             SightingTimestamp = matchingSighting.SightingTimestamp,
             CreationTimestamp = matchingSighting.CreationTimestamp,
-            Reactions = matchingSighting.Reactions
+            Reactions = matchingSighting
+                .Reactions.GroupBy(reaction => reaction.Type)
+                .ToDictionary(reactionGroup => reactionGroup.Key.ToString(), reactionGroup => reactionGroup.Count()),
+            CurrentUserReaction =
+                userId != null
+                    ? matchingSighting.Reactions.SingleOrDefault(reaction => reaction.UserId == userId)?.Type.ToString()
+                    : null
         };
         return Ok(sighting);
     }
 
+    [Authorize]
+    [AllowAnonymous]
     [HttpGet("")]
     public IActionResult Search()
     {
+        var userId = AuthHelper.GetUserIdIfLoggedIn(User);
+
         var sightings = _context
             .Sightings.Include(sighting => sighting.User)
             .Include(sighting => sighting.Species)
@@ -101,7 +118,16 @@ public class SightingController(WhaleSpottingContext context) : Controller
                     VerificationEvent = sighting.VerificationEvent,
                     SightingTimestamp = sighting.SightingTimestamp,
                     CreationTimestamp = sighting.CreationTimestamp,
-                    Reactions = sighting.Reactions
+                    Reactions = sighting
+                        .Reactions.GroupBy(reaction => reaction.Type)
+                        .ToDictionary(
+                            reactionGroup => reactionGroup.Key.ToString(),
+                            reactionGroup => reactionGroup.Count()
+                        ),
+                    CurrentUserReaction =
+                        userId != null
+                            ? sighting.Reactions.SingleOrDefault(reaction => reaction.UserId == userId)?.Type.ToString()
+                            : null
                 })
                 .ToList()
         };
@@ -136,7 +162,12 @@ public class SightingController(WhaleSpottingContext context) : Controller
                     VerificationEvent = sighting.VerificationEvent,
                     SightingTimestamp = sighting.SightingTimestamp,
                     CreationTimestamp = sighting.CreationTimestamp,
-                    Reactions = sighting.Reactions
+                    Reactions = sighting
+                        .Reactions.GroupBy(reaction => reaction.Type)
+                        .ToDictionary(
+                            reactionGroup => reactionGroup.Key.ToString(),
+                            reactionGroup => reactionGroup.Count()
+                        ),
                 })
                 .ToList()
         };
@@ -175,7 +206,12 @@ public class SightingController(WhaleSpottingContext context) : Controller
                     VerificationEvent = sighting.VerificationEvent,
                     SightingTimestamp = sighting.SightingTimestamp,
                     CreationTimestamp = sighting.CreationTimestamp,
-                    Reactions = sighting.Reactions
+                    Reactions = sighting
+                        .Reactions.GroupBy(reaction => reaction.Type)
+                        .ToDictionary(
+                            reactionGroup => reactionGroup.Key.ToString(),
+                            reactionGroup => reactionGroup.Count()
+                        ),
                 })
                 .ToList()
         };
@@ -211,6 +247,13 @@ public class SightingController(WhaleSpottingContext context) : Controller
             _context.SaveChanges();
             sighting.VerificationEventId = savedVerificationEvent.Id;
             _context.SaveChanges();
+
+            if (verificationEventRequest.ApprovalStatus == ApprovalStatus.Approved)
+            {
+                var matchingUser = _context.Users.Single(user => user.Id == sighting.UserId);
+                matchingUser.Experience += (int)Experience.Sighting;
+                _context.SaveChanges();
+            }
             return NoContent();
         }
     }
