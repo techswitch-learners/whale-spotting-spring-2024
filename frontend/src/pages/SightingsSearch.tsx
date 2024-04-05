@@ -8,8 +8,9 @@ import { Link, useSearchParams } from "react-router-dom"
 import { faList, faMapMarker } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Icon } from "leaflet"
-import { BackgroundContext } from "../App"
+import { AuthContext, BackgroundContext } from "../App"
 import { getSightings, getSpeciesList } from "../api/backendClient"
+import ReactionsCard from "../components/ReactionsCard"
 import Sighting from "../models/view/Sighting"
 import Species from "../models/view/Species"
 import "./SightingsSearch.scss"
@@ -61,6 +62,7 @@ const SightingsSearch = () => {
   const [speciesList, setSpeciesList] = useState<Species[]>()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const authContext = useContext(AuthContext)
 
   useEffect(() => {
     getSpeciesList()
@@ -72,7 +74,7 @@ const SightingsSearch = () => {
   const getData = () => {
     setLoading(true)
     setError(false)
-    getSightings()
+    getSightings(authContext.cookie.token)
       .then((response) => response.json())
       .then((data) => setAllSightings(data.sightings))
       .catch(() => setError(true))
@@ -88,7 +90,7 @@ const SightingsSearch = () => {
     setMapView(!mapView)
   }
 
-  useEffect(getData, [])
+  useEffect(getData, [authContext.cookie.token])
 
   useEffect(() => {
     if (allSightings) {
@@ -249,9 +251,14 @@ const SightingsSearch = () => {
               {filteredSightings && filteredSightings.length === 0 && <h5>No sightings found</h5>}
               {filteredSightings && filteredSightings.length > 0 && (
                 <Container>
-                  <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-4 my-4">
+                  <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-5 my-4">
                     {filteredSightings.map((sighting) => (
                       <li key={sighting.id}>
+                        <ReactionsCard
+                          reactions={sighting.reactions}
+                          currentUserReaction={sighting.currentUserReaction}
+                          sightingId={sighting.id}
+                        />
                         <Link
                           to={`/sightings/${sighting.id}`}
                           className="text-decoration-none"
