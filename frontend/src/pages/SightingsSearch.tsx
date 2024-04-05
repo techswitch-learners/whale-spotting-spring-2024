@@ -81,7 +81,7 @@ const SightingsSearch = () => {
   useEffect(getData, [])
 
   useEffect(() => {
-    backgroundContext.setBackground("white")
+    backgroundContext.setBackground("linear-gradient(to bottom, white, #5694bf 50%, rgb(216 230 241)")
   }, [backgroundContext])
 
   useEffect(() => {
@@ -104,8 +104,8 @@ const SightingsSearch = () => {
   return (
     <div className="SightingsSearch d-flex flex-column text-center">
       <h1>Whale Sightings</h1>
-      <div className="d-flex flex-column">
-        <Form className="d-flex align-items-center align-self-center position-relative">
+      <div className="d-flex flex-column align-items-center text-center">
+        <Form.Group className="d-flex align-items-center align-self-center position-relative">
           <Form.Check
             type="switch"
             role="button"
@@ -121,7 +121,8 @@ const SightingsSearch = () => {
           <Form.Label htmlFor="layout-switch" className="ms-3 mb-0">
             {mapView ? "Map View" : "List View"}
           </Form.Label>
-        </Form>
+        </Form.Group>
+
         {mapView && (
           <div className="mapContainer">
             <p>Click on the icon to see more details about the whale sighting</p>
@@ -144,76 +145,83 @@ const SightingsSearch = () => {
             </MapContainer>
           </div>
         )}
+
         {!mapView && (
           <div>
-            <Card className="mx-auto" style={{ maxWidth: "25rem" }}>
-              <Card.Body>
-                <Form onSubmit={handleSubmit}>
-                  <Row className="mb-3">
-                    <Form.Group className="col-8" controlId="bodyOfWater">
-                      <Form.Label className="text-start">Body of water</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={bodyOfWater}
-                        onChange={(event) => setBodyOfWater(event.target.value)}
-                      />
-                    </Form.Group>
-                    <Col xs={4}>
-                      <DropdownButton
-                        id="dropdown-species-button"
-                        title="Species"
-                        className="d-flex flex-column justify-content-center align-items-center mx-2"
-                        variant="secondary"
-                      >
-                        {speciesList?.map((species) => (
-                          <Dropdown.ItemText>
-                            <Form.Group controlId={`species${species.id}`} className="d-flex">
-                              <Form.Check
-                                name="species"
-                                label={species.name}
-                                value={species.name}
-                                onChange={(event) => {
-                                  if (event.target.checked) {
-                                    selectedSpeciesSet.add(event.target.value)
-                                  } else {
-                                    selectedSpeciesSet.delete(event.target.value)
-                                  }
-                                  setSelectedSpeciesSet(selectedSpeciesSet)
-                                }}
-                              />
-                            </Form.Group>
-                          </Dropdown.ItemText>
-                        ))}
-                      </DropdownButton>
-                    </Col>
-                  </Row>
-                  <Row className="mb-3">
-                    <Form.Group className="col-6" controlId="startDate">
-                      <Form.Label className="text-start">Start date</Form.Label>
-                      <Form.Control
-                        type="date"
-                        max={
-                          endDate
-                            ? new Date(endDate).toISOString().split("T")[0]
-                            : new Date().toISOString().split("T")[0]
-                        }
-                        onChange={(event) => setStartDate(event.target.value)}
-                      />
-                    </Form.Group>
-                    <Form.Group className="col-6" controlId="endDate">
-                      <Form.Label className="text-start">End date</Form.Label>
-                      <Form.Control
-                        type="date"
-                        min={startDate ? new Date(startDate).toISOString().split("T")[0] : undefined}
-                        max={new Date().toISOString().split("T")[0]}
-                        onChange={(event) => setEndDate(event.target.value)}
-                      />
-                    </Form.Group>
-                  </Row>
-                  <button type="submit">Filter sightings</button>
-                </Form>
-              </Card.Body>
-            </Card>
+            <div>
+              <Card className="mx-auto" style={{ maxWidth: "25rem" }}>
+                <Card.Body>
+                  <Form onSubmit={handleSubmit}>
+                    <Row className="mb-3">
+                      <Form.Group className="col-8" controlId="bodyOfWater">
+                        <Form.Label className="text-start">Body of water</Form.Label>
+                        <Form.Control
+                          type="text"
+                          value={bodyOfWater}
+                          onChange={(event) => setBodyOfWater(event.target.value)}
+                        />
+                      </Form.Group>
+
+                      <Col xs={3}>
+                        <DropdownButton
+                          id="dropdown-species-button"
+                          title="Species"
+                          className="d-flex flex-column justify-content-center align-items-center mx-2"
+                          variant="secondary"
+                        >
+                          {speciesList?.map((species) => (
+                            <Dropdown.ItemText>
+                              <Form.Group controlId={`species${species.id}`} className="d-flex">
+                                <Form.Check
+                                  name="species"
+                                  label={species.name}
+                                  value={species.name}
+                                  onChange={(event) => {
+                                    if (event.target.checked) {
+                                      selectedSpeciesSet.add(event.target.value)
+                                    } else {
+                                      selectedSpeciesSet.delete(event.target.value)
+                                    }
+                                    setSelectedSpeciesSet(selectedSpeciesSet)
+                                  }}
+                                />
+                              </Form.Group>
+                            </Dropdown.ItemText>
+                          ))}
+                        </DropdownButton>
+                      </Col>
+                    </Row>
+
+                    <Row className="mb-3">
+                      <Form.Group className="col-6" controlId="startDate">
+                        <Form.Label className="text-start">Start date</Form.Label>
+                        <Form.Control
+                          type="date"
+                          max={
+                            endDate
+                              ? new Date(endDate).toISOString().split("T")[0]
+                              : new Date().toISOString().split("T")[0]
+                          }
+                          onChange={(event) => setStartDate(event.target.value)}
+                        />
+                      </Form.Group>
+
+                      <Form.Group className="col-6" controlId="endDate">
+                        <Form.Label className="text-start">End date</Form.Label>
+                        <Form.Control
+                          type="date"
+                          min={startDate ? new Date(startDate).toISOString().split("T")[0] : undefined}
+                          max={new Date().toISOString().split("T")[0]}
+                          onChange={(event) => setEndDate(event.target.value)}
+                        />
+                      </Form.Group>
+                    </Row>
+                    <button type="submit">Show me some whales!</button>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </div>
+            <h3 className="d-flex justify-content-center">{filteredSightings?.length} whales found!</h3>
             <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
               {filteredSightings?.map((sighting) => (
                 <Link
