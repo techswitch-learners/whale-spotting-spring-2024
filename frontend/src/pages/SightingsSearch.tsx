@@ -99,7 +99,7 @@ const SightingsSearch = () => {
   }, [allSightings, searchParams])
 
   useEffect(() => {
-    backgroundContext.setBackground("white")
+    backgroundContext.setBackground("linear-gradient(to bottom, white, #5694bf 50%, rgb(216 230 241)")
   }, [backgroundContext])
 
   const handleSubmit = (event: FormEvent) => {
