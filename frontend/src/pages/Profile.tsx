@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState } from "react"
+// import narwhal from "../../public/achievement-badges-images/narwhal.png"
+// import calf from "../../public/achievement-badges-images/calf.png"
+// import orca from "../../public/achievement-badges-images/orca.png"
+// import plankton from "../../public/achievement-badges-images/plankton.png"
+// import pod from "../../public/achievement-badges-images/pod.png"
+import { Image } from "react-bootstrap"
 import Card from "react-bootstrap/esm/Card"
 import { Link, Navigate } from "react-router-dom"
 import { AuthContext, BackgroundContext } from "../App"
 import { getSightings, getUser } from "../api/backendClient"
 import Sighting from "../models/view/Sighting"
-
-// import calf from "../../public/achievement-badges-images/calf.png"
-// import { Image } from "react-bootstrap"
 
 interface SightingCardProps {
   imageUrl: string
@@ -36,9 +39,9 @@ const Profile = () => {
   const authContext = useContext(AuthContext)
   const [userName, setUserName] = useState("")
   const [userId, setUserId] = useState()
-  // const [experiencePoints,setExperiencePoints]=useState()
-  // const [achievementName, setAchievementName]=useState("")
-  // const [profilePic, setProfilePic]=useState("")
+  const [experiencePoints, setExperiencePoints] = useState(100)
+  const [achievementName, setAchievementName] = useState("")
+  const [profilePic, setProfilePic] = useState("")
 
   const [allSightings, setAllSightings] = useState<Sighting[]>()
   const [loading, setLoading] = useState(true)
@@ -58,9 +61,9 @@ const Profile = () => {
       .then((data) => {
         setUserName(data.userName)
         setUserId(data.id)
-        // setExperiencePoints(data.experience);
-        // setAchievementName(data.userAchievement.name);
-        // setProfilePic(data.userAchievement.badgeImageUrl);
+        setExperiencePoints(data.experience)
+        setAchievementName(data.userAchievement.name)
+        setProfilePic(data.userAchievement.badgeImageUrl)
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
@@ -85,11 +88,16 @@ const Profile = () => {
   return (
     <div className="Profile d-flex flex-column align-items-center m-4">
       <h1 className="text-center">{userName}'s Profile</h1>
-      {/* <Image style={{height:"100px", width:"100px"}} src={`${import.meta.env.BASE_URL}achievement-badges-images/${profilePic}`} alt={`Badge image of `} roundedCircle /> */}
+      <Image
+        style={{ height: "100px", width: "100px" }}
+        src={`${import.meta.env.BASE_URL}achievement-badges-images/${profilePic}`}
+        alt={`Badge image of `}
+        roundedCircle
+      />
       <h4 className="mt-4 ">UserId: {userId}</h4>
       <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
-        {/* <p style={{color:'black',fontSize: '20px' }}>Experience Points: {experiencePoints}</p> */}
-        {/* <p style={{color:'black',fontSize: '20px' }}>  Achievement Name: {achievementName} </p>  */}
+        <p style={{ color: "black", fontSize: "20px" }}>Experience Points: {experiencePoints}</p>
+        <p style={{ color: "black", fontSize: "20px" }}> Achievement Name: {achievementName} </p>
       </div>
       <p>Please find below approved sightings</p>
       <div className="d-flex flex-wrap justify-content-center gap-4 my-4">
