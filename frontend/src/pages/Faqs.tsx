@@ -4,12 +4,12 @@ import Accordion from "react-bootstrap/Accordion"
 import { Link } from "react-router-dom"
 import { BackgroundContext } from "../App"
 import { getAchievements } from "../api/backendClient"
-import Achievements from "../models/view/Achievements"
+import Achievement from "../models/view/Achievement"
 
 const Faqs = () => {
   const backgroundContext = useContext(BackgroundContext)
 
-  const [achievements, setAchievements] = useState<Array<Achievements>>()
+  const [achievements, setAchievements] = useState<Array<Achievement>>()
   const [, setLoading] = useState<boolean>(false)
   const [, setError] = useState<boolean>(false)
 
